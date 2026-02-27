@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Andrea Spiteri — CV</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 9.5pt;
+      line-height: 1.45;
+      color: #1a1a1a;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 24px 32px;
+    }
+
+    @page {
+      size: A4;
+      margin: 14mm 16mm;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+      }
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2.5px solid #E10600;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .header-left h1 {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
+    }
+
+    .header-left h1 span {
+      color: #E10600;
+    }
+
+    .header-left .title {
+      font-size: 10.5pt;
+      font-weight: 600;
+      color: #555;
+      margin-top: 2px;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 8.5pt;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .header-right a {
+      color: #444;
+      text-decoration: none;
+    }
+
+    /* ── Summary ── */
+    .summary {
+      font-size: 9.5pt;
+      color: #333;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      padding: 10px 14px;
+      background: #f8f8f8;
+      border-left: 3px solid #E10600;
+    }
+
+    /* ── Section headings ── */
+    .section-heading {
+      font-size: 9pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #E10600;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 3px;
+      margin-bottom: 10px;
+      margin-top: 14px;
+    }
+
+    /* ── Key Achievements ── */
+    .achievements {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .achiev-item {
+      text-align: center;
+      padding: 8px 4px;
+      background: #f8f8f8;
+      border-top: 2px solid #E10600;
+    }
+
+    .achiev-num {
+      font-size: 16pt;
+      font-weight: 700;
+      color: #E10600;
+      line-height: 1.1;
+    }
+
+    .achiev-lbl {
+      font-size: 6.5pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+
+    /* ── Experience ── */
+    .exp-item {
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .exp-role {
+      font-size: 10pt;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .exp-period {
+      font-size: 8pt;
+      font-weight: 600;
+      color: #888;
+      flex-shrink: 0;
+    }
+
+    .exp-company {
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #E10600;
+      margin-bottom: 3px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .exp-bullets li {
+      font-size: 8.5pt;
+      color: #333;
+      line-height: 1.5;
+      padding-left: 12px;
+      position: relative;
+      margin-bottom: 1px;
+    }
+
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #E10600;
+      font-size: 7pt;
+    }
+
+    /* ── Two column layout ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    /* ── Expertise ── */
+    .expertise-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .expertise-tag {
+      font-size: 7.5pt;
+      font-weight: 600;
+      padding: 3px 8px;
+      background: #f0f0f0;
+      border: 1px solid #ddd;
+      color: #333;
+    }
+
+    /* ── Education ── */
+    .edu-item {
+      margin-bottom: 6px;
+    }
+
+    .edu-degree {
+      font-size: 9pt;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+
+    .edu-meta {
+      font-size: 8pt;
+      color: #666;
+    }
+
+    /* ── Languages ── */
+    .lang-list {
+      font-size: 8.5pt;
+      color: #333;
+    }
+
+    .lang-list span {
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Andrea <span>Spiteri</span></h1>
+      <div class="title">Chief Product Officer</div>
+    </div>
+    <div class="header-right">
+      <div>📍 Naxxar, Malta</div>
+      <div>📞 +356 77011175</div>
+      <div><a href="mailto:andrealispider@gmail.com">andrealispider@gmail.com</a></div>
+      <div><a href="https://www.linkedin.com/in/andrea-spiteri/">linkedin.com/in/andrea-spiteri</a></div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary">
+    Product leader with 15+ years of experience driving product vision and strategy across B2C and B2B portfolios in the
+    iGaming and esports industry. I build and lead high-performing product teams, own end-to-end product roadmaps,
+    champion product improvements and launches into new markets, and improve methodologies and processes while mentoring
+    teams to deliver exceptional results and drive growth.
+  </div>
+
+  <!-- Key Achievements -->
+  <div class="section-heading">Key Achievements</div>
+  <div class="achievements">
+    <div class="achiev-item">
+      <div class="achiev-num">15+</div>
+      <div class="achiev-lbl">Years in iGaming &amp; Sportsbook</div>
+    </div>
+    <div class="achiev-item">
+      <div class="achiev-num">50+</div>
+      <div class="achiev-lbl">PM / PO / Designers Recruited</div>
+    </div>
+    <div class="achiev-item">
+      <div class="achiev-num">50+</div>
+      <div class="achiev-lbl">Largest Department Managed</div>
+    </div>
+    <div class="achiev-item">
+      <div class="achiev-num">25+</div>
+      <div class="achiev-lbl">Providers Integrated</div>
+    </div>
+    <div class="achiev-item">
+      <div class="achiev-num">10+</div>
+      <div class="achiev-lbl">Different Sportsbooks Managed</div>
+    </div>
+    <div class="achiev-item">
+      <div class="achiev-num">4+</div>
+      <div class="achiev-lbl">Departments Built From Zero</div>
+    </div>
+    <div class="achiev-item">
+      <div class="achiev-num">5+</div>
+      <div class="achiev-lbl">Product Managers Mentored</div>
+    </div>
+    <div class="achiev-item">
+      <div class="achiev-num">20+</div>
+      <div class="achiev-lbl">Sports Manually Traded</div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="section-heading">Experience</div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div class="exp-role">Chief Product Officer</div>
+      <div class="exp-period">Apr 2025 – Present</div>
+    </div>
+    <div class="exp-company">NDA Company OBO Oddin.gg</div>
+    <ul class="exp-bullets">
+      <li>Leading the launch of a new company by managing end-to-end product lifecycle and hiring key functions,
+        including the CTO and operational teams.</li>
+      <li>Directing a cross-functional team to drive innovation and ensure timely delivery, while defining the product
+        roadmap and prioritising features to achieve strategic business objectives.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div class="exp-role">Chief Product and Tech Officer (CPTO)</div>
+      <div class="exp-period">Apr 2024 – Apr 2025</div>
+    </div>
+    <div class="exp-company">Betswap.gg</div>
+    <ul class="exp-bullets">
+      <li>Led end-to-end product and technology strategy for a blockchain-based peer-to-peer betting exchange.</li>
+      <li>Hired and led a team of 15+ developers and designers from zero.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div class="exp-role">Principal Product Manager &amp; People Lead</div>
+      <div class="exp-period">Jan 2021 – May 2024</div>
+    </div>
+    <div class="exp-company">Betsson Group</div>
+    <ul class="exp-bullets">
+      <li>Defined strategy and managed the roadmap for the in-house Sportsbook and B2B offerings.</li>
+      <li>Led a team of Product Owners across six scrum teams to execute a dynamic roadmap.</li>
+      <li>Oversaw recruiting ~50 Product Owners, Managers, and UX/UI Designers.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div class="exp-role">Head of Sportsbook</div>
+      <div class="exp-period">Nov 2019 – Jan 2021</div>
+    </div>
+    <div class="exp-company">BOSS Gaming Solutions</div>
+    <ul class="exp-bullets">
+      <li>Oversaw in-house Sportsbook platform across B2B/B2C operations with over 150 land-based outlets.</li>
+      <li>Delivered a LATAM-focused front end and trader/partner back offices.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div class="exp-role">Head of Product</div>
+      <div class="exp-period">Dec 2018 – Nov 2019</div>
+    </div>
+    <div class="exp-company">Hardball Group</div>
+    <ul class="exp-bullets">
+      <li>Directed Product Development across group brands with full commercial responsibility for the Sportsbook
+        P&amp;L.</li>
+      <li>Spearheaded an agile transition and led platform migration, achieving exponential growth post-relaunch.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div class="exp-role">Product Manager</div>
+      <div class="exp-period">Dec 2017 – Dec 2018</div>
+    </div>
+    <div class="exp-company">FanLeague</div>
+    <ul class="exp-bullets">
+      <li>Managed the product vertical and launched V2 of the social betting app.</li>
+      <li>Introduced structured product management processes to improve development efficiency.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div class="exp-role">Product Owner</div>
+      <div class="exp-period">Apr 2015 – Dec 2017</div>
+    </div>
+    <div class="exp-company">Betsson Group</div>
+    <ul class="exp-bullets">
+      <li>Developed internal trading tools and integrated third-party feeds (BetGenius, Betradar, Perform).</li>
+      <li>Bridged the gap between trading and technical teams to ensure seamless product delivery.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-header">
+      <div class="exp-role">Sportsbook Risk Manager</div>
+      <div class="exp-period">Sep 2011 – Apr 2015</div>
+    </div>
+    <div class="exp-company">Betsson Group</div>
+    <ul class="exp-bullets">
+      <li>Managed P&amp;L and trading for high-profile events, including Champions League and World Cup Finals.</li>
+      <li>Supervised up to 50 traders to ensure optimal risk management across operations.</li>
+    </ul>
+  </div>
+
+  <!-- Bottom two columns -->
+  <div class="two-col">
+    <div>
+      <div class="section-heading">Expertise</div>
+      <div class="expertise-list">
+        <span class="expertise-tag">Product Development & Strategy</span>
+        <span class="expertise-tag">Team Leadership & Recruitment</span>
+        <span class="expertise-tag">Sportsbook Operations</span>
+        <span class="expertise-tag">Agile Methodologies</span>
+        <span class="expertise-tag">UX/UI Design Optimization</span>
+        <span class="expertise-tag">B2B & B2C Portfolio Management</span>
+        <span class="expertise-tag">AI-Augmented Workflows</span>
+        <span class="expertise-tag">Stakeholder Management</span>
+      </div>
+    </div>
+    <div>
+      <div class="section-heading">Education</div>
+      <div class="edu-item">
+        <div class="edu-degree">Bachelor of Education Sports</div>
+        <div class="edu-meta">University of Malta · 2008 – 2012</div>
+      </div>
+
+      <div class="section-heading" style="margin-top:12px">Languages</div>
+      <div class="lang-list">
+        <span>Native:</span> Maltese, English &amp; Italian<br>
+        <span>Beginner:</span> French, Spanish &amp; Greek
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
