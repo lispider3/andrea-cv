@@ -131,6 +131,17 @@ const testimonials = [
   { name: "Lara Tedesco", role: "Strategic Planning | Project & Product Management", company: "", relation: "Worked on the same team", text: `After working with Andrea for well over a year, it is clear that not only does he bring with him a wealth of knowledge in his area but also has a refreshing work ethic. His positivity, leadership and eagerness to bring teams together and solve problems make him an MVP in any team he is in!` }
 ];
 
+const achievementStories = {
+  "Years in iGaming \& Sportsbook": "From sportsbook risk management to the C-suite — I started as a trader at Betsson in 2011, learning odds inside out. That domain expertise became the foundation for everything that followed: product ownership, people leadership, and ultimately running entire product organizations across iGaming and esports.",
+  "PM / PO / Designers Recruited": "Across Betsson, BOSS Gaming, Betswap, and Oddin.gg, I've personally recruited and interviewed over 50 product managers, product owners, and designers. Hiring for character and culture fit first — skills can be taught, but attitude and values are non-negotiable.",
+  "Largest Department Managed": "At Betsson Group, I led a department of 50+ people spanning product managers, designers, QA engineers, and developers across multiple sportsbook squads. Keeping everyone aligned, motivated, and shipping required a mix of clear strategy and genuine human connection.",
+  "Providers Integrated": "From odds feeds and trading platforms to payment providers and front-end frameworks — I've managed the integration of 25+ third-party providers. Each one taught me something about vendor management, technical due diligence, and knowing when to build vs. buy.",
+  "Different Sportsbooks Managed": "Betsson, Betsafe, NordicBet, CasinoEuro, Yourbet, BOSS Gaming, Betswap, and more — each with different markets, different customers, and different challenges. This breadth gives me a rare perspective on what works across segments.",
+  "Departments Built From Zero": "At Betswap, I was employee #1 in product and built a 15-person team in 6 months. At BOSS Gaming, I established the sportsbook department. At Hardball/Yourbet, I set up both Product and Operations from scratch. Building from zero is where I thrive.",
+  "Product Managers Mentored": "My proudest achievement isn't any product launch — it's watching the people I've mentored grow into leaders themselves. Several of my former reports are now Heads of Product and Senior POs at major companies.",
+  "Sports Manually Traded": "Before product management, I spent 4 years as a sportsbook risk manager, manually trading 20+ sports from football to table tennis. This hands-on trading experience gives me an edge that no product course can teach."
+};
+
 const achievements = [
   { value: 15, suffix: "+", label: "Years in iGaming & Sportsbook" },
   { value: 50, suffix: "+", label: "PM / PO / Designers Recruited" },
@@ -420,10 +431,10 @@ const renderAchievements = () => `
 
       <div class="achiev-grid">
         ${achievements.map(a => `
-          <div class="reveal achiev-card">
+          <div class="reveal achiev-card" data-label="${a.label}" onclick="openAchievModal(this)">
             <div class="achiev-value" data-target="${a.value}" data-prefix="${a.prefix || ''}" data-suffix="${a.suffix || ''}">${a.prefix || ''}0${a.suffix || ''}</div>
             <div class="achiev-label">${a.label}</div>
-            <div class="achiev-bar"></div>
+            <div class="achiev-card-hint">Click for story</div><div class="achiev-bar"></div>
           </div>
         `).join('')}
       </div>
@@ -598,6 +609,29 @@ const renderTestimonials = () => `
         <p class="section-subtitle">Recommendations from colleagues and leaders I've had the honour to work with.</p>
       </div>
 
+      <div class="reveal endorsement-banner">
+        <div class="endorsement-stat">
+          <div class="endorsement-value">${testimonials.length}</div>
+          <div class="endorsement-label">Recommendations</div>
+        </div>
+        <div class="endorsement-stat">
+          <div class="endorsement-value">${testimonials.filter(t => t.relation.toLowerCase().includes('reported to andrea')).length}</div>
+          <div class="endorsement-label">Direct Reports</div>
+        </div>
+        <div class="endorsement-stat">
+          <div class="endorsement-value">${testimonials.filter(t => t.relation.toLowerCase().includes('same team')).length}</div>
+          <div class="endorsement-label">Peers</div>
+        </div>
+        <div class="endorsement-stat">
+          <div class="endorsement-value">${testimonials.filter(t => t.relation.toLowerCase().includes('andrea reported')).length}</div>
+          <div class="endorsement-label">Managers</div>
+        </div>
+        <div class="endorsement-stat">
+          <div class="endorsement-value">${testimonials.filter(t => t.relation.toLowerCase().includes('different team') || t.relation.toLowerCase().includes('external') || t.relation.toLowerCase().includes('client')).length}</div>
+          <div class="endorsement-label">External</div>
+        </div>
+      </div>
+
       <div class="testimonials-grid">
         ${testimonials.map((t, i) => `
           <div class="reveal test-card ${i >= 4 ? 'test-card-hidden' : ''}">
@@ -643,6 +677,18 @@ const renderFooter = () => `
 `;
 
 // ============ MOUNT ============
+
+const renderModal = () => `
+  <div class="modal-overlay" id="achiev-modal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeAchievModal()">&times;</button>
+      <div class="modal-value" id="modal-value"></div>
+      <div class="modal-label" id="modal-label"></div>
+      <div class="modal-story" id="modal-story"></div>
+    </div>
+  </div>
+`;
+
 const renderApp = () => {
   const app = document.querySelector('#app');
   app.innerHTML = `
@@ -653,6 +699,7 @@ const renderApp = () => {
     ${renderTestimonials()}
     ${renderOffTrack()}
     ${renderFooter()}
+    ${renderModal()}
   `;
 
   initParticles();
@@ -661,6 +708,34 @@ const renderApp = () => {
   initCountUp();
   initHeroTestimonials();
 };
+
+
+// Modal functions
+window.openAchievModal = (card) => {
+  const label = card.dataset.label;
+  const valueEl = card.querySelector('.achiev-value');
+  const value = valueEl ? valueEl.textContent : '';
+  const story = achievementStories[label] || 'Story coming soon...';
+  
+  document.getElementById('modal-value').textContent = value;
+  document.getElementById('modal-label').textContent = label;
+  document.getElementById('modal-story').textContent = story;
+  document.getElementById('achiev-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeAchievModal = () => {
+  document.getElementById('achiev-modal').classList.remove('active');
+  document.body.style.overflow = '';
+};
+
+// Close modal on overlay click or Escape
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'achiev-modal') closeAchievModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeAchievModal();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
