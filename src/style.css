@@ -1569,109 +1569,122 @@ ul {
   color: var(--red);
 }
 
-/* ============ FLICK SWITCH TOGGLE ============ */
-.flick-switch {
+/* ============ NEUMORPHIC THEME TOGGLE ============ */
+.neo-toggle {
   position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
 }
 
-.flick-switch input {
+.neo-toggle input {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.flick-track {
+.neo-track {
   display: flex;
   align-items: center;
-  width: 62px;
-  height: 30px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #2a2a40 100%);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  border-radius: 15px;
+  width: 54px;
+  height: 28px;
+  background: #22223a;
+  border-radius: 14px;
   position: relative;
-  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+  box-shadow:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 4px rgba(60, 60, 90, 0.25);
 }
 
-.flick-switch:hover .flick-track {
-  border-color: rgba(225, 6, 0, 0.5);
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 10px rgba(225, 6, 0, 0.25);
+.neo-toggle:hover .neo-track {
+  box-shadow:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 4px rgba(60, 60, 90, 0.25),
+    0 0 8px rgba(225, 6, 0, 0.15);
 }
 
-.flick-knob {
+.neo-knob {
   position: absolute;
   top: 3px;
   left: 3px;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #ffffff, #e0e0e0);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px rgba(225, 6, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #3a3a55, #2a2a42);
+  box-shadow:
+    3px 3px 6px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(80, 80, 110, 0.15),
+    inset 1px 1px 2px rgba(80, 80, 110, 0.1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.4s ease,
+              box-shadow 0.4s ease;
   z-index: 2;
 }
 
-.flick-switch input:checked ~ .flick-track .flick-knob {
-  transform: translateX(30px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 12px rgba(255, 200, 50, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-.flick-icon {
-  font-size: 0.75rem;
-  line-height: 1;
-  z-index: 1;
+.neo-icon {
+  width: 13px;
+  height: 13px;
+  position: absolute;
   transition: opacity 0.35s ease, transform 0.35s ease;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3));
 }
 
-.flick-icon--moon {
-  position: absolute;
-  left: 8px;
+.neo-icon--moon {
+  color: #8888bb;
   opacity: 1;
-  transform: scale(1);
+  transform: rotate(0deg) scale(1);
 }
 
-.flick-icon--sun {
-  position: absolute;
-  right: 8px;
-  opacity: 0.3;
-  transform: scale(0.8);
+.neo-icon--sun {
+  color: #f5c842;
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
 }
 
-/* When checked (light mode): shift icon visibility */
-.flick-switch input:checked ~ .flick-track .flick-icon--moon {
-  opacity: 0.3;
-  transform: scale(0.8);
+/* Checked = light mode */
+.neo-toggle input:checked ~ .neo-track {
+  background: #d8d8e6;
+  box-shadow:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.08),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.7);
 }
 
-.flick-switch input:checked ~ .flick-track .flick-icon--sun {
+.neo-toggle input:checked ~ .neo-track .neo-knob {
+  transform: translateX(26px);
+  background: linear-gradient(145deg, #f0f0f5, #dddde8);
+  box-shadow:
+    3px 3px 6px rgba(0, 0, 0, 0.1),
+    -2px -2px 4px rgba(255, 255, 255, 0.8),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+.neo-toggle input:checked ~ .neo-track .neo-icon--moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+.neo-toggle input:checked ~ .neo-track .neo-icon--sun {
   opacity: 1;
-  transform: scale(1);
+  transform: rotate(0deg) scale(1);
 }
 
-/* Light mode track styling */
-html.light .flick-track {
-  background: linear-gradient(135deg, #c8c8d6 0%, #dcdce6 100%);
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+/* Hover: accent the knob */
+.neo-toggle:hover .neo-knob {
+  box-shadow:
+    3px 3px 6px rgba(0, 0, 0, 0.5),
+    -2px -2px 4px rgba(80, 80, 110, 0.15),
+    0 0 6px rgba(225, 6, 0, 0.2);
 }
 
-html.light .flick-switch:hover .flick-track {
-  border-color: rgba(225, 6, 0, 0.4);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(225, 6, 0, 0.12);
-}
-
-html.light .flick-knob {
-  background: linear-gradient(145deg, #ffffff, #f0f0f0);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
-}
-
-html.light .flick-icon {
-  filter: none;
+html.light .neo-toggle:hover .neo-track {
+  box-shadow:
+    inset 3px 3px 6px rgba(0, 0, 0, 0.08),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.7),
+    0 0 8px rgba(225, 6, 0, 0.1);
 }
 
 /* ============ LIGHT THEME ============ */
