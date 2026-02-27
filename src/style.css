@@ -1542,3 +1542,342 @@ ul {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* ============ AS LOGO ============ */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  font-family: var(--font-head) !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+  letter-spacing: 2px !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+}
+
+.logo-a {
+  color: var(--white);
+}
+
+.logo-s {
+  color: var(--red);
+}
+
+/* ============ THEME TOGGLE ============ */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  position: relative;
+}
+
+.theme-toggle:hover {
+  background: rgba(225, 6, 0, 0.1);
+  border-color: var(--red);
+  transform: scale(1.1);
+}
+
+.theme-icon {
+  font-size: 1rem;
+  line-height: 1;
+  position: absolute;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Dark mode (default): show moon, hide sun */
+.theme-icon--sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+.theme-icon--moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Light mode: show sun, hide moon */
+html.light .theme-icon--sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+html.light .theme-icon--moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+/* ============ LIGHT THEME ============ */
+html.light {
+  --dark: #f5f5f7;
+  --dark-card: #ffffff;
+  --dark-border: #e0e0e5;
+  --white: #1a1a2e;
+  --gray-200: #333340;
+  --gray-400: #666680;
+  --gray-600: #999aab;
+}
+
+html.light body {
+  background: #f5f5f7;
+  color: #1a1a2e;
+}
+
+html.light .navbar {
+  background: rgba(245, 245, 247, 0.88);
+  border-bottom-color: #e0e0e5;
+}
+
+html.light .navbar.scrolled {
+  background: rgba(245, 245, 247, 0.95);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+
+html.light .nav-links a {
+  color: #333340;
+}
+
+html.light .nav-links a:hover {
+  color: var(--red);
+}
+
+html.light .logo-a {
+  color: #1a1a2e;
+}
+
+html.light .theme-toggle {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html.light .theme-toggle:hover {
+  background: rgba(225, 6, 0, 0.08);
+  border-color: var(--red);
+}
+
+html.light .hero {
+  background: linear-gradient(180deg, #eaeaef 0%, #f5f5f7 100%);
+}
+
+html.light .hero-overlay {
+  background: none;
+}
+
+html.light .particle {
+  background: rgba(225, 6, 0, 0.08);
+}
+
+html.light .hero-subtitle {
+  color: #555566;
+}
+
+html.light .stat-box {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: #e0e0e5;
+}
+
+html.light .stat-box-label {
+  color: #555566;
+}
+
+html.light .btn-f1-outline {
+  border-color: #c0c0cc;
+  color: #333340;
+}
+
+html.light .btn-f1-outline:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(225, 6, 0, 0.04);
+}
+
+html.light .hero-testimonial-banner {
+  border-top-color: #e0e0e5;
+}
+
+html.light .hero-testimonial-slide cite {
+  color: #888899;
+}
+
+html.light .section-dark {
+  background: #f5f5f7;
+  background-image: none;
+}
+
+html.light .about-text {
+  background: #ffffff;
+  border-color: #e0e0e5;
+  color: #333340;
+}
+
+html.light .about-card {
+  background: #ffffff;
+  border-color: #e0e0e5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+html.light .about-card:hover {
+  background: #fff8f7;
+  box-shadow: 0 8px 32px rgba(225, 6, 0, 0.08);
+}
+
+html.light .ai-tools-callout {
+  background: #ffffff;
+  border-color: #e0e0e5;
+}
+
+html.light .ai-badge {
+  background: rgba(225, 6, 0, 0.04);
+  border-color: rgba(225, 6, 0, 0.2);
+}
+
+html.light .ai-badge:hover {
+  background: rgba(225, 6, 0, 0.1);
+}
+
+html.light .achiev-card {
+  background: #ffffff;
+  border-color: #e0e0e5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+html.light .achiev-card:hover {
+  background: #fff8f7;
+  box-shadow: 0 8px 32px rgba(225, 6, 0, 0.08);
+}
+
+html.light .endorsement-stat {
+  background: #ffffff;
+  border-color: #e0e0e5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+html.light .endorsement-stat:hover {
+  background: #fff8f7;
+  box-shadow: 0 8px 32px rgba(225, 6, 0, 0.08);
+}
+
+html.light .exp-card {
+  background: #ffffff;
+  border-color: #e0e0e5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+html.light .exp-card:hover {
+  background: #fafafe;
+  border-left-color: var(--red);
+}
+
+html.light .exp-card--current {
+  background: #fff8f7;
+  border-left-color: var(--red);
+}
+
+html.light .show-more-btn {
+  border-color: #d0d0dd;
+  color: #555566;
+}
+
+html.light .show-more-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(225, 6, 0, 0.04);
+}
+
+html.light .test-card {
+  background: #ffffff;
+  border-color: #e0e0e5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+html.light .test-card:hover {
+  box-shadow: 0 8px 32px rgba(225, 6, 0, 0.08);
+}
+
+html.light .test-footer {
+  border-top-color: #e8e8ee;
+}
+
+html.light .offtrack-panel {
+  background: #ffffff;
+  border-color: #e0e0e5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+html.light .offtrack-panel-header {
+  border-bottom-color: #e8e8ee;
+  background: rgba(0, 0, 0, 0.01);
+}
+
+html.light .lang-bar {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+html.light .interest-chip {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: #e0e0e5;
+}
+
+html.light .interest-chip:hover {
+  background: rgba(225, 6, 0, 0.04);
+  border-color: var(--red);
+}
+
+html.light .footer {
+  background: #eaeaef;
+  border-top-color: #d0d0dd;
+}
+
+html.light .modal-overlay {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+html.light .modal-content {
+  background: #ffffff;
+  border-color: #e0e0e5;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+html.light .modal-close {
+  color: #999aab;
+}
+
+html.light .modal-close:hover {
+  color: var(--red);
+}
+
+html.light .burger-line {
+  background: #1a1a2e;
+}
+
+html.light .hero-scroll-indicator {
+  color: #999aab;
+}
+
+html.light .f1-strip {
+  box-shadow: 0 1px 4px rgba(225, 6, 0, 0.15);
+}
+
+/* Mobile nav in light mode */
+@media (max-width: 768px) {
+  html.light .nav-links {
+    background: rgba(245, 245, 247, 0.98);
+    border-bottom-color: var(--red);
+  }
+
+  html.light .nav-links a {
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+  }
+}
