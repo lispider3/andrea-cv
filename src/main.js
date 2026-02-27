@@ -170,15 +170,15 @@ const initParticles = () => {
 
 const initThemeToggle = () => {
   const toggle = document.getElementById('theme-toggle');
-  // Check for saved preference or default to dark
   const savedTheme = localStorage.getItem('theme') || 'dark';
   if (savedTheme === 'light') {
     document.documentElement.classList.add('light');
+    toggle.checked = true;
   }
 
-  toggle.addEventListener('click', () => {
-    document.documentElement.classList.toggle('light');
-    const isLight = document.documentElement.classList.contains('light');
+  toggle.addEventListener('change', () => {
+    const isLight = toggle.checked;
+    document.documentElement.classList.toggle('light', isLight);
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
   });
 };

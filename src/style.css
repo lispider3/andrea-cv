@@ -1569,54 +1569,97 @@ ul {
   color: var(--red);
 }
 
-/* ============ THEME TOGGLE ============ */
-.theme-toggle {
+/* ============ FLICK SWITCH TOGGLE ============ */
+.flick-switch {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.flick-switch input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.flick-track {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  cursor: pointer;
-  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  width: 56px;
+  height: 28px;
+  background: #2a2a3e;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
   position: relative;
+  transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.theme-toggle:hover {
-  background: rgba(225, 6, 0, 0.1);
+.flick-switch:hover .flick-track {
   border-color: var(--red);
-  transform: scale(1.1);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 8px rgba(225, 6, 0, 0.2);
 }
 
-.theme-icon {
-  font-size: 1rem;
-  line-height: 1;
+.flick-knob {
   position: absolute;
-  transition: opacity 0.3s, transform 0.3s;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f0f0f0, #d8d8d8);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.35s ease;
 }
 
-/* Dark mode (default): show moon, hide sun */
-.theme-icon--sun {
-  opacity: 0;
-  transform: rotate(-90deg) scale(0.5);
+.flick-switch input:checked ~ .flick-track .flick-knob {
+  transform: translateX(28px);
 }
 
-.theme-icon--moon {
+.flick-icon {
+  font-size: 0.7rem;
+  line-height: 1;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.flick-icon--moon {
+  position: absolute;
+  left: 7px;
   opacity: 1;
-  transform: rotate(0deg) scale(1);
 }
 
-/* Light mode: show sun, hide moon */
-html.light .theme-icon--sun {
+.flick-icon--sun {
+  position: absolute;
+  right: 7px;
+  opacity: 0.35;
+}
+
+/* When checked (light mode): shift icon visibility */
+.flick-switch input:checked ~ .flick-track .flick-icon--moon {
+  opacity: 0.35;
+}
+
+.flick-switch input:checked ~ .flick-track .flick-icon--sun {
   opacity: 1;
-  transform: rotate(0deg) scale(1);
 }
 
-html.light .theme-icon--moon {
-  opacity: 0;
-  transform: rotate(90deg) scale(0.5);
+/* Light mode track styling */
+html.light .flick-track {
+  background: #d0d0dd;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+html.light .flick-switch:hover .flick-track {
+  border-color: var(--red);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.12), 0 0 8px rgba(225, 6, 0, 0.15);
+}
+
+html.light .flick-knob {
+  background: linear-gradient(145deg, #ffffff, #e8e8e8);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 /* ============ LIGHT THEME ============ */
@@ -1657,15 +1700,7 @@ html.light .logo-a {
   color: #1a1a2e;
 }
 
-html.light .theme-toggle {
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
 
-html.light .theme-toggle:hover {
-  background: rgba(225, 6, 0, 0.08);
-  border-color: var(--red);
-}
 
 html.light .hero {
   background: linear-gradient(180deg, #eaeaef 0%, #f5f5f7 100%);

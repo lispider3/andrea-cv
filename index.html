@@ -53,10 +53,14 @@
     <div class="nav-inner">
       <div class="nav-brand">
         <a href="#" class="nav-logo" aria-label="Andrea Spiteri — Home"><span class="logo-a">A</span><span class="logo-s">S</span></a>
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark theme">
-          <span class="theme-icon theme-icon--sun" aria-hidden="true">☀️</span>
-          <span class="theme-icon theme-icon--moon" aria-hidden="true">🌙</span>
-        </button>
+        <label class="flick-switch" aria-label="Toggle light/dark theme">
+          <input type="checkbox" id="theme-toggle" />
+          <span class="flick-track">
+            <span class="flick-icon flick-icon--moon">🌙</span>
+            <span class="flick-icon flick-icon--sun">☀️</span>
+            <span class="flick-knob"></span>
+          </span>
+        </label>
       </div>
       <div class="nav-links" id="nav-links" role="navigation">
         <a href="#about">About</a>
