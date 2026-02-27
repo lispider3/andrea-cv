@@ -349,7 +349,7 @@ const renderHero = () => `
         <a href="/andrea-spiteri-cv.pdf" download class="btn-f1">
           Download CV ↓
         </a>
-        <a href="mailto:andrealispider@gmail.com" class="btn-f1 btn-f1-outline">
+        <a href="#contact" class="btn-f1 btn-f1-outline">
           Get in Touch ✉
         </a>
       </div>
