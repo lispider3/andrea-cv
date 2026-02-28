@@ -1,3 +1,5 @@
+.neo-toggle { opacity: 0; transition: opacity 0.2s; }
+.neo-toggle.ready { opacity: 1; }
 /* ============================================================
    ANDREA SPITERI — Executive Portfolio
    Design: Premium Dark Mode · Glassmorphism · Gold Accent

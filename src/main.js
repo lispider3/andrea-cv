@@ -196,6 +196,7 @@ const initThemeToggle = () => {
     toggle.checked = true;
   }
 
+  document.querySelector('.neo-toggle').classList.add('ready');
   toggle.addEventListener('change', () => {
     const isLight = toggle.checked;
     document.documentElement.classList.toggle('light', isLight);
