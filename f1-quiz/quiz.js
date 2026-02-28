@@ -160,27 +160,14 @@ const render = () => {
 
         <div class="quiz-grid">
           ${champions.map((c, i) => `
-            <div class="quiz-cell ${found.has(i) ? 'quiz-cell--found' : ''}">
+            <div class="quiz-cell ${found.has(i) ? 'quiz-cell--found' : ''} ${finished && !found.has(i) ? 'quiz-cell--missed' : ''}">
               <div class="quiz-cell-year">${c.year}</div>
-              <div class="quiz-cell-name">${found.has(i) ? c.driver.split(' ').pop().toUpperCase() : ''}</div>
+              <div class="quiz-cell-name">${found.has(i) || finished ? c.driver.split(' ').pop().toUpperCase() : ''}</div>
             </div>
           `).join('')}
         </div>
 
-        ${finished ? `
-          <div class="quiz-reveal">
-            <h3>Full List</h3>
-            <div class="quiz-grid quiz-grid--reveal">
-              ${champions.map((c, i) => `
-                <div class="quiz-cell ${found.has(i) ? 'quiz-cell--found' : 'quiz-cell--missed'}">
-                  <div class="quiz-cell-year">${c.year}</div>
-                  <div class="quiz-cell-name">${c.driver.split(' ').pop().toUpperCase()}</div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        ` : ''}
-      </div>
+              </div>
     </section>
 
     <footer class="footer" role="contentinfo">
