@@ -340,3 +340,8 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 
 /* ── Interest flag badge ── */
 .interest-flag { font-family: var(--font-mono); font-size: 0.45rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; background: #E10600; padding: 2px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
+
+/* ── Experience card logo ── */
+.exp-card { display: flex; gap: 16px; align-items: flex-start; }
+.exp-logo { flex-shrink: 0; width: 36px; height: 36px; margin-top: 4px; border-radius: 8px; overflow: hidden; }
+.exp-logo svg { width: 36px; height: 36px; display: block; }
