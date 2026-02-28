@@ -391,11 +391,7 @@ const renderAbout = () => `
       </div>
 
       <div class="reveal about-text">
-        I'm not your typical corporate exec, and I wouldn't want to be. I lead product teams with warmth, honesty, and a genuine belief that great products come from great people. I've spent over a decade in the gaming and esports industry, and along the way, I've learned that the best thing you can do as a leader is care deeply about the humans around you, give them the tools and trust they need, and get out of their way. Oh, and bring good coffee and snacks. Snacks help.
-      </div>
-
-      <div class="reveal about-text" style="border-left-color: var(--gray-400); margin-top: -36px;">
-        My leadership principles are simple: I have your back, I give clear direction with no guesswork, I lead by example, and I keep an open door and an open mind. When it comes to mentoring, I believe in creating a safe space where people can express themselves, make mistakes, and grow — showing real leadership in turbulent times, not just when things are easy.
+        I lead product teams with a simple conviction: great products are built by empowered people. With over a decade in iGaming and Sportsbook, my approach trades corporate bureaucracy for radical candor and high-trust leadership. I specialise in building resilient cultures where teams have the clarity to execute, the safety to innovate, and the support to lead through turbulence.
       </div>
 
       <div class="reveal ai-tools-callout">
@@ -591,14 +587,13 @@ const renderExperience = () => `
         ${experiences.map((exp, i) => `
           <div class="reveal exp-card ${exp.current ? 'exp-card--current' : ''} ${i >= 3 ? 'exp-hidden' : ''}">
             ${exp.current ? '<div class="exp-badge">Current</div>' : ''}
-            <div class="exp-pos">${String(i + 1).padStart(2, '0')}</div>
             <div class="exp-info">
               <div class="exp-title">${exp.title}</div>
               <div class="exp-company">${exp.company}</div>
               <div class="exp-meta">
-                <span> ${exp.period}</span>
+                <span>${exp.period}</span>
                 <span class="exp-meta-sep">|</span>
-                <span> ${exp.location}</span>
+                <span>${exp.location}</span>
               </div>
               <div class="exp-details">
                 ${exp.details.map(d => `

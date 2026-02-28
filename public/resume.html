@@ -5,102 +5,95 @@
   <meta charset="UTF-8">
   <title>Andrea Spiteri — CV</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 9.5pt;
-      line-height: 1.45;
-      color: #1a1a1a;
+      font-size: 9pt;
+      line-height: 1.5;
+      color: #e0e0e0;
+      background: #121212;
       max-width: 210mm;
       margin: 0 auto;
       padding: 24px 32px;
     }
 
-    @page {
-      size: A4;
-      margin: 14mm 16mm;
-    }
-
-    @media print {
-      body {
-        padding: 0;
-      }
-    }
+    @page { size: A4; margin: 12mm 14mm; }
+    @media print { body { padding: 0; } }
 
     /* ── Header ── */
     .header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      border-bottom: 2.5px solid #E10600;
-      padding-bottom: 12px;
+      border-bottom: 2px solid #C9A96E;
+      padding-bottom: 14px;
       margin-bottom: 16px;
     }
 
     .header-left h1 {
-      font-size: 22pt;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      font-size: 24pt;
+      font-weight: 800;
+      letter-spacing: -0.5px;
       line-height: 1.1;
+      color: #f0f0f0;
     }
 
-    .header-left h1 span {
-      color: #E10600;
-    }
+    .header-left h1 span { color: #C9A96E; }
 
     .header-left .title {
-      font-size: 10.5pt;
-      font-weight: 600;
-      color: #555;
-      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #C9A96E;
+      margin-top: 4px;
     }
 
     .header-right {
       text-align: right;
-      font-size: 8.5pt;
-      color: #444;
-      line-height: 1.6;
+      font-size: 8pt;
+      color: #8a8a9a;
+      line-height: 1.7;
     }
 
-    .header-right a {
-      color: #444;
-      text-decoration: none;
+    .header-right a { color: #C9A96E; text-decoration: none; }
+    .header-right .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.5pt;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #5a5a6a;
+      margin-right: 4px;
     }
 
     /* ── Summary ── */
     .summary {
-      font-size: 9.5pt;
-      color: #333;
-      line-height: 1.6;
+      font-size: 9pt;
+      font-weight: 300;
+      color: #8a8a9a;
+      line-height: 1.65;
       margin-bottom: 16px;
-      padding: 10px 14px;
-      background: #f8f8f8;
-      border-left: 3px solid #E10600;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border-left: 2px solid #C9A96E;
+      border-radius: 4px;
     }
 
     /* ── Section headings ── */
     .section-heading {
-      font-size: 9pt;
-      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5pt;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #E10600;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 3px;
+      letter-spacing: 3px;
+      color: #C9A96E;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding-bottom: 4px;
       margin-bottom: 10px;
       margin-top: 14px;
     }
@@ -109,30 +102,32 @@
     .achievements {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      gap: 6px;
       margin-bottom: 14px;
     }
 
     .achiev-item {
       text-align: center;
       padding: 8px 4px;
-      background: #f8f8f8;
-      border-top: 2px solid #E10600;
+      background: rgba(255,255,255,0.04);
+      border-top: 2px solid #C9A96E;
+      border-radius: 0 0 4px 4px;
     }
 
     .achiev-num {
       font-size: 16pt;
-      font-weight: 700;
-      color: #E10600;
+      font-weight: 800;
+      color: #C9A96E;
       line-height: 1.1;
     }
 
     .achiev-lbl {
-      font-size: 6.5pt;
-      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 5.5pt;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #666;
+      letter-spacing: 0.8px;
+      color: #5a5a6a;
       line-height: 1.3;
       margin-top: 2px;
     }
@@ -152,43 +147,46 @@
     .exp-role {
       font-size: 10pt;
       font-weight: 700;
-      color: #1a1a1a;
+      color: #f0f0f0;
     }
 
     .exp-period {
-      font-size: 8pt;
-      font-weight: 600;
-      color: #888;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7pt;
+      font-weight: 500;
+      color: #5a5a6a;
       flex-shrink: 0;
     }
 
     .exp-company {
-      font-size: 8.5pt;
-      font-weight: 600;
-      color: #E10600;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      font-weight: 500;
+      color: #C9A96E;
       margin-bottom: 3px;
     }
 
-    .exp-bullets {
-      list-style: none;
-      padding: 0;
-    }
+    .exp-bullets { list-style: none; padding: 0; }
 
     .exp-bullets li {
       font-size: 8.5pt;
-      color: #333;
-      line-height: 1.5;
-      padding-left: 12px;
+      font-weight: 300;
+      color: #8a8a9a;
+      line-height: 1.55;
+      padding-left: 14px;
       position: relative;
       margin-bottom: 1px;
     }
 
     .exp-bullets li::before {
-      content: '▸';
+      content: '';
       position: absolute;
-      left: 0;
-      color: #E10600;
-      font-size: 7pt;
+      left: 3px;
+      top: 7px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(201,169,110,0.3);
     }
 
     /* ── Two column layout ── */
@@ -207,39 +205,24 @@
     }
 
     .expertise-tag {
-      font-size: 7.5pt;
-      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.5pt;
+      font-weight: 500;
       padding: 3px 8px;
-      background: #f0f0f0;
-      border: 1px solid #ddd;
-      color: #333;
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.15);
+      border-radius: 3px;
+      color: #C9A96E;
     }
 
     /* ── Education ── */
-    .edu-item {
-      margin-bottom: 6px;
-    }
-
-    .edu-degree {
-      font-size: 9pt;
-      font-weight: 700;
-      color: #1a1a1a;
-    }
-
-    .edu-meta {
-      font-size: 8pt;
-      color: #666;
-    }
+    .edu-item { margin-bottom: 6px; }
+    .edu-degree { font-size: 9pt; font-weight: 700; color: #f0f0f0; }
+    .edu-meta { font-size: 8pt; color: #5a5a6a; }
 
     /* ── Languages ── */
-    .lang-list {
-      font-size: 8.5pt;
-      color: #333;
-    }
-
-    .lang-list span {
-      font-weight: 600;
-    }
+    .lang-list { font-size: 8.5pt; color: #8a8a9a; }
+    .lang-list span { font-weight: 600; color: #e0e0e0; }
   </style>
 </head>
 
@@ -252,11 +235,11 @@
       <div class="title">Chief Product Officer</div>
     </div>
     <div class="header-right">
-      <div>📍 Naxxar, Malta</div>
-      <div>📞 +356 77011175</div>
-      <div><a href="mailto:andrealispider@gmail.com">andrealispider@gmail.com</a></div>
-      <div><a href="https://www.linkedin.com/in/andrea-spiteri/">linkedin.com/in/andrea-spiteri</a></div>
-      <div><a href="https://andreaspiteri.com">andreaspiteri.com</a></div>
+      <div><span class="label">Location</span> Naxxar, Malta</div>
+      <div><span class="label">Phone</span> +356 77011175</div>
+      <div><span class="label">Email</span> <a href="mailto:andrealispider@gmail.com">andrealispider@gmail.com</a></div>
+      <div><span class="label">LinkedIn</span> <a href="https://www.linkedin.com/in/andrea-spiteri/">linkedin.com/in/andrea-spiteri</a></div>
+      <div><span class="label">Web</span> <a href="https://andreaspiteri.com">andreaspiteri.com</a></div>
     </div>
   </div>
 

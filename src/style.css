@@ -254,3 +254,19 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 /* Fix: burger-btn class (HTML uses burger-btn, not burger) */
 .burger-btn { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
 @media (max-width: 768px) { .burger-btn { display: block; } }
+
+/* ── Testimonial hidden cards + quote icon ── */
+.test-card-hidden { display: none; }
+.test-card-hidden.visible { display: block; }
+.test-quote-icon { display: none; }
+.show-more-wrap { text-align: center; }
+
+/* ── Experience card extras ── */
+.exp-badge { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); background: var(--accent-dim); padding: 3px 10px; border-radius: 100px; display: inline-block; margin-bottom: 8px; }
+.exp-info { flex: 1; }
+.exp-meta { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 12px; }
+.exp-meta-sep { color: var(--border); }
+.exp-detail { display: flex; gap: 10px; margin-bottom: 4px; }
+.exp-detail-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-dim); margin-top: 8px; flex-shrink: 0; }
+.exp-detail span { font-size: 0.82rem; font-weight: 300; color: var(--text-secondary); line-height: 1.7; }
+.experience-list { display: flex; flex-direction: column; }
