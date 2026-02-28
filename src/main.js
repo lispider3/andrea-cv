@@ -144,9 +144,9 @@ const achievementStories = {
 
 const achievements = [
   { value: 15, suffix: "+", label: "Years in iGaming & Sportsbook" },
-  { value: 50, suffix: "+", label: "PM / PO / Designers Recruited" },
   { value: 50, suffix: "+", label: "Largest Department Managed" },
   { value: 25, suffix: "+", label: "Providers Integrated" },
+  { value: 50, suffix: "+", label: "PM / PO / Designers Recruited" },
   { value: 10, suffix: "+", label: "Different Sportsbooks Managed" },
   { value: 4, suffix: "+", label: "Departments Built From Zero" },
   { value: 5, suffix: "+", label: "Product Managers Mentored" },
@@ -449,14 +449,8 @@ const renderAchievements = () => `
           </div>
         `).join('')}
       </div>
-      <div class="achiev-grid-secondary">
-        ${achievements.slice(3).map(a => `
-          <div class="reveal achiev-card achiev-card--secondary" data-label="${a.label}" onclick="openAchievModal(this)">
-            <div class="achiev-value" data-target="${a.value}" data-prefix="${a.prefix || ''}" data-suffix="${a.suffix || ''}">${a.prefix || ''}0${a.suffix || ''}</div>
-            <div class="achiev-label">${a.label}</div>
-            <div class="achiev-card-hint">Click for story</div><div class="achiev-bar"></div>
-          </div>
-        `).join('')}
+      <div class="achiev-inline reveal">
+        ${achievements.slice(3).map(a => `<span class="achiev-chip" data-label="${a.label}" onclick="openAchievModal(this)"><span class="achiev-chip-num" data-target="${a.value}" data-prefix="${a.prefix || ''}" data-suffix="${a.suffix || ''}">${a.prefix || ''}${a.value}${a.suffix || ''}</span> ${a.label}</span>`).join('<span class="achiev-sep">·</span>')}
       </div>
     </div>
   </section>
@@ -625,31 +619,10 @@ const renderTestimonials = () => `
       <div class="reveal">
         <div class="section-tag"><span>Social Proof</span></div>
         <h2 class="section-title">What People <span class="text-red">Say</span></h2>
-        <p class="section-subtitle">Recommendations from colleagues and leaders I've had the honour to work with.</p>
+        <p class="section-subtitle">Recommendations from colleagues and leaders I've had the honour to work with. <span class="endorsement-badge"><span class="endorsement-badge-num">${testimonials.length}</span> LinkedIn Recommendations</span></p>
       </div>
 
-      <div class="reveal endorsement-banner">
-        <div class="endorsement-stat">
-          <div class="endorsement-value">${testimonials.length}</div>
-          <div class="endorsement-label">Recommendations</div>
-        </div>
-        <div class="endorsement-stat">
-          <div class="endorsement-value">${testimonials.filter(t => t.relation.toLowerCase().includes('reported to andrea')).length}</div>
-          <div class="endorsement-label">Direct Reports</div>
-        </div>
-        <div class="endorsement-stat">
-          <div class="endorsement-value">${testimonials.filter(t => t.relation.toLowerCase().includes('same team')).length}</div>
-          <div class="endorsement-label">Peers</div>
-        </div>
-        <div class="endorsement-stat">
-          <div class="endorsement-value">${testimonials.filter(t => t.relation.toLowerCase().includes('andrea reported')).length}</div>
-          <div class="endorsement-label">Managers</div>
-        </div>
-        <div class="endorsement-stat">
-          <div class="endorsement-value">${testimonials.filter(t => t.relation.toLowerCase().includes('different team') || t.relation.toLowerCase().includes('external') || t.relation.toLowerCase().includes('client')).length}</div>
-          <div class="endorsement-label">External</div>
-        </div>
-      </div>
+
 
       <div class="testimonials-grid">
         ${testimonials.map((t, i) => `
