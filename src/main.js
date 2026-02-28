@@ -551,7 +551,7 @@ const renderOffTrack = () => `
             <a href="/f1-quiz/" class="interest-chip interest-chip--link" style="text-decoration:none;">
               <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
               <span class="interest-label">Formula 1</span>
-              <span class="interest-sub">Take the Quiz →</span>
+              <span class="interest-flag">Quiz</span>
             </a>
             <div class="interest-chip">
               <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/></svg></span>

@@ -193,11 +193,19 @@ const render = () => {
 
   if (startBtn) startBtn.addEventListener('click', startQuiz);
   if (restartBtn) restartBtn.addEventListener('click', restartQuiz);
+  const giveupBtn = document.getElementById('quiz-giveup-btn');
+  if (giveupBtn) giveupBtn.addEventListener('click', giveUp);
 
   if (input && started && !finished) {
     input.addEventListener('input', onInput);
     input.focus();
   }
+};
+
+const giveUp = () => {
+  clearInterval(timerInterval);
+  finished = true;
+  render();
 };
 
 const startQuiz = () => {

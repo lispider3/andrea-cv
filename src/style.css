@@ -333,3 +333,10 @@ html.light .nav-links a:hover { color: #1a1a1a; }
   .quiz-timer { font-size: 1.2rem; }
   .quiz-input { min-width: 100%; order: 3; }
 }
+
+/* ── Give Up button ── */
+.quiz-giveup-btn { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 10px 24px; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+.quiz-giveup-btn:hover { color: #E10600; border-color: rgba(225,6,0,0.3); }
+
+/* ── Interest flag badge ── */
+.interest-flag { font-family: var(--font-mono); font-size: 0.45rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; background: #E10600; padding: 2px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
