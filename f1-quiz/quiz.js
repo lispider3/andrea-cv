@@ -143,6 +143,13 @@ const render = () => {
           </div>
         ` : ''}
 
+
+        ${started && !finished ? `
+          <div class="quiz-start-wrap">
+            <button id="quiz-giveup-btn" class="quiz-giveup-btn">GIVE UP</button>
+          </div>
+        ` : ''}
+
         ${finished ? `
           <div class="quiz-result">
             <div class="quiz-result-score">${found.size} / ${TOTAL}</div>
