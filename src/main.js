@@ -328,29 +328,29 @@ const renderHero = () => `
 
       <div class="hero-stats">
         <div class="stat-box">
-          <span class="stat-box-value">🎯</span>
+          <span class="stat-box-value"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
           <span class="stat-box-label">Sportsbook Expert</span>
         </div>
         <div class="stat-box">
-          <span class="stat-box-value">🤖</span>
+          <span class="stat-box-value"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg></span>
           <span class="stat-box-label">AI‑Fluent</span>
         </div>
         <div class="stat-box">
-          <span class="stat-box-value">🧭</span>
+          <span class="stat-box-value"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>
           <span class="stat-box-label">Product Strategy</span>
         </div>
         <div class="stat-box">
-          <span class="stat-box-value">👥</span>
+          <span class="stat-box-value"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
           <span class="stat-box-label">People Leadership</span>
         </div>
       </div>
 
       <div class="hero-cta-row">
         <a href="/andrea-spiteri-cv.pdf" download class="btn-f1">
-          Download CV ↓
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download CV
         </a>
         <a href="#contact" class="btn-f1 btn-f1-outline">
-          Get in Touch ✉
+          Get in Touch <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
 
@@ -377,7 +377,7 @@ const renderHero = () => `
     </div>
     <div class="hero-scroll-indicator">
       <div>Scroll</div>
-      <div class="scroll-arrow">↓</div>
+      <div class="scroll-arrow"></div>
     </div>
   </section>
 `;
@@ -399,7 +399,7 @@ const renderAbout = () => `
       </div>
 
       <div class="reveal ai-tools-callout">
-        <div class="ai-tools-label">🤖 AI Tools I Use Daily</div>
+        <div class="ai-tools-label"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg> AI Tools I Use Daily</div>
         <div class="ai-tools-badges">
           <span class="ai-badge">Antigravity</span>
           <span class="ai-badge">Cursor</span>
@@ -411,22 +411,22 @@ const renderAbout = () => `
 
       <div class="about-grid">
         <div class="reveal about-card">
-          <div class="about-card-icon">👥</div>
+          <div class="about-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
           <div class="about-card-title">People First</div>
           <div class="about-card-desc">I hire for character, chemistry & culture above all else.</div>
         </div>
         <div class="reveal about-card">
-          <div class="about-card-icon">🌱</div>
+          <div class="about-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></div>
           <div class="about-card-title">Grow Together</div>
           <div class="about-card-desc">Helping my team find their path, feel successful, and enjoy the ride.</div>
         </div>
         <div class="reveal about-card">
-          <div class="about-card-icon">⚡</div>
+          <div class="about-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
           <div class="about-card-title">Thrive Under Pressure</div>
           <div class="about-card-desc">The tighter the deadline, the sharper I get.</div>
         </div>
         <div class="reveal about-card">
-          <div class="about-card-icon">🤝</div>
+          <div class="about-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
           <div class="about-card-title">Connections Matter</div>
           <div class="about-card-desc">Relationships are the most important factor in everything I do.</div>
         </div>
@@ -445,8 +445,17 @@ const renderAchievements = () => `
       </div>
 
       <div class="achiev-grid">
-        ${achievements.map(a => `
-          <div class="reveal achiev-card" data-label="${a.label}" onclick="openAchievModal(this)">
+        ${achievements.slice(0, 3).map(a => `
+          <div class="reveal achiev-card achiev-card--primary" data-label="${a.label}" onclick="openAchievModal(this)">
+            <div class="achiev-value" data-target="${a.value}" data-prefix="${a.prefix || ''}" data-suffix="${a.suffix || ''}">${a.prefix || ''}0${a.suffix || ''}</div>
+            <div class="achiev-label">${a.label}</div>
+            <div class="achiev-card-hint">Click for story</div><div class="achiev-bar"></div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="achiev-grid-secondary">
+        ${achievements.slice(3).map(a => `
+          <div class="reveal achiev-card achiev-card--secondary" data-label="${a.label}" onclick="openAchievModal(this)">
             <div class="achiev-value" data-target="${a.value}" data-prefix="${a.prefix || ''}" data-suffix="${a.suffix || ''}">${a.prefix || ''}0${a.suffix || ''}</div>
             <div class="achiev-label">${a.label}</div>
             <div class="achiev-card-hint">Click for story</div><div class="achiev-bar"></div>
@@ -470,7 +479,7 @@ const renderOffTrack = () => `
         <!-- Languages -->
         <div class="reveal offtrack-panel">
           <div class="offtrack-panel-header">
-            <span class="offtrack-panel-icon">🌍</span>
+            <span class="offtrack-panel-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
             <span class="offtrack-panel-title">Languages</span>
           </div>
           <div class="offtrack-panel-body">
@@ -522,7 +531,7 @@ const renderOffTrack = () => `
         <!-- Education -->
         <div class="reveal offtrack-panel">
           <div class="offtrack-panel-header">
-            <span class="offtrack-panel-icon">🎓</span>
+            <span class="offtrack-panel-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 10 3 12 0v-5"/></svg></span>
             <span class="offtrack-panel-title">Education</span>
           </div>
           <div class="offtrack-panel-body">
@@ -541,25 +550,25 @@ const renderOffTrack = () => `
         <!-- Interests -->
         <div class="reveal offtrack-panel offtrack-panel--wide">
           <div class="offtrack-panel-header">
-            <span class="offtrack-panel-icon">🔥</span>
+            <span class="offtrack-panel-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
             <span class="offtrack-panel-title">Interests</span>
           </div>
           <div class="offtrack-interests">
             <div class="interest-chip">
-              <span class="interest-emoji">🏋️</span>
+              <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg></span>
               <span class="interest-label">CrossFit</span>
             </div>
             <div class="interest-chip">
-              <span class="interest-emoji">🏎️</span>
+              <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
               <span class="interest-label">Formula 1</span>
-              <span class="interest-sub">Tifoso 🔴</span>
+              <span class="interest-sub">Tifoso</span>
             </div>
             <div class="interest-chip">
-              <span class="interest-emoji">⚽</span>
+              <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/></svg></span>
               <span class="interest-label">Football</span>
             </div>
             <div class="interest-chip">
-              <span class="interest-emoji">✈️</span>
+              <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
               <span class="interest-label">Traveling</span>
             </div>
           </div>
@@ -587,9 +596,9 @@ const renderExperience = () => `
               <div class="exp-title">${exp.title}</div>
               <div class="exp-company">${exp.company}</div>
               <div class="exp-meta">
-                <span>📅 ${exp.period}</span>
+                <span> ${exp.period}</span>
                 <span class="exp-meta-sep">|</span>
-                <span>📍 ${exp.location}</span>
+                <span> ${exp.location}</span>
               </div>
               <div class="exp-details">
                 ${exp.details.map(d => `
@@ -676,17 +685,12 @@ const renderTestimonials = () => `
 const renderFooter = () => `
   <footer class="footer" id="contact" role="contentinfo">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-left">
-          <div class="footer-name">Andrea Spiteri</div>
-          <div class="footer-copyright">© ${new Date().getFullYear()} — All rights reserved</div>
+      <div class="footer-links">
+          <a href="/andrea-spiteri-cv.pdf" download><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download CV</a>
+          <a href="mailto:andrealispider@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Email</a>
+          <a href="https://www.linkedin.com/in/andrea-spiteri/" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a>
         </div>
-        <div class="footer-links">
-          <a href="/andrea-spiteri-cv.pdf" download class="footer-link">📄 Download CV</a>
-          <a href="mailto:andrealispider@gmail.com" class="footer-link">✉ Email</a>
-          <a href="https://www.linkedin.com/in/andrea-spiteri/" target="_blank" rel="noopener noreferrer" class="footer-link">🔗 LinkedIn</a>
-        </div>
-      </div>
+      <p class="footer-copy">© ${new Date().getFullYear()} Andrea Spiteri — All rights reserved</p>
     </div>
   </footer>
 `;
