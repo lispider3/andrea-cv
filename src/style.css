@@ -61,7 +61,7 @@ a { color: inherit; text-decoration: none; }
 .f1-strip { display: none; }
 
 /* ── HERO ── */
-.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 120px 24px 80px; background: var(--bg); background-image: radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 24px 24px; }
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 120px 24px 80px; background: var(--bg); background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 24px 24px; }
 .hero-overlay, .hero-particles { display: none; }
 .hero-content { max-width: var(--container-max); width: 100%; text-align: center; }
 .hero-tag span { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); padding: 6px 16px; border: 1px solid var(--accent-dim); border-radius: 100px; background: var(--accent-glow); }
@@ -315,7 +315,7 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .quiz-result-label { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
 
 .quiz-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
-.quiz-cell { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 4px; min-height: 36px; transition: all 0.3s; }
+.quiz-cell { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.04); border-radius: 4px; min-height: 36px; transition: all 0.3s; }
 .quiz-cell-year { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; color: var(--text-muted); min-width: 32px; }
 .quiz-cell-name { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; color: transparent; }
 .quiz-cell--found { background: rgba(225,6,0,0.08); border-color: rgba(225,6,0,0.2); }
