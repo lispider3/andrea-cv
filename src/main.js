@@ -212,7 +212,7 @@ const initNavbar = () => {
 const initReveal = () => {
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && !entry.target.classList.contains('exp-hidden')) {
         entry.target.classList.add('visible');
         obs.unobserve(entry.target);
       }

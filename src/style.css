@@ -154,8 +154,8 @@ a { color: inherit; text-decoration: none; }
 .exp-details { list-style: none; padding: 0; }
 .exp-details li { font-size: 0.82rem; font-weight: 300; color: var(--text-secondary); line-height: 1.7; padding-left: 16px; position: relative; margin-bottom: 4px; }
 .exp-details li::before { content: ''; position: absolute; left: 0; top: 10px; width: 4px; height: 4px; border-radius: 50%; background: var(--accent-dim); }
-.exp-hidden { display: none; }
-.exp-hidden.visible { display: block; }
+.exp-hidden { display: none !important; }
+
 .show-more-btn { display: block; margin: 24px auto 0; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 12px 28px; background: transparent; border: 1px solid var(--glass-border); border-radius: var(--radius-sm); color: var(--text-secondary); cursor: pointer; transition: all var(--transition); }
 .show-more-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
 
