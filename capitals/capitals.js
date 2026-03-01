@@ -53,57 +53,6 @@ const DATA = [
   {c:'Ukraine',k:'Kyiv',id:'804',ct:'Europe',a:604},{c:'United Arab Emirates',k:'Abu Dhabi',id:'784',ct:'Asia',a:84},{c:'United Kingdom',k:'London',id:'826',ct:'Europe',a:243},{c:'United States',k:'Washington D.C.',id:'840',ct:'N. America',a:9834},
   {c:'Uruguay',k:'Montevideo',id:'858',ct:'S. America',a:176},{c:'Uzbekistan',k:'Tashkent',id:'860',ct:'Asia',a:449},{c:'Vanuatu',k:'Port Vila',id:'548',ct:'Oceania',a:12},{c:'Vatican City',k:'Vatican City',id:'336',ct:'Europe',a:0.0004},
   {c:'Venezuela',k:'Caracas',id:'862',ct:'S. America',a:916},{c:'Vietnam',k:'Hanoi',id:'704',ct:'Asia',a:331},{c:'Yemen',k:'Sanaa',id:'887',ct:'Asia',a:528},{c:'Zambia',k:'Lusaka',id:'894',ct:'Africa',a:753},{c:'Zimbabwe',k:'Harare',id:'716',ct:'Africa',a:391},
-]onst DATA = [
-  {c:'Afghanistan',k:'Kabul',id:'004'},{c:'Albania',k:'Tirana',id:'008'},{c:'Algeria',k:'Algiers',id:'012'},{c:'Andorra',k:'Andorra la Vella',id:'020'},
-  {c:'Angola',k:'Luanda',id:'024'},{c:'Antigua and Barbuda',k:"St. John's",id:'028'},{c:'Argentina',k:'Buenos Aires',id:'032'},{c:'Armenia',k:'Yerevan',id:'051'},
-  {c:'Australia',k:'Canberra',id:'036'},{c:'Austria',k:'Vienna',id:'040'},{c:'Azerbaijan',k:'Baku',id:'031'},{c:'Bahamas',k:'Nassau',id:'044'},
-  {c:'Bahrain',k:'Manama',id:'048'},{c:'Bangladesh',k:'Dhaka',id:'050'},{c:'Barbados',k:'Bridgetown',id:'052'},{c:'Belarus',k:'Minsk',id:'112'},
-  {c:'Belgium',k:'Brussels',id:'056'},{c:'Belize',k:'Belmopan',id:'084'},{c:'Benin',k:'Porto-Novo',id:'204'},{c:'Bhutan',k:'Thimphu',id:'064'},
-  {c:'Bolivia',k:'Sucre',id:'068'},{c:'Bosnia and Herzegovina',k:'Sarajevo',id:'070'},{c:'Botswana',k:'Gaborone',id:'072'},{c:'Brazil',k:'Brasilia',id:'076'},
-  {c:'Brunei',k:'Bandar Seri Begawan',id:'096'},{c:'Bulgaria',k:'Sofia',id:'100'},{c:'Burkina Faso',k:'Ouagadougou',id:'854'},{c:'Burundi',k:'Gitega',id:'108'},
-  {c:'Cabo Verde',k:'Praia',id:'132'},{c:'Cambodia',k:'Phnom Penh',id:'116'},{c:'Cameroon',k:'Yaounde',id:'120'},{c:'Canada',k:'Ottawa',id:'124'},
-  {c:'Central African Republic',k:'Bangui',id:'140'},{c:'Chad',k:"N'Djamena",id:'148'},{c:'Chile',k:'Santiago',id:'152'},{c:'China',k:'Beijing',id:'156'},
-  {c:'Colombia',k:'Bogota',id:'170'},{c:'Comoros',k:'Moroni',id:'174'},{c:'Congo (DRC)',k:'Kinshasa',id:'180'},{c:'Congo (Republic)',k:'Brazzaville',id:'178'},
-  {c:'Costa Rica',k:'San Jose',id:'188'},{c:'Croatia',k:'Zagreb',id:'191'},{c:'Cuba',k:'Havana',id:'192'},{c:'Cyprus',k:'Nicosia',id:'196'},
-  {c:'Czech Republic',k:'Prague',id:'203'},{c:'Denmark',k:'Copenhagen',id:'208'},{c:'Djibouti',k:'Djibouti',id:'262'},{c:'Dominica',k:'Roseau',id:'212'},
-  {c:'Dominican Republic',k:'Santo Domingo',id:'214'},{c:'East Timor',k:'Dili',id:'626'},{c:'Ecuador',k:'Quito',id:'218'},{c:'Egypt',k:'Cairo',id:'818'},
-  {c:'El Salvador',k:'San Salvador',id:'222'},{c:'Equatorial Guinea',k:'Malabo',id:'226'},{c:'Eritrea',k:'Eritrea',id:'232'},{c:'Estonia',k:'Tallinn',id:'233'},
-  {c:'Eswatini',k:'Mbabane',id:'748'},{c:'Ethiopia',k:'Addis Ababa',id:'231'},{c:'Fiji',k:'Suva',id:'242'},{c:'Finland',k:'Helsinki',id:'246'},
-  {c:'France',k:'Paris',id:'250'},{c:'Gabon',k:'Libreville',id:'266'},{c:'Gambia',k:'Banjul',id:'270'},{c:'Georgia',k:'Tbilisi',id:'268'},
-  {c:'Germany',k:'Berlin',id:'276'},{c:'Ghana',k:'Accra',id:'288'},{c:'Greece',k:'Athens',id:'300'},{c:'Grenada',k:"St. George's",id:'308'},
-  {c:'Guatemala',k:'Guatemala City',id:'320'},{c:'Guinea',k:'Conakry',id:'324'},{c:'Guinea-Bissau',k:'Bissau',id:'624'},{c:'Guyana',k:'Georgetown',id:'328'},
-  {c:'Haiti',k:'Port-au-Prince',id:'332'},{c:'Honduras',k:'Tegucigalpa',id:'340'},{c:'Hungary',k:'Budapest',id:'348'},{c:'Iceland',k:'Reykjavik',id:'352'},
-  {c:'India',k:'New Delhi',id:'356'},{c:'Indonesia',k:'Jakarta',id:'360'},{c:'Iran',k:'Tehran',id:'364'},{c:'Iraq',k:'Baghdad',id:'368'},
-  {c:'Ireland',k:'Dublin',id:'372'},{c:'Israel',k:'Jerusalem',id:'376'},{c:'Italy',k:'Rome',id:'380'},{c:'Ivory Coast',k:'Yamoussoukro',id:'384'},
-  {c:'Jamaica',k:'Kingston',id:'388'},{c:'Japan',k:'Tokyo',id:'392'},{c:'Jordan',k:'Amman',id:'400'},{c:'Kazakhstan',k:'Astana',id:'398'},
-  {c:'Kenya',k:'Nairobi',id:'404'},{c:'Kiribati',k:'Tarawa',id:'296'},{c:'Kosovo',k:'Pristina',id:'-99'},{c:'Kuwait',k:'Kuwait City',id:'414'},
-  {c:'Kyrgyzstan',k:'Bishkek',id:'417'},{c:'Laos',k:'Vientiane',id:'418'},{c:'Latvia',k:'Riga',id:'428'},{c:'Lebanon',k:'Beirut',id:'422'},
-  {c:'Lesotho',k:'Maseru',id:'426'},{c:'Liberia',k:'Monrovia',id:'430'},{c:'Libya',k:'Tripoli',id:'434'},{c:'Liechtenstein',k:'Vaduz',id:'438'},
-  {c:'Lithuania',k:'Vilnius',id:'440'},{c:'Luxembourg',k:'Luxembourg City',id:'442'},{c:'Madagascar',k:'Antananarivo',id:'450'},{c:'Malawi',k:'Lilongwe',id:'454'},
-  {c:'Malaysia',k:'Kuala Lumpur',id:'458'},{c:'Maldives',k:'Male',id:'462'},{c:'Mali',k:'Bamako',id:'466'},{c:'Malta',k:'Valletta',id:'470'},
-  {c:'Marshall Islands',k:'Majuro',id:'584'},{c:'Mauritania',k:'Nouakchott',id:'478'},{c:'Mauritius',k:'Port Louis',id:'480'},{c:'Mexico',k:'Mexico City',id:'484'},
-  {c:'Micronesia',k:'Palikir',id:'583'},{c:'Moldova',k:'Chisinau',id:'498'},{c:'Monaco',k:'Monaco',id:'492'},{c:'Mongolia',k:'Ulaanbaatar',id:'496'},
-  {c:'Montenegro',k:'Podgorica',id:'499'},{c:'Morocco',k:'Rabat',id:'504'},{c:'Mozambique',k:'Maputo',id:'508'},{c:'Myanmar',k:'Naypyidaw',id:'104'},
-  {c:'Namibia',k:'Windhoek',id:'516'},{c:'Nauru',k:'Yaren',id:'520'},{c:'Nepal',k:'Kathmandu',id:'524'},{c:'Netherlands',k:'Amsterdam',id:'528'},
-  {c:'New Zealand',k:'Wellington',id:'554'},{c:'Nicaragua',k:'Managua',id:'558'},{c:'Niger',k:'Niamey',id:'562'},{c:'Nigeria',k:'Abuja',id:'566'},
-  {c:'North Korea',k:'Pyongyang',id:'408'},{c:'North Macedonia',k:'Skopje',id:'807'},{c:'Norway',k:'Oslo',id:'578'},{c:'Oman',k:'Muscat',id:'512'},
-  {c:'Pakistan',k:'Islamabad',id:'586'},{c:'Palau',k:'Ngerulmud',id:'585'},{c:'Palestine',k:'Ramallah',id:'275'},{c:'Panama',k:'Panama City',id:'591'},
-  {c:'Papua New Guinea',k:'Port Moresby',id:'598'},{c:'Paraguay',k:'Asuncion',id:'600'},{c:'Peru',k:'Lima',id:'604'},{c:'Philippines',k:'Manila',id:'608'},
-  {c:'Poland',k:'Warsaw',id:'616'},{c:'Portugal',k:'Lisbon',id:'620'},{c:'Qatar',k:'Doha',id:'634'},{c:'Romania',k:'Bucharest',id:'642'},
-  {c:'Russia',k:'Moscow',id:'643'},{c:'Rwanda',k:'Kigali',id:'646'},{c:'Saint Kitts and Nevis',k:'Basseterre',id:'659'},{c:'Saint Lucia',k:'Castries',id:'662'},
-  {c:'Saint Vincent',k:'Kingstown',id:'670'},{c:'Samoa',k:'Apia',id:'882'},{c:'San Marino',k:'San Marino',id:'674'},{c:'Sao Tome and Principe',k:'Sao Tome',id:'678'},
-  {c:'Saudi Arabia',k:'Riyadh',id:'682'},{c:'Senegal',k:'Dakar',id:'686'},{c:'Serbia',k:'Belgrade',id:'688'},{c:'Seychelles',k:'Victoria',id:'690'},
-  {c:'Sierra Leone',k:'Freetown',id:'694'},{c:'Singapore',k:'Singapore',id:'702'},{c:'Slovakia',k:'Bratislava',id:'703'},{c:'Slovenia',k:'Ljubljana',id:'705'},
-  {c:'Solomon Islands',k:'Honiara',id:'090'},{c:'Somalia',k:'Mogadishu',id:'706'},{c:'South Africa',k:'Pretoria',id:'710'},{c:'South Korea',k:'Seoul',id:'410'},
-  {c:'South Sudan',k:'Juba',id:'728'},{c:'Spain',k:'Madrid',id:'724'},{c:'Sri Lanka',k:'Colombo',id:'144'},{c:'Sudan',k:'Khartoum',id:'729'},
-  {c:'Suriname',k:'Paramaribo',id:'740'},{c:'Sweden',k:'Stockholm',id:'752'},{c:'Switzerland',k:'Bern',id:'756'},{c:'Syria',k:'Damascus',id:'760'},
-  {c:'Taiwan',k:'Taipei',id:'158'},{c:'Tajikistan',k:'Dushanbe',id:'762'},{c:'Tanzania',k:'Dodoma',id:'834'},{c:'Thailand',k:'Bangkok',id:'764'},
-  {c:'Togo',k:'Lome',id:'768'},{c:'Tonga',k:"Nuku'alofa",id:'776'},{c:'Trinidad and Tobago',k:'Port of Spain',id:'780'},{c:'Tunisia',k:'Tunis',id:'788'},
-  {c:'Turkey',k:'Ankara',id:'792'},{c:'Turkmenistan',k:'Ashgabat',id:'795'},{c:'Tuvalu',k:'Funafuti',id:'798'},{c:'Uganda',k:'Kampala',id:'800'},
-  {c:'Ukraine',k:'Kyiv',id:'804'},{c:'United Arab Emirates',k:'Abu Dhabi',id:'784'},{c:'United Kingdom',k:'London',id:'826'},{c:'United States',k:'Washington D.C.',id:'840'},
-  {c:'Uruguay',k:'Montevideo',id:'858'},{c:'Uzbekistan',k:'Tashkent',id:'860'},{c:'Vanuatu',k:'Port Vila',id:'548'},{c:'Vatican City',k:'Vatican City',id:'336'},
-  {c:'Venezuela',k:'Caracas',id:'862'},{c:'Vietnam',k:'Hanoi',id:'704'},{c:'Yemen',k:'Sanaa',id:'887'},{c:'Zambia',k:'Lusaka',id:'894'},{c:'Zimbabwe',k:'Harare',id:'716'},
-];
 
 const TOTAL = DATA.length;
 const TOTAL_WORLD_AREA = DATA.reduce((s, d) => s + d.a, 0);
@@ -208,6 +157,81 @@ const renderMapSVG = () => {
   return `<svg viewBox="0 0 ${width} ${height}" class="cq-map-svg">${paths}</svg>`;
 };
 
+
+// ── AI Performance Analysis ──
+const generateAnalysis = (score, total, pct, contStats, areaPct, answered) => {
+  const timeUsed = (TIMER_MINUTES * 60) - timeLeft;
+  const pacePerMin = timeUsed > 0 ? Math.round(score / (timeUsed / 60) * 10) / 10 : 0;
+
+  // Determine overall level
+  let level, emoji;
+  if (pct >= 95) { level = 'exceptional'; emoji = 'Outstanding'; }
+  else if (pct >= 80) { level = 'excellent'; emoji = 'Excellent'; }
+  else if (pct >= 60) { level = 'good'; emoji = 'Good'; }
+  else if (pct >= 40) { level = 'average'; emoji = 'Average'; }
+  else if (pct >= 20) { level = 'below average'; emoji = 'Below Average'; }
+  else { level = 'beginner'; emoji = 'Beginner'; }
+
+  // Find strongest and weakest continents
+  const sorted = [...contStats].sort((a, b) => b.pct - a.pct);
+  const best = sorted[0];
+  const worst = sorted[sorted.length - 1];
+
+  // Build analysis paragraphs
+  let analysis = '';
+
+  // Opening assessment
+  if (pct === 100) {
+    analysis += `A perfect score — you named every single capital in the world. This is a rare and exceptional achievement that demonstrates comprehensive geographical knowledge. Truly impressive.`;
+  } else if (pct >= 80) {
+    analysis += `An ${emoji.toLowerCase()} result. Naming ${score} out of ${total} capitals (${pct}%) shows a strong command of world geography. Your knowledge covered ${areaPct}% of the world\'s land area, which is remarkable.`;
+  } else if (pct >= 60) {
+    analysis += `A ${emoji.toLowerCase()} result. You named ${score} out of ${total} capitals (${pct}%), demonstrating solid geographical knowledge. Your answers covered ${areaPct}% of the world\'s territory.`;
+  } else if (pct >= 40) {
+    analysis += `You named ${score} out of ${total} capitals (${pct}%), which is an ${emoji.toLowerCase()} score. Your answers covered ${areaPct}% of the world\'s territory. There\'s room to grow, especially in some regions.`;
+  } else if (pct >= 20) {
+    analysis += `You named ${score} out of ${total} capitals (${pct}%). This is a ${emoji.toLowerCase()} result, but geography is a vast subject and every answer counts. Your answers covered ${areaPct}% of the world\'s territory.`;
+  } else {
+    analysis += `You named ${score} out of ${total} capitals (${pct}%). This quiz covers a lot of ground — 197 countries across 6 continents. Every capital you learn is progress.`;
+  }
+
+  // Continental breakdown
+  if (best && best.pct > 0) {
+    analysis += ` Your strongest continent was ${best.ct} at ${best.pct}% (${best.got}/${best.total}).`;
+  }
+  if (worst && worst.pct < best.pct) {
+    analysis += ` ${worst.ct} was your most challenging region at ${worst.pct}% (${worst.got}/${worst.total}).`;
+  }
+
+  // Specific observations
+  const europeStats = contStats.find(c => c.ct === 'Europe');
+  const africaStats = contStats.find(c => c.ct === 'Africa');
+  const asiaStats = contStats.find(c => c.ct === 'Asia');
+  const oceaniaStats = contStats.find(c => c.ct === 'Oceania');
+
+  if (africaStats && africaStats.pct < 20 && pct >= 40) {
+    analysis += ` African capitals are notoriously tricky — they tend to be the most commonly missed globally, so don\'t be discouraged.`;
+  }
+  if (oceaniaStats && oceaniaStats.pct < 30 && pct >= 30) {
+    analysis += ` Oceania\'s small island nations are among the hardest capitals to recall.`;
+  }
+  if (europeStats && europeStats.pct >= 80) {
+    analysis += ` Your European geography is particularly strong.`;
+  }
+
+  // Pace
+  if (pacePerMin >= 3) {
+    analysis += ` Your pace of ${pacePerMin} answers per minute shows confident recall.`;
+  }
+
+  // Encouragement
+  if (pct < 60 && pct >= 20) {
+    analysis += ` To improve, try focusing on one continent at a time — it makes 197 countries much more manageable.`;
+  }
+
+  return { level: emoji, analysis };
+};
+
 // ── Render ──
 const render = () => {
   if (!app) return;
@@ -301,6 +325,15 @@ const render = () => {
             <div class="cq-big-stat-value">${areaPct}%</div>
             <div class="cq-big-stat-label">World Territory</div>
           </div>
+        </div>
+
+        <div class="cq-ai-analysis">
+          <div class="cq-ai-analysis-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+            <span>PERFORMANCE ANALYSIS</span>
+            <span class="cq-ai-level">${generateAnalysis(score, TOTAL, pct, contStats, areaPct, answered).level}</span>
+          </div>
+          <p class="cq-ai-text">${generateAnalysis(score, TOTAL, pct, contStats, areaPct, answered).analysis}</p>
         </div>
 
         <div class="cq-continent-stats">

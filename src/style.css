@@ -583,3 +583,11 @@ html.light .nav-links a:hover { color: #1a1a1a; }
   .cq-stats-row { gap: 24px; }
   .cq-big-stat-value { font-size: 2rem; }
 }
+
+/* ── AI Analysis ── */
+.cq-ai-analysis { margin: 24px 0; padding: 20px 24px; background: var(--card); border: 1px solid var(--accent-dim); border-left: 3px solid var(--accent); border-radius: 10px; }
+.cq-ai-analysis-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.cq-ai-analysis-header svg { color: var(--accent); flex-shrink: 0; }
+.cq-ai-analysis-header span:first-of-type { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); }
+.cq-ai-level { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); background: rgba(201,169,110,0.12); padding: 3px 10px; border-radius: 99px; margin-left: auto; }
+.cq-ai-text { font-size: 0.85rem; line-height: 1.7; color: var(--text-secondary); margin: 0; }
