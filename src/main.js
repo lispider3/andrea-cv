@@ -312,7 +312,7 @@ const checkReadMore = () => {
 // ============ RENDER ============
 const renderHero = () => `
   <section class="hero" aria-label="Hero">
-    <canvas id="hero-canvas" class="hero-canvas"></canvas>
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content">
       <div class="hero-tag"><span>Chief Product Officer</span></div>
 
@@ -730,93 +730,3 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   renderApp();
 });
-
-
-// ── Hero Canvas Animation (Raycast-inspired light beams) ──
-const initHeroCanvas = () => {
-  const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let w, h, animId;
-
-  const resize = () => {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    w = canvas.width = rect.width;
-    h = canvas.height = rect.height;
-  };
-
-  // Noise texture
-  const noiseCanvas = document.createElement('canvas');
-  noiseCanvas.width = 200;
-  noiseCanvas.height = 200;
-  const nCtx = noiseCanvas.getContext('2d');
-  const nd = nCtx.createImageData(200, 200);
-  for (let i = 0; i < nd.data.length; i += 4) {
-    const v = Math.random() * 255;
-    nd.data[i] = v; nd.data[i+1] = v; nd.data[i+2] = v; nd.data[i+3] = 20;
-  }
-  nCtx.putImageData(nd, 0, 0);
-
-  const beams = [
-    { x: 0.25, y: 0.1, angle: -0.75, len: 1.8, w: 280, sp: 0.4, ph: 0 },
-    { x: 0.50, y: 0.0, angle: -0.65, len: 2.0, w: 350, sp: 0.3, ph: 1.5 },
-    { x: 0.75, y: 0.1, angle: -0.80, len: 1.6, w: 250, sp: 0.5, ph: 3.0 },
-    { x: 0.35, y: 0.3, angle: -0.70, len: 1.4, w: 200, sp: 0.35, ph: 4.5 },
-    { x: 0.65, y: 0.2, angle: -0.60, len: 1.7, w: 300, sp: 0.45, ph: 2.0 },
-  ];
-
-  let t = 0;
-  const draw = () => {
-    t += 0.004;
-    ctx.clearRect(0, 0, w, h);
-
-    // Central gold glow
-    const g = ctx.createRadialGradient(w*0.5, h*0.35, 0, w*0.5, h*0.35, w*0.6);
-    g.addColorStop(0, 'rgba(201,169,110,0.12)');
-    g.addColorStop(0.5, 'rgba(201,169,110,0.04)');
-    g.addColorStop(1, 'transparent');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, w, h);
-
-    // Light beams
-    ctx.globalCompositeOperation = 'screen';
-    beams.forEach(b => {
-      const pulse = (Math.sin(t * b.sp + b.ph) + 1) * 0.5;
-      const alpha = 0.04 + pulse * 0.12;
-      const sway = Math.sin(t * 0.2 + b.ph) * 0.04;
-      const bw = b.w * (0.7 + pulse * 0.5);
-
-      ctx.save();
-      ctx.translate(w * b.x + Math.sin(t * 0.15 + b.ph) * 40, h * b.y);
-      ctx.rotate(b.angle + sway);
-
-      const grad = ctx.createLinearGradient(0, -h * b.len * 0.5, 0, h * b.len * 0.5);
-      grad.addColorStop(0, 'rgba(201,169,110,0)');
-      grad.addColorStop(0.25, `rgba(201,169,110,${alpha * 0.5})`);
-      grad.addColorStop(0.5, `rgba(220,190,130,${alpha})`);
-      grad.addColorStop(0.75, `rgba(201,169,110,${alpha * 0.5})`);
-      grad.addColorStop(1, 'rgba(201,169,110,0)');
-      ctx.fillStyle = grad;
-      ctx.filter = `blur(${30 + pulse * 20}px)`;
-      ctx.fillRect(-bw/2, -h * b.len * 0.5, bw, h * b.len);
-      ctx.restore();
-    });
-
-    ctx.filter = 'none';
-    ctx.globalCompositeOperation = 'source-over';
-
-    // Noise grain
-    ctx.globalAlpha = 0.3;
-    ctx.fillStyle = ctx.createPattern(noiseCanvas, 'repeat');
-    ctx.fillRect(0, 0, w, h);
-    ctx.globalAlpha = 1;
-
-    animId = requestAnimationFrame(draw);
-  };
-
-  resize();
-  draw();
-  window.addEventListener('resize', () => { resize(); }, { passive: true });
-};
-
-initHeroCanvas();
