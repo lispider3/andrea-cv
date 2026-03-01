@@ -189,17 +189,6 @@ const initNavbar = () => {
   const burger = document.getElementById('burger-btn');
   const links = document.getElementById('nav-links');
 
-  // Book modal
-document.getElementById('book-btn')?.addEventListener('click', () => {
-  document.getElementById('book-modal-overlay').classList.add('book-modal--open');
-});
-document.getElementById('book-modal-close')?.addEventListener('click', () => {
-  document.getElementById('book-modal-overlay').classList.remove('book-modal--open');
-});
-document.getElementById('book-modal-overlay')?.addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) document.getElementById('book-modal-overlay').classList.remove('book-modal--open');
-});
-
 window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
@@ -520,11 +509,11 @@ const renderOffTrack = () => `
               <div class="lang-info">
                 <span class="lang-name">Italian</span>
                 <span class="lang-level">Native</span>
-                <button class="lang-book-btn" id="book-btn" title="Currently reading">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                </button>
               </div>
               <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+              <button class="lang-book-btn" id="book-btn" title="Currently reading">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </button>
             </div>
             <div class="lang-row">
               <div class="lang-info">
@@ -779,4 +768,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initReveal();
   renderApp();
+
+  // Book modal (must be after renderApp so DOM exists)
+  document.getElementById('book-btn')?.addEventListener('click', () => {
+    document.getElementById('book-modal-overlay').classList.add('book-modal--open');
+  });
+  document.getElementById('book-modal-close')?.addEventListener('click', () => {
+    document.getElementById('book-modal-overlay').classList.remove('book-modal--open');
+  });
+  document.getElementById('book-modal-overlay')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) document.getElementById('book-modal-overlay').classList.remove('book-modal--open');
+  });
 });
