@@ -189,7 +189,18 @@ const initNavbar = () => {
   const burger = document.getElementById('burger-btn');
   const links = document.getElementById('nav-links');
 
-  window.addEventListener('scroll', () => {
+  // Book modal
+document.getElementById('book-btn')?.addEventListener('click', () => {
+  document.getElementById('book-modal-overlay').classList.add('book-modal--open');
+});
+document.getElementById('book-modal-close')?.addEventListener('click', () => {
+  document.getElementById('book-modal-overlay').classList.remove('book-modal--open');
+});
+document.getElementById('book-modal-overlay')?.addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) document.getElementById('book-modal-overlay').classList.remove('book-modal--open');
+});
+
+window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
@@ -509,6 +520,9 @@ const renderOffTrack = () => `
               <div class="lang-info">
                 <span class="lang-name">Italian</span>
                 <span class="lang-level">Native</span>
+                <button class="lang-book-btn" id="book-btn" title="Currently reading">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </button>
               </div>
               <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
             </div>
@@ -671,7 +685,23 @@ const renderTestimonials = () => `
 `;
 
 const renderFooter = () => `
-  <footer class="footer" id="contact" role="contentinfo">
+  <!-- Book Modal -->
+    <div class="book-modal-overlay" id="book-modal-overlay">
+      <div class="book-modal">
+        <button class="book-modal-close" id="book-modal-close">&times;</button>
+        <div class="book-modal-content">
+          <div class="book-modal-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <div class="book-modal-label">Currently Reading</div>
+          <div class="book-modal-title">Il Maestro e Margherita</div>
+          <div class="book-modal-author">Mikhail Bulgakov</div>
+          <div class="book-modal-lang">Reading in Italian</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer" id="contact" role="contentinfo">
     <div class="container">
       <div class="footer-links">
           <a href="/andrea-spiteri-cv.pdf" download><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download CV</a>
