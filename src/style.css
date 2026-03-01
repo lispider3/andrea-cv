@@ -351,3 +351,7 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .exp-card { display: flex; gap: 16px; align-items: flex-start; }
 .exp-logo { flex-shrink: 0; width: 36px; height: 36px; margin-top: 4px; border-radius: 8px; overflow: hidden; }
 .exp-logo svg { width: 36px; height: 36px; display: block; }
+
+/* ── Toast notification ── */
+.toast-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; padding: 14px 28px; background: var(--accent); color: #121212; border-radius: 8px; box-shadow: 0 8px 30px rgba(201,169,110,0.3); opacity: 0; transition: all 0.3s ease; z-index: 9999; pointer-events: none; }
+.toast-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }

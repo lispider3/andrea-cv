@@ -225,6 +225,24 @@ const initReveal = () => {
 };
 
 const initInteractions = () => {
+  // Copy email to clipboard
+  const copyBtn = document.getElementById('copy-email-btn');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('andrealispider@gmail.com').then(() => {
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.textContent = '✉ Email copied to clipboard';
+        document.body.appendChild(toast);
+        requestAnimationFrame(() => toast.classList.add('show'));
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => toast.remove(), 300);
+        }, 2500);
+      });
+    });
+  }
+
   // Show more experience
   const expBtn = document.getElementById('show-more-exp');
   if (expBtn) {
@@ -349,9 +367,9 @@ const renderHero = () => `
         <a href="/andrea-spiteri-cv.pdf" download class="btn-f1">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download CV
         </a>
-        <a href="#contact" class="btn-f1 btn-f1-outline">
+        <button id="copy-email-btn" class="btn-f1 btn-f1-outline" type="button">
           Get in Touch <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+        </button>
       </div>
 
       <div class="hero-testimonial-banner" aria-label="Testimonial highlights">
