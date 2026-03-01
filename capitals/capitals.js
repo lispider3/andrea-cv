@@ -53,6 +53,7 @@ const DATA = [
   {c:'Ukraine',k:'Kyiv',id:'804',ct:'Europe',a:604},{c:'United Arab Emirates',k:'Abu Dhabi',id:'784',ct:'Asia',a:84},{c:'United Kingdom',k:'London',id:'826',ct:'Europe',a:243},{c:'United States',k:'Washington D.C.',id:'840',ct:'N. America',a:9834},
   {c:'Uruguay',k:'Montevideo',id:'858',ct:'S. America',a:176},{c:'Uzbekistan',k:'Tashkent',id:'860',ct:'Asia',a:449},{c:'Vanuatu',k:'Port Vila',id:'548',ct:'Oceania',a:12},{c:'Vatican City',k:'Vatican City',id:'336',ct:'Europe',a:0.0004},
   {c:'Venezuela',k:'Caracas',id:'862',ct:'S. America',a:916},{c:'Vietnam',k:'Hanoi',id:'704',ct:'Asia',a:331},{c:'Yemen',k:'Sanaa',id:'887',ct:'Asia',a:528},{c:'Zambia',k:'Lusaka',id:'894',ct:'Africa',a:753},{c:'Zimbabwe',k:'Harare',id:'716',ct:'Africa',a:391},
+];
 
 const TOTAL = DATA.length;
 const TOTAL_WORLD_AREA = DATA.reduce((s, d) => s + d.a, 0);
