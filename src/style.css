@@ -473,3 +473,14 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 
 /* Icon alignment in card labels */
 .fb-card-label svg, .fb-preview-label svg { vertical-align: -2px; margin-right: 4px; }
+
+/* Mobile: keep next match teams horizontal */
+@media (max-width: 768px) {
+  .fb-match-header { flex-direction: row; gap: 8px; }
+  .fb-team-name { font-size: 0.95rem; }
+  .fb-match-info { min-width: auto; }
+  .fb-match-date, .fb-match-time { font-size: 0.6rem; }
+  .fb-match-vs { font-size: 0.5rem; }
+  .fb-odds-compact .fb-odds-value { font-size: 0.85rem; }
+  .fb-odds-compact .fb-odds-cell { padding: 8px 4px; }
+}

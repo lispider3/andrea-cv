@@ -211,7 +211,7 @@ const renderNextMatch = (match) => {
       <div class="fb-match-header">
         <div class="fb-team ${home === TEAM ? 'fb-team--juve' : ''}">
           <div class="fb-team-name">${home}</div>
-          <div class="fb-team-tag">HOME</div>
+          
         </div>
         <div class="fb-match-info">
           <div class="fb-match-date">${formatDate(match.commence_time)}</div>
@@ -220,7 +220,7 @@ const renderNextMatch = (match) => {
         </div>
         <div class="fb-team ${away === TEAM ? 'fb-team--juve' : ''}">
           <div class="fb-team-name">${away}</div>
-          <div class="fb-team-tag">AWAY</div>
+          
         </div>
       </div>
 
