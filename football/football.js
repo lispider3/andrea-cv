@@ -264,7 +264,7 @@ const renderRecentResults = (results) => {
             <div class="fb-form-item">
               <div class="fb-form-result ${cls}">${result}</div>
               <div class="fb-form-detail">
-                <div class="fb-form-opponent">${isHome ? 'vs' : '@'} ${opponent}</div>
+                <div class="fb-form-opponent">${'vs'} ${opponent}</div>
                 <div class="fb-form-score">${js} – ${os}${r.note ? ' (' + r.note + ')' : ''}</div>
                 <div class="fb-form-date">${formatDate(r.date)}${r.comp !== 'Serie A' ? ' · ' + r.comp : ''}</div>
               </div>
@@ -291,7 +291,7 @@ const renderUpcoming = (fixtures) => {
               <div class="fb-fixture-time">${formatTime(f.commence_time)}</div>
               <div class="fb-fixture-match">
                 <span class="fb-fixture-ha">${isHome ? 'HOME' : 'AWAY'}</span>
-                <span class="fb-fixture-opp">${isHome ? 'vs' : '@'} ${opponent}</span>
+                <span class="fb-fixture-opp">${'vs'} ${opponent}</span>
               </div>
             </div>
           `;
