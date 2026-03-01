@@ -556,3 +556,30 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 @media (max-width: 768px) {
   .cq-map-label { font-size: 3px; }
 }
+
+/* ── Results Stats ── */
+.cq-stats-row { display: flex; justify-content: center; gap: 40px; margin: 24px 0; }
+.cq-big-stat { text-align: center; }
+.cq-big-stat-value { font-family: var(--font-heading); font-size: 2.8rem; font-weight: 800; color: var(--accent); }
+.cq-big-stat-label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); margin-top: 2px; }
+
+.cq-continent-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.cq-cont-stat { padding: 12px 16px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+.cq-cont-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.cq-cont-name { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
+.cq-cont-score { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; color: var(--accent); }
+.cq-cont-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+.cq-cont-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.5s ease; }
+
+.cq-all-answers { margin-top: 32px; }
+.cq-answer-continent { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin: 20px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+.cq-row--correct { border-color: rgba(46,204,113,0.2); background: rgba(46,204,113,0.04); }
+.cq-row--correct .cq-capital { color: #2ecc71; }
+.cq-row--correct .cq-country { color: var(--text); }
+.cq-row--missed { border-color: rgba(231,76,60,0.2); background: rgba(231,76,60,0.03); }
+
+@media (max-width: 768px) {
+  .cq-continent-stats { grid-template-columns: repeat(2, 1fr); }
+  .cq-stats-row { gap: 24px; }
+  .cq-big-stat-value { font-size: 2rem; }
+}
