@@ -62,7 +62,8 @@ a { color: inherit; text-decoration: none; }
 
 /* ── HERO ── */
 .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 120px 24px 80px; background: var(--bg); background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 24px 24px; }
-.hero-overlay, .hero-particles { display: none; }
+.hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.6; }
+.hero-content { position: relative; z-index: 1; }
 .hero-content { max-width: var(--container-max); width: 100%; text-align: center; }
 .hero-tag span { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); padding: 6px 16px; border: 1px solid var(--accent-dim); border-radius: 100px; background: var(--accent-glow); }
 .hero-photo { margin: 40px auto; width: 160px; height: 160px; border-radius: 50%; overflow: hidden; border: 2px solid var(--glass-border); box-shadow: 0 0 60px rgba(201, 169, 110, 0.06); }
