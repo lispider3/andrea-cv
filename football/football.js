@@ -11,6 +11,7 @@ let eventsData = [];
 let loading = true;
 let error = null;
 let standingsData = [];
+let previewText = '';
 
 const fetchJSON = async (url) => {
   const res = await fetch(url);
@@ -54,6 +55,23 @@ const loadData = async () => {
     oddsData = odds;
     scoresData = scores;
     eventsData = events;
+
+    // Fetch AI preview for next Juve match
+    const juveEvents = eventsData.filter(isJuve).filter(e => new Date(e.commence_time) > new Date()).sort((a,b) => new Date(a.commence_time)-new Date(b.commence_time));
+    const nextEv = juveEvents[0] || oddsData.filter(isJuve)[0];
+    if (nextEv) {
+      try {
+        const pRes = await fetch(`/api/preview?home=${encodeURIComponent(nextEv.home_team)}&away=${encodeURIComponent(nextEv.away_team)}`);
+        const ct = pRes.headers.get('content-type') || '';
+        if (pRes.ok && ct.includes('json')) {
+          const pData = await pRes.json();
+          previewText = pData.preview || '';
+        } else { throw new Error('Not JSON'); }
+      } catch(e) {
+        // Client-side fallback: generate from standings data
+        previewText = generateClientPreview(nextEv.home_team, nextEv.away_team, standingsData);
+      }
+    }
     loading = false;
   } catch (e) {
     error = e.message;
@@ -87,6 +105,33 @@ const getAvgOdds = (event) => {
     avg[name] = (teams[name].reduce((a, b) => a + b, 0) / teams[name].length).toFixed(2);
   });
   return avg;
+};
+
+
+// Client-side preview generator (fallback when API unavailable)
+const generateClientPreview = (home, away, standings) => {
+  const find = (name) => standings.find(t => t.name === name || name.includes(t.name));
+  const hs = find(home);
+  const as = find(away);
+  if (!hs || !as) return `${home} host ${away} in a key Serie A showdown. Both teams will be looking to secure vital points in the race for European places.`;
+
+  const homeGD = hs.gf - hs.ga;
+  const ord = n => { const s=['th','st','nd','rd']; const v=n%100; return s[(v-20)%10]||s[v]||s[0]; };
+  const lines = [];
+
+  if (Math.abs(hs.pts - as.pts) <= 8) {
+    lines.push(`A pivotal clash as ${home} (${hs.pts}pts) host ${away} (${as.pts}pts) with just ${Math.abs(hs.pts-as.pts)} points between them.`);
+  } else {
+    lines.push(`${home} (${hs.pts}pts) welcome ${away} (${as.pts}pts) to their home ground.`);
+  }
+
+  if (hs.w > hs.l) lines.push(`The hosts have been solid with ${hs.w} wins from ${hs.p} games and a GD of ${homeGD > 0 ? '+':''}${homeGD}.`);
+  if (as.d >= 6) lines.push(`${away} have drawn ${as.d} times this season, hinting at another tight encounter.`);
+  else if (as.w > as.l) lines.push(`${away} arrive with ${as.w} wins and ${as.gf} goals scored this campaign.`);
+
+  if (Math.abs(hs.pts - as.pts) <= 5) lines.push(`Expect a cagey contest with both sides eyeing Champions League qualification.`);
+
+  return lines.join(' ');
 };
 
 // ── Render ──
