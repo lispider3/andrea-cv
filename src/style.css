@@ -608,3 +608,6 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .book-modal-title { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; font-style: italic; color: var(--text); margin-bottom: 4px; }
 .book-modal-author { font-family: var(--font-body); font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px; }
 .book-modal-lang { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); background: rgba(201,169,110,0.1); padding: 4px 12px; border-radius: 99px; display: inline-block; }
+
+/* ── Exp Logo Header ── */
+.exp-header { display: flex; align-items: center; gap: 12px; }
