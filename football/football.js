@@ -22,11 +22,29 @@ const loadData = async () => {
   loading = true;
   render();
   try {
-    // Fetch standings from API (with fallback)
+    // Fetch standings: try Vercel API first, fallback to ESPN directly
     try {
-      const sRes = await fetch('/api/standings');
-      if (sRes.ok) { const sData = await sRes.json(); standingsData = sData.standings || []; }
-    } catch(e) {}
+      let sRes = await fetch('/api/standings');
+      if (sRes.ok) {
+        const ct = sRes.headers.get('content-type') || '';
+        if (ct.includes('json')) {
+          const sData = await sRes.json();
+          standingsData = sData.standings || [];
+        } else { throw new Error('Not JSON'); }
+      } else { throw new Error('API failed'); }
+    } catch(e) {
+      try {
+        const espn = await fetch('https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings');
+        const d = await espn.json();
+        const entries = d?.children?.[0]?.standings?.entries || [];
+        const nameMap = { 'Internazionale': 'Inter', 'Hellas Verona FC': 'Hellas Verona', 'SSC Napoli': 'Napoli' };
+        standingsData = entries.map(e => {
+          const stats = {}; (e.stats||[]).forEach(s => stats[s.name] = s.value);
+          const raw = e.team?.displayName || '?';
+          return { name: nameMap[raw]||raw, p: Math.round(stats.gamesPlayed||0), w: Math.round(stats.wins||0), d: Math.round(stats.ties||0), l: Math.round(stats.losses||0), gf: Math.round(stats.pointsFor||0), ga: Math.round(stats.pointsAgainst||0), pts: Math.round(stats.points||0) };
+        }).sort((a,b) => b.pts - a.pts || (b.gf-b.ga)-(a.gf-a.ga));
+      } catch(e2) {}
+    }
 
     const [odds, scores, events] = await Promise.all([
       fetchJSON(`${API_BASE}/sports/${SPORT}/odds?apiKey=${ODDS_API_KEY}&regions=eu&markets=h2h&oddsFormat=decimal`).catch(() => []),
