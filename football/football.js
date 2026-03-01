@@ -13,6 +13,16 @@ let error = null;
 let standingsData = [];
 let previewText = '';
 
+// Recent Juventus results (manually maintained — overwrite oldest with newest)
+const RECENT_RESULTS = [
+  { date: '2026-02-25T21:00:00Z', home: 'Juventus', away: 'Galatasaray', hs: 3, as: 2, comp: 'UCL', note: 'AET' },
+  { date: '2026-02-21T15:00:00Z', home: 'Juventus', away: 'Como', hs: 0, as: 2, comp: 'Serie A' },
+  { date: '2026-02-17T18:45:00Z', home: 'Galatasaray', away: 'Juventus', hs: 5, as: 2, comp: 'UCL' },
+  { date: '2026-02-14T20:45:00Z', home: 'Inter', away: 'Juventus', hs: 3, as: 2, comp: 'Serie A' },
+  { date: '2026-02-08T20:45:00Z', home: 'Juventus', away: 'Lazio', hs: 2, as: 2, comp: 'Serie A' },
+];
+
+
 const fetchJSON = async (url) => {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`API error: ${res.status}`);
@@ -158,7 +168,7 @@ const render = () => {
   const juveUpcoming = eventsData.filter(isJuve).filter(e => new Date(e.commence_time) > new Date()).sort((a, b) => new Date(a.commence_time) - new Date(b.commence_time));
 
   const nextMatch = juveOdds.length ? juveOdds[0] : (juveUpcoming.length ? juveUpcoming[0] : null);
-  const recentResults = juveScores.slice(0, 5);
+  const recentResults = RECENT_RESULTS;
   const upcomingFixtures = juveUpcoming.slice(nextMatch && juveOdds.length ? 1 : 0, 6).slice(0, 5);
 
   app.innerHTML = `
@@ -244,12 +254,10 @@ const renderRecentResults = (results) => {
       <div class="fb-card-label">📊 LAST ${results.length} RESULTS</div>
       <div class="fb-form-grid">
         ${results.map(r => {
-          const juveScore = r.scores?.find(s => s.name === TEAM);
-          const oppScore = r.scores?.find(s => s.name !== TEAM);
-          const opponent = r.home_team === TEAM ? r.away_team : r.home_team;
-          const isHome = r.home_team === TEAM;
-          const js = parseInt(juveScore?.score || '0');
-          const os = parseInt(oppScore?.score || '0');
+          const isHome = r.home === TEAM;
+          const opponent = isHome ? r.away : r.home;
+          const js = isHome ? r.hs : r.as;
+          const os = isHome ? r.as : r.hs;
           const result = js > os ? 'W' : js < os ? 'L' : 'D';
           const cls = result === 'W' ? 'fb-result--win' : result === 'L' ? 'fb-result--loss' : 'fb-result--draw';
           return `
@@ -257,8 +265,8 @@ const renderRecentResults = (results) => {
               <div class="fb-form-result ${cls}">${result}</div>
               <div class="fb-form-detail">
                 <div class="fb-form-opponent">${isHome ? 'vs' : '@'} ${opponent}</div>
-                <div class="fb-form-score">${js} – ${os}</div>
-                <div class="fb-form-date">${formatDate(r.commence_time)}</div>
+                <div class="fb-form-score">${js} – ${os}${r.note ? ' (' + r.note + ')' : ''}</div>
+                <div class="fb-form-date">${formatDate(r.date)}${r.comp !== 'Serie A' ? ' · ' + r.comp : ''}</div>
               </div>
             </div>
           `;
