@@ -504,6 +504,9 @@ const renderOffTrack = () => `
                 <span class="lang-level">Native</span>
               </div>
               <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+              <button class="lang-book-btn" data-book="en" title="Currently reading">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </button>
             </div>
             <div class="lang-row">
               <div class="lang-info">
@@ -511,7 +514,7 @@ const renderOffTrack = () => `
                 <span class="lang-level">Native</span>
               </div>
               <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
-              <button class="lang-book-btn" id="book-btn" title="Currently reading">
+              <button class="lang-book-btn" data-book="it" title="Currently reading">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
               </button>
             </div>
@@ -683,9 +686,9 @@ const renderFooter = () => `
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           </div>
           <div class="book-modal-label">Currently Reading</div>
-          <div class="book-modal-title">Il Maestro e Margherita</div>
-          <div class="book-modal-author">Mikhail Bulgakov</div>
-          <div class="book-modal-lang">Reading in Italian</div>
+          <div class="book-modal-title" id="book-modal-title"></div>
+          <div class="book-modal-author" id="book-modal-author"></div>
+          <div class="book-modal-lang" id="book-modal-lang"></div>
         </div>
       </div>
     </div>
@@ -770,8 +773,19 @@ document.addEventListener('DOMContentLoaded', () => {
   renderApp();
 
   // Book modal (must be after renderApp so DOM exists)
-  document.getElementById('book-btn')?.addEventListener('click', () => {
-    document.getElementById('book-modal-overlay').classList.add('book-modal--open');
+  const books = {
+    it: { title: 'Il Maestro e Margherita', author: 'Mikhail Bulgakov', lang: 'Reading in Italian' },
+    en: { title: 'Narrative of the Life of Frederick Douglass', author: 'Frederick Douglass', lang: 'Reading in English' },
+  };
+  document.querySelectorAll('.lang-book-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const b = books[btn.dataset.book];
+      if (!b) return;
+      document.getElementById('book-modal-title').textContent = b.title;
+      document.getElementById('book-modal-author').textContent = b.author;
+      document.getElementById('book-modal-lang').textContent = b.lang;
+      document.getElementById('book-modal-overlay').classList.add('book-modal--open');
+    });
   });
   document.getElementById('book-modal-close')?.addEventListener('click', () => {
     document.getElementById('book-modal-overlay').classList.remove('book-modal--open');
