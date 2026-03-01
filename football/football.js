@@ -127,7 +127,7 @@ const render = () => {
   const recentResults = juveScores.sort((a, b) => new Date(b.commence_time) - new Date(a.commence_time)).slice(0, 5);
 
   // All Serie A standings from scores (W/D/L table)
-  const table = buildTable(scoresData.filter(e => e.completed));
+  const table = STANDINGS;
 
   app.innerHTML = `
     <section class="fb-section">
@@ -293,31 +293,33 @@ const renderUpcoming = (fixtures) => {
 };
 
 // ── Standings Table ──
-const buildTable = (completedMatches) => {
-  const teams = {};
-  completedMatches.forEach(m => {
-    if (!m.scores || m.scores.length < 2) return;
-    const homeScore = parseInt(m.scores.find(s => s.name === m.home_team)?.score || '0');
-    const awayScore = parseInt(m.scores.find(s => s.name === m.away_team)?.score || '0');
-    [m.home_team, m.away_team].forEach(t => {
-      if (!teams[t]) teams[t] = { name: t, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0 };
-    });
-    const h = teams[m.home_team];
-    const a = teams[m.away_team];
-    h.p++; a.p++;
-    h.gf += homeScore; h.ga += awayScore;
-    a.gf += awayScore; a.ga += homeScore;
-    if (homeScore > awayScore) { h.w++; h.pts += 3; a.l++; }
-    else if (homeScore < awayScore) { a.w++; a.pts += 3; h.l++; }
-    else { h.d++; a.d++; h.pts++; a.pts++; }
-  });
-  return Object.values(teams).sort((a, b) => b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga));
-};
+const STANDINGS = [
+  { name: 'Inter', p: 27, w: 22, d: 1, l: 4, gf: 64, ga: 21, pts: 67 },
+  { name: 'AC Milan', p: 27, w: 15, d: 10, l: 2, gf: 41, ga: 20, pts: 55 },
+  { name: 'Napoli', p: 27, w: 16, d: 5, l: 6, gf: 41, ga: 28, pts: 53 },
+  { name: 'AS Roma', p: 26, w: 16, d: 2, l: 8, gf: 34, ga: 16, pts: 50 },
+  { name: 'Como', p: 27, w: 13, d: 9, l: 5, gf: 44, ga: 20, pts: 48 },
+  { name: 'Juventus', p: 26, w: 13, d: 7, l: 6, gf: 43, ga: 25, pts: 46 },
+  { name: 'Atalanta', p: 26, w: 12, d: 9, l: 5, gf: 36, ga: 22, pts: 45 },
+  { name: 'Bologna', p: 26, w: 10, d: 6, l: 10, gf: 35, ga: 32, pts: 36 },
+  { name: 'Sassuolo', p: 26, w: 10, d: 5, l: 11, gf: 32, ga: 35, pts: 35 },
+  { name: 'Lazio', p: 26, w: 8, d: 10, l: 8, gf: 26, ga: 25, pts: 34 },
+  { name: 'Parma', p: 27, w: 8, d: 9, l: 10, gf: 20, ga: 32, pts: 33 },
+  { name: 'Udinese', p: 26, w: 9, d: 5, l: 12, gf: 28, ga: 39, pts: 32 },
+  { name: 'Cagliari', p: 27, w: 7, d: 9, l: 11, gf: 29, ga: 36, pts: 30 },
+  { name: 'Genoa', p: 27, w: 6, d: 9, l: 12, gf: 32, ga: 39, pts: 27 },
+  { name: 'Torino', p: 26, w: 7, d: 6, l: 13, gf: 25, ga: 47, pts: 27 },
+  { name: 'Cremonese', p: 27, w: 5, d: 10, l: 12, gf: 21, ga: 36, pts: 25 },
+  { name: 'Fiorentina', p: 26, w: 5, d: 9, l: 12, gf: 30, ga: 39, pts: 24 },
+  { name: 'Lecce', p: 27, w: 6, d: 6, l: 15, gf: 18, ga: 36, pts: 24 },
+  { name: 'Pisa', p: 26, w: 1, d: 12, l: 13, gf: 20, ga: 43, pts: 15 },
+  { name: 'Hellas Verona', p: 27, w: 2, d: 9, l: 16, gf: 20, ga: 48, pts: 15 },
+];
 
 const renderStandings = (table) => {
   return `
     <div class="fb-card">
-      <div class="fb-card-label">🏆 SERIE A TABLE <span class="fb-card-note">(from recent scores)</span></div>
+      <div class="fb-card-label">🏆 SERIE A TABLE</div>
       <div class="fb-table-wrap">
         <table class="fb-table">
           <thead>
