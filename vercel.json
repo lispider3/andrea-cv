@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" },
     { "source": "/football/(.*)", "destination": "/football/index.html" },
+    { "source": "/capitals/(.*)", "destination": "/capitals/index.html" },
     { "source": "/f1-quiz/(.*)", "destination": "/f1-quiz/index.html" }
   ]
 }
