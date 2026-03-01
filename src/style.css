@@ -593,7 +593,8 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .cq-ai-text { font-size: 0.85rem; line-height: 1.7; color: var(--text-secondary); margin: 0; }
 
 /* ── Book Button & Modal ── */
-.lang-book-btn { background: none; border: 1px solid var(--accent-dim); color: var(--accent); border-radius: 4px; padding: 2px 5px; cursor: pointer; margin-left: 8px; display: inline-flex; align-items: center; transition: all 0.2s; }
+.lang-book-btn { background: none; border: 1px solid var(--accent-dim); color: var(--accent); border-radius: 4px; padding: 2px 5px; cursor: pointer; margin-left: 6px; display: inline-flex; align-items: center; transition: all 0.2s; width: 24px; flex-shrink: 0; justify-content: center; }
+.lang-book-spacer { width: 24px; flex-shrink: 0; margin-left: 6px; }
 .lang-book-btn:hover { background: rgba(201,169,110,0.12); border-color: var(--accent); }
 
 .book-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }

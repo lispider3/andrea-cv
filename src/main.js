@@ -497,6 +497,7 @@ const renderOffTrack = () => `
                 <span class="lang-level">Native</span>
               </div>
               <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+              <div class="lang-book-spacer"></div>
             </div>
             <div class="lang-row">
               <div class="lang-info">
@@ -524,6 +525,7 @@ const renderOffTrack = () => `
                 <span class="lang-level">Beginner</span>
               </div>
               <div class="lang-bar"><div class="lang-fill" style="width:25%"></div></div>
+              <div class="lang-book-spacer"></div>
             </div>
             <div class="lang-row">
               <div class="lang-info">
@@ -531,6 +533,7 @@ const renderOffTrack = () => `
                 <span class="lang-level">Beginner</span>
               </div>
               <div class="lang-bar"><div class="lang-fill" style="width:25%"></div></div>
+              <div class="lang-book-spacer"></div>
             </div>
             <div class="lang-row">
               <div class="lang-info">
@@ -538,6 +541,7 @@ const renderOffTrack = () => `
                 <span class="lang-level">Beginner</span>
               </div>
               <div class="lang-bar"><div class="lang-fill" style="width:25%"></div></div>
+              <div class="lang-book-spacer"></div>
             </div>
           </div>
         </div>
