@@ -85,7 +85,7 @@ a { color: inherit; text-decoration: none; }
 .btn-f1-outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
 .btn-f1 svg { width: 14px; height: 14px; }
 
-.hero-testimonial-banner { padding-top: 32px; border-top: 1px solid var(--border); }
+.hero-testimonial-banner { padding-top: 32px; border-top: none; }
 .hero-testimonial-track { position: relative; min-height: 60px; }
 .hero-testimonial-slide { position: absolute; width: 100%; opacity: 0; transition: opacity 0.6s var(--ease); text-align: center; }
 .hero-testimonial-slide.active { opacity: 1; }
@@ -168,7 +168,7 @@ a { color: inherit; text-decoration: none; }
 .read-more-btn { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); background: none; border: none; cursor: pointer; padding: 0; margin-bottom: 12px; display: none; transition: opacity var(--transition); }
 .read-more-btn.show { display: inline-block; }
 .read-more-btn:hover { opacity: 0.7; }
-.test-footer { display: flex; flex-direction: column; gap: 2px; padding-top: 12px; border-top: 1px solid var(--border); }
+.test-footer { display: flex; flex-direction: column; gap: 2px; padding-top: 12px; border-top: none; }
 .test-name { font-family: var(--font-head); font-size: 0.8rem; font-weight: 700; color: var(--white); }
 .test-role { font-size: 0.7rem; font-weight: 400; color: var(--text-muted); }
 .test-relation { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 500; letter-spacing: 1px; color: var(--accent); opacity: 0.6; }
@@ -204,7 +204,7 @@ a { color: inherit; text-decoration: none; }
 .interest-sub { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 500; letter-spacing: 1px; color: var(--text-muted); }
 
 /* ── FOOTER ── */
-.footer { padding: 60px 0 40px; background: var(--bg-elevated); border-top: 1px solid var(--border); text-align: center; }
+.footer { padding: 60px 0 40px; background: var(--bg-elevated); border-top: none; text-align: center; }
 .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
 .footer-links a { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); transition: color var(--transition); display: inline-flex; align-items: center; gap: 6px; }
 .footer-links a:hover { color: var(--accent); }
