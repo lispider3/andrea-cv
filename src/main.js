@@ -45,7 +45,7 @@ const experiences = [
   {
     title: "Head of Sportsbook",
     company: "BOSS. Gaming Solutions",
-    logo: "/logos/boss.png",
+    logo: "/logos/boss.svg",
     period: "Nov 2019 – Jan 2021",
     location: "Malta",
     details: [
