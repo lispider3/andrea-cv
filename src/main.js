@@ -57,7 +57,7 @@ const experiences = [
   {
     title: "Head of Product",
     company: "Hardball Group / Yourbet",
-    logo: "/logos/yourbet.png",
+    logo: "/logos/yourbet.svg",
     period: "Dec 2018 – Nov 2019",
     location: "Malta",
     details: [
