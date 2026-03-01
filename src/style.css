@@ -355,3 +355,104 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 /* ── Toast notification ── */
 .toast-notification { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; padding: 14px 28px; background: var(--accent); color: #121212; border-radius: 8px; box-shadow: 0 8px 30px rgba(201,169,110,0.3); opacity: 0; transition: all 0.3s ease; z-index: 9999; pointer-events: none; }
 .toast-notification.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── FOOTBALL DASHBOARD ── */
+.fb-section { min-height: 100vh; padding: 100px 24px 60px; background: var(--bg); }
+.fb-container { max-width: 800px; margin: 0 auto; }
+.fb-header { text-align: center; margin-bottom: 48px; }
+.fb-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); padding: 6px 16px; border: 1px solid var(--accent-dim); border-radius: 100px; background: var(--accent-glow); margin-bottom: 24px; }
+.fb-badge svg { width: 16px; height: 16px; color: var(--accent); }
+.fb-title { font-family: var(--font-head); font-size: clamp(2.4rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -1px; line-height: 1.05; color: var(--white); margin-bottom: 12px; }
+.fb-title span { color: var(--accent); }
+.fb-subtitle { font-size: 0.95rem; font-weight: 300; color: var(--text-secondary); max-width: 440px; margin: 0 auto; line-height: 1.6; }
+
+/* Cards */
+.fb-card { background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 28px; margin-bottom: 20px; }
+.fb-card-label { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.fb-card-note { color: var(--text-muted); font-weight: 400; letter-spacing: 1px; }
+
+/* Next Match */
+.fb-next-match { border-color: var(--accent-dim); }
+.fb-match-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 28px; }
+.fb-team { text-align: center; flex: 1; }
+.fb-team-name { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.fb-team--juve .fb-team-name { color: var(--accent); }
+.fb-team-tag { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 600; letter-spacing: 2px; color: var(--text-muted); }
+.fb-match-info { text-align: center; flex-shrink: 0; }
+.fb-match-date { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500; color: var(--text-secondary); letter-spacing: 1px; }
+.fb-match-time { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--white); margin: 4px 0; }
+.fb-match-vs { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; letter-spacing: 3px; color: var(--text-muted); }
+
+/* Odds */
+.fb-odds-section { margin-bottom: 20px; }
+.fb-odds-title { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 12px; text-align: center; }
+.fb-odds-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.fb-odds-cell { text-align: center; padding: 14px 8px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: 8px; }
+.fb-odds-label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 500; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 6px; }
+.fb-odds-value { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: var(--white); }
+.fb-odds-prob { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 500; color: var(--accent); margin-top: 4px; }
+
+/* Probability bar */
+.fb-prob-bar { display: flex; border-radius: 6px; overflow: hidden; height: 28px; margin-bottom: 20px; }
+.fb-prob-seg { display: flex; align-items: center; justify-content: center; transition: width 0.5s ease; }
+.fb-prob-seg span { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 600; letter-spacing: 1px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 4px; }
+.fb-prob-home { background: var(--accent); }
+.fb-prob-draw { background: rgba(255,255,255,0.15); }
+.fb-prob-away { background: rgba(255,255,255,0.08); }
+
+/* Best odds */
+.fb-best-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.fb-best-cell { text-align: center; padding: 10px; background: rgba(255,255,255,0.02); border-radius: 6px; }
+.fb-best-name { display: block; font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 4px; }
+.fb-best-value { display: block; font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: var(--accent); }
+.fb-best-bookie { display: block; font-family: var(--font-mono); font-size: 0.45rem; color: var(--text-muted); margin-top: 4px; letter-spacing: 0.5px; }
+
+/* Recent Form */
+.fb-form-grid { display: flex; flex-direction: column; gap: 8px; }
+.fb-form-item { display: flex; align-items: center; gap: 14px; padding: 10px 14px; background: rgba(255,255,255,0.02); border-radius: 8px; }
+.fb-form-result { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; color: #fff; flex-shrink: 0; }
+.fb-result--win { background: #22c55e; }
+.fb-result--loss { background: #ef4444; }
+.fb-result--draw { background: rgba(255,255,255,0.2); }
+.fb-form-opponent { font-size: 0.85rem; font-weight: 500; color: var(--white); }
+.fb-form-score { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); }
+.fb-form-date { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-muted); }
+
+/* Fixtures */
+.fb-fixtures { display: flex; flex-direction: column; gap: 6px; }
+.fb-fixture-row { display: flex; align-items: center; gap: 16px; padding: 12px 14px; background: rgba(255,255,255,0.02); border-radius: 8px; }
+.fb-fixture-date { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500; color: var(--text-secondary); min-width: 90px; }
+.fb-fixture-time { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; color: var(--accent); min-width: 50px; }
+.fb-fixture-ha { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 600; letter-spacing: 1.5px; color: var(--text-muted); margin-right: 8px; }
+.fb-fixture-opp { font-size: 0.85rem; font-weight: 500; color: var(--white); }
+
+/* Standings Table */
+.fb-table-wrap { overflow-x: auto; }
+.fb-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.7rem; }
+.fb-table th { font-weight: 600; font-size: 0.55rem; letter-spacing: 1.5px; color: var(--text-muted); text-align: center; padding: 8px 6px; border-bottom: 1px solid var(--border); text-transform: uppercase; }
+.fb-table th:nth-child(2) { text-align: left; }
+.fb-table td { text-align: center; padding: 8px 6px; color: var(--text-secondary); border-bottom: 1px solid rgba(255,255,255,0.03); }
+.fb-table td:nth-child(2) { text-align: left; }
+.fb-table-team { font-weight: 500; color: var(--white) !important; }
+.fb-table-pts { font-weight: 700; color: var(--accent) !important; }
+.fb-table-juve { background: rgba(201,169,110,0.06); }
+.fb-table-juve .fb-table-team { color: var(--accent) !important; }
+
+/* Loading & Error */
+.fb-loading { text-align: center; padding: 80px 0; }
+.fb-spinner { width: 32px; height: 32px; border: 2px solid var(--glass-border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.fb-loading p, .fb-error p { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
+.fb-error { text-align: center; padding: 80px 0; }
+.fb-btn { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; padding: 10px 24px; background: var(--accent); color: #121212; border: none; border-radius: 6px; cursor: pointer; margin-top: 16px; }
+.fb-empty { text-align: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); padding: 40px; }
+
+/* Mobile */
+@media (max-width: 600px) {
+  .fb-match-header { flex-direction: column; gap: 12px; }
+  .fb-team-name { font-size: 1rem; }
+  .fb-odds-grid, .fb-best-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .fb-odds-value { font-size: 1.1rem; }
+  .fb-fixture-row { flex-wrap: wrap; gap: 8px; }
+  .fb-table { font-size: 0.6rem; }
+}

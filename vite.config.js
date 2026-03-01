@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         'f1-quiz': resolve(__dirname, 'f1-quiz/index.html'),
+        'football': resolve(__dirname, 'football/index.html'),
       },
     },
   },
