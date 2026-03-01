@@ -1,5 +1,5 @@
-.neo-toggle { opacity: 0; transition: opacity 0.2s; }
-.neo-toggle.ready { opacity: 1; }
+.neo-toggle { visibility: hidden; }
+.neo-toggle.ready { visibility: visible; }
 /* ============================================================
    ANDREA SPITERI — Executive Portfolio
    Design: Premium Dark Mode · Glassmorphism · Gold Accent
@@ -61,7 +61,7 @@ a { color: inherit; text-decoration: none; }
 .f1-strip { display: none; }
 
 /* ── HERO ── */
-.hero { background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 24px 24px; min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 120px 24px 80px; background: var(--bg); }
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 120px 24px 80px; background: var(--bg); background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px); background-size: 24px 24px; }
 .hero-overlay, .hero-particles { display: none; }
 .hero-content { max-width: var(--container-max); width: 100%; text-align: center; }
 .hero-tag span { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); padding: 6px 16px; border: 1px solid var(--accent-dim); border-radius: 100px; background: var(--accent-glow); }
