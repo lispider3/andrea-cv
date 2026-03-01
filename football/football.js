@@ -13,14 +13,7 @@ let error = null;
 let standingsData = [];
 let previewText = '';
 
-// Recent Juventus results (manually maintained — overwrite oldest with newest)
-const RECENT_RESULTS = [
-  { date: '2026-02-25T21:00:00Z', home: 'Juventus', away: 'Galatasaray', hs: 3, as: 2, comp: 'UCL', note: 'AET' },
-  { date: '2026-02-21T15:00:00Z', home: 'Juventus', away: 'Como', hs: 0, as: 2, comp: 'Serie A' },
-  { date: '2026-02-17T18:45:00Z', home: 'Galatasaray', away: 'Juventus', hs: 5, as: 2, comp: 'UCL' },
-  { date: '2026-02-14T20:45:00Z', home: 'Inter', away: 'Juventus', hs: 3, as: 2, comp: 'Serie A' },
-  { date: '2026-02-08T20:45:00Z', home: 'Juventus', away: 'Lazio', hs: 2, as: 2, comp: 'Serie A' },
-];
+let recentResultsData = [];
 
 
 const fetchJSON = async (url) => {
@@ -57,6 +50,34 @@ const loadData = async () => {
       } catch(e2) {}
     }
 
+
+    // Fetch recent Juventus results: try Vercel API, fallback to ESPN directly
+    try {
+      let rRes = await fetch('/api/results');
+      const rCt = rRes.headers.get('content-type') || '';
+      if (rRes.ok && rCt.includes('json')) {
+        const rData = await rRes.json();
+        recentResultsData = rData.results || [];
+      } else { throw new Error('Not JSON'); }
+    } catch(e) {
+      try {
+        const espnR = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/ita.1/teams/111/schedule');
+        const rd = await espnR.json();
+        const nameMap = { 'Internazionale': 'Inter', 'Hellas Verona FC': 'Hellas Verona', 'SSC Napoli': 'Napoli' };
+        recentResultsData = (rd.events || [])
+          .filter(e => e.competitions?.[0]?.status?.type?.completed)
+          .map(e => {
+            const comp = e.competitions[0];
+            const h = comp.competitors?.find(c => c.homeAway === 'home');
+            const a = comp.competitors?.find(c => c.homeAway === 'away');
+            const hn = h?.team?.displayName || '?';
+            const an = a?.team?.displayName || '?';
+            return { date: e.date, home: nameMap[hn]||hn, away: nameMap[an]||an, hs: parseInt(h?.score?.displayValue||h?.score||'0'), as: parseInt(a?.score?.displayValue||a?.score||'0'), comp: 'Serie A' };
+          })
+          .sort((a,b) => new Date(b.date) - new Date(a.date))
+          .slice(0, 5);
+      } catch(e2) {}
+    }
     const [odds, scores, events] = await Promise.all([
       fetchJSON(`${API_BASE}/sports/${SPORT}/odds?apiKey=${ODDS_API_KEY}&regions=eu&markets=h2h&oddsFormat=decimal`).catch(() => []),
       fetchJSON(`${API_BASE}/sports/${SPORT}/scores?apiKey=${ODDS_API_KEY}&daysFrom=3`).catch(() => []),
@@ -168,7 +189,7 @@ const render = () => {
   const juveUpcoming = eventsData.filter(isJuve).filter(e => new Date(e.commence_time) > new Date()).sort((a, b) => new Date(a.commence_time) - new Date(b.commence_time));
 
   const nextMatch = juveOdds.length ? juveOdds[0] : (juveUpcoming.length ? juveUpcoming[0] : null);
-  const recentResults = RECENT_RESULTS;
+  const recentResults = recentResultsData;
   const upcomingFixtures = juveUpcoming.slice(nextMatch && juveOdds.length ? 1 : 0, 6).slice(0, 5);
 
   app.innerHTML = `
