@@ -228,6 +228,13 @@ const renderNextMatch = (match) => {
           </div>
         </div>
       ` : '<div class="fb-odds-section"><div class="fb-odds-title">Odds not yet available</div></div>'}
+
+      ${previewText ? `
+        <div class="fb-preview">
+          <div class="fb-preview-label">🤖 AI MATCH PREVIEW</div>
+          <p class="fb-preview-text">${previewText}</p>
+        </div>
+      ` : ''}
     </div>
   `;
 };
