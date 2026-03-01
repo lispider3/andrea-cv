@@ -215,14 +215,12 @@ const renderNextMatch = (match) => {
       </div>
 
       ${avg ? `
-        <div class="fb-odds-section">
-          <div class="fb-odds-title">AVERAGE ODDS · ${match.bookmakers?.length || 0} BOOKMAKERS</div>
+        <div class="fb-odds-section fb-odds-compact">
           <div class="fb-odds-grid">
             ${[home, 'Draw', away].map(name => `
               <div class="fb-odds-cell">
                 <div class="fb-odds-label">${name}</div>
                 <div class="fb-odds-value">${avg[name] || '—'}</div>
-                <div class="fb-odds-prob">${avg[name] ? impliedProb(avg[name]) + '%' : ''}</div>
               </div>
             `).join('')}
           </div>

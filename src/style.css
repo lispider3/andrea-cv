@@ -464,3 +464,9 @@ html.light .nav-links a:hover { color: #1a1a1a; }
   .fb-fixture-row { flex-wrap: wrap; gap: 8px; }
   .fb-table { font-size: 0.6rem; }
 }
+
+/* Compact odds */
+.fb-odds-compact .fb-odds-grid { gap: 8px; }
+.fb-odds-compact .fb-odds-cell { padding: 10px 6px; }
+.fb-odds-compact .fb-odds-value { font-size: 1rem; }
+.fb-odds-compact .fb-odds-label { font-size: 0.5rem; }
