@@ -1,125 +1,160 @@
 import '../src/style.css';
+import { geoNaturalEarth1, geoPath } from 'd3-geo';
+import { feature } from 'topojson-client';
 
-// ── 197 Countries & Capitals ──
-const COUNTRIES = [
-  {c:'Afghanistan',k:'Kabul'},{c:'Albania',k:'Tirana'},{c:'Algeria',k:'Algiers'},{c:'Andorra',k:'Andorra la Vella'},
-  {c:'Angola',k:'Luanda'},{c:'Antigua and Barbuda',k:'St. John\'s'},{c:'Argentina',k:'Buenos Aires'},{c:'Armenia',k:'Yerevan'},
-  {c:'Australia',k:'Canberra'},{c:'Austria',k:'Vienna'},{c:'Azerbaijan',k:'Baku'},{c:'Bahamas',k:'Nassau'},
-  {c:'Bahrain',k:'Manama'},{c:'Bangladesh',k:'Dhaka'},{c:'Barbados',k:'Bridgetown'},{c:'Belarus',k:'Minsk'},
-  {c:'Belgium',k:'Brussels'},{c:'Belize',k:'Belmopan'},{c:'Benin',k:'Porto-Novo'},{c:'Bhutan',k:'Thimphu'},
-  {c:'Bolivia',k:'Sucre'},{c:'Bosnia and Herzegovina',k:'Sarajevo'},{c:'Botswana',k:'Gaborone'},{c:'Brazil',k:'Brasilia'},
-  {c:'Brunei',k:'Bandar Seri Begawan'},{c:'Bulgaria',k:'Sofia'},{c:'Burkina Faso',k:'Ouagadougou'},{c:'Burundi',k:'Gitega'},
-  {c:'Cabo Verde',k:'Praia'},{c:'Cambodia',k:'Phnom Penh'},{c:'Cameroon',k:'Yaounde'},{c:'Canada',k:'Ottawa'},
-  {c:'Central African Republic',k:'Bangui'},{c:'Chad',k:'N\'Djamena'},{c:'Chile',k:'Santiago'},{c:'China',k:'Beijing'},
-  {c:'Colombia',k:'Bogota'},{c:'Comoros',k:'Moroni'},{c:'Congo (DRC)',k:'Kinshasa'},{c:'Congo (Republic)',k:'Brazzaville'},
-  {c:'Costa Rica',k:'San Jose'},{c:'Croatia',k:'Zagreb'},{c:'Cuba',k:'Havana'},{c:'Cyprus',k:'Nicosia'},
-  {c:'Czech Republic',k:'Prague'},{c:'Denmark',k:'Copenhagen'},{c:'Djibouti',k:'Djibouti'},{c:'Dominica',k:'Roseau'},
-  {c:'Dominican Republic',k:'Santo Domingo'},{c:'East Timor',k:'Dili'},{c:'Ecuador',k:'Quito'},{c:'Egypt',k:'Cairo'},
-  {c:'El Salvador',k:'San Salvador'},{c:'Equatorial Guinea',k:'Malabo'},{c:'Eritrea',k:'Asmara'},{c:'Estonia',k:'Tallinn'},
-  {c:'Eswatini',k:'Mbabane'},{c:'Ethiopia',k:'Addis Ababa'},{c:'Fiji',k:'Suva'},{c:'Finland',k:'Helsinki'},
-  {c:'France',k:'Paris'},{c:'Gabon',k:'Libreville'},{c:'Gambia',k:'Banjul'},{c:'Georgia',k:'Tbilisi'},
-  {c:'Germany',k:'Berlin'},{c:'Ghana',k:'Accra'},{c:'Greece',k:'Athens'},{c:'Grenada',k:'St. George\'s'},
-  {c:'Guatemala',k:'Guatemala City'},{c:'Guinea',k:'Conakry'},{c:'Guinea-Bissau',k:'Bissau'},{c:'Guyana',k:'Georgetown'},
-  {c:'Haiti',k:'Port-au-Prince'},{c:'Honduras',k:'Tegucigalpa'},{c:'Hungary',k:'Budapest'},{c:'Iceland',k:'Reykjavik'},
-  {c:'India',k:'New Delhi'},{c:'Indonesia',k:'Jakarta'},{c:'Iran',k:'Tehran'},{c:'Iraq',k:'Baghdad'},
-  {c:'Ireland',k:'Dublin'},{c:'Israel',k:'Jerusalem'},{c:'Italy',k:'Rome'},{c:'Ivory Coast',k:'Yamoussoukro'},
-  {c:'Jamaica',k:'Kingston'},{c:'Japan',k:'Tokyo'},{c:'Jordan',k:'Amman'},{c:'Kazakhstan',k:'Astana'},
-  {c:'Kenya',k:'Nairobi'},{c:'Kiribati',k:'Tarawa'},{c:'Kosovo',k:'Pristina'},{c:'Kuwait',k:'Kuwait City'},
-  {c:'Kyrgyzstan',k:'Bishkek'},{c:'Laos',k:'Vientiane'},{c:'Latvia',k:'Riga'},{c:'Lebanon',k:'Beirut'},
-  {c:'Lesotho',k:'Maseru'},{c:'Liberia',k:'Monrovia'},{c:'Libya',k:'Tripoli'},{c:'Liechtenstein',k:'Vaduz'},
-  {c:'Lithuania',k:'Vilnius'},{c:'Luxembourg',k:'Luxembourg City'},{c:'Madagascar',k:'Antananarivo'},{c:'Malawi',k:'Lilongwe'},
-  {c:'Malaysia',k:'Kuala Lumpur'},{c:'Maldives',k:'Male'},{c:'Mali',k:'Bamako'},{c:'Malta',k:'Valletta'},
-  {c:'Marshall Islands',k:'Majuro'},{c:'Mauritania',k:'Nouakchott'},{c:'Mauritius',k:'Port Louis'},{c:'Mexico',k:'Mexico City'},
-  {c:'Micronesia',k:'Palikir'},{c:'Moldova',k:'Chisinau'},{c:'Monaco',k:'Monaco'},{c:'Mongolia',k:'Ulaanbaatar'},
-  {c:'Montenegro',k:'Podgorica'},{c:'Morocco',k:'Rabat'},{c:'Mozambique',k:'Maputo'},{c:'Myanmar',k:'Naypyidaw'},
-  {c:'Namibia',k:'Windhoek'},{c:'Nauru',k:'Yaren'},{c:'Nepal',k:'Kathmandu'},{c:'Netherlands',k:'Amsterdam'},
-  {c:'New Zealand',k:'Wellington'},{c:'Nicaragua',k:'Managua'},{c:'Niger',k:'Niamey'},{c:'Nigeria',k:'Abuja'},
-  {c:'North Korea',k:'Pyongyang'},{c:'North Macedonia',k:'Skopje'},{c:'Norway',k:'Oslo'},{c:'Oman',k:'Muscat'},
-  {c:'Pakistan',k:'Islamabad'},{c:'Palau',k:'Ngerulmud'},{c:'Palestine',k:'Ramallah'},{c:'Panama',k:'Panama City'},
-  {c:'Papua New Guinea',k:'Port Moresby'},{c:'Paraguay',k:'Asuncion'},{c:'Peru',k:'Lima'},{c:'Philippines',k:'Manila'},
-  {c:'Poland',k:'Warsaw'},{c:'Portugal',k:'Lisbon'},{c:'Qatar',k:'Doha'},{c:'Romania',k:'Bucharest'},
-  {c:'Russia',k:'Moscow'},{c:'Rwanda',k:'Kigali'},{c:'Saint Kitts and Nevis',k:'Basseterre'},{c:'Saint Lucia',k:'Castries'},
-  {c:'Saint Vincent',k:'Kingstown'},{c:'Samoa',k:'Apia'},{c:'San Marino',k:'San Marino'},{c:'Sao Tome and Principe',k:'Sao Tome'},
-  {c:'Saudi Arabia',k:'Riyadh'},{c:'Senegal',k:'Dakar'},{c:'Serbia',k:'Belgrade'},{c:'Seychelles',k:'Victoria'},
-  {c:'Sierra Leone',k:'Freetown'},{c:'Singapore',k:'Singapore'},{c:'Slovakia',k:'Bratislava'},{c:'Slovenia',k:'Ljubljana'},
-  {c:'Solomon Islands',k:'Honiara'},{c:'Somalia',k:'Mogadishu'},{c:'South Africa',k:'Pretoria'},{c:'South Korea',k:'Seoul'},
-  {c:'South Sudan',k:'Juba'},{c:'Spain',k:'Madrid'},{c:'Sri Lanka',k:'Colombo'},{c:'Sudan',k:'Khartoum'},
-  {c:'Suriname',k:'Paramaribo'},{c:'Sweden',k:'Stockholm'},{c:'Switzerland',k:'Bern'},{c:'Syria',k:'Damascus'},
-  {c:'Taiwan',k:'Taipei'},{c:'Tajikistan',k:'Dushanbe'},{c:'Tanzania',k:'Dodoma'},{c:'Thailand',k:'Bangkok'},
-  {c:'Togo',k:'Lome'},{c:'Tonga',k:'Nuku\'alofa'},{c:'Trinidad and Tobago',k:'Port of Spain'},{c:'Tunisia',k:'Tunis'},
-  {c:'Turkey',k:'Ankara'},{c:'Turkmenistan',k:'Ashgabat'},{c:'Tuvalu',k:'Funafuti'},{c:'Uganda',k:'Kampala'},
-  {c:'Ukraine',k:'Kyiv'},{c:'United Arab Emirates',k:'Abu Dhabi'},{c:'United Kingdom',k:'London'},{c:'United States',k:'Washington D.C.'},
-  {c:'Uruguay',k:'Montevideo'},{c:'Uzbekistan',k:'Tashkent'},{c:'Vanuatu',k:'Port Vila'},{c:'Vatican City',k:'Vatican City'},
-  {c:'Venezuela',k:'Caracas'},{c:'Vietnam',k:'Hanoi'},{c:'Yemen',k:'Sanaa'},{c:'Zambia',k:'Lusaka'},{c:'Zimbabwe',k:'Harare'},
+// ── 197 Countries → Capitals + ISO numeric codes for map ──
+const DATA = [
+  {c:'Afghanistan',k:'Kabul',id:'004'},{c:'Albania',k:'Tirana',id:'008'},{c:'Algeria',k:'Algiers',id:'012'},{c:'Andorra',k:'Andorra la Vella',id:'020'},
+  {c:'Angola',k:'Luanda',id:'024'},{c:'Antigua and Barbuda',k:"St. John's",id:'028'},{c:'Argentina',k:'Buenos Aires',id:'032'},{c:'Armenia',k:'Yerevan',id:'051'},
+  {c:'Australia',k:'Canberra',id:'036'},{c:'Austria',k:'Vienna',id:'040'},{c:'Azerbaijan',k:'Baku',id:'031'},{c:'Bahamas',k:'Nassau',id:'044'},
+  {c:'Bahrain',k:'Manama',id:'048'},{c:'Bangladesh',k:'Dhaka',id:'050'},{c:'Barbados',k:'Bridgetown',id:'052'},{c:'Belarus',k:'Minsk',id:'112'},
+  {c:'Belgium',k:'Brussels',id:'056'},{c:'Belize',k:'Belmopan',id:'084'},{c:'Benin',k:'Porto-Novo',id:'204'},{c:'Bhutan',k:'Thimphu',id:'064'},
+  {c:'Bolivia',k:'Sucre',id:'068'},{c:'Bosnia and Herzegovina',k:'Sarajevo',id:'070'},{c:'Botswana',k:'Gaborone',id:'072'},{c:'Brazil',k:'Brasilia',id:'076'},
+  {c:'Brunei',k:'Bandar Seri Begawan',id:'096'},{c:'Bulgaria',k:'Sofia',id:'100'},{c:'Burkina Faso',k:'Ouagadougou',id:'854'},{c:'Burundi',k:'Gitega',id:'108'},
+  {c:'Cabo Verde',k:'Praia',id:'132'},{c:'Cambodia',k:'Phnom Penh',id:'116'},{c:'Cameroon',k:'Yaounde',id:'120'},{c:'Canada',k:'Ottawa',id:'124'},
+  {c:'Central African Republic',k:'Bangui',id:'140'},{c:'Chad',k:"N'Djamena",id:'148'},{c:'Chile',k:'Santiago',id:'152'},{c:'China',k:'Beijing',id:'156'},
+  {c:'Colombia',k:'Bogota',id:'170'},{c:'Comoros',k:'Moroni',id:'174'},{c:'Congo (DRC)',k:'Kinshasa',id:'180'},{c:'Congo (Republic)',k:'Brazzaville',id:'178'},
+  {c:'Costa Rica',k:'San Jose',id:'188'},{c:'Croatia',k:'Zagreb',id:'191'},{c:'Cuba',k:'Havana',id:'192'},{c:'Cyprus',k:'Nicosia',id:'196'},
+  {c:'Czech Republic',k:'Prague',id:'203'},{c:'Denmark',k:'Copenhagen',id:'208'},{c:'Djibouti',k:'Djibouti',id:'262'},{c:'Dominica',k:'Roseau',id:'212'},
+  {c:'Dominican Republic',k:'Santo Domingo',id:'214'},{c:'East Timor',k:'Dili',id:'626'},{c:'Ecuador',k:'Quito',id:'218'},{c:'Egypt',k:'Cairo',id:'818'},
+  {c:'El Salvador',k:'San Salvador',id:'222'},{c:'Equatorial Guinea',k:'Malabo',id:'226'},{c:'Eritrea',k:'Eritrea',id:'232'},{c:'Estonia',k:'Tallinn',id:'233'},
+  {c:'Eswatini',k:'Mbabane',id:'748'},{c:'Ethiopia',k:'Addis Ababa',id:'231'},{c:'Fiji',k:'Suva',id:'242'},{c:'Finland',k:'Helsinki',id:'246'},
+  {c:'France',k:'Paris',id:'250'},{c:'Gabon',k:'Libreville',id:'266'},{c:'Gambia',k:'Banjul',id:'270'},{c:'Georgia',k:'Tbilisi',id:'268'},
+  {c:'Germany',k:'Berlin',id:'276'},{c:'Ghana',k:'Accra',id:'288'},{c:'Greece',k:'Athens',id:'300'},{c:'Grenada',k:"St. George's",id:'308'},
+  {c:'Guatemala',k:'Guatemala City',id:'320'},{c:'Guinea',k:'Conakry',id:'324'},{c:'Guinea-Bissau',k:'Bissau',id:'624'},{c:'Guyana',k:'Georgetown',id:'328'},
+  {c:'Haiti',k:'Port-au-Prince',id:'332'},{c:'Honduras',k:'Tegucigalpa',id:'340'},{c:'Hungary',k:'Budapest',id:'348'},{c:'Iceland',k:'Reykjavik',id:'352'},
+  {c:'India',k:'New Delhi',id:'356'},{c:'Indonesia',k:'Jakarta',id:'360'},{c:'Iran',k:'Tehran',id:'364'},{c:'Iraq',k:'Baghdad',id:'368'},
+  {c:'Ireland',k:'Dublin',id:'372'},{c:'Israel',k:'Jerusalem',id:'376'},{c:'Italy',k:'Rome',id:'380'},{c:'Ivory Coast',k:'Yamoussoukro',id:'384'},
+  {c:'Jamaica',k:'Kingston',id:'388'},{c:'Japan',k:'Tokyo',id:'392'},{c:'Jordan',k:'Amman',id:'400'},{c:'Kazakhstan',k:'Astana',id:'398'},
+  {c:'Kenya',k:'Nairobi',id:'404'},{c:'Kiribati',k:'Tarawa',id:'296'},{c:'Kosovo',k:'Pristina',id:'-99'},{c:'Kuwait',k:'Kuwait City',id:'414'},
+  {c:'Kyrgyzstan',k:'Bishkek',id:'417'},{c:'Laos',k:'Vientiane',id:'418'},{c:'Latvia',k:'Riga',id:'428'},{c:'Lebanon',k:'Beirut',id:'422'},
+  {c:'Lesotho',k:'Maseru',id:'426'},{c:'Liberia',k:'Monrovia',id:'430'},{c:'Libya',k:'Tripoli',id:'434'},{c:'Liechtenstein',k:'Vaduz',id:'438'},
+  {c:'Lithuania',k:'Vilnius',id:'440'},{c:'Luxembourg',k:'Luxembourg City',id:'442'},{c:'Madagascar',k:'Antananarivo',id:'450'},{c:'Malawi',k:'Lilongwe',id:'454'},
+  {c:'Malaysia',k:'Kuala Lumpur',id:'458'},{c:'Maldives',k:'Male',id:'462'},{c:'Mali',k:'Bamako',id:'466'},{c:'Malta',k:'Valletta',id:'470'},
+  {c:'Marshall Islands',k:'Majuro',id:'584'},{c:'Mauritania',k:'Nouakchott',id:'478'},{c:'Mauritius',k:'Port Louis',id:'480'},{c:'Mexico',k:'Mexico City',id:'484'},
+  {c:'Micronesia',k:'Palikir',id:'583'},{c:'Moldova',k:'Chisinau',id:'498'},{c:'Monaco',k:'Monaco',id:'492'},{c:'Mongolia',k:'Ulaanbaatar',id:'496'},
+  {c:'Montenegro',k:'Podgorica',id:'499'},{c:'Morocco',k:'Rabat',id:'504'},{c:'Mozambique',k:'Maputo',id:'508'},{c:'Myanmar',k:'Naypyidaw',id:'104'},
+  {c:'Namibia',k:'Windhoek',id:'516'},{c:'Nauru',k:'Yaren',id:'520'},{c:'Nepal',k:'Kathmandu',id:'524'},{c:'Netherlands',k:'Amsterdam',id:'528'},
+  {c:'New Zealand',k:'Wellington',id:'554'},{c:'Nicaragua',k:'Managua',id:'558'},{c:'Niger',k:'Niamey',id:'562'},{c:'Nigeria',k:'Abuja',id:'566'},
+  {c:'North Korea',k:'Pyongyang',id:'408'},{c:'North Macedonia',k:'Skopje',id:'807'},{c:'Norway',k:'Oslo',id:'578'},{c:'Oman',k:'Muscat',id:'512'},
+  {c:'Pakistan',k:'Islamabad',id:'586'},{c:'Palau',k:'Ngerulmud',id:'585'},{c:'Palestine',k:'Ramallah',id:'275'},{c:'Panama',k:'Panama City',id:'591'},
+  {c:'Papua New Guinea',k:'Port Moresby',id:'598'},{c:'Paraguay',k:'Asuncion',id:'600'},{c:'Peru',k:'Lima',id:'604'},{c:'Philippines',k:'Manila',id:'608'},
+  {c:'Poland',k:'Warsaw',id:'616'},{c:'Portugal',k:'Lisbon',id:'620'},{c:'Qatar',k:'Doha',id:'634'},{c:'Romania',k:'Bucharest',id:'642'},
+  {c:'Russia',k:'Moscow',id:'643'},{c:'Rwanda',k:'Kigali',id:'646'},{c:'Saint Kitts and Nevis',k:'Basseterre',id:'659'},{c:'Saint Lucia',k:'Castries',id:'662'},
+  {c:'Saint Vincent',k:'Kingstown',id:'670'},{c:'Samoa',k:'Apia',id:'882'},{c:'San Marino',k:'San Marino',id:'674'},{c:'Sao Tome and Principe',k:'Sao Tome',id:'678'},
+  {c:'Saudi Arabia',k:'Riyadh',id:'682'},{c:'Senegal',k:'Dakar',id:'686'},{c:'Serbia',k:'Belgrade',id:'688'},{c:'Seychelles',k:'Victoria',id:'690'},
+  {c:'Sierra Leone',k:'Freetown',id:'694'},{c:'Singapore',k:'Singapore',id:'702'},{c:'Slovakia',k:'Bratislava',id:'703'},{c:'Slovenia',k:'Ljubljana',id:'705'},
+  {c:'Solomon Islands',k:'Honiara',id:'090'},{c:'Somalia',k:'Mogadishu',id:'706'},{c:'South Africa',k:'Pretoria',id:'710'},{c:'South Korea',k:'Seoul',id:'410'},
+  {c:'South Sudan',k:'Juba',id:'728'},{c:'Spain',k:'Madrid',id:'724'},{c:'Sri Lanka',k:'Colombo',id:'144'},{c:'Sudan',k:'Khartoum',id:'729'},
+  {c:'Suriname',k:'Paramaribo',id:'740'},{c:'Sweden',k:'Stockholm',id:'752'},{c:'Switzerland',k:'Bern',id:'756'},{c:'Syria',k:'Damascus',id:'760'},
+  {c:'Taiwan',k:'Taipei',id:'158'},{c:'Tajikistan',k:'Dushanbe',id:'762'},{c:'Tanzania',k:'Dodoma',id:'834'},{c:'Thailand',k:'Bangkok',id:'764'},
+  {c:'Togo',k:'Lome',id:'768'},{c:'Tonga',k:"Nuku'alofa",id:'776'},{c:'Trinidad and Tobago',k:'Port of Spain',id:'780'},{c:'Tunisia',k:'Tunis',id:'788'},
+  {c:'Turkey',k:'Ankara',id:'792'},{c:'Turkmenistan',k:'Ashgabat',id:'795'},{c:'Tuvalu',k:'Funafuti',id:'798'},{c:'Uganda',k:'Kampala',id:'800'},
+  {c:'Ukraine',k:'Kyiv',id:'804'},{c:'United Arab Emirates',k:'Abu Dhabi',id:'784'},{c:'United Kingdom',k:'London',id:'826'},{c:'United States',k:'Washington D.C.',id:'840'},
+  {c:'Uruguay',k:'Montevideo',id:'858'},{c:'Uzbekistan',k:'Tashkent',id:'860'},{c:'Vanuatu',k:'Port Vila',id:'548'},{c:'Vatican City',k:'Vatican City',id:'336'},
+  {c:'Venezuela',k:'Caracas',id:'862'},{c:'Vietnam',k:'Hanoi',id:'704'},{c:'Yemen',k:'Sanaa',id:'887'},{c:'Zambia',k:'Lusaka',id:'894'},{c:'Zimbabwe',k:'Harare',id:'716'},
 ];
 
-const TOTAL = COUNTRIES.length;
+const TOTAL = DATA.length;
 const TIMER_MINUTES = 15;
+const ATLAS_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
-let state = 'idle'; // idle | playing | done
+let state = 'idle';
 let score = 0;
 let answered = new Set();
 let timerInterval = null;
 let timeLeft = TIMER_MINUTES * 60;
+let worldData = null;
+let lastAnswered = '';
 
 const app = document.getElementById('quiz-app');
-
-// ── Normalize for matching ──
 const norm = (s) => s.toLowerCase().replace(/[^a-z]/g, '');
-
-// ── Timer ──
 const fmtTime = (s) => `${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`;
 
+// Build lookup: numericISO → quiz index
+const idToIdx = {};
+DATA.forEach((d, i) => { if (d.id) idToIdx[d.id] = i; });
+
+// ── Load world map data ──
+const loadMap = async () => {
+  if (worldData) return;
+  const res = await fetch(ATLAS_URL);
+  const topo = await res.json();
+  worldData = feature(topo, topo.objects.countries);
+};
+
+// ── Timer ──
 const startTimer = () => {
   timeLeft = TIMER_MINUTES * 60;
   timerInterval = setInterval(() => {
     timeLeft--;
-    document.getElementById('cq-timer').textContent = fmtTime(timeLeft);
+    const t = document.getElementById('cq-timer');
+    if (t) t.textContent = fmtTime(timeLeft);
+    if (timeLeft <= 60) { if (t) t.style.color = '#e74c3c'; }
     if (timeLeft <= 0) endGame();
   }, 1000);
 };
 
-const endGame = () => {
-  state = 'done';
-  clearInterval(timerInterval);
-  render();
-};
-
-const startGame = () => {
-  state = 'playing';
-  score = 0;
-  answered = new Set();
-  render();
-  startTimer();
+const endGame = () => { state = 'done'; clearInterval(timerInterval); render(); };
+const startGame = async () => {
+  await loadMap();
+  state = 'playing'; score = 0; answered = new Set(); lastAnswered = '';
+  render(); startTimer();
   setTimeout(() => document.getElementById('cq-input')?.focus(), 100);
 };
-
-const giveUp = () => endGame();
 
 // ── Check answer ──
 const checkAnswer = (val) => {
   const n = norm(val);
   if (!n) return;
-  for (let i = 0; i < COUNTRIES.length; i++) {
+  for (let i = 0; i < DATA.length; i++) {
     if (answered.has(i)) continue;
-    if (norm(COUNTRIES[i].k) === n) {
+    if (norm(DATA[i].k) === n) {
       answered.add(i);
       score++;
+      lastAnswered = `${DATA[i].k} — ${DATA[i].c}`;
       document.getElementById('cq-input').value = '';
       document.getElementById('cq-score').textContent = `${score} / ${TOTAL}`;
-      // Mark the row
-      const row = document.getElementById(`cq-row-${i}`);
-      if (row) {
-        row.classList.add('cq-found');
-        row.querySelector('.cq-capital').textContent = COUNTRIES[i].k;
+      const fb = document.getElementById('cq-feedback');
+      if (fb) { fb.textContent = lastAnswered; fb.classList.add('cq-fb-show'); setTimeout(() => fb.classList.remove('cq-fb-show'), 1500); }
+
+      // Color the country on the map
+      const path = document.getElementById(`country-${DATA[i].id}`);
+      if (path) {
+        path.setAttribute('class', 'cq-map-found');
+        // Add label
+        const bbox = path.getBBox();
+        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        label.setAttribute('x', bbox.x + bbox.width / 2);
+        label.setAttribute('y', bbox.y + bbox.height / 2);
+        label.setAttribute('class', 'cq-map-label');
+        label.textContent = DATA[i].k;
+        path.parentNode.appendChild(label);
       }
-      // Flash effect
-      const flash = document.getElementById('cq-flash');
-      if (flash) { flash.classList.add('cq-flash-show'); setTimeout(() => flash.classList.remove('cq-flash-show'), 300); }
+
       if (score === TOTAL) endGame();
       return;
     }
   }
+};
+
+// ── Render Map SVG ──
+const renderMapSVG = () => {
+  if (!worldData) return '<div class="cq-map-loading">Loading map...</div>';
+
+  const width = 960;
+  const height = 500;
+  const projection = geoNaturalEarth1().fitSize([width, height], worldData);
+  const pathGen = geoPath(projection);
+
+  const paths = worldData.features.map(f => {
+    const numId = f.id || f.properties?.id;
+    const idx = idToIdx[numId];
+    const isFound = idx !== undefined && answered.has(idx);
+    return `<path id="country-${numId}" d="${pathGen(f)}" class="${isFound ? 'cq-map-found' : 'cq-map-country'}" />`;
+  }).join('');
+
+  return `<svg viewBox="0 0 ${width} ${height}" class="cq-map-svg">${paths}</svg>`;
 };
 
 // ── Render ──
@@ -133,8 +168,8 @@ const render = () => {
           <div class="cq-header">
             <div class="cq-badge"><span>GEOGRAPHY</span></div>
             <h1 class="cq-title">WORLD CAPITALS<br><span>QUIZ</span></h1>
-            <p class="cq-subtitle">Can you name the capital city of every country in the world?<br>You have ${TIMER_MINUTES} minutes to name all ${TOTAL}.</p>
-            <button class="cq-start-btn" onclick="window.__startQuiz()">Start Quiz</button>
+            <p class="cq-subtitle">Can you name the capital city of every country in the world?<br>You have ${TIMER_MINUTES} minutes to name all ${TOTAL}. Countries light up on the map as you answer.</p>
+            <button class="cq-start-btn" id="cq-start">Start Quiz</button>
           </div>
         </div>
       </section>
@@ -144,57 +179,59 @@ const render = () => {
           <p class="footer-copy">© ${new Date().getFullYear()} Andrea Spiteri — All rights reserved</p>
         </div>
       </footer>`;
+    document.getElementById('cq-start')?.addEventListener('click', startGame);
     return;
   }
 
   if (state === 'playing') {
     app.innerHTML = `
-      <section class="cq-section">
-        <div class="cq-container">
+      <section class="cq-section cq-section--playing">
+        <div class="cq-container cq-container--wide">
           <div class="cq-toolbar">
             <div class="cq-toolbar-left">
               <input type="text" id="cq-input" class="cq-input" placeholder="Type a capital city..." autocomplete="off" spellcheck="false" />
             </div>
             <div class="cq-toolbar-right">
+              <div id="cq-feedback" class="cq-feedback"></div>
               <div class="cq-stat"><span class="cq-stat-label">Score</span><span class="cq-stat-value" id="cq-score">${score} / ${TOTAL}</span></div>
               <div class="cq-stat"><span class="cq-stat-label">Time</span><span class="cq-stat-value" id="cq-timer">${fmtTime(timeLeft)}</span></div>
-              <button class="cq-give-up" onclick="window.__giveUp()">Give Up</button>
+              <button class="cq-give-up" id="cq-giveup">Give Up</button>
             </div>
           </div>
-          <div id="cq-flash" class="cq-flash"></div>
-          <div class="cq-grid">
-            ${COUNTRIES.map((item, i) => `
-              <div class="cq-row ${answered.has(i) ? 'cq-found' : ''}" id="cq-row-${i}">
-                <span class="cq-country">${item.c}</span>
-                <span class="cq-capital">${answered.has(i) ? item.k : ''}</span>
-              </div>
-            `).join('')}
+          <div class="cq-map-container">
+            ${renderMapSVG()}
+          </div>
+          <div class="cq-progress-bar">
+            <div class="cq-progress-fill" style="width: ${(score/TOTAL)*100}%"></div>
           </div>
         </div>
       </section>`;
 
-    const inp = document.getElementById('cq-input');
-    inp.addEventListener('input', (e) => checkAnswer(e.target.value));
-    inp.focus();
+    document.getElementById('cq-input')?.addEventListener('input', e => checkAnswer(e.target.value));
+    document.getElementById('cq-giveup')?.addEventListener('click', endGame);
+    document.getElementById('cq-input')?.focus();
     return;
   }
 
   // Done
   const pct = Math.round((score / TOTAL) * 100);
-  const missed = COUNTRIES.filter((_, i) => !answered.has(i));
+  const missed = DATA.filter((_, i) => !answered.has(i));
   const grade = pct === 100 ? 'PERFECT!' : pct >= 80 ? 'EXCELLENT' : pct >= 60 ? 'GREAT JOB' : pct >= 40 ? 'GOOD EFFORT' : 'KEEP PRACTICING';
 
   app.innerHTML = `
     <section class="cq-section">
-      <div class="cq-container">
+      <div class="cq-container cq-container--wide">
         <div class="cq-header">
           <h1 class="cq-title">${grade}</h1>
           <p class="cq-subtitle">You named <strong>${score}</strong> of <strong>${TOTAL}</strong> capitals (${pct}%)</p>
-          <button class="cq-start-btn" onclick="window.__startQuiz()">Play Again</button>
+          <div class="cq-map-container cq-map-container--result">
+            ${renderMapSVG()}
+          </div>
+          <button class="cq-start-btn" id="cq-restart" style="margin-top:24px;">Play Again</button>
         </div>
-        ${missed.length > 0 && missed.length <= 50 ? `
+        ${missed.length > 0 && missed.length <= 80 ? `
           <div class="cq-missed">
-            <div class="cq-missed-label">Missed Capitals</div>
+            <div class="cq-missed-label">Missed Capitals (${missed.length})</div>
             <div class="cq-grid cq-grid--result">
               ${missed.map(item => `
                 <div class="cq-row cq-missed-row">
@@ -204,11 +241,7 @@ const render = () => {
               `).join('')}
             </div>
           </div>
-        ` : missed.length > 50 ? `
-          <div class="cq-missed">
-            <div class="cq-missed-label">${missed.length} capitals missed</div>
-          </div>
-        ` : ''}
+        ` : missed.length > 80 ? `<div class="cq-missed"><div class="cq-missed-label">${missed.length} capitals missed</div></div>` : ''}
       </div>
     </section>
     <footer class="footer" role="contentinfo">
@@ -217,11 +250,8 @@ const render = () => {
         <p class="footer-copy">© ${new Date().getFullYear()} Andrea Spiteri — All rights reserved</p>
       </div>
     </footer>`;
+  document.getElementById('cq-restart')?.addEventListener('click', startGame);
 };
-
-// Expose for onclick
-window.__startQuiz = startGame;
-window.__giveUp = giveUp;
 
 // Nav scroll
 window.addEventListener('scroll', () => {

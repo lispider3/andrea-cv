@@ -536,3 +536,23 @@ html.light .nav-links a:hover { color: #1a1a1a; }
   .cq-grid { grid-template-columns: 1fr; }
   .cq-title { font-size: 2.2rem; }
 }
+
+/* ── Map Quiz ── */
+.cq-container--wide { max-width: 1100px; }
+.cq-section--playing { padding-top: 80px; }
+.cq-map-container { margin: 0 auto; border-radius: 10px; overflow: hidden; background: rgba(255,255,255,0.02); border: 1px solid var(--border); }
+.cq-map-container--result { margin-top: 20px; opacity: 0.8; }
+.cq-map-svg { display: block; width: 100%; height: auto; }
+.cq-map-country { fill: rgba(255,255,255,0.06); stroke: rgba(255,255,255,0.12); stroke-width: 0.5; transition: fill 0.4s ease; cursor: default; }
+.cq-map-country:hover { fill: rgba(255,255,255,0.1); }
+.cq-map-found { fill: rgba(201,169,110,0.5); stroke: var(--accent); stroke-width: 0.7; }
+.cq-map-label { font-family: var(--font-mono); font-size: 4px; fill: var(--accent); text-anchor: middle; dominant-baseline: central; pointer-events: none; font-weight: 600; }
+.cq-map-loading { text-align: center; padding: 80px 20px; color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.8rem; }
+.cq-feedback { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); opacity: 0; transition: opacity 0.3s; white-space: nowrap; }
+.cq-fb-show { opacity: 1; }
+.cq-progress-bar { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 12px; overflow: hidden; }
+.cq-progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.3s ease; }
+
+@media (max-width: 768px) {
+  .cq-map-label { font-size: 3px; }
+}
