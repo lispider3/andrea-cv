@@ -737,114 +737,86 @@ const initHeroCanvas = () => {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let w, h, dpr;
-  let frame = 0;
+  let w, h, animId;
 
   const resize = () => {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
     const rect = canvas.parentElement.getBoundingClientRect();
-    w = rect.width;
-    h = rect.height;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    ctx.scale(dpr, dpr);
+    w = canvas.width = rect.width;
+    h = canvas.height = rect.height;
   };
 
-  // Create noise texture once
+  // Noise texture
   const noiseCanvas = document.createElement('canvas');
-  noiseCanvas.width = 128;
-  noiseCanvas.height = 128;
-  const noiseCtx = noiseCanvas.getContext('2d');
-  const noiseData = noiseCtx.createImageData(128, 128);
-  for (let i = 0; i < noiseData.data.length; i += 4) {
+  noiseCanvas.width = 200;
+  noiseCanvas.height = 200;
+  const nCtx = noiseCanvas.getContext('2d');
+  const nd = nCtx.createImageData(200, 200);
+  for (let i = 0; i < nd.data.length; i += 4) {
     const v = Math.random() * 255;
-    noiseData.data[i] = v;
-    noiseData.data[i + 1] = v;
-    noiseData.data[i + 2] = v;
-    noiseData.data[i + 3] = 18;
+    nd.data[i] = v; nd.data[i+1] = v; nd.data[i+2] = v; nd.data[i+3] = 20;
   }
-  noiseCtx.putImageData(noiseData, 0, 0);
+  nCtx.putImageData(nd, 0, 0);
 
-  const drawBeam = (x, y, angle, length, width, alpha, hue) => {
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(angle);
-    const grad = ctx.createLinearGradient(0, -length / 2, 0, length / 2);
-    grad.addColorStop(0, `hsla(${hue}, 40%, 65%, 0)`);
-    grad.addColorStop(0.3, `hsla(${hue}, 40%, 65%, ${alpha * 0.6})`);
-    grad.addColorStop(0.5, `hsla(${hue}, 45%, 72%, ${alpha})`);
-    grad.addColorStop(0.7, `hsla(${hue}, 40%, 65%, ${alpha * 0.6})`);
-    grad.addColorStop(1, `hsla(${hue}, 40%, 65%, 0)`);
-    ctx.fillStyle = grad;
-    ctx.fillRect(-width / 2, -length / 2, width, length);
-    ctx.restore();
-  };
+  const beams = [
+    { x: 0.25, y: 0.1, angle: -0.75, len: 1.8, w: 280, sp: 0.4, ph: 0 },
+    { x: 0.50, y: 0.0, angle: -0.65, len: 2.0, w: 350, sp: 0.3, ph: 1.5 },
+    { x: 0.75, y: 0.1, angle: -0.80, len: 1.6, w: 250, sp: 0.5, ph: 3.0 },
+    { x: 0.35, y: 0.3, angle: -0.70, len: 1.4, w: 200, sp: 0.35, ph: 4.5 },
+    { x: 0.65, y: 0.2, angle: -0.60, len: 1.7, w: 300, sp: 0.45, ph: 2.0 },
+  ];
 
+  let t = 0;
   const draw = () => {
-    frame++;
+    t += 0.004;
     ctx.clearRect(0, 0, w, h);
 
-    const t = frame * 0.003;
-    const cx = w * 0.5;
-    const cy = h * 0.4;
-
-    // Radial ambient glow (gold center)
-    const ambientGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, w * 0.7);
-    ambientGrad.addColorStop(0, 'rgba(201, 169, 110, 0.06)');
-    ambientGrad.addColorStop(0.4, 'rgba(201, 169, 110, 0.02)');
-    ambientGrad.addColorStop(1, 'rgba(201, 169, 110, 0)');
-    ctx.fillStyle = ambientGrad;
+    // Central gold glow
+    const g = ctx.createRadialGradient(w*0.5, h*0.35, 0, w*0.5, h*0.35, w*0.6);
+    g.addColorStop(0, 'rgba(201,169,110,0.12)');
+    g.addColorStop(0.5, 'rgba(201,169,110,0.04)');
+    g.addColorStop(1, 'transparent');
+    ctx.fillStyle = g;
     ctx.fillRect(0, 0, w, h);
 
-    // Diagonal light beams (gold hues 35-45)
-    const beams = [
-      { ox: 0.3, oy: 0.2, angle: -0.75, len: 1.4, w: 180, speed: 0.7, phase: 0, hue: 38 },
-      { ox: 0.5, oy: 0.3, angle: -0.65, len: 1.6, w: 220, speed: 0.5, phase: 1.2, hue: 40 },
-      { ox: 0.7, oy: 0.15, angle: -0.8, len: 1.3, w: 140, speed: 0.9, phase: 2.4, hue: 36 },
-      { ox: 0.4, oy: 0.5, angle: -0.7, len: 1.1, w: 100, speed: 0.6, phase: 3.6, hue: 42 },
-      { ox: 0.6, oy: 0.4, angle: -0.6, len: 1.5, w: 160, speed: 0.8, phase: 4.8, hue: 35 },
-      { ox: 0.2, oy: 0.6, angle: -0.85, len: 1.0, w: 90, speed: 1.0, phase: 0.8, hue: 44 },
-    ];
-
+    // Light beams
     ctx.globalCompositeOperation = 'screen';
-
     beams.forEach(b => {
-      const pulse = Math.sin(t * b.speed + b.phase) * 0.5 + 0.5;
-      const sway = Math.sin(t * b.speed * 0.3 + b.phase) * 0.05;
-      const alpha = pulse * 0.08;
-      if (alpha < 0.005) return;
-      drawBeam(
-        w * b.ox + Math.sin(t * 0.2 + b.phase) * 30,
-        h * b.oy,
-        b.angle + sway,
-        h * b.len,
-        b.w * (0.8 + pulse * 0.4),
-        alpha,
-        b.hue
-      );
+      const pulse = (Math.sin(t * b.sp + b.ph) + 1) * 0.5;
+      const alpha = 0.04 + pulse * 0.12;
+      const sway = Math.sin(t * 0.2 + b.ph) * 0.04;
+      const bw = b.w * (0.7 + pulse * 0.5);
+
+      ctx.save();
+      ctx.translate(w * b.x + Math.sin(t * 0.15 + b.ph) * 40, h * b.y);
+      ctx.rotate(b.angle + sway);
+
+      const grad = ctx.createLinearGradient(0, -h * b.len * 0.5, 0, h * b.len * 0.5);
+      grad.addColorStop(0, 'rgba(201,169,110,0)');
+      grad.addColorStop(0.25, `rgba(201,169,110,${alpha * 0.5})`);
+      grad.addColorStop(0.5, `rgba(220,190,130,${alpha})`);
+      grad.addColorStop(0.75, `rgba(201,169,110,${alpha * 0.5})`);
+      grad.addColorStop(1, 'rgba(201,169,110,0)');
+      ctx.fillStyle = grad;
+      ctx.filter = `blur(${30 + pulse * 20}px)`;
+      ctx.fillRect(-bw/2, -h * b.len * 0.5, bw, h * b.len);
+      ctx.restore();
     });
 
+    ctx.filter = 'none';
     ctx.globalCompositeOperation = 'source-over';
 
-    // Noise grain overlay
-    ctx.globalAlpha = 0.35;
-    const pattern = ctx.createPattern(noiseCanvas, 'repeat');
-    ctx.fillStyle = pattern;
+    // Noise grain
+    ctx.globalAlpha = 0.3;
+    ctx.fillStyle = ctx.createPattern(noiseCanvas, 'repeat');
     ctx.fillRect(0, 0, w, h);
     ctx.globalAlpha = 1;
 
-    requestAnimationFrame(draw);
+    animId = requestAnimationFrame(draw);
   };
 
   resize();
-  window.addEventListener('resize', resize, { passive: true });
-  // Only animate when visible
-  const obs = new IntersectionObserver(([e]) => {
-    if (e.isIntersecting) draw();
-  }, { threshold: 0 });
-  obs.observe(canvas);
+  draw();
+  window.addEventListener('resize', () => { resize(); }, { passive: true });
 };
 
 initHeroCanvas();
