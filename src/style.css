@@ -445,6 +445,9 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .fb-loading p, .fb-error p { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
 .fb-error { text-align: center; padding: 80px 0; }
 .fb-btn { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; padding: 10px 24px; background: var(--accent); color: #121212; border: none; border-radius: 6px; cursor: pointer; margin-top: 16px; }
+.fb-expand-btn { display: block; width: 100%; margin-top: 16px; padding: 10px; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); background: rgba(201,169,110,0.06); border: 1px solid var(--accent-dim); border-radius: 6px; cursor: pointer; transition: background 0.2s; }
+.fb-expand-btn:hover { background: rgba(201,169,110,0.12); }
+
 .fb-empty { text-align: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); padding: 40px; }
 
 /* Mobile */

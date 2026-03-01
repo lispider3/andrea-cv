@@ -5,14 +5,13 @@ const SPORT = 'soccer_italy_serie_a';
 const API_BASE = 'https://api.the-odds-api.com/v4';
 const TEAM = 'Juventus';
 
-// ── State ──
 let oddsData = [];
 let scoresData = [];
 let eventsData = [];
 let loading = true;
 let error = null;
+let standingsData = [];
 
-// ── Fetch helpers ──
 const fetchJSON = async (url) => {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`API error: ${res.status}`);
@@ -23,6 +22,12 @@ const loadData = async () => {
   loading = true;
   render();
   try {
+    // Fetch standings from API (with fallback)
+    try {
+      const sRes = await fetch('/api/standings');
+      if (sRes.ok) { const sData = await sRes.json(); standingsData = sData.standings || []; }
+    } catch(e) {}
+
     const [odds, scores, events] = await Promise.all([
       fetchJSON(`${API_BASE}/sports/${SPORT}/odds?apiKey=${ODDS_API_KEY}&regions=eu&markets=h2h&oddsFormat=decimal`).catch(() => []),
       fetchJSON(`${API_BASE}/sports/${SPORT}/scores?apiKey=${ODDS_API_KEY}&daysFrom=3`).catch(() => []),
@@ -41,14 +46,8 @@ const loadData = async () => {
 
 // ── Helpers ──
 const isJuve = (ev) => ev.home_team === TEAM || ev.away_team === TEAM;
-const formatDate = (iso) => {
-  const d = new Date(iso);
-  return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
-};
-const formatTime = (iso) => {
-  const d = new Date(iso);
-  return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-};
+const formatDate = (iso) => new Date(iso).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+const formatTime = (iso) => new Date(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
 const impliedProb = (odds) => ((1 / odds) * 100).toFixed(0);
 
 const getAvgOdds = (event) => {
@@ -58,7 +57,6 @@ const getAvgOdds = (event) => {
     if (m) h2hMarkets.push(m.outcomes);
   });
   if (!h2hMarkets.length) return null;
-
   const teams = {};
   h2hMarkets.forEach(outcomes => {
     outcomes.forEach(o => {
@@ -66,26 +64,11 @@ const getAvgOdds = (event) => {
       teams[o.name].push(o.price);
     });
   });
-
   const avg = {};
   Object.keys(teams).forEach(name => {
     avg[name] = (teams[name].reduce((a, b) => a + b, 0) / teams[name].length).toFixed(2);
   });
   return avg;
-};
-
-const getBestOdds = (event) => {
-  const best = {};
-  (event.bookmakers || []).forEach(b => {
-    const m = b.markets.find(m => m.key === 'h2h');
-    if (!m) return;
-    m.outcomes.forEach(o => {
-      if (!best[o.name] || o.price > best[o.name].price) {
-        best[o.name] = { price: o.price, bookmaker: b.title };
-      }
-    });
-  });
-  return best;
 };
 
 // ── Render ──
@@ -94,79 +77,58 @@ const render = () => {
   if (!app) return;
 
   if (loading) {
-    app.innerHTML = `
-      <section class="fb-section">
-        <div class="fb-container">
-          <div class="fb-loading">
-            <div class="fb-spinner"></div>
-            <p>Loading live data...</p>
-          </div>
-        </div>
-      </section>`;
+    app.innerHTML = `<section class="fb-section"><div class="fb-container">
+      <div class="fb-loading"><div class="fb-spinner"></div><p>Loading live data...</p></div>
+    </div></section>`;
     return;
   }
 
   if (error) {
-    app.innerHTML = `
-      <section class="fb-section">
-        <div class="fb-container">
-          <div class="fb-error">
-            <p>⚠ ${error}</p>
-            <button onclick="location.reload()" class="fb-btn">Retry</button>
-          </div>
-        </div>
-      </section>`;
+    app.innerHTML = `<section class="fb-section"><div class="fb-container">
+      <div class="fb-error"><p>⚠ ${error}</p><button onclick="location.reload()" class="fb-btn">Retry</button></div>
+    </div></section>`;
     return;
   }
 
-  // Find Juventus data
   const juveOdds = oddsData.filter(isJuve);
-  const juveScores = scoresData.filter(isJuve).filter(e => e.completed);
+  const juveScores = scoresData.filter(isJuve).filter(e => e.completed).sort((a, b) => new Date(b.commence_time) - new Date(a.commence_time));
   const juveUpcoming = eventsData.filter(isJuve).filter(e => new Date(e.commence_time) > new Date()).sort((a, b) => new Date(a.commence_time) - new Date(b.commence_time));
-  const nextMatch = juveOdds.length ? juveOdds[0] : (juveUpcoming.length ? juveUpcoming[0] : null);
-  const recentResults = juveScores.sort((a, b) => new Date(b.commence_time) - new Date(a.commence_time)).slice(0, 5);
 
-  // All Serie A standings from scores (W/D/L table)
-  const table = STANDINGS;
+  const nextMatch = juveOdds.length ? juveOdds[0] : (juveUpcoming.length ? juveUpcoming[0] : null);
+  const recentResults = juveScores.slice(0, 5);
+  const upcomingFixtures = juveUpcoming.slice(nextMatch && juveOdds.length ? 1 : 0, 6).slice(0, 5);
 
   app.innerHTML = `
     <section class="fb-section">
       <div class="fb-container">
         <div class="fb-header">
-          <div class="fb-badge">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M12 3L14.5 9.5L21 12L14.5 14.5L12 21L9.5 14.5L3 12L9.5 9.5L12 3Z" fill="currentColor" opacity="0.2"/></svg>
-            <span>SERIE A TRACKER</span>
-          </div>
+          <div class="fb-badge"><span>SERIE A · LIVE DATA</span></div>
           <h1 class="fb-title">JUVENTUS<br><span>DASHBOARD</span></h1>
-          <p class="fb-subtitle">Live odds, fixtures, and results — powered by real bookmaker data.</p>
         </div>
 
         ${nextMatch ? renderNextMatch(nextMatch) : '<p class="fb-empty">No upcoming Juventus matches found.</p>'}
 
-        ${recentResults.length ? renderRecentForm(recentResults) : ''}
+        ${recentResults.length ? renderRecentResults(recentResults) : ''}
 
-        ${juveUpcoming.length > 1 ? renderUpcoming(juveUpcoming.slice(nextMatch ? 1 : 0, 5)) : ''}
+        ${upcomingFixtures.length ? renderUpcoming(upcomingFixtures) : ''}
 
-        ${table.length ? renderStandings(table) : ''}
+        ${standingsData.length ? renderStandings(standingsData) : ''}
       </div>
     </section>
 
     <footer class="footer" role="contentinfo">
       <div class="container">
-        <div class="footer-links">
-          <a href="/">← Back to Portfolio</a>
-        </div>
+        <div class="footer-links"><a href="/">← Back to Portfolio</a></div>
         <p class="footer-copy">© ${new Date().getFullYear()} Andrea Spiteri — All rights reserved</p>
       </div>
     </footer>
   `;
 };
 
-// ── Next Match Card ──
+// ── Section 1: Next Match ──
 const renderNextMatch = (match) => {
   const avg = getAvgOdds(match);
-  const best = getBestOdds(match);
-  const isLive = match.commence_time && new Date(match.commence_time) <= new Date();
+  const isLive = new Date(match.commence_time) <= new Date();
   const home = match.home_team;
   const away = match.away_team;
 
@@ -193,54 +155,25 @@ const renderNextMatch = (match) => {
         <div class="fb-odds-section">
           <div class="fb-odds-title">AVERAGE ODDS · ${match.bookmakers?.length || 0} BOOKMAKERS</div>
           <div class="fb-odds-grid">
-            <div class="fb-odds-cell">
-              <div class="fb-odds-label">${home}</div>
-              <div class="fb-odds-value">${avg[home] || '—'}</div>
-              <div class="fb-odds-prob">${avg[home] ? impliedProb(avg[home]) + '%' : ''}</div>
-            </div>
-            <div class="fb-odds-cell">
-              <div class="fb-odds-label">Draw</div>
-              <div class="fb-odds-value">${avg['Draw'] || '—'}</div>
-              <div class="fb-odds-prob">${avg['Draw'] ? impliedProb(avg['Draw']) + '%' : ''}</div>
-            </div>
-            <div class="fb-odds-cell">
-              <div class="fb-odds-label">${away}</div>
-              <div class="fb-odds-value">${avg[away] || '—'}</div>
-              <div class="fb-odds-prob">${avg[away] ? impliedProb(avg[away]) + '%' : ''}</div>
-            </div>
+            ${[home, 'Draw', away].map(name => `
+              <div class="fb-odds-cell">
+                <div class="fb-odds-label">${name}</div>
+                <div class="fb-odds-value">${avg[name] || '—'}</div>
+                <div class="fb-odds-prob">${avg[name] ? impliedProb(avg[name]) + '%' : ''}</div>
+              </div>
+            `).join('')}
           </div>
         </div>
-
-        <div class="fb-prob-bar">
-          <div class="fb-prob-seg fb-prob-home" style="width:${avg[home] ? impliedProb(avg[home]) : 33}%"><span>${home.split(' ').pop()}</span></div>
-          <div class="fb-prob-seg fb-prob-draw" style="width:${avg['Draw'] ? impliedProb(avg['Draw']) : 33}%"><span>Draw</span></div>
-          <div class="fb-prob-seg fb-prob-away" style="width:${avg[away] ? impliedProb(avg[away]) : 33}%"><span>${away.split(' ').pop()}</span></div>
-        </div>
-
-        ${best && Object.keys(best).length ? `
-          <div class="fb-best-odds">
-            <div class="fb-odds-title">BEST ODDS</div>
-            <div class="fb-best-grid">
-              ${Object.entries(best).map(([name, data]) => `
-                <div class="fb-best-cell">
-                  <span class="fb-best-name">${name}</span>
-                  <span class="fb-best-value">${data.price.toFixed(2)}</span>
-                  <span class="fb-best-bookie">${data.bookmaker}</span>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        ` : ''}
       ` : '<div class="fb-odds-section"><div class="fb-odds-title">Odds not yet available</div></div>'}
     </div>
   `;
 };
 
-// ── Recent Form ──
-const renderRecentForm = (results) => {
+// ── Section 2: Last 5 Results ──
+const renderRecentResults = (results) => {
   return `
     <div class="fb-card">
-      <div class="fb-card-label">📊 RECENT FORM</div>
+      <div class="fb-card-label">📊 LAST ${results.length} RESULTS</div>
       <div class="fb-form-grid">
         ${results.map(r => {
           const juveScore = r.scores?.find(s => s.name === TEAM);
@@ -267,11 +200,11 @@ const renderRecentForm = (results) => {
   `;
 };
 
-// ── Upcoming Fixtures ──
+// ── Section 3: Next 5 Fixtures ──
 const renderUpcoming = (fixtures) => {
   return `
     <div class="fb-card">
-      <div class="fb-card-label">📅 UPCOMING FIXTURES</div>
+      <div class="fb-card-label">📅 NEXT ${fixtures.length} FIXTURES</div>
       <div class="fb-fixtures">
         ${fixtures.map(f => {
           const isHome = f.home_team === TEAM;
@@ -292,52 +225,53 @@ const renderUpcoming = (fixtures) => {
   `;
 };
 
-// ── Standings Table ──
-const STANDINGS = [
-  { name: 'Inter', p: 27, w: 22, d: 1, l: 4, gf: 64, ga: 21, pts: 67 },
-  { name: 'AC Milan', p: 27, w: 15, d: 10, l: 2, gf: 41, ga: 20, pts: 55 },
-  { name: 'Napoli', p: 27, w: 16, d: 5, l: 6, gf: 41, ga: 28, pts: 53 },
-  { name: 'AS Roma', p: 26, w: 16, d: 2, l: 8, gf: 34, ga: 16, pts: 50 },
-  { name: 'Como', p: 27, w: 13, d: 9, l: 5, gf: 44, ga: 20, pts: 48 },
-  { name: 'Juventus', p: 26, w: 13, d: 7, l: 6, gf: 43, ga: 25, pts: 46 },
-  { name: 'Atalanta', p: 26, w: 12, d: 9, l: 5, gf: 36, ga: 22, pts: 45 },
-  { name: 'Bologna', p: 26, w: 10, d: 6, l: 10, gf: 35, ga: 32, pts: 36 },
-  { name: 'Sassuolo', p: 26, w: 10, d: 5, l: 11, gf: 32, ga: 35, pts: 35 },
-  { name: 'Lazio', p: 26, w: 8, d: 10, l: 8, gf: 26, ga: 25, pts: 34 },
-  { name: 'Parma', p: 27, w: 8, d: 9, l: 10, gf: 20, ga: 32, pts: 33 },
-  { name: 'Udinese', p: 26, w: 9, d: 5, l: 12, gf: 28, ga: 39, pts: 32 },
-  { name: 'Cagliari', p: 27, w: 7, d: 9, l: 11, gf: 29, ga: 36, pts: 30 },
-  { name: 'Genoa', p: 27, w: 6, d: 9, l: 12, gf: 32, ga: 39, pts: 27 },
-  { name: 'Torino', p: 26, w: 7, d: 6, l: 13, gf: 25, ga: 47, pts: 27 },
-  { name: 'Cremonese', p: 27, w: 5, d: 10, l: 12, gf: 21, ga: 36, pts: 25 },
-  { name: 'Fiorentina', p: 26, w: 5, d: 9, l: 12, gf: 30, ga: 39, pts: 24 },
-  { name: 'Lecce', p: 27, w: 6, d: 6, l: 15, gf: 18, ga: 36, pts: 24 },
-  { name: 'Pisa', p: 26, w: 1, d: 12, l: 13, gf: 20, ga: 43, pts: 15 },
-  { name: 'Hellas Verona', p: 27, w: 2, d: 9, l: 16, gf: 20, ga: 48, pts: 15 },
-];
+
+// ── Section 4: Standings (Juve ± 2, expandable) ──
+let _fullTableHTML = '';
+let _snippetTableHTML = '';
+window.toggleStandings = () => {
+  const body = document.getElementById('standings-body');
+  const btn = document.getElementById('expand-standings');
+  if (btn.dataset.expanded === 'true') {
+    body.innerHTML = _snippetTableHTML;
+    btn.textContent = 'Show Full Table';
+    btn.dataset.expanded = 'false';
+  } else {
+    body.innerHTML = _fullTableHTML;
+    btn.textContent = 'Show Less';
+    btn.dataset.expanded = 'true';
+  }
+};
 
 const renderStandings = (table) => {
+  const juveIdx = table.findIndex(t => t.name === TEAM || t.name === 'Juventus');
+  if (juveIdx === -1) return '';
+  const startIdx = Math.max(0, juveIdx - 2);
+  const endIdx = Math.min(table.length, juveIdx + 3);
+  const snippet = table.slice(startIdx, endIdx);
+
+  const renderRow = (t, pos) => `
+    <tr class="${t.name === TEAM || t.name === 'Juventus' ? 'fb-table-juve' : ''}">
+      <td>${pos}</td>
+      <td class="fb-table-team">${t.name}</td>
+      <td>${t.p}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
+      <td>${t.gf}</td><td>${t.ga}</td><td>${(t.gf - t.ga) > 0 ? '+' : ''}${t.gf - t.ga}</td>
+      <td class="fb-table-pts">${t.pts}</td>
+    </tr>`;
+
+  _snippetTableHTML = snippet.map((t, i) => renderRow(t, startIdx + i + 1)).join('');
+  _fullTableHTML = table.map((t, i) => renderRow(t, i + 1)).join('');
+
   return `
     <div class="fb-card">
       <div class="fb-card-label">🏆 SERIE A TABLE</div>
       <div class="fb-table-wrap">
         <table class="fb-table">
-          <thead>
-            <tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr>
-          </thead>
-          <tbody>
-            ${table.map((t, i) => `
-              <tr class="${t.name === TEAM ? 'fb-table-juve' : ''}">
-                <td>${i + 1}</td>
-                <td class="fb-table-team">${t.name}</td>
-                <td>${t.p}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
-                <td>${t.gf}</td><td>${t.ga}</td><td>${t.gf - t.ga > 0 ? '+' : ''}${t.gf - t.ga}</td>
-                <td class="fb-table-pts">${t.pts}</td>
-              </tr>
-            `).join('')}
-          </tbody>
+          <thead><tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead>
+          <tbody id="standings-body">${_snippetTableHTML}</tbody>
         </table>
       </div>
+      <button class="fb-expand-btn" id="expand-standings" data-expanded="false" onclick="toggleStandings()">Show Full Table</button>
     </div>
   `;
 };
