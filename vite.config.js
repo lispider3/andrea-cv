@@ -9,6 +9,7 @@ export default defineConfig({
         'f1-quiz': resolve(__dirname, 'f1-quiz/index.html'),
         'football': resolve(__dirname, 'football/index.html'),
         'capitals': resolve(__dirname, 'capitals/index.html'),
+        'cpo-sim': resolve(__dirname, 'cpo-sim/index.html'),
       },
     },
   },

@@ -622,3 +622,94 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .book-modal-lang { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); background: rgba(201,169,110,0.1); padding: 4px 12px; border-radius: 99px; display: inline-block; }
 
 /* ── Exp Logo Header ── handled above */
+
+/* ══════════════════════════════════════════════
+   CPO SIMULATOR
+   ══════════════════════════════════════════════ */
+.cpo-section { min-height: 100vh; padding: 100px 24px 60px; background: var(--bg); }
+.cpo-section--playing { padding-top: 80px; }
+.cpo-container { max-width: 720px; margin: 0 auto; }
+
+/* ── Intro ── */
+.cpo-intro { text-align: center; }
+.cpo-badge { display: inline-block; margin-bottom: 20px; }
+.cpo-badge span { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); padding: 6px 16px; border: 1px solid var(--accent-dim); border-radius: 100px; background: var(--accent-glow); }
+.cpo-title { font-family: var(--font-head); font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; letter-spacing: -2px; line-height: 1; color: var(--white); margin-bottom: 20px; }
+.cpo-title span { color: var(--accent); }
+.cpo-subtitle { font-size: 0.95rem; font-weight: 300; color: var(--text-secondary); line-height: 1.7; max-width: 440px; margin: 0 auto 32px; }
+.cpo-intro-metrics { display: flex; justify-content: center; gap: 20px; margin-bottom: 36px; }
+.cpo-intro-stat { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
+.cpo-intro-stat-icon { display: flex; }
+.cpo-start-btn { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 16px 40px; background: var(--accent); color: #121212; border: none; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.3s var(--ease); }
+.cpo-start-btn:hover { background: #d4b67a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,169,110,0.25); }
+.cpo-start-hint { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 500; letter-spacing: 1.5px; color: var(--text-muted); margin-top: 16px; }
+
+/* ── Metrics Bar ── */
+.cpo-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.cpo-metric { padding: 16px 18px; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: var(--radius); }
+.cpo-metric-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.cpo-metric-icon { display: flex; flex-shrink: 0; }
+.cpo-metric-label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); flex: 1; }
+.cpo-metric-value { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; }
+.cpo-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 3px; overflow: hidden; }
+.cpo-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+/* ── Round Indicator ── */
+.cpo-round-indicator { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.cpo-round-label { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-secondary); }
+.cpo-round-dots { display: flex; gap: 8px; }
+.cpo-round-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border); transition: all 0.3s; }
+.cpo-dot--done { background: var(--accent); border-color: var(--accent); }
+.cpo-dot--active { border-color: var(--accent); box-shadow: 0 0 8px rgba(201,169,110,0.4); animation: cpo-pulse 2s ease-in-out infinite; }
+@keyframes cpo-pulse { 0%, 100% { box-shadow: 0 0 8px rgba(201,169,110,0.2); } 50% { box-shadow: 0 0 16px rgba(201,169,110,0.5); } }
+
+/* ── Scenario Card ── */
+.cpo-scenario { padding: 32px; background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: var(--radius); }
+.cpo-scenario-tag { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; border: 1px solid; margin-bottom: 16px; }
+.cpo-scenario-icon { display: flex; }
+.cpo-scenario-title { font-family: var(--font-head); font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 800; color: var(--white); margin-bottom: 12px; line-height: 1.2; letter-spacing: -0.3px; }
+.cpo-scenario-desc { font-size: 0.88rem; font-weight: 300; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; }
+
+/* ── Options ── */
+.cpo-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cpo-option { text-align: left; padding: 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); border-radius: var(--radius); cursor: pointer; transition: all 0.3s var(--ease); }
+.cpo-option:hover { background: var(--accent-glow); border-color: rgba(201,169,110,0.2); transform: translateY(-2px); }
+.cpo-option-label { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.cpo-option-desc { font-size: 0.78rem; font-weight: 300; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
+.cpo-option-deltas { display: flex; flex-wrap: wrap; gap: 6px; }
+.cpo-delta { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 4px; background: rgba(255,255,255,0.04); }
+
+/* ── Animate In ── */
+.cpo-animate-in { animation: cpoSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+@keyframes cpoSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Review ── */
+.cpo-review { text-align: center; }
+.cpo-review-badge { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.cpo-review-emoji { font-size: 4rem; margin-bottom: 16px; line-height: 1; }
+.cpo-review-title { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -1px; margin-bottom: 16px; }
+.cpo-review-desc { font-size: 0.92rem; font-weight: 300; color: var(--text-secondary); line-height: 1.7; max-width: 520px; margin: 0 auto 32px; }
+.cpo-review-score { margin: 28px 0; }
+.cpo-review-score-value { font-family: var(--font-head); font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; color: var(--accent); }
+.cpo-review-score-label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; letter-spacing: 2px; color: var(--text-muted); margin-top: 4px; }
+
+/* ── Decision Log ── */
+.cpo-review-decisions { margin: 32px 0; text-align: left; }
+.cpo-review-decisions-label { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.cpo-review-decision { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.cpo-review-decision:last-child { border-bottom: none; }
+.cpo-review-decision-num { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; color: var(--accent); width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: var(--accent-dim); flex-shrink: 0; margin-top: 2px; }
+.cpo-review-decision-title { font-size: 0.82rem; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.cpo-review-decision-choice { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600; color: var(--accent); letter-spacing: 0.5px; }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .cpo-metrics { grid-template-columns: 1fr; gap: 8px; }
+  .cpo-options { grid-template-columns: 1fr; }
+  .cpo-scenario { padding: 24px 20px; }
+  .cpo-intro-metrics { flex-direction: column; align-items: center; gap: 10px; }
+  .cpo-title { font-size: 3.5rem; }
+}
+@media (max-width: 480px) {
+  .cpo-title { font-size: 2.8rem; }
+}
