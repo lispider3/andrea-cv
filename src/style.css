@@ -486,7 +486,7 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 }
 
 /* ── World Capitals Quiz ── */
-.cq-section { padding: 100px 20px 60px; min-height: 100vh; }
+.cq-section { padding: 100px 20px 60px; min-height: 100vh; min-height: 100dvh; }
 .cq-container { max-width: 900px; margin: 0 auto; }
 
 .cq-header { text-align: center; margin-bottom: 40px; }
@@ -531,10 +531,22 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .cq-grid--result { }
 
 @media (max-width: 768px) {
-  .cq-toolbar { flex-direction: column; gap: 10px; position: sticky; top: 64px; }
+  .cq-toolbar { flex-direction: column; gap: 10px; position: sticky; top: 56px; padding: 10px 14px; }
+  .cq-toolbar-left { flex: none; width: 100%; }
   .cq-toolbar-right { width: 100%; justify-content: space-between; }
-  .cq-grid { grid-template-columns: 1fr; }
+  .cq-input { font-size: 16px; padding: 12px 14px; }
+  .cq-grid { grid-template-columns: 1fr 1fr; }
   .cq-title { font-size: 2.2rem; }
+  .cq-section { padding: 80px 14px 40px; min-height: auto; }
+  .cq-section--playing { padding-top: 70px; }
+  .cq-map-container { border-radius: 8px; }
+  .cq-feedback { font-size: 0.6rem; }
+  .cq-big-stat { font-size: 2.5rem; }
+  .cq-stats-row { flex-direction: column; gap: 12px; }
+  .cq-continent-stats { grid-template-columns: 1fr; gap: 8px; }
+  .cq-result-grade { font-size: 2rem; }
+  .cq-ai-analysis { padding: 16px; }
+  .cq-ai-text { font-size: 0.8rem; }
 }
 
 /* ── Map Quiz ── */

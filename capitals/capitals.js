@@ -101,7 +101,9 @@ const startGame = async () => {
   await loadMap();
   state = 'playing'; score = 0; answered = new Set(); lastAnswered = '';
   render(); startTimer();
-  setTimeout(() => document.getElementById('cq-input')?.focus(), 100);
+  if (window.innerWidth > 768) {
+    setTimeout(() => document.getElementById('cq-input')?.focus(), 100);
+  }
 };
 
 // ── Check answer ──
@@ -115,6 +117,7 @@ const checkAnswer = (val) => {
       score++;
       lastAnswered = `${DATA[i].k} — ${DATA[i].c}`;
       document.getElementById('cq-input').value = '';
+      document.getElementById('cq-input').focus();
       document.getElementById('cq-score').textContent = `${score} / ${TOTAL}`;
       const fb = document.getElementById('cq-feedback');
       if (fb) { fb.textContent = lastAnswered; fb.classList.add('cq-fb-show'); setTimeout(() => fb.classList.remove('cq-fb-show'), 1500); }
@@ -265,7 +268,7 @@ const render = () => {
         <div class="cq-container cq-container--wide">
           <div class="cq-toolbar">
             <div class="cq-toolbar-left">
-              <input type="text" id="cq-input" class="cq-input" placeholder="Type a capital city..." autocomplete="off" spellcheck="false" />
+              <input type="text" id="cq-input" class="cq-input" placeholder="Type a capital city..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="text" />
             </div>
             <div class="cq-toolbar-right">
               <div id="cq-feedback" class="cq-feedback"></div>
@@ -285,7 +288,7 @@ const render = () => {
 
     document.getElementById('cq-input')?.addEventListener('input', e => checkAnswer(e.target.value));
     document.getElementById('cq-giveup')?.addEventListener('click', endGame);
-    document.getElementById('cq-input')?.focus();
+    if (window.innerWidth > 768) document.getElementById('cq-input')?.focus();
     return;
   }
 
