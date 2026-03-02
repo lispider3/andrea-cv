@@ -69,12 +69,62 @@ let worldData = null;
 let lastAnswered = '';
 
 const app = document.getElementById('quiz-app');
-const norm = (s) => s.toLowerCase().replace(/[^a-z]/g, '');
+const norm = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z]/g, '');
 const fmtTime = (s) => `${Math.floor(s/60).toString().padStart(2,'0')}:${(s%60).toString().padStart(2,'0')}`;
 
 // Build lookup: numericISO → quiz index
 const idToIdx = {};
 DATA.forEach((d, i) => { if (d.id) idToIdx[d.id] = i; });
+
+// Build alternate accepted answers → index in DATA
+// Each key is a normalized alternate spelling; value is the DATA index it maps to
+const ALTS = {};
+const altEntries = [
+  // Bolivia: La Paz is the seat of government; Sucre is the constitutional capital — both should count
+  ['La Paz', 'Sucre'],
+  // Short forms for "City" capitals
+  ['Washington', 'Washington D.C.'], ['Washington DC', 'Washington D.C.'], ['Washington D.C', 'Washington D.C.'],
+  ['Mexico', 'Mexico City'], ['Ciudad de Mexico', 'Mexico City'], ['Mexico DF', 'Mexico City'],
+  ['Kuwait', 'Kuwait City'], ['Luxembourg', 'Luxembourg City'], ['Guatemala', 'Guatemala City'],
+  ['Panama', 'Panama City'], ['Vatican', 'Vatican City'],
+  // Diacritics / transliterations
+  ['Brasília', 'Brasilia'], ['Yaoundé', 'Yaounde'], ['Lomé', 'Lome'], ['Bogotá', 'Bogota'],
+  ['Asunción', 'Asuncion'], ['Chișinău', 'Chisinau'], ['Kishinev', 'Chisinau'],
+  ['São Tomé', 'Sao Tome'], ['São Tome', 'Sao Tome'],
+  ['Malé', 'Male'], ['Reykjavík', 'Reykjavik'],
+  // Historic / alternate names
+  ['Kiev', 'Kyiv'], ['Ulan Bator', 'Ulaanbaatar'], ['Ulan Baatar', 'Ulaanbaatar'],
+  ['Peking', 'Beijing'], ['Djakarta', 'Jakarta'], ['Bombay', 'New Delhi'], ['Delhi', 'New Delhi'],
+  ['Tananarivo', 'Antananarivo'], ['Tananarive', 'Antananarivo'],
+  ['Nur-Sultan', 'Astana'], ['Nur Sultan', 'Astana'],
+  ['Prishtina', 'Pristina'], ['Prishtine', 'Pristina'],
+  ['Rangoon', 'Naypyidaw'], ['Lefkosia', 'Nicosia'],
+  ['Abu Dabi', 'Abu Dhabi'], ['Taipeh', 'Taipei'],
+  ['Addis Abeba', 'Addis Ababa'],
+  // Apostrophe / punctuation variants
+  ['Nukualofa', "Nuku\'alofa"], ['Nuku alofa', "Nuku\'alofa"],
+  ['NDjamena', "N\'Djamena"], ['Ndjamena', "N\'Djamena"], ['N Djamena', "N\'Djamena"],
+  ['Port au Prince', 'Port-au-Prince'], ['Porto Novo', 'Porto-Novo'],
+  ['St Johns', "St. John\'s"], ['Saint Johns', "St. John\'s"],
+  ['St Georges', "St. George\'s"], ['Saint Georges', "St. George\'s"],
+  ['Saint George', "St. George\'s"], ['St George', "St. George\'s"],
+  // Other common variants
+  ['Bandar Seri Begwan', 'Bandar Seri Begawan'],
+  ['Sri Jayawardenepura Kotte', 'Colombo'], ['Kotte', 'Colombo'],
+  ['Pretoria', 'Pretoria'], ['Cape Town', 'Pretoria'], ['Bloemfontein', 'Pretoria'],
+  ['Pnom Penh', 'Phnom Penh'], ['Phnom Pen', 'Phnom Penh'],
+  ['Andorra La Vella', 'Andorra la Vella'],
+  ['Funafuti Atoll', 'Funafuti'], ['South Tarawa', 'Tarawa'], ['Tarawa Atoll', 'Tarawa'],
+  ['Sana a', 'Sanaa'], ['San a', 'Sanaa'], ["Sana\'a", 'Sanaa'],
+];
+// Build lookup: find the DATA index for each canonical capital, then map alternates
+const capitalToIdx = {};
+DATA.forEach((d, i) => { capitalToIdx[norm(d.k)] = i; });
+altEntries.forEach(([alt, canonical]) => {
+  const idx = capitalToIdx[norm(canonical)];
+  if (idx !== undefined) ALTS[norm(alt)] = idx;
+});
+
 
 // ── Load world map data ──
 const loadMap = async () => {
@@ -112,7 +162,7 @@ const checkAnswer = (val) => {
   if (!n) return;
   for (let i = 0; i < DATA.length; i++) {
     if (answered.has(i)) continue;
-    if (norm(DATA[i].k) === n) {
+    if (norm(DATA[i].k) === n || (ALTS[n] === i)) {
       answered.add(i);
       score++;
       lastAnswered = `${DATA[i].k} — ${DATA[i].c}`;
