@@ -15,7 +15,7 @@ function getRedis() {
 }
 
 const VALID_EVENTS = new Set([
-  'pageview', 'cv_download', 'quiz_start', 'quiz_complete',
+  'pageview', 'cv_download', 'quiz_start', 'quiz_complete', 'session_end',
   'cpo_start', 'cpo_complete', 'cta_click', 'book_modal',
 ]);
 

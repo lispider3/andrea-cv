@@ -39,6 +39,7 @@ const relTime = ts => {
   if (d < 86400000) return `${Math.floor(d / 3600000)}h ago`;
   return `${Math.floor(d / 86400000)}d ago`;
 };
+const fmtDur = s => { if (!s) return ''; s = Number(s); if (s < 60) return s + 's'; return Math.floor(s/60) + 'm ' + (s%60) + 's'; };
 const eventLabel = e => ({
   pageview: `${ico.eye} Page View`,
   cv_download: `${ico.download} CV Download`,
@@ -48,6 +49,7 @@ const eventLabel = e => ({
   cpo_complete: `${ico.trophy} CPO Complete`,
   cta_click: `${ico.link} CTA Click`,
   book_modal: `${ico.book} Book Modal`,
+  session_end: `${ico.clock} Session End`,
 }[e] || e);
 
 // ── Login ──
@@ -193,6 +195,7 @@ function renderDashboard(data) {
                 ${ev.target ? `<span class="an-event-extra">${ev.target}</span>` : ''}
                 ${ev.score !== undefined ? `<span class="an-event-extra">Score: ${ev.score}</span>` : ''}
                 <span class="an-event-device">${ev.mobile ? ico.phone : ico.monitor} ${ev.device || ''}</span>
+                ${ev.dur ? `<span class="an-event-dur">${fmtDur(ev.dur)}</span>` : ''}
                 ${ev.ip ? `<span class="an-event-ip">${ev.ip}</span>` : ''}
                 ${isMine
                   ? '<span class="an-badge an-badge--you">YOU</span>'

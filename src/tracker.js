@@ -36,7 +36,15 @@ export function trackEvent(name, data = {}) {
 }
 
 // Auto-track pageview on import
+const _sessionStart = Date.now();
 if (!isExcluded()) {
-  // Slight delay so it doesn't compete with critical resources
   setTimeout(() => trackEvent('pageview'), 100);
+
+  // Send session duration when visitor leaves
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      const dur = Math.round((Date.now() - _sessionStart) / 1000);
+      if (dur > 1) trackEvent('session_end', { dur });
+    }
+  });
 }
