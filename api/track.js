@@ -93,9 +93,12 @@ export default async function handler(req, res) {
     else if (/Windows/i.test(ua)) device = 'Windows PC';
     else if (/Linux/i.test(ua)) device = 'Linux';
 
+    const fp = extra.fp || '';
+    delete extra.fp;
+
     const logEntry = JSON.stringify({
       e: event, p: page, r: referrer, t: timestamp,
-      ...extra, d: day, ip, mobile: isMobile, device,
+      ...extra, d: day, ip, mobile: isMobile, device, fp,
     });
     pipeline.lpush('recent', logEntry);
     pipeline.ltrim('recent', 0, 199);

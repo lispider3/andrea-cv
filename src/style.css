@@ -832,3 +832,10 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .an-event-device { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-secondary); white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
 .an-event-device svg { stroke: var(--text-muted); flex-shrink: 0; }
 .an-event-ip { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-muted); opacity: 0.6; white-space: nowrap; }
+
+/* ── YOU badge & flag button ── */
+.an-badge { font-family: var(--font-mono); font-size: 0.45rem; font-weight: 700; letter-spacing: 1.5px; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; }
+.an-badge--you { background: rgba(201,169,110,0.15); color: var(--accent); border: 1px solid rgba(201,169,110,0.3); }
+.an-flag-btn { font-family: var(--font-mono); font-size: 0.45rem; font-weight: 600; letter-spacing: 1px; padding: 2px 8px; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
+.an-flag-btn:hover { color: var(--accent); border-color: var(--accent-dim); }
+.an-event--mine { background: rgba(201,169,110,0.03); border-left: 2px solid var(--accent); padding-left: 8px; }

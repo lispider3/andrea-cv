@@ -25,6 +25,25 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
+  // POST: flag/unflag a fingerprint as "mine"
+  if (req.method === 'POST') {
+    try {
+      const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+      const db = getRedis();
+      if (body.action === 'flag' && body.fp) {
+        await db.sadd('my_fingerprints', body.fp);
+        return res.status(200).json({ ok: true });
+      }
+      if (body.action === 'unflag' && body.fp) {
+        await db.srem('my_fingerprints', body.fp);
+        return res.status(200).json({ ok: true });
+      }
+      return res.status(400).json({ error: 'Invalid action' });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  }
+
   try {
     const db = getRedis();
 
@@ -68,6 +87,9 @@ export default async function handler(req, res) {
     // Recent events
     pipeline.lrange('recent', 0, 49);
 
+    // Flagged fingerprints
+    pipeline.smembers('my_fingerprints');
+
     const results = await pipeline.exec();
 
     let idx = 0;
@@ -99,6 +121,7 @@ export default async function handler(req, res) {
     const ctaTargets = results[idx++] || {};
     const referrers = results[idx++] || {};
     const recentRaw = results[idx++] || [];
+    const myFingerprints = results[idx++] || [];
 
     const recent = recentRaw.map(r => {
       try { return typeof r === 'string' ? JSON.parse(r) : r; } catch { return r; }
@@ -113,6 +136,7 @@ export default async function handler(req, res) {
       ctaTargets,
       referrers,
       recent,
+      myFingerprints,
       generated: new Date().toISOString(),
     });
   } catch (err) {

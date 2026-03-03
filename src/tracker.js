@@ -10,12 +10,22 @@ export function excludeMe() {
 
 export function trackEvent(name, data = {}) {
   if (isExcluded()) return;
+  // Lightweight fingerprint (no cookies, no external libs)
+  const fp = [
+    screen.width + 'x' + screen.height,
+    Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+    navigator.language || '',
+    navigator.platform || '',
+    navigator.hardwareConcurrency || '',
+  ].join('|');
+
   const payload = {
     e: name,
     p: location.pathname,
     r: document.referrer || '',
     t: Date.now(),
     ua: navigator.userAgent || '',
+    fp,
     ...data,
   };
   try {
