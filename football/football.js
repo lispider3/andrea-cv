@@ -276,6 +276,7 @@ const renderQuiz = () => {
 
   return `
     <div class="fb-card fb-quiz-active">
+      <div class="fb-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> JUVENTUS TOP-5 SCORERS SINCE 1992/93</div>
       <div class="jq-header">
         <div class="jq-header-left">
           ${quizState === 'playing' ? `<input type="text" id="juve-quiz-input" class="jq-input" placeholder="Type a player name..." autocomplete="off" autocapitalize="off" spellcheck="false">` : ''}
