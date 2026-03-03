@@ -261,6 +261,15 @@ function renderHandicaps() {
         <h2 class="sb-section-title">Try It Yourself</h2>
         <p class="sb-section-sub">Pick a handicap line and a final score to see if you Win, Lose, Half-Win, Half-Lose, or Void.</p>
 
+
+        <div class="sb-hc-legend">
+          <div class="sb-hc-legend-item"><span class="sb-result-badge sb-result-badge--win">WIN</span><span>You win the full payout.</span></div>
+          <div class="sb-hc-legend-item"><span class="sb-result-badge sb-result-badge--halfwin">HALF WIN</span><span>Half your stake wins, the other half is refunded.</span></div>
+          <div class="sb-hc-legend-item"><span class="sb-result-badge sb-result-badge--void">VOID</span><span>Your full stake is returned \u2014 as if the bet never happened.</span></div>
+          <div class="sb-hc-legend-item"><span class="sb-result-badge sb-result-badge--halflose">HALF LOSE</span><span>You lose half your stake; the other half is refunded.</span></div>
+          <div class="sb-hc-legend-item"><span class="sb-result-badge sb-result-badge--lose">LOSE</span><span>You lose the entire stake. Better luck next time.</span></div>
+        </div>
+
         <div class="sb-sim-card">
           <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> ASIAN HANDICAP SIMULATOR \u2014 HOME TEAM PERSPECTIVE</div>
 

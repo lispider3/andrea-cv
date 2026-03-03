@@ -1023,3 +1023,8 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 /* ── Stat box link ── */
 .stat-box--link { cursor: pointer; transition: border-color 0.2s; }
 .stat-box--link:hover { border-color: var(--accent-dim); }
+
+/* ── Handicap Outcome Legend ── */
+.sb-hc-legend { display: flex; flex-direction: column; gap: 8px; margin: 24px 0; }
+.sb-hc-legend-item { display: flex; align-items: center; gap: 12px; font-size: 0.78rem; color: var(--text-secondary); }
+.sb-hc-legend-item .sb-result-badge { min-width: 80px; text-align: center; flex-shrink: 0; }
