@@ -801,8 +801,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Book modal (must be after renderApp so DOM exists)
   const books = {
-    it: { title: 'Il Maestro e Margherita', author: 'Mikhail Bulgakov', lang: 'Reading in Italian', cover: '/book-bulgakov.png' },
-    en: { title: 'Narrative of the Life of Frederick Douglass', author: 'Frederick Douglass', lang: 'Reading in English', cover: '/book-douglass.png' },
+    it: { title: 'Il Maestro e Margherita', author: 'Mikhail Bulgakov', lang: 'Reading in Italian', cover: '/book-bulgakov.jpg' },
+    en: { title: 'Narrative of the Life of Frederick Douglass', author: 'Frederick Douglass', lang: 'Reading in English', cover: '/book-douglass.jpg' },
   };
   document.querySelectorAll('.lang-book-btn').forEach(btn => {
     btn.addEventListener('click', () => {
