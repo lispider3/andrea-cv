@@ -201,13 +201,6 @@ function renderHandicaps() {
   const res = calcAsianHandicap(hcLine, hcHomeGoals, hcAwayGoals);
 
   return `
-    <section class="sb-section sb-section--alt">
-      <div class="sb-container">
-        <span class="sb-section-tag">THE HOOK</span>
-        <h2 class="sb-section-title">Handicaps: Probably Created to Annoy People</h2>
-        <p class="sb-section-sub">"A circumstance that makes progress or success difficult." Handicaps make lopsided matches \u2014 like Brazil vs Malta \u2014 worth betting on, by giving the stronger team a hurdle to clear.</p>
-      </div>
-    </section>
 
     <section class="sb-section">
       <div class="sb-container">
