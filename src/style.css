@@ -740,10 +740,9 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .jq-giveup { font-size: 0.6rem !important; padding: 6px 12px !important; }
 
 /* ── Grid ── */
-.jq-grid { display: flex; gap: 2px; overflow-x: auto; padding-bottom: 8px; }
-.jq-grid::-webkit-scrollbar { height: 4px; }
-.jq-grid::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
-.jq-col { flex: 0 0 auto; min-width: 120px; }
+.jq-grid { display: flex; flex-wrap: wrap; gap: 2px; padding-bottom: 8px; }
+
+.jq-col { flex: 1 1 calc(10% - 2px); min-width: 90px; max-width: 140px; }
 .jq-season { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1px; color: var(--accent); text-align: center; padding: 6px 4px; background: rgba(201,169,110,0.08); border-radius: 4px 4px 0 0; white-space: nowrap; }
 .jq-cell { display: flex; align-items: center; gap: 6px; padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.7rem; min-height: 28px; background: rgba(255,255,255,0.01); transition: background 0.3s; }
 .jq-cell--found { background: rgba(34,197,94,0.08); }
