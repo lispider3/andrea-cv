@@ -1092,3 +1092,56 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 
 .sb-pb-calc-inputs--2way { grid-template-columns: repeat(2, 1fr); }
 @media (max-width: 600px) { .sb-pb-calc-inputs--2way { grid-template-columns: 1fr; } }
+
+/* ── Cash Out: Match Card ── */
+.sb-co-match { margin-bottom: 20px; }
+.sb-co-teams { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 16px; }
+.sb-co-team { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.sb-co-team-name { font-family: var(--font-head); font-size: 0.9rem; font-weight: 700; color: var(--white); }
+.sb-co-score { font-family: var(--font-mono); font-size: 2rem; font-weight: 800; color: var(--white); letter-spacing: 4px; }
+.sb-co-context { text-align: center; font-size: 0.75rem; color: var(--text-secondary); margin-top: 12px; }
+
+/* ── Cash Out: Progress Bar ── */
+.sb-co-progress { margin: 0 auto; max-width: 400px; }
+.sb-co-progress-bar { position: relative; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; }
+.sb-co-progress-fill { height: 100%; background: linear-gradient(90deg, #34d399, var(--accent)); border-radius: 3px; transition: width 0.4s; }
+.sb-co-progress-marker { position: absolute; top: -22px; transform: translateX(-50%); }
+.sb-co-progress-marker span { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: var(--accent); background: rgba(201,169,110,0.15); padding: 2px 6px; border-radius: 4px; }
+.sb-co-progress-labels { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.45rem; color: var(--text-muted); margin-top: 4px; }
+
+/* ── Cash Out: Bet Info ── */
+.sb-co-bet-info { padding: 16px; background: rgba(255,255,255,0.02); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.05); margin-top: 16px; }
+
+/* ── Cash Out: Decision Buttons ── */
+.sb-co-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 8px; }
+.sb-co-btn { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 14px 28px; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.25s; border: 1px solid; }
+.sb-co-btn--cashout { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.3); color: #34d399; }
+.sb-co-btn--cashout:hover, .sb-co-btn--cashout.active { background: rgba(52,211,153,0.2); border-color: #34d399; }
+.sb-co-btn--ride { background: rgba(201,169,110,0.08); border-color: rgba(201,169,110,0.25); color: var(--accent); }
+.sb-co-btn--ride:hover, .sb-co-btn--ride.active { background: rgba(201,169,110,0.15); border-color: var(--accent); }
+
+/* ── Cash Out: Verdict ── */
+.sb-co-verdict { display: flex; align-items: flex-start; gap: 16px; margin-top: 20px; padding: 20px; border-radius: var(--radius-sm); }
+.sb-co-verdict--cashout { background: rgba(52,211,153,0.04); border: 1px solid rgba(52,211,153,0.15); }
+.sb-co-verdict--ride { background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.15); }
+.sb-co-verdict h4 { font-family: var(--font-head); font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+.sb-co-verdict p { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5; }
+.sb-co-verdict-icon { flex-shrink: 0; margin-top: 2px; }
+
+/* ── Bet Builder: Legs ── */
+.sb-bb-legs { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+.sb-bb-leg { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; text-align: left; }
+.sb-bb-leg:hover { border-color: rgba(255,255,255,0.12); }
+.sb-bb-leg--active { border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.04); }
+.sb-bb-leg-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: transparent; transition: all 0.2s; }
+.sb-bb-leg--active .sb-bb-leg-check { border-color: #34d399; background: rgba(52,211,153,0.15); color: #34d399; }
+.sb-bb-leg-info { display: flex; justify-content: space-between; align-items: center; flex: 1; }
+.sb-bb-leg-label { font-family: var(--font-head); font-size: 0.85rem; font-weight: 600; color: var(--white); }
+.sb-bb-leg-odds { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; color: var(--accent); }
+
+/* ── Bet Builder: Slip ── */
+.sb-bb-slip { padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); }
+.sb-bb-slip-header { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; }
+.sb-bb-slip-odds { text-align: center; margin-bottom: 12px; padding: 8px; background: rgba(201,169,110,0.05); border-radius: var(--radius-sm); }
+.sb-bb-slip-calc { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); }
+.sb-bb-slip-calc strong { color: var(--accent); font-size: 1rem; }

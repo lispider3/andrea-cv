@@ -16,6 +16,8 @@ const lessons = [
   { id: 'system-bets', title: 'System Bets', sub: 'The Art of Winning Even When You Lose', tag: 'LESSON 1', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>' },
   { id: 'handicaps', title: 'Handicap Betting', sub: 'Probably Created to Annoy People', tag: 'LESSON 2', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>' },
   { id: 'payback', title: 'Paybacks', sub: 'The Juice to Make Money', tag: 'LESSON 3', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' },
+  { id: 'cashout', title: 'Cash Out', sub: 'Take the Money and Run', tag: 'LESSON 4', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>' },
+  { id: 'betbuilder', title: 'Bet Builder', sub: 'High Risk, High Reward, High Fun', tag: 'LESSON 5', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>' },
 ];
 
 function renderPicker() {
@@ -24,7 +26,7 @@ function renderPicker() {
       <div class="sb-container">
         <span class="sb-tag">BETTING EDUCATION</span>
         <h1 class="sb-hero-title">Sportsbook<br><span>Masterclass</span></h1>
-        <p class="sb-hero-sub">Interactive lessons on betting mechanics, from system bets to paybacks.</p>
+        <p class="sb-hero-sub">Interactive lessons on betting mechanics — from system bets to bet builders.</p>
       </div>
     </section>
     <section class="sb-section">
@@ -580,6 +582,199 @@ function renderPayback() {
 }
 
 
+
+// ═══════════════ LESSON 4: CASH OUT ═══════════════
+let cashoutChoice = null; // null, 'cashout', 'ride'
+
+function renderCashout() {
+  const choiceHTML = cashoutChoice === 'cashout'
+    ? '<div class="sb-co-verdict sb-co-verdict--cashout"><div class="sb-co-verdict-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h4>Smart Move.</h4><p>\u20ac15 secured. No stress, no stoppage-time drama. You locked in a 50% profit on your \u20ac10 stake. Not glamorous, but profitable.</p></div>'
+    : cashoutChoice === 'ride'
+    ? '<div class="sb-co-verdict sb-co-verdict--ride"><div class="sb-co-verdict-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h4>Diamond Hands.</h4><p>You believe in the process. If Arsenal holds on, you collect \u20ac20 \u2014 double your stake. If they concede... well, at least you have a story.</p></div>'
+    : '';
+
+  return `
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">WHAT IS IT?</span>
+        <h2 class="sb-section-title">The Panic Button (But Make It Strategic)</h2>
+        <p class="sb-section-sub">Cash Out lets you settle a bet before the event finishes. Lock in profit when things look good, or save part of your stake when they don\u2019t.</p>
+
+        <div class="sb-hc-examples" style="margin-top:24px">
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">Lock In Profit</div>
+            <p>Your bet is winning. The bookie offers you guaranteed money <em>right now</em>. Less than the full payout, but risk-free.</p>
+          </div>
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">Cut Your Losses</div>
+            <p>Your bet is losing. Cash out to recover a fraction of your stake instead of watching it go to zero.</p>
+          </div>
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">The Catch</div>
+            <p>The bookie\u2019s cash-out offer always has a <em>margin built in</em>. You\u2019re paying a premium for certainty.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <span class="sb-section-tag">THE SCENARIO</span>
+        <h2 class="sb-section-title">The 80th Minute Dilemma</h2>
+        <p class="sb-section-sub">You placed a bet. It\u2019s almost over. But \u201calmost\u201d is the most dangerous word in football.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> LIVE SCENARIO</div>
+
+          <div class="sb-co-match">
+            <div class="sb-co-teams">
+              <div class="sb-co-team">
+                <div class="sb-hc-crest"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <span class="sb-co-team-name">Arsenal</span>
+              </div>
+              <div class="sb-co-score">1 - 0</div>
+              <div class="sb-co-team">
+                <div class="sb-hc-crest"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div>
+                <span class="sb-co-team-name">Opponent</span>
+              </div>
+            </div>
+
+            <div class="sb-co-progress">
+              <div class="sb-co-progress-bar">
+                <div class="sb-co-progress-fill" style="width:89%"></div>
+                <div class="sb-co-progress-marker" style="left:89%"><span>85\u2032</span></div>
+              </div>
+              <div class="sb-co-progress-labels"><span>0\u2032</span><span>45\u2032</span><span>90\u2032</span></div>
+            </div>
+
+            <div class="sb-co-context">
+              <p>\u26a0\ufe0f 82\u2032 \u2014 Opponent just hit the post. The momentum is shifting.</p>
+            </div>
+          </div>
+
+          <div class="sb-co-bet-info">
+            <div class="sb-sim-summary-row"><span>Your Stake</span><span>\u20ac10</span></div>
+            <div class="sb-sim-summary-row"><span>Full Payout (if Arsenal wins)</span><span style="color:#34d399">\u20ac20</span></div>
+            <div class="sb-sim-summary-row sb-sim-summary-total"><span>Cash Out Offer</span><span style="color:var(--accent)">\u20ac15</span></div>
+          </div>
+
+          <h4 class="sb-sim-heading" style="text-align:center;margin-top:24px">What Do You Do?</h4>
+          <div class="sb-co-buttons">
+            <button class="sb-co-btn sb-co-btn--cashout ${cashoutChoice === 'cashout' ? 'active' : ''}" data-choice="cashout">Cash Out (\u20ac15)</button>
+            <button class="sb-co-btn sb-co-btn--ride ${cashoutChoice === 'ride' ? 'active' : ''}" data-choice="ride">Ride It Out (\u20ac20)</button>
+          </div>
+          ${choiceHTML}
+          ${cashoutChoice ? '<button class="sb-reset-btn sb-btn sb-btn--ghost" data-sim="cashout" style="margin-top:12px;display:block;margin-left:auto;margin-right:auto">Try Again</button>' : ''}
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <div class="sb-banker-card">
+          <div class="sb-banker-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>
+            <h3 class="sb-banker-title">When to Cash Out</h3>
+            <p>There\u2019s no universal rule. But ask yourself: <em>\u201cWould I place this bet again at these odds right now?\u201d</em></p>
+            <p style="margin-top:8px">If the answer is no, take the money. If yes, let it ride. Either way, it\u2019s about discipline \u2014 not luck.</p>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
+
+// ═══════════════ LESSON 5: BET BUILDER ═══════════════
+const bbLegs = [
+  { label: 'Man City to Win', odds: 1.45, active: true },
+  { label: 'Haaland to Score a Header', odds: 4.50, active: true },
+  { label: 'Over 10.5 Corners', odds: 2.10, active: true },
+];
+
+function renderBetBuilder() {
+  const activeLegs = bbLegs.filter(l => l.active);
+  const combinedOdds = activeLegs.reduce((acc, l) => acc * l.odds, 1);
+  const stake = 10;
+  const payout = (stake * combinedOdds).toFixed(2);
+
+  return `
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">WHAT IS IT?</span>
+        <h2 class="sb-section-title">A Game Within a Game</h2>
+        <p class="sb-section-sub">A Bet Builder (or Match Parlay) lets you combine multiple predictions from a <em>single match</em> into one bet. The odds multiply \u2014 and so does the risk.</p>
+
+        <div class="sb-hc-examples" style="margin-top:24px">
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">Step 1</div>
+            <p>Pick a match. Any match. This is your stage.</p>
+          </div>
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">Step 2</div>
+            <p>Add predictions: match result, goalscorers, corners, cards \u2014 whatever you fancy.</p>
+          </div>
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">Step 3</div>
+            <p><strong>All legs must win.</strong> If one fails, the entire bet fails. High risk, high reward.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <span class="sb-section-tag">PARLAY BUILDER</span>
+        <h2 class="sb-section-title">Build Your Script</h2>
+        <p class="sb-section-sub">Toggle legs on and off to see how the combined odds change. All from one match: Man City vs Real Madrid.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> MAN CITY vs REAL MADRID \u2014 BET BUILDER</div>
+
+          <div class="sb-bb-legs">
+            ${bbLegs.map((l, i) => `
+              <button class="sb-bb-leg ${l.active ? 'sb-bb-leg--active' : ''}" data-leg="${i}">
+                <div class="sb-bb-leg-check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="sb-bb-leg-info">
+                  <span class="sb-bb-leg-label">${l.label}</span>
+                  <span class="sb-bb-leg-odds">@ ${l.odds.toFixed(2)}</span>
+                </div>
+              </button>
+            `).join('')}
+          </div>
+
+          ${activeLegs.length > 0 ? `
+            <div class="sb-bb-slip">
+              <div class="sb-bb-slip-header">
+                <span>Bet Slip</span>
+                <span>${activeLegs.length} leg${activeLegs.length > 1 ? 's' : ''}</span>
+              </div>
+              <div class="sb-bb-slip-odds">
+                <div class="sb-bb-slip-calc">
+                  ${activeLegs.map(l => l.odds.toFixed(2)).join(' \u00d7 ')} = <strong>${combinedOdds.toFixed(2)}</strong>
+                </div>
+              </div>
+              <div class="sb-sim-summary-row"><span>Stake</span><span>\u20ac${stake.toFixed(2)}</span></div>
+              <div class="sb-sim-summary-row sb-sim-summary-total"><span>Potential Payout</span><span style="color:#34d399">\u20ac${payout}</span></div>
+            </div>
+          ` : '<p class="sb-sim-hint" style="margin-top:20px">Toggle at least one leg to build your parlay.</p>'}
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <div class="sb-banker-card" style="border-color:rgba(239,68,68,0.2);background:rgba(239,68,68,0.02)">
+          <div class="sb-banker-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>
+            <h3 class="sb-banker-title" style="color:#ef4444">The Safety Warning</h3>
+            <p>If Haaland scores a foot-volley instead of a header, the whole house of cards falls down. <em>Every single leg must win.</em></p>
+            <p style="margin-top:8px">Bet Builders are fun. They\u2019re also the bookmaker\u2019s favourite product. The margins on these are significantly higher than singles. Choose wisely.</p>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
 // ═══════════════ MAIN RENDER ═══════════════
 function renderPage() {
   const app = document.getElementById('betting-app');
@@ -597,6 +792,10 @@ function renderPage() {
     app.innerHTML = backBtn + lessonHero + renderHandicaps();
   } else if (currentLesson === 'payback') {
     app.innerHTML = backBtn + lessonHero + renderPayback();
+  } else if (currentLesson === 'cashout') {
+    app.innerHTML = backBtn + lessonHero + renderCashout();
+  } else if (currentLesson === 'betbuilder') {
+    app.innerHTML = backBtn + lessonHero + renderBetBuilder();
   }
 
   bindEvents();
@@ -648,6 +847,19 @@ function bindEvents() {
       if (el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); }
     });
   });
+  // Cash out
+  document.querySelectorAll('.sb-co-btn').forEach(btn => {
+    btn.addEventListener('click', () => { cashoutChoice = btn.dataset.choice; renderPage(); });
+  });
+  // Bet builder legs
+  document.querySelectorAll('.sb-bb-leg').forEach(btn => {
+    btn.addEventListener('click', () => { const i = parseInt(btn.dataset.leg); bbLegs[i].active = !bbLegs[i].active; renderPage(); });
+  });
+  // Cash out reset
+  document.querySelectorAll('.sb-reset-btn[data-sim="cashout"]').forEach(btn => {
+    btn.addEventListener('click', () => { cashoutChoice = null; renderPage(); });
+  });
+
   document.querySelectorAll('.sb-pb2-input').forEach(inp => {
     inp.addEventListener('input', () => {
       if (inp.dataset.odds === 'A') pb2OddsA = inp.value;
