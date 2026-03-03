@@ -42,6 +42,12 @@ export default async function handler(req, res) {
       || req.headers['x-real-ip']
       || req.socket?.remoteAddress || '';
 
+    // Server-side IP exclusion (works even in incognito)
+    const excludeIps = (process.env.EXCLUDE_IPS || '').split(',').map(s => s.trim()).filter(Boolean);
+    if (excludeIps.length && excludeIps.includes(ip)) {
+      return res.status(204).end();
+    }
+
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const { e: event, p: page, r: referrer, t: timestamp, ...extra } = body || {};
 
