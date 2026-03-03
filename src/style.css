@@ -797,7 +797,8 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 /* ── Metrics bar ── */
 .an-metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
 .an-metric { flex: 1; min-width: 120px; background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 16px; text-align: center; }
-.an-metric-icon { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+.an-metric-icon { display: flex; justify-content: center; margin-bottom: 6px; }
+.an-metric-icon svg { stroke: var(--accent); }
 .an-metric-value { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 800; color: var(--accent); display: block; }
 .an-metric-label { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 600; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; }
 
@@ -823,9 +824,11 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .an-recent::-webkit-scrollbar { width: 4px; }
 .an-recent::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
 .an-event { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.7rem; flex-wrap: wrap; }
-.an-event-type { font-family: var(--font-mono); font-weight: 600; color: var(--white); min-width: 120px; white-space: nowrap; font-size: 0.6rem; }
+.an-event-type { font-family: var(--font-mono); font-weight: 600; color: var(--white); min-width: 120px; white-space: nowrap; font-size: 0.6rem; display: inline-flex; align-items: center; gap: 4px; }
+.an-event-type svg { stroke: var(--accent); flex-shrink: 0; }
 .an-event-page { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.6rem; }
 .an-event-extra { font-family: var(--font-mono); font-size: 0.55rem; color: var(--accent); background: rgba(201,169,110,0.08); padding: 2px 6px; border-radius: 3px; }
 .an-event-time { margin-left: auto; font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-muted); white-space: nowrap; }
-.an-event-device { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-secondary); white-space: nowrap; }
+.an-event-device { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-secondary); white-space: nowrap; display: inline-flex; align-items: center; gap: 3px; }
+.an-event-device svg { stroke: var(--text-muted); flex-shrink: 0; }
 .an-event-ip { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-muted); opacity: 0.6; white-space: nowrap; }
