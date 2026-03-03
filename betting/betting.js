@@ -195,7 +195,7 @@ function resultClass(r) {
   return 'sb-result-badge--lose';
 }
 
-const hcLines = ['-0.25', '-0.5', '-0.75', '-1', '-1.25', '-1.5', '-1.75', '-2', '-2.5', '+0.25', '+0.5', '+0.75', '+1', '+1.25', '+1.5'];
+const hcLines = ['-2.5', '-2', '-1.75', '-1.5', '-1.25', '-1', '-0.75', '-0.5', '-0.25', '0', '+0.25', '+0.5', '+0.75', '+1', '+1.25', '+1.5'];
 
 function renderHandicaps() {
   const res = calcAsianHandicap(hcLine, hcHomeGoals, hcAwayGoals);
