@@ -61,6 +61,20 @@ const loadData = async () => {
       } catch(e2) {}
     }
 
+    // Always fetch logos from ESPN (the /api/standings endpoint doesn't include them)
+    try {
+      const espnLogos = await fetch('https://site.api.espn.com/apis/v2/sports/soccer/ita.1/standings');
+      const ld = await espnLogos.json();
+      const logoEntries = ld?.children?.[0]?.standings?.entries || [];
+      const logoNameMap = { 'Internazionale': 'Inter', 'Hellas Verona FC': 'Hellas Verona', 'SSC Napoli': 'Napoli' };
+      logoEntries.forEach(e => {
+        const raw = e.team?.displayName || '';
+        const name = logoNameMap[raw] || raw;
+        const logo = e.team?.logos?.[0]?.href || '';
+        if (name && logo) TEAM_LOGOS[name] = logo;
+      });
+    } catch(e) {}
+
     const [odds, scores, events] = await Promise.all([
       fetchJSON(`${API_BASE}/sports/${SPORT}/odds?apiKey=${ODDS_API_KEY}&regions=eu&markets=h2h&oddsFormat=decimal`).catch(() => []),
       fetchJSON(`${API_BASE}/sports/${SPORT}/scores?apiKey=${ODDS_API_KEY}&daysFrom=3`).catch(() => []),
