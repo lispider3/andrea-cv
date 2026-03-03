@@ -81,7 +81,7 @@ const champions = [
 ];
 
 const TOTAL = champions.length;
-const TIMER_SECONDS = 600; // 10 minutes
+const TIMER_SECONDS = 600;
 
 let found = new Set();
 let timerInterval = null;
@@ -100,7 +100,6 @@ champions.forEach((c, i) => {
   const lastName = getLastName(c.driver);
   if (!lookup[lastName]) lookup[lastName] = [];
   lookup[lastName].push(i);
-  // Also add without diacritics
   const clean = lastName.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   if (clean !== lastName) {
     if (!lookup[clean]) lookup[clean] = [];
@@ -114,157 +113,136 @@ const formatTime = (s) => {
   return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
 };
 
+// Group champions by decade for the grid
+const decades = [];
+for (let d = 1950; d <= 2020; d += 10) {
+  const end = Math.min(d + 9, 2025);
+  const items = champions.filter(c => c.year >= d && c.year <= end);
+  if (items.length) decades.push({ label: `${d}s`, start: d, items });
+}
+
 const render = () => {
-  document.getElementById('quiz-app').innerHTML = `
-    <section class="quiz-section">
-      <div class="quiz-container">
-        <div class="quiz-header">
-          <div class="quiz-tag"><span>🏆 CHAMPIONS QUIZ</span></div>
-          <h1 class="quiz-title">NAME THE F1<br>WORLD CHAMPIONS</h1>
-          <p class="quiz-subtitle">Type any part of a champion's last name — every title they won is revealed at once.<br>1950–2025 · ${TOTAL} titles · 10 minutes.</p>
-        </div>
+  const app = document.getElementById('quiz-app');
+  if (!app) return;
 
-        <div class="quiz-controls">
-          <div class="quiz-timer" id="quiz-timer">${formatTime(secondsLeft)}</div>
-          <input
-            type="text"
-            id="quiz-input"
-            class="quiz-input"
-            placeholder="Type a driver's last name..."
-            autocomplete="off"
-            ${!started || finished ? 'disabled' : ''}
-          />
-          <div class="quiz-score"><span id="quiz-found">${found.size}</span> / ${TOTAL}</div>
-        </div>
+  app.innerHTML = `
+    <section class="f1q-section">
+      <div class="f1q-container">
 
-        ${!started && !finished ? `
-          <div class="quiz-start-wrap">
-            <button id="quiz-start-btn" class="quiz-start-btn">▶ START QUIZ</button>
+        ${!started ? `
+          <div class="f1q-intro">
+            <div class="f1q-badge"><span>CHAMPIONS QUIZ</span></div>
+            <h1 class="f1q-title">NAME THE F1<br><span>WORLD CHAMPIONS</span></h1>
+            <p class="f1q-subtitle">Type any part of a champion's last name — every title they won is revealed at once.<br>${TOTAL} titles · 1950–2025 · 10 minutes.</p>
+            <button id="f1q-start" class="f1q-btn f1q-btn--primary">Start Quiz</button>
           </div>
         ` : ''}
 
+        ${started ? `
+          <div class="f1q-card">
+            <div class="f1q-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> F1 WORLD CHAMPIONS · 1950–2025</div>
 
-        ${started && !finished ? `
-          <div class="quiz-start-wrap">
-            <button id="quiz-giveup-btn" class="quiz-giveup-btn">GIVE UP</button>
-          </div>
-        ` : ''}
-
-        ${finished ? `
-          <div class="quiz-result">
-            <div class="quiz-result-score">${found.size} / ${TOTAL}</div>
-            <div class="quiz-result-label">${found.size === TOTAL ? 'PERFECT SCORE! 🏆' : found.size > 60 ? 'INCREDIBLE!' : found.size > 40 ? 'GREAT JOB!' : found.size > 20 ? 'NOT BAD!' : 'KEEP PRACTICING!'}</div>
-            <button id="quiz-restart-btn" class="quiz-start-btn" style="margin-top:16px;">↻ PLAY AGAIN</button>
-          </div>
-        ` : ''}
-
-        <div class="quiz-grid">
-          ${champions.map((c, i) => `
-            <div class="quiz-cell ${found.has(i) ? 'quiz-cell--found' : ''} ${finished && !found.has(i) ? 'quiz-cell--missed' : ''}">
-              <div class="quiz-cell-year">${c.year}</div>
-              <div class="quiz-cell-name">${found.has(i) || finished ? c.driver.split(' ').pop().toUpperCase() : ''}</div>
-            </div>
-          `).join('')}
-        </div>
-
+            ${!finished ? `
+              <div class="f1q-toolbar">
+                <div class="f1q-toolbar-left">
+                  <input type="text" id="f1q-input" class="f1q-input" placeholder="Type a driver's last name..." autocomplete="off" autocapitalize="none" spellcheck="false" />
+                </div>
+                <div class="f1q-toolbar-right">
+                  <span class="f1q-stat-label">SCORE</span>
+                  <span class="f1q-stat-value" id="f1q-score">${found.size} / ${TOTAL}</span>
+                  <span class="f1q-stat-label">TIME</span>
+                  <span class="f1q-stat-value f1q-timer" id="f1q-timer">${formatTime(secondsLeft)}</span>
+                  <button class="f1q-btn f1q-btn--ghost" id="f1q-giveup">Give Up</button>
+                </div>
               </div>
+            ` : `
+              <div class="f1q-result">
+                <div class="f1q-result-score">${found.size} / ${TOTAL}</div>
+                <div class="f1q-result-label">${found.size === TOTAL ? 'PERFECT SCORE! 🏆' : found.size > 60 ? 'INCREDIBLE!' : found.size > 40 ? 'GREAT JOB!' : found.size > 20 ? 'NOT BAD!' : 'KEEP PRACTICING!'}</div>
+                <button id="f1q-restart" class="f1q-btn f1q-btn--primary" style="margin-top:16px">Play Again</button>
+              </div>
+            `}
+
+            <div class="f1q-grid">
+              ${champions.map((c, i) => `
+                <div class="f1q-cell ${found.has(i) ? 'f1q-cell--found' : ''} ${finished && !found.has(i) ? 'f1q-cell--missed' : ''}">
+                  <span class="f1q-cell-year">${c.year}</span>
+                  <span class="f1q-cell-name">${found.has(i) || finished ? c.driver.split(' ').pop().toUpperCase() : ''}</span>
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="f1q-progress">
+              <div class="f1q-progress-fill" style="width:${(found.size/TOTAL)*100}%"></div>
+            </div>
+          </div>
+        ` : ''}
+
+      </div>
     </section>
 
     <footer class="footer" role="contentinfo">
       <div class="container">
-        <div class="footer-links">
-          <a href="/">← Back to Portfolio</a>
-        </div>
+        <div class="footer-links"><a href="/">← Back to Portfolio</a></div>
         <p class="footer-copy">© ${new Date().getFullYear()} Andrea Spiteri — All rights reserved</p>
       </div>
     </footer>
   `;
 
   // Bind events
-  const startBtn = document.getElementById('quiz-start-btn');
-  const restartBtn = document.getElementById('quiz-restart-btn');
-  const input = document.getElementById('quiz-input');
+  document.getElementById('f1q-start')?.addEventListener('click', startQuiz);
+  document.getElementById('f1q-restart')?.addEventListener('click', restartQuiz);
+  document.getElementById('f1q-giveup')?.addEventListener('click', giveUp);
 
-  if (startBtn) startBtn.addEventListener('click', startQuiz);
-  if (restartBtn) restartBtn.addEventListener('click', restartQuiz);
-  const giveupBtn = document.getElementById('quiz-giveup-btn');
-  if (giveupBtn) giveupBtn.addEventListener('click', giveUp);
-
+  const input = document.getElementById('f1q-input');
   if (input && started && !finished) {
     input.addEventListener('input', onInput);
     input.focus();
   }
 };
 
-const giveUp = () => {
-  clearInterval(timerInterval);
-  finished = true;
-  render();
-};
-
+const giveUp = () => { clearInterval(timerInterval); finished = true; render(); };
 const startQuiz = () => {
-  started = true;
-  secondsLeft = TIMER_SECONDS;
-  found = new Set();
-  finished = false;
+  started = true; secondsLeft = TIMER_SECONDS; found = new Set(); finished = false;
   render();
   timerInterval = setInterval(() => {
     secondsLeft--;
-    const timerEl = document.getElementById('quiz-timer');
-    if (timerEl) {
-      timerEl.textContent = formatTime(secondsLeft);
-      if (secondsLeft <= 60) timerEl.classList.add('quiz-timer--danger');
+    const el = document.getElementById('f1q-timer');
+    if (el) {
+      el.textContent = formatTime(secondsLeft);
+      if (secondsLeft <= 60) el.classList.add('f1q-timer--danger');
     }
-    if (secondsLeft <= 0) endQuiz();
+    if (secondsLeft <= 0) { clearInterval(timerInterval); finished = true; render(); }
   }, 1000);
 };
-
-const endQuiz = () => {
-  clearInterval(timerInterval);
-  finished = true;
-  render();
-};
-
-const restartQuiz = () => {
-  clearInterval(timerInterval);
-  found = new Set();
-  started = false;
-  finished = false;
-  secondsLeft = TIMER_SECONDS;
-  render();
-};
+const restartQuiz = () => { clearInterval(timerInterval); found = new Set(); started = false; finished = false; secondsLeft = TIMER_SECONDS; render(); };
 
 const onInput = (e) => {
   const val = e.target.value.trim().toLowerCase();
   if (val.length < 2) return;
-
   const matches = lookup[val];
   if (matches && matches.length > 0) {
     let newFound = false;
-    matches.forEach(i => {
-      if (!found.has(i)) {
-        found.add(i);
-        newFound = true;
-      }
-    });
+    matches.forEach(i => { if (!found.has(i)) { found.add(i); newFound = true; } });
     if (newFound) {
       e.target.value = '';
-      // Update DOM without full re-render
-      document.getElementById('quiz-found').textContent = found.size;
+      document.getElementById('f1q-score').textContent = `${found.size} / ${TOTAL}`;
+      // Update progress bar
+      const fill = document.querySelector('.f1q-progress-fill');
+      if (fill) fill.style.width = `${(found.size/TOTAL)*100}%`;
       matches.forEach(i => {
-        const cells = document.querySelectorAll('.quiz-cell');
+        const cells = document.querySelectorAll('.f1q-cell');
         const cell = cells[i];
         if (cell) {
-          cell.classList.add('quiz-cell--found');
-          cell.querySelector('.quiz-cell-name').textContent = champions[i].driver.split(' ').pop().toUpperCase();
+          cell.classList.add('f1q-cell--found');
+          cell.querySelector('.f1q-cell-name').textContent = champions[i].driver.split(' ').pop().toUpperCase();
         }
       });
-      if (found.size === TOTAL) endQuiz();
+      if (found.size === TOTAL) { clearInterval(timerInterval); finished = true; render(); }
     }
   }
 };
 
-// Init navbar scroll
 window.addEventListener('scroll', () => {
   const nav = document.getElementById('navbar');
   if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
