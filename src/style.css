@@ -860,6 +860,10 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .sb-hero-img img { width: 320px; height: auto; filter: drop-shadow(0 20px 40px rgba(201,169,110,0.15)); animation: sb-float 4s ease-in-out infinite; }
 @keyframes sb-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 @media (max-width: 768px) { .sb-hero-grid { grid-template-columns: 1fr; text-align: center; } .sb-hero-img img { width: 220px; } }
+.sb-hero--centered { text-align: center; }
+.sb-hero--centered .sb-hero-sub { margin-left: auto; margin-right: auto; }
+.sb-picks--6 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 600px) { .sb-picks--6 { grid-template-columns: 1fr 1fr; } }
 
 /* ── Buttons ── */
 .sb-btn { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 12px 28px; border: none; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; text-decoration: none; display: inline-block; }
