@@ -93,17 +93,36 @@ function renderDashboard(data) {
           `).join('')}
         </div>
 
-        <!-- Daily Chart -->
+        <!-- Daily Chart (Last 7 Days — Line Graph) -->
         <div class="an-card">
-          <div class="an-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg> DAILY PAGEVIEWS (LAST 30 DAYS)</div>
-          <div class="an-chart">
-            ${daily.slice().reverse().map(d => `
-              <div class="an-bar-col" title="${d.date}: ${d.pageviews} views">
-                <div class="an-bar" style="height:${Math.max(pct(d.pageviews, maxDaily), 2)}%"></div>
-                <span class="an-bar-label">${d.date.slice(5)}</span>
-              </div>
-            `).join('')}
-          </div>
+          <div class="an-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> DAILY PAGEVIEWS (LAST 7 DAYS)</div>
+          ${(() => {
+            const week = daily.slice(0, 7).reverse();
+            const maxV = Math.max(...week.map(d => d.pageviews), 1);
+            const W = 700, H = 180, padX = 50, padY = 24, padB = 32;
+            const chartW = W - padX * 2, chartH = H - padY - padB;
+            const pts = week.map((d, i) => {
+              const x = padX + (i / Math.max(week.length - 1, 1)) * chartW;
+              const y = padY + chartH - (d.pageviews / maxV) * chartH;
+              return { x, y, ...d };
+            });
+            const line = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
+            const area = line + ' L' + pts[pts.length-1].x.toFixed(1) + ',' + (padY+chartH) + ' L' + pts[0].x.toFixed(1) + ',' + (padY+chartH) + ' Z';
+            // Y-axis grid lines
+            const gridLines = [0, 0.25, 0.5, 0.75, 1].map(f => {
+              const y = padY + chartH - f * chartH;
+              const val = Math.round(f * maxV);
+              return '<line x1="'+padX+'" y1="'+y+'" x2="'+(W-padX)+'" y2="'+y+'" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><text x="'+(padX-8)+'" y="'+(y+3)+'" fill="rgba(255,255,255,0.3)" font-size="9" text-anchor="end" font-family="var(--font-mono)">'+val+'</text>';
+            }).join('');
+            return '<svg class="an-line-chart" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none">'
+              + gridLines
+              + '<path d="'+area+'" fill="url(#anGrad)" />'
+              + '<path d="'+line+'" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+              + pts.map(p => '<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="4" fill="var(--accent)" stroke="var(--bg)" stroke-width="2"/><text x="'+p.x.toFixed(1)+'" y="'+(p.y-10)+'" fill="var(--accent)" font-size="10" text-anchor="middle" font-family="var(--font-mono)" font-weight="700">'+p.pageviews+'</text>').join('')
+              + pts.map(p => '<text x="'+p.x.toFixed(1)+'" y="'+(H-8)+'" fill="rgba(255,255,255,0.4)" font-size="9" text-anchor="middle" font-family="var(--font-mono)">'+p.date.slice(5)+'</text>').join('')
+              + '<defs><linearGradient id="anGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--accent)" stop-opacity="0.2"/><stop offset="100%" stop-color="var(--accent)" stop-opacity="0.01"/></linearGradient></defs>'
+              + '</svg>';
+          })()}
         </div>
 
         <div class="an-grid-2">
