@@ -827,3 +827,5 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .an-event-page { color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.6rem; }
 .an-event-extra { font-family: var(--font-mono); font-size: 0.55rem; color: var(--accent); background: rgba(201,169,110,0.08); padding: 2px 6px; border-radius: 3px; }
 .an-event-time { margin-left: auto; font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-muted); white-space: nowrap; }
+.an-event-device { font-family: var(--font-mono); font-size: 0.55rem; color: var(--text-secondary); white-space: nowrap; }
+.an-event-ip { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-muted); opacity: 0.6; white-space: nowrap; }

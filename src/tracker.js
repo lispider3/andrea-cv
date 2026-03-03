@@ -15,6 +15,7 @@ export function trackEvent(name, data = {}) {
     p: location.pathname,
     r: document.referrer || '',
     t: Date.now(),
+    ua: navigator.userAgent || '',
     ...data,
   };
   try {

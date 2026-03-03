@@ -37,6 +37,11 @@ export default async function handler(req, res) {
 
   try {
     // sendBeacon sends as text/plain, parse the body
+    // Get visitor IP from Vercel headers
+    const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim()
+      || req.headers['x-real-ip']
+      || req.socket?.remoteAddress || '';
+
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
     const { e: event, p: page, r: referrer, t: timestamp, ...extra } = body || {};
 
@@ -68,9 +73,23 @@ export default async function handler(req, res) {
     }
 
     // 5. Recent events log (keep last 200)
+    // Parse device info from user-agent
+    const ua = extra.ua || '';
+    delete extra.ua;
+    const isMobile = /Mobile|Android|iPhone|iPad|iPod/i.test(ua);
+    let device = 'Unknown';
+    if (/iPhone/i.test(ua)) device = 'iPhone';
+    else if (/iPad/i.test(ua)) device = 'iPad';
+    else if (/Android/i.test(ua)) {
+      const m = ua.match(/Android[^;]*;\s*([^)]+)/);
+      device = m ? m[1].trim().split(' Build')[0] : 'Android';
+    } else if (/Macintosh/i.test(ua)) device = 'Mac';
+    else if (/Windows/i.test(ua)) device = 'Windows PC';
+    else if (/Linux/i.test(ua)) device = 'Linux';
+
     const logEntry = JSON.stringify({
       e: event, p: page, r: referrer, t: timestamp,
-      ...extra, d: day,
+      ...extra, d: day, ip, mobile: isMobile, device,
     });
     pipeline.lpush('recent', logEntry);
     pipeline.ltrim('recent', 0, 199);

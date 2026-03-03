@@ -176,6 +176,8 @@ function renderDashboard(data) {
                 ${ev.quiz ? `<span class="an-event-extra">${ev.quiz}</span>` : ''}
                 ${ev.target ? `<span class="an-event-extra">${ev.target}</span>` : ''}
                 ${ev.score !== undefined ? `<span class="an-event-extra">Score: ${ev.score}</span>` : ''}
+                <span class="an-event-device">${ev.mobile ? '📱' : '💻'} ${ev.device || ''}</span>
+                ${ev.ip ? `<span class="an-event-ip">${ev.ip}</span>` : ''}
                 <span class="an-event-time">${relTime(ev.t)}</span>
               </div>
             `).join('') || '<div style="opacity:0.5;padding:16px;text-align:center">No events yet</div>'}
