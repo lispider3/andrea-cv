@@ -840,3 +840,5 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .an-flag-btn:hover { color: var(--accent); border-color: var(--accent-dim); }
 .an-event--mine { background: rgba(201,169,110,0.03); border-left: 2px solid var(--accent); padding-left: 8px; }
 .an-event-dur { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 600; color: var(--accent); background: rgba(201,169,110,0.08); padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
+.an-unflag-btn { font-family: var(--font-mono); font-size: 0.45rem; font-weight: 700; letter-spacing: 1.5px; padding: 2px 8px; background: rgba(201,169,110,0.15); color: var(--accent); border: 1px solid rgba(201,169,110,0.3); border-radius: 3px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
+.an-unflag-btn:hover { background: rgba(239,68,68,0.15); color: #ef4444; border-color: rgba(239,68,68,0.3); }

@@ -198,7 +198,7 @@ function renderDashboard(data) {
                 ${ev.dur ? `<span class="an-event-dur">${fmtDur(ev.dur)}</span>` : ''}
                 ${ev.ip ? `<span class="an-event-ip">${ev.ip}</span>` : ''}
                 ${isMine
-                  ? '<span class="an-badge an-badge--you">YOU</span>'
+                  ? `<button class="an-unflag-btn" data-fp="${ev.fp}" title="Unflag this session">YOU ✕</button>`
                   : ev.fp ? `<button class="an-flag-btn" data-fp="${ev.fp}" title="Flag as my session">Flag</button>` : ''}
                 <span class="an-event-time">${relTime(ev.t)}</span>
               </div>`;
@@ -209,6 +209,24 @@ function renderDashboard(data) {
         <p style="text-align:center;font-family:var(--font-mono);font-size:0.5rem;color:var(--text-muted);margin-top:24px;letter-spacing:1px">Generated ${new Date(data.generated).toLocaleString()}</p>
       </div>
     </section>`;
+
+  // Unflag buttons
+  document.querySelectorAll('.an-unflag-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const fp = btn.dataset.fp;
+      try {
+        const r = await fetch('/api/analytics', {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + password, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'unflag', fp }),
+        });
+        if (r.ok) {
+          const r2 = await fetch('/api/analytics', { headers: { Authorization: 'Bearer ' + password } });
+          if (r2.ok) renderDashboard(await r2.json());
+        }
+      } catch {}
+    });
+  });
 
   // Flag-as-mine buttons
   document.querySelectorAll('.an-flag-btn').forEach(btn => {
