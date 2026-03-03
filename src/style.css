@@ -767,5 +767,5 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 }
 
 /* ── Book Cover in Modal ── */
-.book-modal-cover { width: 140px; height: auto; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); margin-bottom: 16px; object-fit: cover; }
+.book-modal-cover { display: block; width: 140px; height: auto; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); margin: 0 auto 16px; object-fit: cover; }
 @media (max-width: 480px) { .book-modal-cover { width: 110px; } }
