@@ -17,6 +17,7 @@ const lessons = [
   { id: 'handicaps', title: 'Handicap Betting', sub: 'Probably Created to Annoy People', tag: 'LESSON 2', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>' },
   { id: 'payback', title: 'Paybacks', sub: 'The Juice to Make Money', tag: 'LESSON 3', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' },
   { id: 'cashout', title: 'Cash Out', sub: 'Take the Money and Run', tag: 'LESSON 4', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>' },
+  { id: 'betbuilder', title: 'Bet Builder', sub: 'Why the Odds Are Never What They Seem', tag: 'LESSON 5', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>' },
 ];
 
 function renderPicker() {
@@ -683,6 +684,196 @@ function renderCashout() {
 }
 
 
+
+// ═══════════════ LESSON 5: BET BUILDER ═══════════════
+const bbMarkets = [
+  { id: 'mcwin',   label: 'Man City to Win',           odds: 1.45, cat: 'result',    group: 'Result' },
+  { id: 'draw',    label: 'Draw',                      odds: 4.20, cat: 'result',    group: 'Result' },
+  { id: 'btts',    label: 'Both Teams to Score',       odds: 1.72, cat: 'goals',     group: 'Goals' },
+  { id: 'ov25',    label: 'Over 2.5 Goals',            odds: 1.65, cat: 'goals',     group: 'Goals' },
+  { id: 'un25',    label: 'Under 2.5 Goals',           odds: 2.25, cat: 'goals',     group: 'Goals' },
+  { id: 'haaland', label: 'Haaland to Score Anytime',  odds: 1.80, cat: 'scorer',    group: 'Goalscorer' },
+  { id: 'vini',    label: 'Vinicius to Score Anytime', odds: 3.10, cat: 'scorer',    group: 'Goalscorer' },
+  { id: 'ov10c',   label: 'Over 10.5 Corners',         odds: 2.10, cat: 'corners',   group: 'Corners' },
+  { id: 'mc15c',   label: 'Man City Over 5.5 Corners', odds: 2.00, cat: 'corners',   group: 'Corners' },
+  { id: 'ov3card', label: 'Over 3.5 Cards',            odds: 1.85, cat: 'cards',     group: 'Cards' },
+];
+const bbActive = new Set();
+
+// Correlation factors: pairs that overlap. Higher = more correlated (1 = fully overlapping, 0 = independent)
+const correlations = {
+  'mcwin+haaland':  { factor: 0.30, reason: 'If City win, Haaland is more likely to have scored.' },
+  'mcwin+ov25':     { factor: 0.25, reason: 'City winning usually involves goals \u2014 the "over" becomes more likely.' },
+  'mcwin+btts':     { factor: 0.10, reason: 'City winning doesn\u2019t strongly predict conceding, but attacking play increases chances.' },
+  'mcwin+un25':     { factor: 0.20, reason: 'Conflicting: City winning AND few goals is possible (1-0), but less common.' },
+  'mcwin+mc15c':    { factor: 0.20, reason: 'A dominant City means more attacking play and more corners.' },
+  'draw+un25':      { factor: 0.25, reason: 'Draws are often low-scoring. These overlap significantly.' },
+  'draw+btts':      { factor: 0.15, reason: 'A draw with both teams scoring (1-1, 2-2) is a specific subset.' },
+  'btts+ov25':      { factor: 0.35, reason: 'If both teams score, you already have 2+ goals. Strong overlap.' },
+  'btts+haaland':   { factor: 0.20, reason: 'Both teams scoring raises the chance any individual player scores.' },
+  'btts+vini':      { factor: 0.20, reason: 'Same logic: more goals = more chances for individual scorers.' },
+  'ov25+haaland':   { factor: 0.20, reason: 'More goals in the match = higher chance Haaland is among the scorers.' },
+  'ov25+vini':      { factor: 0.20, reason: 'More goals = more chances for Vinicius too.' },
+  'ov25+un25':      { factor: 1.00, reason: 'These are mutually exclusive. You cannot have both.' },
+  'haaland+vini':   { factor: 0.05, reason: 'Largely independent \u2014 different teams, different roles.' },
+  'ov10c+mc15c':    { factor: 0.40, reason: 'City\u2019s corners are a subset of total corners. High overlap.' },
+  'ov10c+ov25':     { factor: 0.15, reason: 'High-scoring games tend to have more corners, but the link is moderate.' },
+  'un25+haaland':   { factor: 0.15, reason: 'Fewer goals means less chance for any scorer. Mild negative.' },
+  'un25+vini':      { factor: 0.15, reason: 'Same: fewer goals = fewer scoring chances.' },
+};
+
+function getCorrelation(id1, id2) {
+  const key1 = id1 + '+' + id2;
+  const key2 = id2 + '+' + id1;
+  return correlations[key1] || correlations[key2] || null;
+}
+
+function calcBBOdds() {
+  const active = bbMarkets.filter(m => bbActive.has(m.id));
+  if (active.length === 0) return { naive: 0, adjusted: 0, pairs: [] };
+  
+  const naive = active.reduce((acc, m) => acc * m.odds, 1);
+  
+  // Find all correlated pairs among active selections
+  const pairs = [];
+  for (let i = 0; i < active.length; i++) {
+    for (let j = i + 1; j < active.length; j++) {
+      const cor = getCorrelation(active[i].id, active[j].id);
+      if (cor) pairs.push({ a: active[i], b: active[j], ...cor });
+    }
+  }
+  
+  // Apply correlation penalty: reduce odds for each correlated pair
+  // This is a simplified educational model, not real pricing
+  let penalty = 1;
+  pairs.forEach(p => {
+    penalty *= (1 - p.factor * 0.3); // Each correlation reduces odds
+  });
+  
+  const adjusted = naive * penalty;
+  return { naive, adjusted, pairs, active };
+}
+
+function renderBetBuilder() {
+  const result = calcBBOdds();
+  const stake = 10;
+  const groups = [...new Set(bbMarkets.map(m => m.group))];
+  const hasMutualExclusive = result.pairs.some(p => p.factor >= 1.0);
+
+  return `
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">WHAT IS IT?</span>
+        <h2 class="sb-section-title">A Game Within a Game</h2>
+        <p class="sb-section-sub">A Bet Builder combines multiple predictions from a <em>single match</em> into one bet. But here\u2019s the twist: the odds aren\u2019t as simple as just multiplying them together.</p>
+
+        <div class="sb-hc-examples" style="margin-top:24px">
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">The Promise</div>
+            <p>Combine match result, goalscorers, corners, cards \u2014 whatever you fancy. The more legs, the bigger the payout.</p>
+          </div>
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">The Catch</div>
+            <p><strong>All legs must win.</strong> And because events in the same match are linked, the bookmaker adjusts the odds downward.</p>
+          </div>
+          <div class="sb-hc-ex-card sb-hier-card--highlight">
+            <div class="sb-hc-ex-line">The Correlation</div>
+            <p>If City win, Haaland probably scored. If there are lots of goals, there are probably lots of corners. <em>These events overlap.</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <span class="sb-section-tag">MARKET BUILDER</span>
+        <h2 class="sb-section-title">Man City vs Real Madrid</h2>
+        <p class="sb-section-sub">Select markets to build your bet. Watch how correlations affect the real odds.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> SELECT YOUR MARKETS</div>
+
+          ${groups.map(g => `
+            <h4 class="sb-sim-heading" style="margin-top:16px">${g}</h4>
+            <div class="sb-bb-legs">
+              ${bbMarkets.filter(m => m.group === g).map(m => `
+                <button class="sb-bb-leg ${bbActive.has(m.id) ? 'sb-bb-leg--active' : ''} ${hasMutualExclusive && bbActive.has(m.id) && result.pairs.some(p => p.factor >= 1.0 && (p.a.id === m.id || p.b.id === m.id)) ? 'sb-bb-leg--conflict' : ''}" data-leg="${m.id}">
+                  <div class="sb-bb-leg-check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div class="sb-bb-leg-info">
+                    <span class="sb-bb-leg-label">${m.label}</span>
+                    <span class="sb-bb-leg-odds">@ ${m.odds.toFixed(2)}</span>
+                  </div>
+                </button>
+              `).join('')}
+            </div>
+          `).join('')}
+
+          ${result.active && result.active.length > 0 ? `
+            <div class="sb-bb-slip" style="margin-top:20px">
+              <div class="sb-bb-slip-header">
+                <span>Bet Slip</span>
+                <span>${result.active.length} leg${result.active.length > 1 ? 's' : ''}</span>
+              </div>
+
+              ${result.active.length > 1 ? `
+                <div class="sb-bb-odds-compare">
+                  <div class="sb-bb-odds-col">
+                    <span class="sb-bb-odds-label">Na\u00efve Odds</span>
+                    <span class="sb-bb-odds-val sb-bb-odds-val--naive">${result.naive.toFixed(2)}</span>
+                    <span class="sb-bb-odds-note">Simple multiplication</span>
+                  </div>
+                  <div class="sb-bb-odds-arrow">\u2192</div>
+                  <div class="sb-bb-odds-col">
+                    <span class="sb-bb-odds-label">Adjusted Odds</span>
+                    <span class="sb-bb-odds-val sb-bb-odds-val--adjusted">${result.adjusted.toFixed(2)}</span>
+                    <span class="sb-bb-odds-note">After correlation</span>
+                  </div>
+                  ${result.naive > result.adjusted ? `<div class="sb-bb-odds-diff">\u2212${((1 - result.adjusted / result.naive) * 100).toFixed(0)}% reduction</div>` : ''}
+                </div>
+              ` : `
+                <div class="sb-bb-slip-odds" style="text-align:center">
+                  <div class="sb-bb-slip-calc">Combined Odds: <strong>${result.naive.toFixed(2)}</strong></div>
+                </div>
+              `}
+
+              <div class="sb-sim-summary-row"><span>Stake</span><span>\u20ac${stake.toFixed(2)}</span></div>
+              <div class="sb-sim-summary-row sb-sim-summary-total"><span>Potential Payout</span><span style="color:#34d399">\u20ac${(stake * result.adjusted).toFixed(2)}</span></div>
+            </div>
+
+            ${result.pairs.length > 0 ? `
+              <div class="sb-bb-correlations" style="margin-top:16px">
+                <h4 class="sb-sim-heading">Why the odds dropped</h4>
+                ${result.pairs.map(p => `
+                  <div class="sb-bb-cor-item ${p.factor >= 1.0 ? 'sb-bb-cor-item--conflict' : p.factor >= 0.3 ? 'sb-bb-cor-item--high' : p.factor >= 0.15 ? 'sb-bb-cor-item--med' : 'sb-bb-cor-item--low'}">
+                    <div class="sb-bb-cor-header">
+                      <span class="sb-bb-cor-pair">${p.a.label} + ${p.b.label}</span>
+                      <span class="sb-bb-cor-level">${p.factor >= 1.0 ? '\u26d4 CONFLICT' : p.factor >= 0.3 ? 'HIGH' : p.factor >= 0.15 ? 'MEDIUM' : 'LOW'}</span>
+                    </div>
+                    <p class="sb-bb-cor-reason">${p.reason}</p>
+                  </div>
+                `).join('')}
+              </div>
+            ` : '<p class="sb-sim-hint" style="margin-top:12px">These selections have no known correlation \u2014 the na\u00efve odds are close to accurate.</p>'}
+          ` : '<p class="sb-sim-hint" style="margin-top:20px">Select at least one market to start building your bet.</p>'}
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <div class="sb-banker-card" style="border-color:rgba(239,68,68,0.2);background:rgba(239,68,68,0.02)">
+          <div class="sb-banker-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>
+            <h3 class="sb-banker-title" style="color:#ef4444">The Real Cost</h3>
+            <p>The bookmaker calculates these correlations automatically and builds them into the price. On top of that, they add their own margin. Bet Builders typically carry <em>much higher margins</em> than standard singles.</p>
+            <p style="margin-top:8px">High payouts look exciting. But the house edge on a 5-leg Bet Builder can be 25%+ compared to 5% on a simple single. Choose wisely.</p>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
+
 // ═══════════════ MAIN RENDER ═══════════════
 function renderPage() {
   const app = document.getElementById('betting-app');
@@ -702,6 +893,8 @@ function renderPage() {
     app.innerHTML = backBtn + lessonHero + renderPayback();
   } else if (currentLesson === 'cashout') {
     app.innerHTML = backBtn + lessonHero + renderCashout();
+  } else if (currentLesson === 'betbuilder') {
+    app.innerHTML = backBtn + lessonHero + renderBetBuilder();
   }
 
   bindEvents();
@@ -757,6 +950,15 @@ function bindEvents() {
   document.querySelectorAll('.sb-co-btn').forEach(btn => {
     btn.addEventListener('click', () => { cashoutChoice = btn.dataset.choice; renderPage(); });
   });
+  // Bet builder legs
+  document.querySelectorAll('.sb-bb-leg').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.leg;
+      if (bbActive.has(id)) bbActive.delete(id); else bbActive.add(id);
+      renderPage();
+    });
+  });
+
   // Cash out reset
   document.querySelectorAll('.sb-reset-btn[data-sim="cashout"]').forEach(btn => {
     btn.addEventListener('click', () => { cashoutChoice = null; renderPage(); });

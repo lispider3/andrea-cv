@@ -1145,3 +1145,34 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .sb-bb-slip-odds { text-align: center; margin-bottom: 12px; padding: 8px; background: rgba(201,169,110,0.05); border-radius: var(--radius-sm); }
 .sb-bb-slip-calc { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); }
 .sb-bb-slip-calc strong { color: var(--accent); font-size: 1rem; }
+
+/* ── Bet Builder: Odds Comparison ── */
+.sb-bb-odds-compare { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 20px; margin-bottom: 16px; background: rgba(255,255,255,0.02); border-radius: var(--radius-sm); flex-wrap: wrap; }
+.sb-bb-odds-col { text-align: center; }
+.sb-bb-odds-label { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 4px; }
+.sb-bb-odds-val { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 800; display: block; }
+.sb-bb-odds-val--naive { color: var(--text-muted); text-decoration: line-through; text-decoration-color: rgba(239,68,68,0.4); }
+.sb-bb-odds-val--adjusted { color: var(--accent); }
+.sb-bb-odds-note { font-family: var(--font-mono); font-size: 0.5rem; color: rgba(255,255,255,0.25); display: block; margin-top: 2px; }
+.sb-bb-odds-arrow { font-size: 1.2rem; color: var(--text-muted); }
+.sb-bb-odds-diff { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: #ef4444; background: rgba(239,68,68,0.08); padding: 4px 10px; border-radius: var(--radius-sm); width: 100%; text-align: center; margin-top: 4px; }
+
+/* ── Bet Builder: Correlation Items ── */
+.sb-bb-correlations { display: flex; flex-direction: column; gap: 6px; }
+.sb-bb-cor-item { padding: 12px 14px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); }
+.sb-bb-cor-item--high { border-color: rgba(239,68,68,0.2); background: rgba(239,68,68,0.03); }
+.sb-bb-cor-item--med { border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.02); }
+.sb-bb-cor-item--low { border-color: rgba(52,211,153,0.15); background: rgba(52,211,153,0.02); }
+.sb-bb-cor-item--conflict { border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.06); }
+.sb-bb-cor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.sb-bb-cor-pair { font-family: var(--font-head); font-size: 0.78rem; font-weight: 600; color: var(--white); }
+.sb-bb-cor-level { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: var(--radius-sm); }
+.sb-bb-cor-item--high .sb-bb-cor-level { color: #ef4444; background: rgba(239,68,68,0.1); }
+.sb-bb-cor-item--med .sb-bb-cor-level { color: #fbbf24; background: rgba(251,191,36,0.1); }
+.sb-bb-cor-item--low .sb-bb-cor-level { color: #34d399; background: rgba(52,211,153,0.1); }
+.sb-bb-cor-item--conflict .sb-bb-cor-level { color: #ef4444; background: rgba(239,68,68,0.15); }
+.sb-bb-cor-reason { font-size: 0.72rem; color: var(--text-secondary); line-height: 1.4; }
+
+/* ── Bet Builder: Conflict leg ── */
+.sb-bb-leg--conflict { border-color: rgba(239,68,68,0.4) !important; background: rgba(239,68,68,0.06) !important; }
+.sb-bb-leg--conflict .sb-bb-leg-check { border-color: #ef4444; background: rgba(239,68,68,0.15); color: #ef4444; }
