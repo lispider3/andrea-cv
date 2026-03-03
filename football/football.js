@@ -13,30 +13,8 @@ let error = null;
 let standingsData = [];
 let previewText = '';
 
-// ── Team logo mapping (ESPN CDN) ──
-const TEAM_LOGOS = {
-  'Juventus':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/111.png&w=40&h=40','Inter':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/110.png&w=40&h=40',
-  'AC Milan':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/103.png&w=40&h=40',
-  'Napoli':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/114.png&w=40&h=40',
-  'AS Roma':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/104.png&w=40&h=40',
-  'Roma':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/104.png&w=40&h=40',
-  'Lazio':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/105.png&w=40&h=40',
-  'Atalanta':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/107.png&w=40&h=40',
-  'Fiorentina':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/109.png&w=40&h=40',
-  'Bologna':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/108.png&w=40&h=40',
-  'Torino':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/119.png&w=40&h=40',
-  'Udinese':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/120.png&w=40&h=40',
-  'Empoli':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/511.png&w=40&h=40',
-  'Sassuolo':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/3438.png&w=40&h=40',
-  'Cagliari':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/113.png&w=40&h=40',
-  'Genoa':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/115.png&w=40&h=40',
-  'Hellas Verona':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/116.png&w=40&h=40',
-  'Lecce':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/606.png&w=40&h=40',
-  'Monza':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/5902.png&w=40&h=40',
-  'Parma':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/112.png&w=40&h=40',
-  'Venezia':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/4752.png&w=40&h=40',
-  'Como':'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/5765.png&w=40&h=40',
-};
+// ── Team logos (populated dynamically from ESPN API) ──
+const TEAM_LOGOS = {};
 const getLogo = (name) => {
   if (TEAM_LOGOS[name]) return TEAM_LOGOS[name];
   // Fuzzy match
@@ -77,7 +55,7 @@ const loadData = async () => {
           const raw = e.team?.displayName || '?';
           const logo = e.team?.logos?.[0]?.href || '';
           const name = nameMap[raw]||raw;
-          if (logo && !TEAM_LOGOS[name]) TEAM_LOGOS[name] = logo;
+          if (logo) TEAM_LOGOS[name] = logo;
           return { name, p: Math.round(stats.gamesPlayed||0), w: Math.round(stats.wins||0), d: Math.round(stats.ties||0), l: Math.round(stats.losses||0), gf: Math.round(stats.pointsFor||0), ga: Math.round(stats.pointsAgainst||0), pts: Math.round(stats.points||0) };
         }).sort((a,b) => b.pts - a.pts || (b.gf-b.ga)-(a.gf-a.ga));
       } catch(e2) {}
