@@ -11,6 +11,7 @@ export default defineConfig({
         'capitals': resolve(__dirname, 'capitals/index.html'),
         'cpo-sim': resolve(__dirname, 'cpo-sim/index.html'),
         'analytics': resolve(__dirname, 'analytics/index.html'),
+        'betting': resolve(__dirname, 'betting/index.html'),
       },
     },
   },
