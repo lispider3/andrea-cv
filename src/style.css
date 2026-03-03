@@ -713,3 +713,8 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 @media (max-width: 480px) {
   .cpo-title { font-size: 2.8rem; }
 }
+
+/* ── AI Badge Link (CPO Sim easter egg) ── */
+.ai-badge--link { text-decoration: none; cursor: pointer; transition: all var(--transition); }
+.ai-badge--link:hover { background: rgba(201, 169, 110, 0.25); border-color: rgba(201, 169, 110, 0.4); color: var(--accent); }
+.ai-badge--link:hover svg { opacity: 1; }

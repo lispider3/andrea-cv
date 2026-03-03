@@ -435,7 +435,7 @@ const renderAbout = () => `
       <div class="reveal ai-tools-callout">
         <div class="ai-tools-label"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg> AI Tools I Use Daily</div>
         <div class="ai-tools-badges">
-          <span class="ai-badge">Antigravity</span>
+          <a href="/cpo-sim/" class="ai-badge ai-badge--link">Antigravity <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;vertical-align:-1px;opacity:0.6"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
           <span class="ai-badge">Cursor</span>
           <span class="ai-badge">Lovable</span>
           <span class="ai-badge">Gemini</span>
