@@ -718,3 +718,54 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .ai-badge--link { text-decoration: none; cursor: pointer; transition: all var(--transition); }
 .ai-badge--link:hover { background: rgba(201, 169, 110, 0.25); border-color: rgba(201, 169, 110, 0.4); color: var(--accent); }
 .ai-badge--link:hover svg { opacity: 1; }
+
+/* ══════════════════════════════════════════════
+   JUVENTUS SCORERS QUIZ
+   ══════════════════════════════════════════════ */
+.fb-quiz-intro { text-align: center; padding: 32px 24px; }
+.jq-title { font-family: var(--font-head); font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; color: var(--white); line-height: 1.1; letter-spacing: -1px; margin: 12px 0 8px; }
+.jq-title span { color: var(--accent); }
+.jq-subtitle { font-size: 0.82rem; font-weight: 300; color: var(--text-secondary); line-height: 1.6; max-width: 420px; margin: 0 auto 20px; }
+.jq-start { display: inline-block; }
+
+/* ── Quiz Active ── */
+.fb-quiz-active { padding: 16px; }
+.jq-header { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.jq-header-left { flex: 1; min-width: 180px; }
+.jq-header-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.jq-input { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--accent-dim); border-radius: var(--radius-sm); color: var(--white); font-family: var(--font-body); font-size: 0.85rem; outline: none; transition: border-color 0.3s; }
+.jq-input:focus { border-color: var(--accent); }
+.jq-score-lbl, .jq-time-lbl { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 600; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; }
+.jq-score, .jq-time { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-right: 8px; }
+.jq-giveup { font-size: 0.6rem !important; padding: 6px 12px !important; }
+
+/* ── Grid ── */
+.jq-grid { display: flex; gap: 2px; overflow-x: auto; padding-bottom: 8px; }
+.jq-grid::-webkit-scrollbar { height: 4px; }
+.jq-grid::-webkit-scrollbar-thumb { background: var(--accent-dim); border-radius: 2px; }
+.jq-col { flex: 0 0 auto; min-width: 120px; }
+.jq-season { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1px; color: var(--accent); text-align: center; padding: 6px 4px; background: rgba(201,169,110,0.08); border-radius: 4px 4px 0 0; white-space: nowrap; }
+.jq-cell { display: flex; align-items: center; gap: 6px; padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.7rem; min-height: 28px; background: rgba(255,255,255,0.01); transition: background 0.3s; }
+.jq-cell--found { background: rgba(34,197,94,0.08); }
+.jq-cell--found .jq-name { color: #22c55e; }
+.jq-cell--missed .jq-name { color: #ef4444; opacity: 0.7; }
+.jq-goals { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: var(--text-muted); min-width: 18px; text-align: right; }
+.jq-name { font-size: 0.65rem; font-weight: 400; color: var(--text-secondary); white-space: nowrap; }
+
+/* ── Condensed match card ── */
+.fb-next-match--compact { padding: 20px; }
+.fb-match-header--compact { gap: 16px; }
+.fb-match-header--compact .fb-team { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.fb-table-team { display: flex; align-items: center; gap: 6px; }
+.fb-table-team img { flex-shrink: 0; }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .jq-header { flex-direction: column; }
+  .jq-header-left { width: 100%; }
+  .jq-col { min-width: 100px; }
+}
+
+/* ── Book Cover in Modal ── */
+.book-modal-cover { width: 140px; height: auto; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4); margin-bottom: 16px; object-fit: cover; }
+@media (max-width: 480px) { .book-modal-cover { width: 110px; } }

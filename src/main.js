@@ -599,17 +599,17 @@ const renderOffTrack = () => `
             <a href="/f1-quiz/" class="interest-chip interest-chip--link" style="text-decoration:none;">
               <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
               <span class="interest-label">Formula 1</span>
-              <span class="interest-flag">Quiz</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;opacity:0.4"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
             <a href="/football/" class="interest-chip interest-chip--link" style="text-decoration:none;">
               <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/></svg></span>
               <span class="interest-label">Football</span>
-              <span class="interest-flag">Stats</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;opacity:0.4"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
             <a href="/capitals/" class="interest-chip interest-chip--link" style="text-decoration:none;">
               <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
               <span class="interest-label">Traveling</span>
-              <span class="interest-flag">Quiz</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;opacity:0.4"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             </a>
           </div>
         </div>
@@ -711,9 +711,7 @@ const renderFooter = () => `
       <div class="book-modal">
         <button class="book-modal-close" id="book-modal-close">&times;</button>
         <div class="book-modal-content">
-          <div class="book-modal-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          </div>
+          <img class="book-modal-cover" id="book-modal-cover" src="" alt="Book cover" />
           <div class="book-modal-label">Currently Reading</div>
           <div class="book-modal-title" id="book-modal-title"></div>
           <div class="book-modal-author" id="book-modal-author"></div>
@@ -803,13 +801,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Book modal (must be after renderApp so DOM exists)
   const books = {
-    it: { title: 'Il Maestro e Margherita', author: 'Mikhail Bulgakov', lang: 'Reading in Italian' },
-    en: { title: 'Narrative of the Life of Frederick Douglass', author: 'Frederick Douglass', lang: 'Reading in English' },
+    it: { title: 'Il Maestro e Margherita', author: 'Mikhail Bulgakov', lang: 'Reading in Italian', cover: '/book-bulgakov.png' },
+    en: { title: 'Narrative of the Life of Frederick Douglass', author: 'Frederick Douglass', lang: 'Reading in English', cover: '/book-douglass.png' },
   };
   document.querySelectorAll('.lang-book-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const b = books[btn.dataset.book];
       if (!b) return;
+      document.getElementById('book-modal-cover').src = b.cover;
+      document.getElementById('book-modal-cover').alt = b.title;
       document.getElementById('book-modal-title').textContent = b.title;
       document.getElementById('book-modal-author').textContent = b.author;
       document.getElementById('book-modal-lang').textContent = b.lang;
