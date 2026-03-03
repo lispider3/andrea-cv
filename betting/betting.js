@@ -195,7 +195,7 @@ function resultClass(r) {
   return 'sb-result-badge--lose';
 }
 
-const hcLines = ['-2.5', '-2', '-1.75', '-1.5', '-1.25', '-1', '-0.75', '-0.5', '-0.25', '0', '+0.25', '+0.5', '+0.75', '+1', '+1.25', '+1.5'];
+const hcLines = ['-2.5', '-2.25', '-2', '-1.75', '-1.5', '-1.25', '-1', '-0.75', '-0.5', '-0.25', '0', '+0.25', '+0.5', '+0.75', '+1', '+1.25', '+1.5', '+1.75', '+2', '+2.25', '+2.5'];
 
 function renderHandicaps() {
   const res = calcAsianHandicap(hcLine, hcHomeGoals, hcAwayGoals);
@@ -264,17 +264,18 @@ function renderHandicaps() {
         </div>
 
         <div class="sb-sim-card">
-          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> ASIAN HANDICAP SIMULATOR \u2014 HOME TEAM PERSPECTIVE</div>
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> ASIAN HANDICAP SIMULATOR \u2014 BRAZIL (HOME) PERSPECTIVE</div>
 
           <h4 class="sb-sim-heading">Handicap Line</h4>
           <div class="sb-hc-lines">
-            ${hcLines.map(l => '<button class="sb-hc-line-btn '+(l===hcLine?'active':'')+'" data-line="'+l+'">'+l+'</button>').join('')}
+            ${hcLines.map(l => { const cls = parseFloat(l) < 0 ? 'sb-hc-line-btn--neg' : parseFloat(l) > 0 ? 'sb-hc-line-btn--pos' : 'sb-hc-line-btn--zero'; return '<button class="sb-hc-line-btn '+cls+' '+(l===hcLine?'active':'')+'" data-line="'+l+'">'+l+'</button>'; }).join('')}
           </div>
 
           <h4 class="sb-sim-heading">Final Score</h4>
           <div class="sb-hc-score">
             <div class="sb-hc-score-team">
-              <span class="sb-hc-score-label">Home</span>
+              <div class="sb-hc-crest"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <span class="sb-hc-score-label">Brazil</span>
               <div class="sb-hc-score-ctrl">
                 <button class="sb-hc-score-btn" data-team="home" data-dir="-1">\u2212</button>
                 <span class="sb-hc-score-val" id="hc-home">${hcHomeGoals}</span>
@@ -283,7 +284,8 @@ function renderHandicaps() {
             </div>
             <span class="sb-hc-score-vs">vs</span>
             <div class="sb-hc-score-team">
-              <span class="sb-hc-score-label">Away</span>
+              <div class="sb-hc-crest"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <span class="sb-hc-score-label">Malta</span>
               <div class="sb-hc-score-ctrl">
                 <button class="sb-hc-score-btn" data-team="away" data-dir="-1">\u2212</button>
                 <span class="sb-hc-score-val" id="hc-away">${hcAwayGoals}</span>

@@ -994,10 +994,18 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 @media (max-width: 768px) { .sb-hc-examples { grid-template-columns: 1fr; } }
 
 /* ── Handicap Line Buttons ── */
-.sb-hc-lines { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-.sb-hc-line-btn { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; padding: 6px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
-.sb-hc-line-btn:hover { color: var(--accent); border-color: var(--accent-dim); }
-.sb-hc-line-btn.active { background: rgba(201,169,110,0.12); color: var(--accent); border-color: var(--accent); }
+.sb-hc-lines { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 16px; }
+.sb-hc-line-btn { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; padding: 8px 4px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; transition: all 0.2s; text-align: center; }
+.sb-hc-line-btn:hover { color: var(--white); border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); }
+.sb-hc-line-btn.active { background: rgba(201,169,110,0.15); color: var(--accent); border-color: var(--accent); font-weight: 800; }
+.sb-hc-line-btn--neg { color: #ef7070; }
+.sb-hc-line-btn--neg:hover { color: #f87171; }
+.sb-hc-line-btn--pos { color: #5ad2a0; }
+.sb-hc-line-btn--pos:hover { color: #34d399; }
+.sb-hc-line-btn--zero { color: #fbbf24; border-color: rgba(251,191,36,0.2); }
+.sb-hc-line-btn--zero:hover { color: #fbbf24; border-color: rgba(251,191,36,0.4); }
+.sb-hc-line-btn.active.sb-hc-line-btn--neg, .sb-hc-line-btn.active.sb-hc-line-btn--pos, .sb-hc-line-btn.active.sb-hc-line-btn--zero { color: var(--accent); }
+@media (max-width: 600px) { .sb-hc-lines { grid-template-columns: repeat(5, 1fr); } }
 
 /* ── Score Selector ── */
 .sb-hc-score { display: flex; align-items: center; gap: 20px; justify-content: center; margin: 16px 0 24px; }
@@ -1028,3 +1036,6 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .sb-hc-legend { display: flex; flex-direction: column; gap: 8px; margin: 24px 0; }
 .sb-hc-legend-item { display: flex; align-items: center; gap: 12px; font-size: 0.78rem; color: var(--text-secondary); }
 .sb-hc-legend-item .sb-result-badge { min-width: 80px; text-align: center; flex-shrink: 0; }
+
+/* ── Handicap Team Crest ── */
+.sb-hc-crest { color: var(--accent); margin-bottom: 4px; }
