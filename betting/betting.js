@@ -15,6 +15,7 @@ function combinations(arr, k) {
 const lessons = [
   { id: 'system-bets', title: 'System Bets', sub: 'The Art of Winning Even When You Lose', tag: 'LESSON 1', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>' },
   { id: 'handicaps', title: 'Handicap Betting', sub: 'Probably Created to Annoy People', tag: 'LESSON 2', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>' },
+  { id: 'payback', title: 'Paybacks', sub: 'The Juice to Make Money', tag: 'LESSON 3', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' },
 ];
 
 function renderPicker() {
@@ -23,7 +24,7 @@ function renderPicker() {
       <div class="sb-container">
         <span class="sb-tag">BETTING EDUCATION</span>
         <h1 class="sb-hero-title">Sportsbook<br><span>Masterclass</span></h1>
-        <p class="sb-hero-sub">Interactive lessons on betting mechanics, from system bets to handicaps.</p>
+        <p class="sb-hero-sub">Interactive lessons on betting mechanics, from system bets to paybacks.</p>
       </div>
     </section>
     <section class="sb-section">
@@ -330,6 +331,255 @@ function renderHandicaps() {
     </section>`;
 }
 
+
+// ═══════════════ LESSON 3: PAYBACKS ═══════════════
+let coinFair = true;
+let pbOdds1 = '2.10';
+let pbOddsX = '3.40';
+let pbOdds2 = '3.50';
+let pb2OddsA = '1.90';
+let pb2OddsB = '1.95';
+
+function calcPayback2(oA, oB) {
+  const sum = (1/oA) + (1/oB);
+  const payback = (1/sum) * 100;
+  const overround = (sum - 1) * 100;
+  return { payback: payback.toFixed(1), overround: overround.toFixed(1) };
+}
+
+function calcPayback(o1, ox, o2) {
+  const sum = (1/o1) + (1/ox) + (1/o2);
+  const payback = (1/sum) * 100;
+  const overround = (sum - 1) * 100;
+  return { payback: payback.toFixed(1), overround: overround.toFixed(1), sum: sum.toFixed(4) };
+}
+
+function renderPayback() {
+  const o1 = parseFloat(pbOdds1) || 2;
+  const ox = parseFloat(pbOddsX) || 3;
+  const o2 = parseFloat(pbOdds2) || 3;
+  const pb = calcPayback(o1, ox, o2);
+  const a = parseFloat(pb2OddsA) || 1.9;
+  const b = parseFloat(pb2OddsB) || 1.95;
+  const pb2 = calcPayback2(a, b);
+
+  // Coin toss math
+  const fairPayout = 200;
+  const bookiePayout = 190;
+  const fairProfit = 0;
+  const bookieProfit = 10;
+
+  return `
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">WHAT IS A PAYBACK?</span>
+        <h2 class="sb-section-title">Two Definitions</h2>
+        <p class="sb-section-sub">Context matters.</p>
+
+        <div class="sb-hc-examples" style="margin-top:24px">
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">Definition 1</div>
+            <p><strong>Profit from investment.</strong> The percentage of total money wagered that a bookmaker returns to bettors as winnings.</p>
+          </div>
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">Definition 2</div>
+            <p><strong>An act of revenge.</strong> What you\u2019ll want after understanding Definition 1.</p>
+          </div>
+          <div class="sb-hc-ex-card sb-hier-card--highlight">
+            <div class="sb-hc-ex-line">The Takeaway</div>
+            <p>The payback tells you how much of the money pool goes back to punters. The rest is the bookmaker\u2019s <em>margin</em> \u2014 their cut.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <span class="sb-section-tag">THE MILK ANALOGY</span>
+        <h2 class="sb-section-title">Think of It Like a Shop</h2>
+        <p class="sb-section-sub">A shop buys milk for \u20ac0.80 and sells it for \u20ac1.00. The customer gets 80% of the value back \u2014 the shop keeps 20%.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-pb-milk">
+            <div class="sb-pb-milk-bar">
+              <div class="sb-pb-milk-fill" style="width:80%">
+                <span>80% \u2192 Customer</span>
+              </div>
+              <div class="sb-pb-milk-margin">
+                <span>20% Margin</span>
+              </div>
+            </div>
+            <p class="sb-sim-note" style="margin-top:16px">Bookmakers work the same way. A 95% payback means for every \u20ac100 wagered, \u20ac95 goes back to bettors and \u20ac5 is the bookie\u2019s margin. The lower the payback, the worse the deal for you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">INTERACTIVE</span>
+        <h2 class="sb-section-title">The Coin Toss</h2>
+        <p class="sb-section-sub">A fair coin. Two bettors. \u20ac100 each. Watch how the bookie\u2019s margin appears.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> COIN TOSS SIMULATOR</div>
+
+          <div class="sb-pb-toggle">
+            <button class="sb-pb-toggle-btn ${coinFair ? 'active' : ''}" data-fair="true">Fair Odds (2.00)</button>
+            <button class="sb-pb-toggle-btn ${!coinFair ? 'active' : ''}" data-fair="false">Bookie Odds (1.90)</button>
+          </div>
+
+          <div class="sb-pb-coin-grid">
+            <div class="sb-pb-coin-col">
+              <div class="sb-hc-crest"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12"/><path d="M6 12h12"/></svg></div>
+              <span class="sb-pb-coin-label">Bettor A</span>
+              <span class="sb-pb-coin-stake">Stakes \u20ac100</span>
+              <span class="sb-pb-coin-odds">@ ${coinFair ? '2.00' : '1.90'}</span>
+              <span class="sb-pb-coin-win">Wins \u20ac${coinFair ? '200' : '190'}</span>
+            </div>
+            <div class="sb-pb-coin-col sb-pb-coin-col--vs">
+              <span class="sb-hc-score-vs">vs</span>
+            </div>
+            <div class="sb-pb-coin-col">
+              <div class="sb-hc-crest"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg></div>
+              <span class="sb-pb-coin-label">Bettor B</span>
+              <span class="sb-pb-coin-stake">Stakes \u20ac100</span>
+              <span class="sb-pb-coin-odds">@ ${coinFair ? '2.00' : '1.90'}</span>
+              <span class="sb-pb-coin-win">Wins \u20ac${coinFair ? '200' : '190'}</span>
+            </div>
+          </div>
+
+          <div class="sb-pb-coin-summary ${coinFair ? '' : 'sb-pb-coin-summary--profit'}">
+            <div class="sb-sim-summary-row"><span>Total Pool</span><span>\u20ac200</span></div>
+            <div class="sb-sim-summary-row"><span>Winner Payout</span><span>\u20ac${coinFair ? '200' : '190'}</span></div>
+            <div class="sb-sim-summary-row sb-sim-summary-total"><span>Bookie Profit</span><span class="${coinFair ? '' : 'sb-pb-profit-val'}">\u20ac${coinFair ? '0' : '10'}</span></div>
+            ${!coinFair ? '<p class="sb-sim-note">That \u20ac10 is the overround. The bookie collects \u20ac200 but only pays out \u20ac190. A 5% margin on every coin toss, regardless who wins.</p>' : '<p class="sb-sim-note">Fair odds = no margin. The bookie is just holding the money. This never happens in practice.</p>'}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <span class="sb-section-tag">THE FORMULA LAB</span>
+        <h2 class="sb-section-title">How Payback Is Calculated</h2>
+        <p class="sb-section-sub">One formula to rule them all.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-pb-formula">
+            <span class="sb-pb-formula-label">Payback %</span>
+            <span class="sb-pb-formula-eq">= 1 \u00f7 ( 1/Odds\u2081 + 1/Odds\u2082 + \u2026 + 1/Odds\u2099 ) \u00d7 100</span>
+          </div>
+        </div>
+
+        <div class="sb-hc-examples" style="margin-top:24px">
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">3-Way Market</div>
+            <p>Home / Draw / Away. Three outcomes.<br>Example: 2.10 / 3.40 / 3.50<br><em>Payback: \u2248 95.7%</em></p>
+          </div>
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">2-Way Market</div>
+            <p>Over / Under, or Asian Handicap. Two outcomes.<br>Example: 1.90 / 1.95<br><em>Payback: \u2248 96.1%</em></p>
+          </div>
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">X-Way (Correct Score)</div>
+            <p>Dozens of outcomes. The more outcomes, the lower the payback typically is.<br><em>Often 85\u201390%</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">PAYBACK CALCULATOR</span>
+        <h2 class="sb-section-title">Try It Yourself</h2>
+        <p class="sb-section-sub">Enter odds and see the payback percentage and the bookmaker\u2019s overround.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 3-WAY MARKET CALCULATOR</div>
+
+          <div class="sb-pb-calc-inputs">
+            <div class="sb-pb-calc-field">
+              <label>Home (1)</label>
+              <input type="number" step="0.01" min="1" class="sb-pb-input" data-odds="1" value="${pbOdds1}" />
+            </div>
+            <div class="sb-pb-calc-field">
+              <label>Draw (X)</label>
+              <input type="number" step="0.01" min="1" class="sb-pb-input" data-odds="X" value="${pbOddsX}" />
+            </div>
+            <div class="sb-pb-calc-field">
+              <label>Away (2)</label>
+              <input type="number" step="0.01" min="1" class="sb-pb-input" data-odds="2" value="${pbOdds2}" />
+            </div>
+          </div>
+
+          <div class="sb-pb-calc-result">
+            <div class="sb-pb-calc-metric">
+              <span class="sb-pb-calc-metric-label">Payback</span>
+              <span class="sb-pb-calc-metric-val ${parseFloat(pb.payback) >= 95 ? 'sb-pb-val--good' : parseFloat(pb.payback) >= 90 ? 'sb-pb-val--ok' : 'sb-pb-val--bad'}">${pb.payback}%</span>
+            </div>
+            <div class="sb-pb-calc-metric">
+              <span class="sb-pb-calc-metric-label">Overround</span>
+              <span class="sb-pb-calc-metric-val sb-pb-val--neutral">${pb.overround}%</span>
+            </div>
+          </div>
+          <div class="sb-pb-bar-wrap">
+            <div class="sb-pb-bar">
+              <div class="sb-pb-bar-fill" style="width:${Math.min(100, parseFloat(pb.payback))}%"></div>
+            </div>
+            <div class="sb-pb-bar-labels"><span>\u20ac0</span><span>Payback: \u20ac${(parseFloat(pb.payback)).toFixed(0)} per \u20ac100</span><span>\u20ac100</span></div>
+          </div>
+        </div>
+
+        <div class="sb-sim-card" style="margin-top:16px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 2-WAY MARKET CALCULATOR</div>
+
+          <div class="sb-pb-calc-inputs sb-pb-calc-inputs--2way">
+            <div class="sb-pb-calc-field">
+              <label>Over / Home</label>
+              <input type="number" step="0.01" min="1" class="sb-pb-input sb-pb2-input" data-odds="A" value="${pb2OddsA}" />
+            </div>
+            <div class="sb-pb-calc-field">
+              <label>Under / Away</label>
+              <input type="number" step="0.01" min="1" class="sb-pb-input sb-pb2-input" data-odds="B" value="${pb2OddsB}" />
+            </div>
+          </div>
+
+          <div class="sb-pb-calc-result">
+            <div class="sb-pb-calc-metric">
+              <span class="sb-pb-calc-metric-label">Payback</span>
+              <span class="sb-pb-calc-metric-val ${parseFloat(pb2.payback) >= 95 ? 'sb-pb-val--good' : parseFloat(pb2.payback) >= 90 ? 'sb-pb-val--ok' : 'sb-pb-val--bad'}">${pb2.payback}%</span>
+            </div>
+            <div class="sb-pb-calc-metric">
+              <span class="sb-pb-calc-metric-label">Overround</span>
+              <span class="sb-pb-calc-metric-val sb-pb-val--neutral">${pb2.overround}%</span>
+            </div>
+          </div>
+          <div class="sb-pb-bar-wrap">
+            <div class="sb-pb-bar">
+              <div class="sb-pb-bar-fill" style="width:${Math.min(100, parseFloat(pb2.payback))}%"></div>
+            </div>
+            <div class="sb-pb-bar-labels"><span>\u20ac0</span><span>Payback: \u20ac${(parseFloat(pb2.payback)).toFixed(0)} per \u20ac100</span><span>\u20ac100</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <div class="sb-banker-card">
+          <div class="sb-banker-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div>
+            <h3 class="sb-banker-title">The Long Game</h3>
+            <p>Day to day, scores and results create wild swings. But zoom out \u2014 over hundreds of bets, the bookmaker\u2019s margin is a constant gravity. <em>The graph always smooths out.</em></p>
+            <p style="margin-top:8px">This is why payback matters more than any single result. It\u2019s the one number that tells you the real cost of playing.</p>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
+
 // ═══════════════ MAIN RENDER ═══════════════
 function renderPage() {
   const app = document.getElementById('betting-app');
@@ -345,6 +595,8 @@ function renderPage() {
     app.innerHTML = backBtn + lessonHero + renderSystemBets();
   } else if (currentLesson === 'handicaps') {
     app.innerHTML = backBtn + lessonHero + renderHandicaps();
+  } else if (currentLesson === 'payback') {
+    app.innerHTML = backBtn + lessonHero + renderPayback();
   }
 
   bindEvents();
@@ -379,6 +631,30 @@ function bindEvents() {
       if (btn.dataset.team === 'home') hcHomeGoals = Math.max(0, hcHomeGoals + d);
       else hcAwayGoals = Math.max(0, hcAwayGoals + d);
       renderPage();
+    });
+  });
+
+  // Payback lesson
+  document.querySelectorAll('.sb-pb-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => { coinFair = btn.dataset.fair === 'true'; renderPage(); });
+  });
+  document.querySelectorAll('.sb-pb-input:not(.sb-pb2-input)').forEach(inp => {
+    inp.addEventListener('input', () => {
+      if (inp.dataset.odds === '1') pbOdds1 = inp.value;
+      else if (inp.dataset.odds === 'X') pbOddsX = inp.value;
+      else pbOdds2 = inp.value;
+      renderPage();
+      const el = document.querySelector('.sb-pb-input:not(.sb-pb2-input)[data-odds="'+inp.dataset.odds+'"]');
+      if (el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); }
+    });
+  });
+  document.querySelectorAll('.sb-pb2-input').forEach(inp => {
+    inp.addEventListener('input', () => {
+      if (inp.dataset.odds === 'A') pb2OddsA = inp.value;
+      else pb2OddsB = inp.value;
+      renderPage();
+      const el = document.querySelector('.sb-pb2-input[data-odds="'+inp.dataset.odds+'"]');
+      if (el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); }
     });
   });
 }

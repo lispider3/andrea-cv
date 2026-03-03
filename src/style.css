@@ -1039,3 +1039,56 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 
 /* ── Handicap Team Crest ── */
 .sb-hc-crest { color: var(--accent); margin-bottom: 4px; }
+
+/* ── Payback: Toggle ── */
+.sb-pb-toggle { display: flex; gap: 4px; margin-bottom: 24px; background: rgba(255,255,255,0.02); padding: 4px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.06); }
+.sb-pb-toggle-btn { flex: 1; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 10px 16px; border: none; border-radius: calc(var(--radius-sm) - 2px); background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+.sb-pb-toggle-btn.active { background: rgba(201,169,110,0.15); color: var(--accent); }
+.sb-pb-toggle-btn:hover:not(.active) { color: var(--white); }
+
+/* ── Payback: Milk Bar ── */
+.sb-pb-milk-bar { display: flex; height: 40px; border-radius: var(--radius-sm); overflow: hidden; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; }
+.sb-pb-milk-fill { background: rgba(52,211,153,0.2); color: #34d399; display: flex; align-items: center; justify-content: center; transition: width 0.3s; }
+.sb-pb-milk-margin { flex: 1; background: rgba(239,68,68,0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; }
+
+/* ── Payback: Coin Toss ── */
+.sb-pb-coin-grid { display: flex; align-items: center; justify-content: center; gap: 24px; margin: 20px 0; }
+.sb-pb-coin-col { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 120px; }
+.sb-pb-coin-col--vs { min-width: auto; }
+.sb-pb-coin-label { font-family: var(--font-head); font-size: 0.9rem; font-weight: 700; color: var(--white); }
+.sb-pb-coin-stake, .sb-pb-coin-odds, .sb-pb-coin-win { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); }
+.sb-pb-coin-win { color: var(--accent); font-weight: 700; }
+.sb-pb-coin-summary { margin-top: 8px; padding: 16px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
+.sb-pb-coin-summary--profit { border-color: rgba(239,68,68,0.15); background: rgba(239,68,68,0.03); }
+.sb-pb-profit-val { color: #ef4444; font-weight: 800; }
+
+/* ── Payback: Formula ── */
+.sb-pb-formula { display: flex; align-items: center; gap: 12px; padding: 20px; background: rgba(201,169,110,0.04); border: 1px solid var(--accent-dim); border-radius: var(--radius-sm); }
+.sb-pb-formula-label { font-family: var(--font-head); font-size: 1rem; font-weight: 800; color: var(--accent); white-space: nowrap; }
+.sb-pb-formula-eq { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); }
+
+/* ── Payback: Calculator ── */
+.sb-pb-calc-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.sb-pb-calc-field { display: flex; flex-direction: column; gap: 6px; }
+.sb-pb-calc-field label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; }
+.sb-pb-input { font-family: var(--font-mono); font-size: 1.2rem; font-weight: 700; color: var(--white); background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-sm); padding: 10px 14px; text-align: center; outline: none; transition: border-color 0.2s; -moz-appearance: textfield; }
+.sb-pb-input::-webkit-inner-spin-button, .sb-pb-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.sb-pb-input:focus { border-color: var(--accent); }
+.sb-pb-calc-result { display: flex; gap: 16px; justify-content: center; margin-bottom: 16px; }
+.sb-pb-calc-metric { text-align: center; padding: 16px 32px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-sm); }
+.sb-pb-calc-metric-label { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 6px; }
+.sb-pb-calc-metric-val { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 800; }
+.sb-pb-val--good { color: #34d399; }
+.sb-pb-val--ok { color: #fbbf24; }
+.sb-pb-val--bad { color: #ef4444; }
+.sb-pb-val--neutral { color: var(--text-secondary); }
+
+/* ── Payback: Bar ── */
+.sb-pb-bar-wrap { margin-top: 8px; }
+.sb-pb-bar { height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+.sb-pb-bar-fill { height: 100%; background: linear-gradient(90deg, #34d399, var(--accent)); border-radius: 4px; transition: width 0.3s; }
+.sb-pb-bar-labels { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-muted); margin-top: 4px; }
+@media (max-width: 600px) { .sb-pb-calc-inputs { grid-template-columns: 1fr; } .sb-pb-calc-result { flex-direction: column; } }
+
+.sb-pb-calc-inputs--2way { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 600px) { .sb-pb-calc-inputs--2way { grid-template-columns: 1fr; } }
