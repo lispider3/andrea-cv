@@ -95,7 +95,6 @@ function renderPage() {
         <span class="sb-tag">BETTING EDUCATION</span>
         <h1 class="sb-hero-title">System Bets:<br><span>The Art of Winning<br>Even When You Lose</span></h1>
         <p class="sb-hero-sub">Almost winning is a tragedy. System bets make it a strategy.</p>
-        <a href="#the-why" class="sb-btn sb-btn--primary">Start Learning</a>
       </div>
     </section>
 
@@ -103,26 +102,26 @@ function renderPage() {
       <div class="sb-container">
         <span class="sb-section-tag">THE HIERARCHY</span>
         <h2 class="sb-section-title">Not All Bets Are Created Equal</h2>
-        <p class="sb-section-sub">To understand system bets, you first need to understand what came before them — and why they exist.</p>
+        <p class="sb-section-sub">The evolution from singles to systems, in three steps.</p>
         <div class="sb-hierarchy">
           <div class="sb-hier-card">
             <div class="sb-hier-num">01</div>
             <h3>Single Bets</h3>
-            <p>One outcome. One result. You pick a winner, it wins, you get paid. Straightforward, honest, unglamorous.</p>
+            <p>One pick, one outcome. Straightforward and unglamorous.</p>
             <div class="sb-hier-tag sb-hier-tag--green">Low Risk</div>
           </div>
           <div class="sb-hier-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
           <div class="sb-hier-card">
             <div class="sb-hier-num">02</div>
             <h3>Combi / Acca Bets</h3>
-            <p>Multiple picks, one bet. The odds multiply — and so does the heartbreak. <em>Every single leg must win.</em> Miss one and you get nothing.</p>
+            <p>Multiple picks, one bet. The odds multiply — but <em>every leg must win.</em> Miss one and you get nothing.</p>
             <div class="sb-hier-tag sb-hier-tag--amber">High Risk</div>
           </div>
           <div class="sb-hier-arrow"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
           <div class="sb-hier-card sb-hier-card--highlight">
             <div class="sb-hier-num">03</div>
             <h3>System Bets</h3>
-            <p>The safety net. A system bet is a mixture of several accumulator bets that lets you <strong>lose one or more legs and still win</strong> part of your stake back.</p>
+            <p>A mixture of accumulators that lets you <strong>lose a leg and still profit</strong>.</p>
             <div class="sb-hier-tag sb-hier-tag--gold">Smart Risk</div>
           </div>
         </div>
@@ -147,14 +146,6 @@ function renderPage() {
       </div>
     </section>
 
-    <footer class="sb-footer">
-      <div class="sb-container" style="text-align:center">
-        <h2 class="sb-footer-title">Questions?</h2>
-        <p class="sb-footer-sub">Betting should be fun and informed, never reckless. Reach out if anything's unclear.</p>
-        <a href="mailto:andreaspiteri@outlook.com" class="sb-btn sb-btn--primary">Get In Touch</a>
-        <p class="sb-footer-copy">\u00a9 ${new Date().getFullYear()} Andrea Spiteri \u2014 All rights reserved</p>
-      </div>
-    </footer>
   `;
 
   document.querySelectorAll('.sb-pick-btn').forEach(btn => {
