@@ -10,6 +10,7 @@ export default defineConfig({
         'football': resolve(__dirname, 'football/index.html'),
         'capitals': resolve(__dirname, 'capitals/index.html'),
         'cpo-sim': resolve(__dirname, 'cpo-sim/index.html'),
+        'analytics': resolve(__dirname, 'analytics/index.html'),
       },
     },
   },

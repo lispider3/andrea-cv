@@ -1,4 +1,5 @@
 import '../src/style.css';
+import { trackEvent } from '../src/tracker.js';
 
 // ── F1 World Champions 1950–2025 ──
 const champions = [
@@ -201,9 +202,10 @@ const render = () => {
   }
 };
 
-const giveUp = () => { clearInterval(timerInterval); finished = true; render(); };
+const giveUp = () => { clearInterval(timerInterval); finished = true; trackEvent('quiz_complete', { quiz: 'f1', score: `${found.size}/${TOTAL}` }); render(); };
 const startQuiz = () => {
   started = true; secondsLeft = TIMER_SECONDS; found = new Set(); finished = false;
+  trackEvent('quiz_start', { quiz: 'f1' });
   render();
   timerInterval = setInterval(() => {
     secondsLeft--;

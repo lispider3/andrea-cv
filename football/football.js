@@ -1,4 +1,5 @@
 import '../src/style.css';
+import { trackEvent } from '../src/tracker.js';
 
 const ODDS_API_KEY = 'e67c22de5664471109480ba217a832c7';
 const SPORT = 'soccer_italy_serie_a';

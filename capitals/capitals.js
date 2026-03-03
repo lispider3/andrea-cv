@@ -1,4 +1,5 @@
 import '../src/style.css';
+import { trackEvent } from '../src/tracker.js';
 import { geoNaturalEarth1, geoPath } from 'd3-geo';
 import { feature } from 'topojson-client';
 
@@ -150,6 +151,7 @@ const endGame = () => { state = 'done'; clearInterval(timerInterval); render(); 
 const startGame = async () => {
   await loadMap();
   state = 'playing'; score = 0; answered = new Set(); lastAnswered = '';
+  trackEvent('quiz_start', { quiz: 'capitals' });
   render(); startTimer();
   if (window.innerWidth > 768) {
     setTimeout(() => document.getElementById('cq-input')?.focus(), 100);

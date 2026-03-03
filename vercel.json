@@ -19,6 +19,10 @@
     {
       "source": "/cpo-sim/(.*)",
       "destination": "/cpo-sim/index.html"
+    },
+    {
+      "source": "/analytics/(.*)",
+      "destination": "/analytics/index.html"
     }
   ],
   "headers": [

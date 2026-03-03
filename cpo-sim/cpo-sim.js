@@ -1,4 +1,5 @@
 import '../src/style.css';
+import { trackEvent } from '../src/tracker.js';
 
 // ══════════════════════════════════════════════
 //  CPO SIMULATOR — Chief Product Officer Game

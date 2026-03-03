@@ -1,3 +1,4 @@
+import { trackEvent } from './tracker.js';
 import './style.css';
 
 // ============ DATA ============
@@ -799,6 +800,16 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   renderApp();
 
+  // Track CV download clicks
+  document.querySelectorAll('a[href*="cv"], a[href*="resume"], a[download]').forEach(a => {
+    a.addEventListener('click', () => trackEvent('cv_download'));
+  });
+
+  // Track CTA clicks (social links, email, external links)
+  document.querySelectorAll('.social-link, .footer-links a, a[target="_blank"]').forEach(a => {
+    a.addEventListener('click', () => trackEvent('cta_click', { target: a.href?.split('/').pop() || a.textContent.trim() }));
+  });
+
   // Book modal (must be after renderApp so DOM exists)
   const books = {
     it: { title: 'Il Maestro e Margherita', author: 'Mikhail Bulgakov', lang: 'Reading in Italian', cover: '/book-bulgakov.jpg' },
@@ -814,6 +825,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('book-modal-author').textContent = b.author;
       document.getElementById('book-modal-lang').textContent = b.lang;
       document.getElementById('book-modal-overlay').classList.add('book-modal--open');
+      trackEvent('book_modal', { book: b.title });
     });
   });
   document.getElementById('book-modal-close')?.addEventListener('click', () => {
