@@ -71,7 +71,7 @@ function renderDashboard(data) {
       <div class="an-container">
         <div class="an-header">
           <h1 class="an-title">Analytics</h1>
-          <button id="an-refresh" class="an-btn an-btn--ghost">↻ Refresh</button>
+          <div style="display:flex;gap:8px"><button id="an-refresh" class="an-btn an-btn--ghost">↻ Refresh</button><button id="an-clear" class="an-btn an-btn--ghost" style="color:#ef4444;border-color:rgba(239,68,68,0.3)">🗑 Clear All</button></div>
         </div>
 
         <!-- Totals -->
@@ -186,6 +186,13 @@ function renderDashboard(data) {
       </div>
     </section>`;
 
+  document.getElementById('an-clear')?.addEventListener('click', async () => {
+    if (!confirm('Clear ALL analytics data? This cannot be undone.')) return;
+    try {
+      const r = await fetch('/api/clear-analytics', { method: 'DELETE', headers: { Authorization: 'Bearer ' + password } });
+      if (r.ok) { alert('Data cleared!'); location.reload(); }
+    } catch {}
+  });
   document.getElementById('an-refresh')?.addEventListener('click', async () => {
     try {
       const r = await fetch('/api/analytics', { headers: { Authorization: `Bearer ${password}` } });
