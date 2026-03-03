@@ -972,3 +972,54 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .sb-footer-title { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; color: var(--white); margin-bottom: 8px; }
 .sb-footer-sub { font-size: 0.82rem; color: var(--text-secondary); max-width: 400px; margin: 0 auto 20px; }
 .sb-footer-copy { font-family: var(--font-mono); font-size: 0.5rem; color: var(--text-muted); margin-top: 32px; letter-spacing: 1px; }
+
+/* ── Lesson Picker ── */
+.sb-lesson-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.sb-lesson-card { background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 32px 24px; text-align: left; cursor: pointer; transition: all 0.25s; display: flex; flex-direction: column; gap: 8px; }
+.sb-lesson-card:hover { transform: translateY(-4px); border-color: var(--accent-dim); box-shadow: 0 8px 32px rgba(201,169,110,0.08); }
+.sb-lesson-icon { color: var(--accent); margin-bottom: 4px; }
+.sb-lesson-tag { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 700; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
+.sb-lesson-title { font-family: var(--font-head); font-size: 1.2rem; font-weight: 800; color: var(--white); }
+.sb-lesson-sub { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.4; }
+.sb-lesson-cta { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1.5px; color: var(--accent); text-transform: uppercase; margin-top: auto; display: flex; align-items: center; gap: 4px; }
+.sb-lesson-cta svg { stroke: var(--accent); }
+
+/* ── Handicap Cards ── */
+.sb-hc-examples { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 24px; }
+.sb-hc-ex-card { background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 20px; transition: transform 0.2s, border-color 0.2s; }
+.sb-hc-ex-card:hover { transform: translateY(-3px); border-color: var(--accent-dim); }
+.sb-hc-ex-line { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-bottom: 8px; }
+.sb-hc-ex-card p { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.5; }
+.sb-hc-ex-card em { color: var(--accent); font-style: normal; font-weight: 500; }
+@media (max-width: 768px) { .sb-hc-examples { grid-template-columns: 1fr; } }
+
+/* ── Handicap Line Buttons ── */
+.sb-hc-lines { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.sb-hc-line-btn { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; padding: 6px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+.sb-hc-line-btn:hover { color: var(--accent); border-color: var(--accent-dim); }
+.sb-hc-line-btn.active { background: rgba(201,169,110,0.12); color: var(--accent); border-color: var(--accent); }
+
+/* ── Score Selector ── */
+.sb-hc-score { display: flex; align-items: center; gap: 20px; justify-content: center; margin: 16px 0 24px; }
+.sb-hc-score-team { text-align: center; }
+.sb-hc-score-label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 8px; }
+.sb-hc-score-ctrl { display: flex; align-items: center; gap: 12px; }
+.sb-hc-score-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: rgba(255,255,255,0.03); color: var(--text-secondary); font-size: 1rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+.sb-hc-score-btn:hover { border-color: var(--accent); color: var(--accent); }
+.sb-hc-score-val { font-family: var(--font-mono); font-size: 2rem; font-weight: 800; color: var(--white); min-width: 40px; text-align: center; }
+.sb-hc-score-vs { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+
+/* ── Handicap Result ── */
+.sb-hc-result { margin-top: 8px; }
+.sb-hc-result-split { display: flex; gap: 12px; justify-content: center; margin-bottom: 12px; }
+.sb-hc-result-half { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.03); padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.05); }
+.sb-hc-result-line { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--white); }
+.sb-hc-result-overall { display: flex; align-items: center; gap: 10px; justify-content: center; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; color: var(--white); padding: 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02); }
+.sb-hc-result-overall--single { font-size: 1rem; }
+.sb-result-badge--halfwin { background: rgba(52,211,153,0.1); color: #34d399; }
+.sb-result-badge--halflose { background: rgba(239,68,68,0.1); color: #ef4444; }
+.sb-result-badge--void { background: rgba(251,191,36,0.1); color: #fbbf24; }
+
+/* ── Stat box link ── */
+.stat-box--link { cursor: pointer; transition: border-color 0.2s; }
+.stat-box--link:hover { border-color: var(--accent-dim); }
