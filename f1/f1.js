@@ -37,17 +37,35 @@ const loadData = async () => {
     constructorStandings = cTable?.ConstructorStandings || [];
 
     // Pre-season fallback: if standings are empty, fetch entry lists
+    // 2026 driver→team map (update once per season)
+    const DRIVER_TEAMS = {
+      albon: 'williams', alonso: 'aston_martin', antonelli: 'mercedes', bearman: 'haas',
+      bortoleto: 'audi', bottas: 'cadillac', colapinto: 'alpine', gasly: 'alpine',
+      hadjar: 'rb', hamilton: 'ferrari', hulkenberg: 'audi', lawson: 'red_bull',
+      leclerc: 'ferrari', lindblad: 'rb', norris: 'mclaren', ocon: 'haas',
+      piastri: 'mclaren', perez: 'cadillac', russell: 'mercedes', sainz: 'williams',
+      stroll: 'aston_martin', max_verstappen: 'red_bull',
+    };
+    // Constructor name lookup
+    const TEAM_NAMES = {
+      williams: 'Williams', aston_martin: 'Aston Martin', mercedes: 'Mercedes', haas: 'Haas F1 Team',
+      audi: 'Audi', cadillac: 'Cadillac F1 Team', alpine: 'Alpine F1 Team', rb: 'RB F1 Team',
+      ferrari: 'Ferrari', red_bull: 'Red Bull', mclaren: 'McLaren',
+    };
     if (!driverStandings.length) {
       try {
         const driversRes = await fetch(`${API}/drivers.json`).then(r => r.json());
         const drivers = driversRes?.MRData?.DriverTable?.Drivers || [];
-        driverStandings = drivers.map((d, i) => ({
-          position: String(i + 1),
-          points: '0',
-          wins: '0',
-          Driver: d,
-          Constructors: [{ name: '—' }],
-        }));
+        driverStandings = drivers.map((d, i) => {
+          const cId = DRIVER_TEAMS[d.driverId] || '';
+          return {
+            position: String(i + 1),
+            points: '0',
+            wins: '0',
+            Driver: d,
+            Constructors: [{ constructorId: cId, name: TEAM_NAMES[cId] || '—' }],
+          };
+        });
       } catch { }  // silently fail — tables just won't show
     }
     if (!constructorStandings.length) {
