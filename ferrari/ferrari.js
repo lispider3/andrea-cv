@@ -1,5 +1,6 @@
 import '../src/style.css';
 import { trackEvent } from '../src/tracker.js';
+import { flagImg, formatTime, initNavScroll } from '../src/shared.js';
 
 // ── Ferrari F1 Drivers 2000–2024 ──
 // Each entry: [year, driver, country_iso2]
@@ -62,9 +63,6 @@ const FERRARI_DRIVERS = [
 const TOTAL = FERRARI_DRIVERS.length;
 const TIMER_SECONDS = 300; // 5 minutes
 
-const flagImg = (iso, size = 16) => iso
-  ? `<img src="https://flagcdn.com/w20/${iso}.png" alt="" width="20" height="15" class="quiz-flag" loading="lazy">`
-  : '';
 
 let found = new Set();
 let timerInterval = null;
@@ -114,11 +112,6 @@ Object.entries(aliases).forEach(([alias, canonical]) => {
   }
 });
 
-const formatTime = (s) => {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
-};
 
 // Get unique drivers for the count
 const uniqueDrivers = [...new Set(FERRARI_DRIVERS.map(d => d[1]))];
@@ -260,9 +253,6 @@ const onInput = (e) => {
   }
 };
 
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+initNavScroll();
 
 render();

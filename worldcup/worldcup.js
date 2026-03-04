@@ -1,5 +1,6 @@
 import '../src/style.css';
 import { trackEvent } from '../src/tracker.js';
+import { flagImg as _flagImg, initNavScroll } from '../src/shared.js';
 
 // FIFA World Cup Top 4 — 2002–2022
 const tournaments = [
@@ -22,11 +23,7 @@ const FLAG_CODES = {
   'Croatia': 'hr', 'Belgium': 'be', 'England': 'gb-eng', 'Morocco': 'ma',
 };
 
-const flagImg = (team, size = 20) => {
-  const iso = FLAG_CODES[team];
-  if (!iso) return '';
-  return `<img src="https://flagcdn.com/w20/${iso}.png" alt="${team}" width="20" height="15" class="quiz-flag" loading="lazy">`;
-};
+const flagImg = (team) => _flagImg(FLAG_CODES[team]);
 
 let found = {}; // { "year-pos": true }
 let foundCount = 0;
@@ -75,7 +72,7 @@ Object.entries(aliasMap).forEach(([alias, canonical]) => {
   if (entries && !lookup[alias]) lookup[alias] = entries;
 });
 
-const formatTime = (s) => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+const formatTime = (s) => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;  // kept local (different format)  // kept local (different format)
 const fKey = (year, pos) => `${year}-${pos}`;
 
 const render = () => {
@@ -229,10 +226,6 @@ const onInput = (e) => {
   }
 };
 
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+initNavScroll();
 
 render();
-trackEvent('pageview');

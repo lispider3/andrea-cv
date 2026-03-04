@@ -1,5 +1,6 @@
 import '../src/style.css';
 import { trackEvent } from '../src/tracker.js';
+import { flagImg, formatTime, initNavScroll } from '../src/shared.js';
 
 // ── Driver nationalities (ISO 2-letter codes for flagcdn.com) ──
 const DRIVER_FLAGS = {
@@ -27,9 +28,6 @@ const TEAM_COLORS = {
   'Brawn': '#B5F500', 'Red Bull': '#3671C6',
 };
 
-const flagImg = (iso, size = 16) => iso
-  ? `<img src="https://flagcdn.com/w20/${iso}.png" alt="" width="20" height="15" class="quiz-flag" loading="lazy">`
-  : '';
 const teamDot = (team) => {
   const c = TEAM_COLORS[team];
   return c ? `<span class="quiz-team-dot" style="background:${c}" title="${team}"></span>` : '';
@@ -142,11 +140,6 @@ champions.forEach((c, i) => {
   }
 });
 
-const formatTime = (s) => {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
-};
 
 // Group champions by decade for the grid
 const decades = [];
@@ -294,9 +287,6 @@ const onInput = (e) => {
   }
 };
 
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+initNavScroll();
 
 render();

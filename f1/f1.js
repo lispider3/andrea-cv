@@ -1,5 +1,6 @@
 import '../src/style.css';
 import { trackEvent } from '../src/tracker.js';
+import { natFlagImg as flagImg, initNavScroll } from '../src/shared.js';
 
 const API = 'https://api.jolpi.ca/ergast/f1/current';
 let loading = true;
@@ -10,22 +11,6 @@ let nextRace = null;
 let lastRace = null;
 let previewText = '';
 let previewPhase = '';
-
-const flagImg = (nat) => {
-  const map = {
-    'Dutch': 'nl', 'British': 'gb', 'Monegasque': 'mc', 'Spanish': 'es',
-    'Australian': 'au', 'German': 'de', 'Finnish': 'fi', 'Canadian': 'ca',
-    'Mexican': 'mx', 'French': 'fr', 'Japanese': 'jp', 'Thai': 'th',
-    'Danish': 'dk', 'Chinese': 'cn', 'American': 'us', 'Italian': 'it',
-    'Brazilian': 'br', 'New Zealander': 'nz', 'Argentine': 'ar',
-    'Swiss': 'ch', 'Austrian': 'at', 'Swedish': 'se', 'Belgian': 'be',
-    'Polish': 'pl', 'Russian': 'ru', 'Indian': 'in', 'Indonesian': 'id',
-  };
-  const iso = map[nat];
-  return iso ? `<img src="https://flagcdn.com/w20/${iso}.png" alt="" width="20" height="15" class="quiz-flag" loading="lazy">` : '';
-};
-
-
 
 const loadData = async () => {
   loading = true;
@@ -283,10 +268,7 @@ const render = () => {
   `;
 };
 
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+initNavScroll();
 
 loadData();
 trackEvent('pageview', { page: 'f1-dashboard' });

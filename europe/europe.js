@@ -1,5 +1,6 @@
 import '../src/style.css';
 import { trackEvent } from '../src/tracker.js';
+import { flagImg, formatTime, initNavScroll } from '../src/shared.js';
 
 // ── 45 Countries of Europe (Sporcle standard) ──
 // [name, iso2 code, aliases]
@@ -55,9 +56,6 @@ const COUNTRIES = [
 const TOTAL = COUNTRIES.length;
 const TIMER_SECONDS = 300; // 5 minutes
 
-const flagImg = (iso) => iso
-  ? `<img src="https://flagcdn.com/w20/${iso}.png" alt="" width="20" height="15" class="quiz-flag" loading="lazy">`
-  : '';
 
 let found = new Set();
 let timerInterval = null;
@@ -75,11 +73,6 @@ COUNTRIES.forEach(([name, iso, aliases], i) => {
   aliases.forEach(a => { lookup[norm(a)] = i; });
 });
 
-const formatTime = (s) => {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
-  return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
-};
 
 // Sort countries alphabetically for the grid
 const sortedIndices = COUNTRIES.map((_, i) => i).sort((a, b) =>
@@ -211,9 +204,6 @@ const onInput = (e) => {
   }
 };
 
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+initNavScroll();
 
 render();

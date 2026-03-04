@@ -1,5 +1,6 @@
 import '../src/style.css';
 import { trackEvent } from '../src/tracker.js';
+import { initNavScroll } from '../src/shared.js';
 
 let quizFilter = 'all';
 
@@ -57,13 +58,9 @@ function render() {
   `;
 }
 
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+initNavScroll();
 
 render();
-trackEvent('pageview');
 
 document.addEventListener('click', (e) => {
   if (e.target.matches('.sb-quiz-filter-btn')) {

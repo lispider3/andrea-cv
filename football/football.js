@@ -1,9 +1,9 @@
 import '../src/style.css';
 import { trackEvent } from '../src/tracker.js';
+import { initNavScroll } from '../src/shared.js';
 
-const ODDS_API_KEY = 'e67c22de5664471109480ba217a832c7';
 const SPORT = 'soccer_italy_serie_a';
-const API_BASE = 'https://api.the-odds-api.com/v4';
+const API_BASE = '/api/odds';
 const TEAM = 'Juventus';
 
 let oddsData = [];
@@ -23,7 +23,6 @@ const getLogo = (name) => {
   return key ? TEAM_LOGOS[key] : '';
 };
 const logoImg = (name, size = 24) => { const src = getLogo(name); return src ? `<img src="${src}" alt="${name}" width="${size}" height="${size}" style="border-radius:4px;object-fit:contain;" loading="lazy">` : ''; };
-
 
 const fetchJSON = async (url) => {
   const res = await fetch(url);
@@ -77,9 +76,9 @@ const loadData = async () => {
     } catch(e) {}
 
     const [odds, scores, events] = await Promise.all([
-      fetchJSON(`${API_BASE}/sports/${SPORT}/odds?apiKey=${ODDS_API_KEY}&regions=eu&markets=h2h&oddsFormat=decimal`).catch(() => []),
-      fetchJSON(`${API_BASE}/sports/${SPORT}/scores?apiKey=${ODDS_API_KEY}&daysFrom=3`).catch(() => []),
-      fetchJSON(`${API_BASE}/sports/${SPORT}/events?apiKey=${ODDS_API_KEY}`).catch(() => []),
+      fetchJSON(`${API_BASE}?sport=${SPORT}&endpoint=odds&regions=eu&markets=h2h&oddsFormat=decimal`).catch(() => []),
+      fetchJSON(`${API_BASE}?sport=${SPORT}&endpoint=scores&daysFrom=3`).catch(() => []),
+      fetchJSON(`${API_BASE}?sport=${SPORT}&endpoint=events`).catch(() => []),
     ]);
     oddsData = odds; scoresData = scores; eventsData = events;
 
@@ -186,7 +185,6 @@ const render = () => {
     </footer>
   `;
 
-
 };
 
 // ── Section 1: Next Match (condensed with logos) ──
@@ -237,7 +235,6 @@ const renderNextMatch = (match) => {
     </div>
   `;
 };
-
 
 // ── Standings (with logos) ──
 let _fullTableHTML = '';
@@ -290,9 +287,6 @@ const renderStandings = (table) => {
 };
 
 // ── Init ──
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
-}, { passive: true });
+initNavScroll();
 
 loadData();

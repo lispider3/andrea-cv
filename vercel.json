@@ -27,6 +27,30 @@
     {
       "source": "/betting/(.*)",
       "destination": "/betting/index.html"
+    },
+    {
+      "source": "/quiz/(.*)",
+      "destination": "/quiz/index.html"
+    },
+    {
+      "source": "/worldcup/(.*)",
+      "destination": "/worldcup/index.html"
+    },
+    {
+      "source": "/ferrari/(.*)",
+      "destination": "/ferrari/index.html"
+    },
+    {
+      "source": "/europe/(.*)",
+      "destination": "/europe/index.html"
+    },
+    {
+      "source": "/f1/(.*)",
+      "destination": "/f1/index.html"
+    },
+    {
+      "source": "/juve-quiz/(.*)",
+      "destination": "/juve-quiz/index.html"
     }
   ],
   "headers": [
