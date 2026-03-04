@@ -1233,3 +1233,7 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .sb-sys-type-row { display: flex; flex-wrap: wrap; gap: 6px; }
 .sb-sys-type-k { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: rgba(255,255,255,0.04); color: var(--text-secondary); border: 1px solid rgba(255,255,255,0.05); }
 .sb-sys-type-note { font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; margin: 0; }
+
+/* ── Cross-Lesson Links ── */
+.sb-link-lesson { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; transition: opacity 0.2s; }
+.sb-link-lesson:hover { opacity: 0.8; }

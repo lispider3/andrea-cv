@@ -132,7 +132,92 @@ function renderSystemBets() {
       <h2 class="sb-section-title">The 5/6 System \u2014 More Picks, More Safety</h2>
       <p class="sb-section-sub">6 picks, 6 five-fold combinations. Lose one and every combo still wins.</p>
       ${renderSim(sim56, 5, 'sim56')}
-    </div></section>`;
+    </div></section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <span class="sb-section-tag">SYSTEM BET TYPES</span>
+        <h2 class="sb-section-title">The Full Menu</h2>
+        <p class="sb-section-sub">System bets come in different sizes. Some are simple. Some include every possible sub-combination.</p>
+
+        <div class="sb-sys-types">
+          <div class="sb-sys-type">
+            <div class="sb-sys-type-header">
+              <h4>2/3 (Trixie)</h4>
+              <span class="sb-sys-type-badge">3 picks</span>
+            </div>
+            <div class="sb-sys-type-combos">
+              <div class="sb-sys-type-row"><span class="sb-sys-type-k">3 \u00d7 doubles</span></div>
+            </div>
+            <p class="sb-sys-type-note">The simplest system. 2 out of 3 must win.</p>
+          </div>
+
+          <div class="sb-sys-type">
+            <div class="sb-sys-type-header">
+              <h4>2/4 (Yankee)</h4>
+              <span class="sb-sys-type-badge">4 picks</span>
+            </div>
+            <div class="sb-sys-type-combos">
+              <div class="sb-sys-type-row"><span class="sb-sys-type-k">6 \u00d7 doubles</span><span class="sb-sys-type-k">4 \u00d7 trebles</span><span class="sb-sys-type-k">1 \u00d7 four-fold</span></div>
+            </div>
+            <p class="sb-sys-type-note">11 bets total. The more legs that win, the more combos pay out.</p>
+          </div>
+
+          <div class="sb-sys-type">
+            <div class="sb-sys-type-header">
+              <h4>2/5 (Canadian / Super Yankee)</h4>
+              <span class="sb-sys-type-badge">5 picks</span>
+            </div>
+            <div class="sb-sys-type-combos">
+              <div class="sb-sys-type-row"><span class="sb-sys-type-k">10 \u00d7 doubles</span><span class="sb-sys-type-k">10 \u00d7 trebles</span><span class="sb-sys-type-k">5 \u00d7 four-folds</span><span class="sb-sys-type-k">1 \u00d7 five-fold</span></div>
+            </div>
+            <p class="sb-sys-type-note">26 bets total. Can return a profit if only 2 of 5 win.</p>
+          </div>
+
+          <div class="sb-sys-type">
+            <div class="sb-sys-type-header">
+              <h4>2/6 (Heinz)</h4>
+              <span class="sb-sys-type-badge">6 picks</span>
+            </div>
+            <div class="sb-sys-type-combos">
+              <div class="sb-sys-type-row"><span class="sb-sys-type-k">15 \u00d7 doubles</span><span class="sb-sys-type-k">20 \u00d7 trebles</span><span class="sb-sys-type-k">15 \u00d7 four-folds</span><span class="sb-sys-type-k">6 \u00d7 five-folds</span><span class="sb-sys-type-k">1 \u00d7 six-fold</span></div>
+            </div>
+            <p class="sb-sys-type-note">57 bets total (yes, like the ketchup). Named after the Heinz 57 varieties.</p>
+          </div>
+
+          <div class="sb-sys-type">
+            <div class="sb-sys-type-header">
+              <h4>2/7 (Super Heinz)</h4>
+              <span class="sb-sys-type-badge">7 picks</span>
+            </div>
+            <div class="sb-sys-type-combos">
+              <div class="sb-sys-type-row"><span class="sb-sys-type-k">21 \u00d7 doubles</span><span class="sb-sys-type-k">35 \u00d7 trebles</span><span class="sb-sys-type-k">35 \u00d7 four-folds</span><span class="sb-sys-type-k">21 \u00d7 five-folds</span><span class="sb-sys-type-k">7 \u00d7 six-folds</span><span class="sb-sys-type-k">1 \u00d7 seven-fold</span></div>
+            </div>
+            <p class="sb-sys-type-note">120 bets. Your stake is multiplied by 120. High coverage, high cost.</p>
+          </div>
+
+          <div class="sb-sys-type">
+            <div class="sb-sys-type-header">
+              <h4>2/8 (Goliath)</h4>
+              <span class="sb-sys-type-badge sb-sys-type-badge--big">8 picks</span>
+            </div>
+            <div class="sb-sys-type-combos">
+              <div class="sb-sys-type-row"><span class="sb-sys-type-k">28 \u00d7 doubles</span><span class="sb-sys-type-k">56 \u00d7 trebles</span><span class="sb-sys-type-k">70 \u00d7 four-folds</span><span class="sb-sys-type-k">56 \u00d7 five-folds</span><span class="sb-sys-type-k">28 \u00d7 six-folds</span><span class="sb-sys-type-k">8 \u00d7 seven-folds</span><span class="sb-sys-type-k">1 \u00d7 eight-fold</span></div>
+            </div>
+            <p class="sb-sys-type-note">247 bets. The largest standard system. A \u20ac1 unit stake = \u20ac247 total wager.</p>
+          </div>
+        </div>
+
+        <div class="sb-banker-card" style="margin-top:24px">
+          <div class="sb-banker-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>
+            <h3 class="sb-banker-title">Simple vs Full Systems</h3>
+            <p>A <strong>5/6</strong> is just 6 five-fold combos. But a <strong>full system 2/6 (Heinz)</strong> includes <em>every</em> possible combination from doubles up \u2014 57 bets from just 6 picks.</p>
+            <p style="margin-top:8px">The more sub-combinations included, the more safety net you have, but the higher your total stake. Choose based on your risk appetite.</p>
+          </div>
+        </div>
+      </div>
+    </section>`;
 }
 
 // ═══════════════ LESSON 2: HANDICAPS ═══════════════
@@ -891,7 +976,7 @@ function renderCombiTax() {
       <div class="sb-container">
         <span class="sb-section-tag">THE MULTIPLICATION RULE</span>
         <h2 class="sb-section-title">Margin Compounds. Fast.</h2>
-        <p class="sb-section-sub">A single bet at 95% payback keeps 5% for the bookie. Sounds fair. But in a combi, that 5% compounds with every leg you add.</p>
+        <p class="sb-section-sub">A single bet at 95% payback keeps 5% for the bookie. Sounds fair. But in a combi, that 5% compounds with every leg you add.</p><p class="sb-section-sub" style="margin-top:8px"><em>New to payback? <a href="#" class="sb-link-lesson" data-lesson="payback">Start with Lesson 3: Paybacks</a> first.</em></p>
 
         <div class="sb-sim-card" style="margin-top:24px">
           <div class="sb-pb-formula">
@@ -1077,6 +1162,11 @@ function bindEvents() {
       if (bbActive.has(id)) bbActive.delete(id); else bbActive.add(id);
       renderPage();
     });
+  });
+
+  // Cross-lesson links
+  document.querySelectorAll('.sb-link-lesson').forEach(a => {
+    a.addEventListener('click', (e) => { e.preventDefault(); currentLesson = a.dataset.lesson; renderPage(); window.scrollTo(0, 0); });
   });
 
   // Combi tax
