@@ -674,9 +674,9 @@ let cashoutChoice = null; // null, 'cashout', 'ride'
 
 function renderCashout() {
   const choiceHTML = cashoutChoice === 'cashout'
-    ? '<div class="sb-co-verdict sb-co-verdict--cashout"><div class="sb-co-verdict-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h4>Smart Move.</h4><p>\u20ac15 secured. No stress, no stoppage-time drama. You locked in a 50% profit on your \u20ac10 stake. Not glamorous, but profitable.</p></div>'
+    ? '<div class="sb-co-verdict sb-co-verdict--cashout"><div class="sb-co-verdict-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><h4>Smart Move.</h4><p>\u20ac20 secured. No stress, no stoppage-time drama. You locked in a 100% profit on your \u20ac10 stake. Smart and profitable.</p></div>'
     : cashoutChoice === 'ride'
-    ? '<div class="sb-co-verdict sb-co-verdict--ride"><div class="sb-co-verdict-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h4>Diamond Hands.</h4><p>You believe in the process. If Arsenal holds on, you collect \u20ac20 \u2014 double your stake. If they concede... well, at least you have a story.</p></div>'
+    ? '<div class="sb-co-verdict sb-co-verdict--ride"><div class="sb-co-verdict-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><h4>Diamond Hands.</h4><p>You believe in the process. If Arsenal holds on, you collect \u20ac25 \u2014 double your stake. If they concede... well, at least you have a story.</p></div>'
     : '';
 
   return `
@@ -721,7 +721,7 @@ function renderCashout() {
               <div class="sb-co-score">1 - 0</div>
               <div class="sb-co-team">
                 <div class="sb-hc-crest"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div>
-                <span class="sb-co-team-name">Opponent</span>
+                <span class="sb-co-team-name">PSG</span>
               </div>
             </div>
 
@@ -740,14 +740,14 @@ function renderCashout() {
 
           <div class="sb-co-bet-info">
             <div class="sb-sim-summary-row"><span>Your Stake</span><span>\u20ac10</span></div>
-            <div class="sb-sim-summary-row"><span>Full Payout (if Arsenal wins)</span><span style="color:#34d399">\u20ac20</span></div>
-            <div class="sb-sim-summary-row sb-sim-summary-total"><span>Cash Out Offer</span><span style="color:var(--accent)">\u20ac15</span></div>
+            <div class="sb-sim-summary-row"><span>Full Payout (if Arsenal wins)</span><span style="color:#34d399">\u20ac25</span></div>
+            <div class="sb-sim-summary-row sb-sim-summary-total"><span>Cash Out Offer</span><span style="color:var(--accent)">\u20ac20</span></div>
           </div>
 
           <h4 class="sb-sim-heading" style="text-align:center;margin-top:24px">What Do You Do?</h4>
           <div class="sb-co-buttons">
-            <button class="sb-co-btn sb-co-btn--cashout ${cashoutChoice === 'cashout' ? 'active' : ''}" data-choice="cashout">Cash Out (\u20ac15)</button>
-            <button class="sb-co-btn sb-co-btn--ride ${cashoutChoice === 'ride' ? 'active' : ''}" data-choice="ride">Ride It Out (\u20ac20)</button>
+            <button class="sb-co-btn sb-co-btn--cashout ${cashoutChoice === 'cashout' ? 'active' : ''}" data-choice="cashout">Cash Out (\u20ac20)</button>
+            <button class="sb-co-btn sb-co-btn--ride ${cashoutChoice === 'ride' ? 'active' : ''}" data-choice="ride">Ride It Out (\u20ac25)</button>
           </div>
           ${choiceHTML}
           ${cashoutChoice ? '<button class="sb-reset-btn sb-btn sb-btn--ghost" data-sim="cashout" style="margin-top:12px;display:block;margin-left:auto;margin-right:auto">Try Again</button>' : ''}
