@@ -671,6 +671,7 @@ function renderPayback() {
 
 // ═══════════════ LESSON 4: CASH OUT ═══════════════
 let cashoutChoice = null; // null, 'cashout', 'ride'
+let partialPct = 50; // partial cashout percentage
 
 function renderCashout() {
   const choiceHTML = cashoutChoice === 'cashout'
@@ -755,7 +756,53 @@ function renderCashout() {
       </div>
     </section>
 
+
     <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">PARTIAL CASH OUT</span>
+        <h2 class="sb-section-title">Why Choose When You Can Do Both?</h2>
+        <p class="sb-section-sub">Most bookmakers let you cash out a <em>portion</em> of your bet. Lock in some profit now, let the rest ride.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> PARTIAL CASH OUT \u2014 ARSENAL vs PSG</div>
+
+          <div class="sb-co-partial-scenario">
+            <div class="sb-sim-summary-row"><span>Original Stake</span><span>\u20ac10</span></div>
+            <div class="sb-sim-summary-row"><span>Full Cash Out Value</span><span style="color:var(--accent)">\u20ac20</span></div>
+            <div class="sb-sim-summary-row"><span>Full Payout (if Arsenal wins)</span><span style="color:#34d399">\u20ac25</span></div>
+          </div>
+
+          <div class="sb-ct-slider-wrap" style="margin-top:20px">
+            <label class="sb-ct-slider-label">Cash Out: <strong>${partialPct}%</strong></label>
+            <input type="range" min="0" max="100" step="10" value="${partialPct}" class="sb-ct-slider" id="partial-slider" />
+            <div class="sb-ct-slider-ticks">${Array.from({length:11},(_,i)=>'<span class="'+(i*10===partialPct?'sb-ct-tick--active':'')+'\">'+(i*10)+'%</span>').join('')}</div>
+          </div>
+
+          <div class="sb-co-partial-split">
+            <div class="sb-co-partial-col sb-co-partial-col--locked">
+              <div class="sb-co-partial-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+              <span class="sb-co-partial-label">Cashed Out</span>
+              <span class="sb-co-partial-val" style="color:#34d399">\u20ac${(20 * partialPct / 100).toFixed(2)}</span>
+              <span class="sb-co-partial-note">Locked in. Yours now.</span>
+            </div>
+            <div class="sb-co-partial-col sb-co-partial-col--riding">
+              <div class="sb-co-partial-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <span class="sb-co-partial-label">Still Riding</span>
+              <span class="sb-co-partial-val" style="color:var(--accent)">\u20ac${(10 * (100 - partialPct) / 100).toFixed(2)} stake</span>
+              <span class="sb-co-partial-note">${partialPct === 100 ? 'Nothing left riding.' : partialPct === 0 ? 'Full bet still active.' : 'If Arsenal wins: \u20ac' + (25 * (100 - partialPct) / 100).toFixed(2)}</span>
+            </div>
+          </div>
+
+          <div class="sb-co-partial-summary">
+            <div class="sb-sim-summary-row"><span>Guaranteed Profit</span><span style="color:#34d399">\u20ac${(20 * partialPct / 100).toFixed(2)}</span></div>
+            <div class="sb-sim-summary-row"><span>If Arsenal Wins</span><span style="color:#34d399">\u20ac${((20 * partialPct / 100) + (25 * (100 - partialPct) / 100)).toFixed(2)}</span></div>
+            <div class="sb-sim-summary-row sb-sim-summary-total"><span>If Arsenal Loses</span><span>\u20ac${(20 * partialPct / 100).toFixed(2)}${partialPct < 100 ? ' <span style="color:#ef4444">(\u2212\u20ac' + (10 * (100 - partialPct) / 100).toFixed(2) + ' lost stake)</span>' : ''}</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
       <div class="sb-container">
         <div class="sb-banker-card">
           <div class="sb-banker-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
@@ -1162,6 +1209,13 @@ function bindEvents() {
       if (bbActive.has(id)) bbActive.delete(id); else bbActive.add(id);
       renderPage();
     });
+  });
+
+  // Partial cashout slider
+  document.getElementById('partial-slider')?.addEventListener('input', (e) => {
+    partialPct = parseInt(e.target.value);
+    renderPage();
+    document.getElementById('partial-slider')?.focus();
   });
 
   // Cross-lesson links

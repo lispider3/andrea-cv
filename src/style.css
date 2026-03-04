@@ -1239,3 +1239,16 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .sb-link-lesson:hover { opacity: 0.8; }
 
 .sb-ct-tick--active { color: var(--accent); font-weight: 800; }
+
+/* ── Partial Cash Out ── */
+.sb-co-partial-scenario { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 8px; }
+.sb-co-partial-split { display: flex; gap: 12px; margin: 20px 0; }
+.sb-co-partial-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 20px 16px; border-radius: var(--radius-sm); text-align: center; }
+.sb-co-partial-col--locked { background: rgba(52,211,153,0.04); border: 1px solid rgba(52,211,153,0.15); }
+.sb-co-partial-col--riding { background: rgba(201,169,110,0.04); border: 1px solid rgba(201,169,110,0.15); }
+.sb-co-partial-icon { margin-bottom: 4px; }
+.sb-co-partial-label { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
+.sb-co-partial-val { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 800; }
+.sb-co-partial-note { font-size: 0.65rem; color: var(--text-muted); }
+.sb-co-partial-summary { padding: 16px; background: rgba(255,255,255,0.02); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.05); }
+@media (max-width: 600px) { .sb-co-partial-split { flex-direction: column; } }
