@@ -1252,3 +1252,13 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .sb-co-partial-note { font-size: 0.65rem; color: var(--text-muted); }
 .sb-co-partial-summary { padding: 16px; background: rgba(255,255,255,0.02); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.05); }
 @media (max-width: 600px) { .sb-co-partial-split { flex-direction: column; } }
+
+/* ── European Handicap Simulator ── */
+.sb-eh-lines { grid-template-columns: repeat(7, 1fr); }
+.sb-eh-result { margin-top: 20px; }
+.sb-eh-outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+.sb-eh-outcome { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 16px 12px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); transition: all 0.2s; }
+.sb-eh-outcome--win { border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.05); }
+.sb-eh-outcome--lose { opacity: 0.5; }
+.sb-eh-outcome-label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
+@media (max-width: 600px) { .sb-eh-outcomes { grid-template-columns: 1fr; } }

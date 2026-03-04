@@ -222,8 +222,19 @@ function renderSystemBets() {
 
 // ═══════════════ LESSON 2: HANDICAPS ═══════════════
 let hcLine = '-1.25';
+let ehLine = '-1';
+let ehHomeGoals = 2;
+let ehAwayGoals = 1;
 let hcHomeGoals = 2;
 let hcAwayGoals = 1;
+
+function calcEuropeanHandicap(line, homeG, awayG) {
+  const l = parseInt(line);
+  const adjDiff = (homeG - awayG) + l;
+  if (adjDiff > 0) return { home: 'WIN', draw: 'LOSE', away: 'LOSE' };
+  if (adjDiff === 0) return { home: 'LOSE', draw: 'WIN', away: 'LOSE' };
+  return { home: 'LOSE', draw: 'LOSE', away: 'WIN' };
+}
 
 function calcAsianHandicap(line, homeG, awayG) {
   const diff = homeG - awayG;
@@ -288,6 +299,7 @@ const hcLines = ['-2.5', '-2.25', '-2', '-1.75', '-1.5', '-1.25', '-1', '-0.75',
 
 function renderHandicaps() {
   const res = calcAsianHandicap(hcLine, hcHomeGoals, hcAwayGoals);
+  const ehRes = calcEuropeanHandicap(ehLine, ehHomeGoals, ehAwayGoals);
 
   return `
 
@@ -311,6 +323,57 @@ function renderHandicaps() {
             <p>Wins only on the <em>exact</em> margin. Home -2 Draw wins if Home wins 2-0, 3-1, 4-2, etc.</p>
           </div>
         </div>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> EUROPEAN HANDICAP SIMULATOR \u2014 BRAZIL (HOME) PERSPECTIVE</div>
+
+          <h4 class="sb-sim-heading">Handicap Line</h4>
+          <div class="sb-hc-lines sb-eh-lines">
+            ${['-3','-2','-1','0','+1','+2','+3'].map(l => { const cls = parseInt(l) < 0 ? 'sb-hc-line-btn--neg' : parseInt(l) > 0 ? 'sb-hc-line-btn--pos' : 'sb-hc-line-btn--zero'; return '<button class="sb-hc-line-btn '+cls+' '+(l===ehLine?'active':'')+' sb-eh-line-btn" data-ehline="'+l+'">'+l+'</button>'; }).join('')}
+          </div>
+
+          <h4 class="sb-sim-heading">Final Score</h4>
+          <div class="sb-hc-score">
+            <div class="sb-hc-score-team">
+              <div class="sb-hc-crest"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <span class="sb-hc-score-label">Brazil</span>
+              <div class="sb-hc-score-ctrl">
+                <button class="sb-hc-score-btn sb-eh-score-btn" data-team="home" data-dir="-1">\u2212</button>
+                <span class="sb-hc-score-val">${ehHomeGoals}</span>
+                <button class="sb-hc-score-btn sb-eh-score-btn" data-team="home" data-dir="1">+</button>
+              </div>
+            </div>
+            <span class="sb-hc-score-vs">vs</span>
+            <div class="sb-hc-score-team">
+              <div class="sb-hc-crest"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <span class="sb-hc-score-label">Malta</span>
+              <div class="sb-hc-score-ctrl">
+                <button class="sb-hc-score-btn sb-eh-score-btn" data-team="away" data-dir="-1">\u2212</button>
+                <span class="sb-hc-score-val">${ehAwayGoals}</span>
+                <button class="sb-hc-score-btn sb-eh-score-btn" data-team="away" data-dir="1">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="sb-eh-result">
+            <h4 class="sb-sim-heading">Adjusted Score: ${ehHomeGoals + parseInt(ehLine)} - ${ehAwayGoals} <span style="color:var(--text-muted);font-weight:400">(after ${ehLine} handicap)</span></h4>
+            <div class="sb-eh-outcomes">
+              <div class="sb-eh-outcome ${ehRes.home === 'WIN' ? 'sb-eh-outcome--win' : 'sb-eh-outcome--lose'}">
+                <span class="sb-eh-outcome-label">Home (1)</span>
+                <span class="sb-result-badge ${resultClass(ehRes.home)}">${ehRes.home}</span>
+              </div>
+              <div class="sb-eh-outcome ${ehRes.draw === 'WIN' ? 'sb-eh-outcome--win' : 'sb-eh-outcome--lose'}">
+                <span class="sb-eh-outcome-label">Handicap Draw (X)</span>
+                <span class="sb-result-badge ${resultClass(ehRes.draw)}">${ehRes.draw}</span>
+              </div>
+              <div class="sb-eh-outcome ${ehRes.away === 'WIN' ? 'sb-eh-outcome--win' : 'sb-eh-outcome--lose'}">
+                <span class="sb-eh-outcome-label">Away (2)</span>
+                <span class="sb-result-badge ${resultClass(ehRes.away)}">${ehRes.away}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1171,8 +1234,21 @@ function bindEvents() {
     btn.addEventListener('click', () => { sims[btn.dataset.sim].forEach(p => p.won = null); renderPage(); });
   });
 
-  // Handicap simulator
-  document.querySelectorAll('.sb-hc-line-btn').forEach(btn => {
+  // European Handicap simulator
+  document.querySelectorAll('.sb-eh-line-btn').forEach(btn => {
+    btn.addEventListener('click', () => { ehLine = btn.dataset.ehline; renderPage(); });
+  });
+  document.querySelectorAll('.sb-eh-score-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const d = parseInt(btn.dataset.dir);
+      if (btn.dataset.team === 'home') ehHomeGoals = Math.max(0, ehHomeGoals + d);
+      else ehAwayGoals = Math.max(0, ehAwayGoals + d);
+      renderPage();
+    });
+  });
+
+  // Asian Handicap simulator
+  document.querySelectorAll('.sb-hc-line-btn:not(.sb-eh-line-btn)').forEach(btn => {
     btn.addEventListener('click', () => { hcLine = btn.dataset.line; renderPage(); });
   });
   document.querySelectorAll('.sb-hc-score-btn').forEach(btn => {
