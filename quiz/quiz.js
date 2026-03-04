@@ -16,15 +16,6 @@ const quizzes = [
 function render() {
   const app = document.getElementById('app');
   app.innerHTML = `
-    <nav class="navbar" id="navbar" aria-label="Main navigation">
-      <div class="nav-brand">
-        <a href="/" class="nav-logo" aria-label="Andrea Spiteri — Home"><span class="logo-a">A</span><span class="logo-s">S</span></a>
-      </div>
-      <div class="nav-links" id="nav-links" role="navigation">
-        <a href="/">Portfolio</a>
-      </div>
-    </nav>
-
     <section class="sb-hero sb-hero--centered">
       <div class="sb-container">
         <span class="sb-tag">INTERACTIVE</span>

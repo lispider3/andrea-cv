@@ -494,6 +494,20 @@ html.light .nav-links a:hover { color: #1a1a1a; }
   .fb-odds-compact .fb-odds-cell { padding: 8px 4px; }
 }
 
+/* ── F1 Dashboard ── */
+.f1-hero { text-align: center; padding: 32px 24px 24px; }
+.f1-hero-badge { display: inline-block; padding: 4px 14px; border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.f1-hero-title { font-family: var(--font-head); font-size: clamp(1.75rem, 5vw, 2.6rem); font-weight: 900; letter-spacing: -1px; margin: 0; color: var(--white); }
+.f1-hero-title span { opacity: 0.4; }
+.f1-hero-subtitle { opacity: 0.5; margin-top: 8px; font-size: 0.875rem; }
+.f1-race-block { text-align: center; display: block; padding: 16px 0; }
+.f1-race-name { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; color: var(--white); }
+.f1-race-circuit { opacity: 0.5; margin-top: 4px; font-size: 0.81rem; }
+.f1-race-meta { margin-top: 12px; display: flex; justify-content: center; gap: 24px; }
+.f1-race-meta-label { opacity: 0.4; font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; }
+.f1-race-meta-value { font-weight: 600; }
+.f1-preview-badge { margin-left: 8px; padding: 2px 8px; background: rgba(255,255,255,0.08); border-radius: 10px; font-size: 0.625rem; letter-spacing: 1px; opacity: 0.6; }
+
 /* ── World Capitals Quiz ── */
 .cq-section { padding: 100px 20px 60px; min-height: 100vh; min-height: 100dvh; }
 .cq-container { max-width: 900px; margin: 0 auto; }

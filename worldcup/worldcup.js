@@ -72,7 +72,7 @@ Object.entries(aliasMap).forEach(([alias, canonical]) => {
   if (entries && !lookup[alias]) lookup[alias] = entries;
 });
 
-const formatTime = (s) => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;  // kept local (different format)  // kept local (different format)
+const formatTime = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;  // kept local (different format)  // kept local (different format)
 const fKey = (year, pos) => `${year}-${pos}`;
 
 const render = () => {
@@ -80,15 +80,6 @@ const render = () => {
   if (!app) return;
 
   app.innerHTML = `
-    <nav class="navbar" id="navbar" aria-label="Main navigation">
-      <div class="nav-brand">
-        <a href="/" class="nav-logo" aria-label="Andrea Spiteri — Home"><span class="logo-a">A</span><span class="logo-s">S</span></a>
-      </div>
-      <div class="nav-links" id="nav-links" role="navigation">
-        <a href="/quiz/">← Quiz Hub</a>
-      </div>
-    </nav>
-
     <section class="f1q-section">
       <div class="f1q-container">
 
@@ -138,19 +129,19 @@ const render = () => {
                     <span class="wc-table-host">${t.host}</span>
                   </div>
                   ${t.teams.map((team, pos) => {
-                    const key = fKey(t.year, pos);
-                    const isFound = found[key];
-                    const show = isFound || finished;
-                    return `<div class="wc-table-cell ${show ? posClasses[pos] : ''} ${finished && !isFound ? 'wc-cell--missed' : ''}">
+    const key = fKey(t.year, pos);
+    const isFound = found[key];
+    const show = isFound || finished;
+    return `<div class="wc-table-cell ${show ? posClasses[pos] : ''} ${finished && !isFound ? 'wc-cell--missed' : ''}">
                       ${show ? `${flagImg(team, 18)}<span class="wc-table-name">${team}</span>` : '<span class="wc-table-blank">?</span>'}
                     </div>`;
-                  }).join('')}
+  }).join('')}
                 </div>
               `).join('')}
             </div>
 
             <div class="f1q-progress">
-              <div class="f1q-progress-fill" style="width:${(foundCount/TOTAL)*100}%"></div>
+              <div class="f1q-progress-fill" style="width:${(foundCount / TOTAL) * 100}%"></div>
             </div>
           </div>
         ` : ''}

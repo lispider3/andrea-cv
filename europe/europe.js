@@ -108,7 +108,7 @@ const render = () => {
 
         ${started ? `
           <div class="f1q-card">
-            <div class="f1q-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <span style="color:#3b82f6">COUNTRIES OF EUROPE</span> · ${TOTAL} TO NAME</div>
+            <div class="f1q-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> COUNTRIES OF EUROPE · ${TOTAL} TO NAME</div>
 
             ${!finished ? `
               <div class="f1q-toolbar">
@@ -127,7 +127,7 @@ const render = () => {
               <div class="f1q-result">
                 <div class="f1q-result-score">${found.size} / ${TOTAL}</div>
                 <div class="f1q-result-label">${found.size === TOTAL ? 'PERFECT SCORE!' : found.size >= 40 ? 'INCREDIBLE!' : found.size >= 30 ? 'GREAT JOB!' : found.size >= 20 ? 'NOT BAD!' : 'KEEP PRACTICING!'}</div>
-                <button id="f1q-restart" class="f1q-btn f1q-btn--primary" style="background:#3b82f6;border-color:#3b82f6;margin-top:16px">Play Again</button>
+                <button id="f1q-restart" class="f1q-btn f1q-btn--primary" style="margin-top:16px">Play Again</button>
               </div>
             `}
 
@@ -136,7 +136,7 @@ const render = () => {
             </div>
 
             <div class="f1q-progress">
-              <div class="f1q-progress-fill" style="background:linear-gradient(90deg,#3b82f6,#60a5fa);width:${(found.size / TOTAL) * 100}%"></div>
+              <div class="f1q-progress-fill" style="width:${(found.size / TOTAL) * 100}%"></div>
             </div>
           </div>
         ` : ''}

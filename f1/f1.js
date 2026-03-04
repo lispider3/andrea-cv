@@ -87,17 +87,17 @@ const renderNextRace = () => {
   return `
     <div class="fb-card">
       <div class="fb-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> NEXT RACE</div>
-      <div class="fb-match-header fb-match-header--compact" style="text-align:center;display:block;padding:16px 0">
-        <div style="font-size:24px;font-weight:800;letter-spacing:-0.5px">${nextRace.raceName}</div>
-        <div style="opacity:0.5;margin-top:4px;font-size:13px">${nextRace.Circuit?.circuitName || ''} — ${nextRace.Circuit?.Location?.locality || ''}, ${nextRace.Circuit?.Location?.country || ''}</div>
-        <div style="margin-top:12px;display:flex;justify-content:center;gap:24px">
+      <div class="f1-race-block">
+        <div class="f1-race-name">${nextRace.raceName}</div>
+        <div class="f1-race-circuit">${nextRace.Circuit?.circuitName || ''} — ${nextRace.Circuit?.Location?.locality || ''}, ${nextRace.Circuit?.Location?.country || ''}</div>
+        <div class="f1-race-meta">
           <div>
-            <div style="opacity:0.4;font-size:11px;text-transform:uppercase;letter-spacing:1px">Date</div>
-            <div style="font-weight:600">${formatRaceDate(nextRace.date, nextRace.time)}</div>
+            <div class="f1-race-meta-label">Date</div>
+            <div class="f1-race-meta-value">${formatRaceDate(nextRace.date, nextRace.time)}</div>
           </div>
           <div>
-            <div style="opacity:0.4;font-size:11px;text-transform:uppercase;letter-spacing:1px">Lights Out</div>
-            <div style="font-weight:600">${formatRaceTime(nextRace.date, nextRace.time)}</div>
+            <div class="f1-race-meta-label">Lights Out</div>
+            <div class="f1-race-meta-value">${formatRaceTime(nextRace.date, nextRace.time)}</div>
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@ const renderLastRace = () => {
                 <td>${r.position}</td>
                 <td>${flagImg(r.Driver?.nationality)} ${r.Driver?.givenName} ${r.Driver?.familyName}</td>
                 <td>${r.Constructor?.name}</td>
-                <td style="font-weight:600">${r.points}</td>
+                <td class="fb-table-pts">${r.points}</td>
               </tr>`;
   }).join('')}
           </tbody>
@@ -214,7 +214,7 @@ const renderPreview = () => {
   const badge = phaseBadges[previewPhase] || 'PREVIEW';
   return `
     <div class="fb-card">
-      <div class="fb-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg> AI RACE PREVIEW <span style="margin-left:8px;padding:2px 8px;background:rgba(255,255,255,0.08);border-radius:10px;font-size:10px;letter-spacing:1px;opacity:0.6">${badge}</span></div>
+      <div class="fb-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg> AI RACE PREVIEW <span class="f1-preview-badge">${badge}</span></div>
       <div class="fb-preview">
         <p class="fb-preview-text">${previewText}</p>
       </div>
@@ -245,10 +245,10 @@ const render = () => {
   app.innerHTML = `
     <section class="fb-section">
       <div class="fb-container">
-        <div class="fb-card" style="text-align:center;padding:32px 24px 24px">
-          <div style="display:inline-block;padding:4px 14px;border:1px solid rgba(255,255,255,0.15);border-radius:20px;font-size:11px;letter-spacing:2px;color:var(--accent,#c9a84c);font-weight:600;margin-bottom:12px">FORMULA 1</div>
-          <h1 style="font-size:clamp(28px,5vw,42px);font-weight:900;letter-spacing:-1px;margin:0">${season} <span style="opacity:0.4">Season</span></h1>
-          <p style="opacity:0.5;margin-top:8px;font-size:14px">Live standings & race data from the Ergast API</p>
+        <div class="fb-card f1-hero">
+          <div class="f1-hero-badge">FORMULA 1</div>
+          <h1 class="f1-hero-title">${season} <span>Season</span></h1>
+          <p class="f1-hero-subtitle">Live standings & race data from the Ergast API</p>
         </div>
 
         ${renderNextRace()}

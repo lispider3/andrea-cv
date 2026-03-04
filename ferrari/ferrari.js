@@ -122,7 +122,7 @@ const renderCell = (entry, i) => {
   const cls = `f1q-cell ${found.has(i) ? 'f1q-cell--found' : ''} ${finished && !found.has(i) ? 'f1q-cell--missed' : ''}`;
   const lastName = driver.split(' ').pop().replace(/Jr\./g, '').trim().toUpperCase();
   return `<div class="${cls}">
-    <span class="quiz-team-dot" style="background:#DC0000" title="Ferrari"></span>
+    <span class="quiz-team-dot" style="background:var(--accent)" title="Ferrari"></span>
     <span class="f1q-cell-year">${year}</span>
     ${show ? flagImg(iso, 14) : ''}
     <span class="f1q-cell-name">${show ? lastName : ''}</span>
@@ -148,7 +148,7 @@ const render = () => {
 
         ${started ? `
           <div class="f1q-card">
-            <div class="f1q-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> <span style="color:#DC0000">SCUDERIA FERRARI</span> · F1 DRIVERS SINCE 2000</div>
+            <div class="f1q-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg> SCUDERIA FERRARI · F1 DRIVERS SINCE 2000</div>
 
             ${!finished ? `
               <div class="f1q-toolbar">
@@ -167,7 +167,7 @@ const render = () => {
               <div class="f1q-result">
                 <div class="f1q-result-score">${found.size} / ${TOTAL}</div>
                 <div class="f1q-result-label">${found.size === TOTAL ? 'PERFECT SCORE!' : found.size > 40 ? 'INCREDIBLE!' : found.size > 30 ? 'GREAT JOB!' : found.size > 15 ? 'NOT BAD!' : 'KEEP PRACTICING!'}</div>
-                <button id="f1q-restart" class="f1q-btn f1q-btn--primary" style="background:#DC0000;border-color:#DC0000;margin-top:16px">Play Again</button>
+                <button id="f1q-restart" class="f1q-btn f1q-btn--primary" style="margin-top:16px">Play Again</button>
               </div>
             `}
 
@@ -176,7 +176,7 @@ const render = () => {
             </div>
 
             <div class="f1q-progress">
-              <div class="f1q-progress-fill" style="background:linear-gradient(90deg,#DC0000,#FF2800);width:${(found.size / TOTAL) * 100}%"></div>
+              <div class="f1q-progress-fill" style="width:${(found.size / TOTAL) * 100}%"></div>
             </div>
           </div>
         ` : ''}
@@ -241,7 +241,7 @@ const onInput = (e) => {
           const [year, driver, iso] = FERRARI_DRIVERS[i];
           const lastName = driver.split(' ').pop().replace(/Jr\./g, '').trim().toUpperCase();
           cell.innerHTML = `
-            <span class="quiz-team-dot" style="background:#DC0000" title="Ferrari"></span>
+            <span class="quiz-team-dot" style="background:var(--accent)" title="Ferrari"></span>
             <span class="f1q-cell-year">${year}</span>
             ${flagImg(iso, 14)}
             <span class="f1q-cell-name">${lastName}</span>
