@@ -884,39 +884,74 @@ function renderCashout() {
 
 // ═══════════════ LESSON 5: BET BUILDER ═══════════════
 const bbMarkets = [
-  { id: 'mcwin',   label: 'Man City to Win',           odds: 1.45, cat: 'result',    group: 'Result' },
-  { id: 'draw',    label: 'Draw',                      odds: 4.20, cat: 'result',    group: 'Result' },
-  { id: 'btts',    label: 'Both Teams to Score',       odds: 1.72, cat: 'goals',     group: 'Goals' },
-  { id: 'ov25',    label: 'Over 2.5 Goals',            odds: 1.65, cat: 'goals',     group: 'Goals' },
-  { id: 'un25',    label: 'Under 2.5 Goals',           odds: 2.25, cat: 'goals',     group: 'Goals' },
-  { id: 'haaland', label: 'Haaland to Score Anytime',  odds: 1.80, cat: 'scorer',    group: 'Goalscorer' },
-  { id: 'vini',    label: 'Vinicius to Score Anytime', odds: 3.10, cat: 'scorer',    group: 'Goalscorer' },
-  { id: 'ov10c',   label: 'Over 10.5 Corners',         odds: 2.10, cat: 'corners',   group: 'Corners' },
-  { id: 'mc15c',   label: 'Man City Over 5.5 Corners', odds: 2.00, cat: 'corners',   group: 'Corners' },
-  { id: 'ov3card', label: 'Over 3.5 Cards',            odds: 1.85, cat: 'cards',     group: 'Cards' },
+  { id: 'psgwin',  label: 'PSG to Win',               odds: 1.80, cat: 'result', group: 'Match Result', row: 1 },
+  { id: 'draw',    label: 'Draw',                     odds: 4.00, cat: 'result', group: 'Match Result', row: 1 },
+  { id: 'chewin',  label: 'Chelsea to Win',           odds: 4.35, cat: 'result', group: 'Match Result', row: 1 },
+  { id: 'ov25',    label: 'Over 2.5 Goals',           odds: 1.55, cat: 'goals',  group: 'Total Goals', row: 2 },
+  { id: 'un25',    label: 'Under 2.5 Goals',          odds: 2.42, cat: 'goals',  group: 'Total Goals', row: 2 },
+  { id: 'bttsy',   label: 'BTTS Yes',                 odds: 1.52, cat: 'btts',   group: 'Both Teams to Score', row: 3 },
+  { id: 'bttsn',   label: 'BTTS No',                  odds: 2.42, cat: 'btts',   group: 'Both Teams to Score', row: 3 },
+  { id: 'haaland', label: 'Haaland to Score',         odds: 1.80, cat: 'scorer', group: 'Player to Score Anytime', row: 4 },
+  { id: 'barcola', label: 'Barcola to Score',         odds: 3.00, cat: 'scorer', group: 'Player to Score Anytime', row: 4 },
+  { id: 'ov10c',   label: 'Over 10.5 Corners',        odds: 2.10, cat: 'corners', group: 'Corners', row: 5 },
+  { id: 'un10c',   label: 'Under 10.5 Corners',       odds: 1.60, cat: 'corners', group: 'Corners', row: 5 },
+  { id: 'ov3card', label: 'Over 3.5 Cards',           odds: 1.85, cat: 'cards',  group: 'Cards', row: 6 },
+  { id: 'un3card', label: 'Under 3.5 Cards',          odds: 1.85, cat: 'cards',  group: 'Cards', row: 6 },
 ];
 const bbActive = new Set();
 
 // Correlation factors: pairs that overlap. Higher = more correlated (1 = fully overlapping, 0 = independent)
 const correlations = {
-  'mcwin+haaland':  { factor: 0.30, reason: 'If City win, Haaland is more likely to have scored.' },
-  'mcwin+ov25':     { factor: 0.25, reason: 'City winning usually involves goals \u2014 the "over" becomes more likely.' },
-  'mcwin+btts':     { factor: 0.10, reason: 'City winning doesn\u2019t strongly predict conceding, but attacking play increases chances.' },
-  'mcwin+un25':     { factor: 0.20, reason: 'Conflicting: City winning AND few goals is possible (1-0), but less common.' },
-  'mcwin+mc15c':    { factor: 0.20, reason: 'A dominant City means more attacking play and more corners.' },
-  'draw+un25':      { factor: 0.25, reason: 'Draws are often low-scoring. These overlap significantly.' },
-  'draw+btts':      { factor: 0.15, reason: 'A draw with both teams scoring (1-1, 2-2) is a specific subset.' },
-  'btts+ov25':      { factor: 0.35, reason: 'If both teams score, you already have 2+ goals. Strong overlap.' },
-  'btts+haaland':   { factor: 0.20, reason: 'Both teams scoring raises the chance any individual player scores.' },
-  'btts+vini':      { factor: 0.20, reason: 'Same logic: more goals = more chances for individual scorers.' },
-  'ov25+haaland':   { factor: 0.20, reason: 'More goals in the match = higher chance Haaland is among the scorers.' },
-  'ov25+vini':      { factor: 0.20, reason: 'More goals = more chances for Vinicius too.' },
-  'ov25+un25':      { factor: 1.00, reason: 'These are mutually exclusive. You cannot have both.' },
-  'haaland+vini':   { factor: 0.05, reason: 'Largely independent \u2014 different teams, different roles.' },
-  'ov10c+mc15c':    { factor: 0.40, reason: 'City\u2019s corners are a subset of total corners. High overlap.' },
-  'ov10c+ov25':     { factor: 0.15, reason: 'High-scoring games tend to have more corners, but the link is moderate.' },
-  'un25+haaland':   { factor: 0.15, reason: 'Fewer goals means less chance for any scorer. Mild negative.' },
-  'un25+vini':      { factor: 0.15, reason: 'Same: fewer goals = fewer scoring chances.' },
+  // Result + Goals: winning teams score goals
+  'psgwin+ov25':     { factor: 0.25, reason: 'PSG winning usually means goals \u2014 the "over" becomes more likely.' },
+  'psgwin+un25':     { factor: 0.20, reason: 'PSG winning AND few goals is possible (1-0), but less common with their attack.' },
+  'chewin+ov25':     { factor: 0.20, reason: 'A Chelsea upset likely involves goals from both sides.' },
+  'draw+un25':       { factor: 0.25, reason: 'Draws are often low-scoring (0-0, 1-1). These overlap significantly.' },
+  'draw+ov25':       { factor: 0.10, reason: 'A high-scoring draw (2-2, 3-3) is less common than a 1-1.' },
+  
+  // Result + BTTS
+  'psgwin+bttsy':    { factor: 0.10, reason: 'PSG winning with both teams scoring (e.g. 3-1) is plausible but not strongly linked.' },
+  'psgwin+bttsn':    { factor: 0.15, reason: 'PSG clean sheet wins (1-0, 2-0) are common \u2014 some overlap here.' },
+  'draw+bttsy':      { factor: 0.15, reason: 'Draws with both scoring (1-1, 2-2) are a specific subset.' },
+  'chewin+bttsn':    { factor: 0.10, reason: 'Chelsea winning without conceding at Parc des Princes? Possible but rare.' },
+  
+  // Goals + BTTS: strong overlap
+  'ov25+bttsy':      { factor: 0.35, reason: 'If both teams score, you already have 2+ goals. Very strong overlap.' },
+  'un25+bttsn':      { factor: 0.30, reason: 'Under 2.5 and BTTS No both point toward a low-scoring, one-sided game.' },
+  'ov25+bttsn':      { factor: 0.15, reason: 'Over 2.5 with only one team scoring (3-0) \u2014 possible but less common.' },
+  'un25+bttsy':      { factor: 0.20, reason: 'Both teams scoring but under 2.5? Only 1-1 qualifies. Very narrow.' },
+  
+  // Mutually exclusive pairs
+  'ov25+un25':       { factor: 1.00, reason: 'These are mutually exclusive. You cannot have both.' },
+  'bttsy+bttsn':     { factor: 1.00, reason: 'These are mutually exclusive. You cannot have both.' },
+  'psgwin+draw':     { factor: 1.00, reason: 'These are mutually exclusive. You cannot have both.' },
+  'psgwin+chewin':   { factor: 1.00, reason: 'These are mutually exclusive. You cannot have both.' },
+  'draw+chewin':     { factor: 1.00, reason: 'These are mutually exclusive. You cannot have both.' },
+  'ov10c+un10c':     { factor: 1.00, reason: 'These are mutually exclusive. You cannot have both.' },
+  'ov3card+un3card': { factor: 1.00, reason: 'These are mutually exclusive. You cannot have both.' },
+  
+  // Result + Scorers
+  'psgwin+barcola':  { factor: 0.25, reason: 'Barcola plays for PSG \u2014 if PSG wins, he\u2019s more likely to have scored.' },
+  'psgwin+haaland':  { factor: 0.15, reason: 'Haaland plays for Chelsea \u2014 PSG winning reduces his chances (but doesn\u2019t eliminate them).' },
+  'chewin+haaland':  { factor: 0.25, reason: 'Haaland plays for Chelsea \u2014 a Chelsea win increases his scoring chances.' },
+  'chewin+barcola':  { factor: 0.15, reason: 'Barcola plays for PSG \u2014 a Chelsea win reduces (but doesn\u2019t eliminate) his chances.' },
+  
+  // Goals + Scorers
+  'ov25+haaland':    { factor: 0.20, reason: 'More goals = higher chance any individual player scores.' },
+  'ov25+barcola':    { factor: 0.20, reason: 'More goals = higher chance Barcola is among the scorers.' },
+  'un25+haaland':    { factor: 0.15, reason: 'Fewer goals means less chance for any scorer.' },
+  'un25+barcola':    { factor: 0.15, reason: 'Fewer goals = fewer scoring chances for Barcola.' },
+  
+  // BTTS + Scorers
+  'bttsy+haaland':   { factor: 0.20, reason: 'Both teams scoring raises the chance any individual player scores.' },
+  'bttsy+barcola':   { factor: 0.20, reason: 'Both teams scoring = more goals = more chances for individual scorers.' },
+  
+  // Scorers (largely independent - different teams)
+  'haaland+barcola': { factor: 0.05, reason: 'Different teams, different roles \u2014 largely independent.' },
+  
+  // Corners + Goals (moderate)
+  'ov10c+ov25':      { factor: 0.15, reason: 'High-scoring games tend to have more corners, but the link is moderate.' },
+  'ov10c+psgwin':    { factor: 0.15, reason: 'PSG dominating at home usually means more attacking play and corners.' },
 };
 
 function getCorrelation(id1, id2) {
@@ -984,7 +1019,7 @@ function renderBetBuilder() {
     <section class="sb-section">
       <div class="sb-container">
         <span class="sb-section-tag">MARKET BUILDER</span>
-        <h2 class="sb-section-title">Man City vs Real Madrid</h2>
+        <h2 class="sb-section-title">PSG vs Chelsea</h2>
         <p class="sb-section-sub">Select markets to build your bet. Watch how correlations affect the real odds.</p>
 
         <div class="sb-sim-card" style="margin-top:24px">
@@ -992,14 +1027,11 @@ function renderBetBuilder() {
 
           ${groups.map(g => `
             <h4 class="sb-sim-heading" style="margin-top:16px">${g}</h4>
-            <div class="sb-bb-legs">
+            <div class="sb-bb-row">
               ${bbMarkets.filter(m => m.group === g).map(m => `
-                <button class="sb-bb-leg ${bbActive.has(m.id) ? 'sb-bb-leg--active' : ''} ${hasMutualExclusive && bbActive.has(m.id) && result.pairs.some(p => p.factor >= 1.0 && (p.a.id === m.id || p.b.id === m.id)) ? 'sb-bb-leg--conflict' : ''}" data-leg="${m.id}">
-                  <div class="sb-bb-leg-check"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-                  <div class="sb-bb-leg-info">
-                    <span class="sb-bb-leg-label">${m.label}</span>
-                    <span class="sb-bb-leg-odds">@ ${m.odds.toFixed(2)}</span>
-                  </div>
+                <button class="sb-bb-cell ${bbActive.has(m.id) ? 'sb-bb-cell--active' : ''} ${hasMutualExclusive && bbActive.has(m.id) && result.pairs.some(p => p.factor >= 1.0 && (p.a.id === m.id || p.b.id === m.id)) ? 'sb-bb-cell--conflict' : ''}" data-leg="${m.id}">
+                  <span class="sb-bb-cell-label">${m.label}</span>
+                  <span class="sb-bb-cell-odds">${m.odds.toFixed(2)}</span>
                 </button>
               `).join('')}
             </div>
@@ -1400,7 +1432,7 @@ function bindEvents() {
     btn.addEventListener('click', () => { cashoutChoice = btn.dataset.choice; renderPage(); });
   });
   // Bet builder legs
-  document.querySelectorAll('.sb-bb-leg').forEach(btn => {
+  document.querySelectorAll('.sb-bb-cell').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.dataset.leg;
       if (bbActive.has(id)) bbActive.delete(id); else bbActive.add(id);
