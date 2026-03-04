@@ -24,6 +24,38 @@ const getLogo = (name) => {
 };
 const logoImg = (name, size = 24) => { const src = getLogo(name); return src ? `<img src="${src}" alt="${name}" width="${size}" height="${size}" style="border-radius:4px;object-fit:contain;" loading="lazy">` : ''; };
 
+// ── Player nationalities (ISO 2-letter codes for flagcdn.com) ──
+const PLAYER_FLAGS = {
+  'Roberto Baggio': 'it', 'Andreas Möller': 'de', 'Gianluca Vialli': 'it', 'Fabrizio Ravanelli': 'it',
+  'David Platt': 'gb-eng', 'Paolo Di Canio': 'it', 'Alessandro Del Piero': 'it', 'Antonio Conte': 'it',
+  'Didier Deschamps': 'fr', 'Alen Bokšić': 'hr', 'Attilio Lombardo': 'it',
+  'Christian Vieri': 'it', 'Nicola Amoruso': 'it', 'Zinédine Zidane': 'fr',
+  'Filippo Inzaghi': 'it', 'Daniel Fonseca': 'uy', 'Darko Kovačević': 'rs',
+  'Edgar Davids': 'nl', 'David Trézéguet': 'fr', 'Gianluca Zambrotta': 'it',
+  'Pavel Nedvěd': 'cz', 'Igor Tudor': 'hr', 'Ciro Ferrara': 'it',
+  'Marcelo Salas': 'cl', 'Enzo Maresca': 'it', 'Mauro Camoranesi': 'it',
+  'Zlatan Ibrahimović': 'se', 'Adrian Mutu': 'ro', 'Raffaele Palladino': 'it',
+  'Valeri Bojinov': 'bg', 'Vincenzo Iaquinta': 'it', 'Amauri': 'br',
+  'Hasan Salihamidžić': 'ba', 'Diego': 'br', 'Alessandro Matri': 'it',
+  'Fabio Quagliarella': 'it', 'Felipe Melo': 'br', 'Claudio Marchisio': 'it',
+  'Mirko Vučinić': 'me', 'Arturo Vidal': 'cl', 'Sebastian Giovinco': 'it',
+  'Carlos Tévez': 'ar', 'Fernando Llorente': 'es', 'Paul Pogba': 'fr',
+  'Leonardo Bonucci': 'it', 'Paulo Dybala': 'ar', 'Álvaro Morata': 'es',
+  'Gonzalo Higuaín': 'ar', 'Mario Mandžukić': 'hr', 'Miralem Pjanić': 'ba',
+  'Juan Cuadrado': 'co', 'Douglas Costa': 'br', 'Blaise Matuidi': 'fr',
+  'Cristiano Ronaldo': 'pt', 'Moise Kean': 'it', 'Emre Can': 'de',
+  'Matthijs de Ligt': 'nl', 'Adrien Rabiot': 'fr', 'Federico Chiesa': 'it',
+  'Dušan Vlahović': 'rs', 'Arkadiusz Milik': 'pl', 'Ángel Di María': 'ar',
+  'Timothy Weah': 'us', 'Andrea Cambiaso': 'it', 'Randal Kolo Muani': 'fr',
+  'Kenan Yıldız': 'tr', 'Kephren Thuram': 'fr',
+};
+
+const pflagImg = (name, size = 14) => {
+  const iso = PLAYER_FLAGS[name];
+  if (!iso) return '';
+  return `<img src="https://flagcdn.com/w20/${iso}.png" alt="" width="20" height="15" class="quiz-flag" loading="lazy">`;
+};
+
 
 const fetchJSON = async (url) => {
   const res = await fetch(url);
@@ -269,7 +301,7 @@ const renderQuiz = () => {
       const found = quizAnswered.has(key);
       return `<div class="jq-cell ${found ? 'jq-cell--found' : ''} ${quizState==='done' && !found ? 'jq-cell--missed' : ''}">
         <span class="jq-goals">${goals}</span>
-        <span class="jq-name">${found || quizState==='done' ? name : ''}</span>
+        ${(found || quizState==='done') ? pflagImg(name) : ''}<span class="jq-name">${found || quizState==='done' ? name : ''}</span>
       </div>`;
     }).join('');
     return `<div class="jq-col"><div class="jq-season">${season.s}</div>${rows}</div>`;

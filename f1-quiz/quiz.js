@@ -1,6 +1,40 @@
 import '../src/style.css';
 import { trackEvent } from '../src/tracker.js';
 
+// ── Driver nationalities (ISO 2-letter codes for flagcdn.com) ──
+const DRIVER_FLAGS = {
+  'Nino Farina': 'it', 'Juan Manuel Fangio': 'ar', 'Alberto Ascari': 'it',
+  'Mike Hawthorn': 'gb', 'Jack Brabham': 'au', 'Phil Hill': 'us',
+  'Graham Hill': 'gb', 'Jim Clark': 'gb', 'John Surtees': 'gb',
+  'Denny Hulme': 'nz', 'Jackie Stewart': 'gb', 'Jochen Rindt': 'at',
+  'Emerson Fittipaldi': 'br', 'Niki Lauda': 'at', 'James Hunt': 'gb',
+  'Mario Andretti': 'us', 'Jody Scheckter': 'za', 'Alan Jones': 'au',
+  'Nelson Piquet': 'br', 'Keke Rosberg': 'fi', 'Alain Prost': 'fr',
+  'Ayrton Senna': 'br', 'Nigel Mansell': 'gb', 'Michael Schumacher': 'de',
+  'Damon Hill': 'gb', 'Jacques Villeneuve': 'ca', 'Mika Häkkinen': 'fi',
+  'Fernando Alonso': 'es', 'Kimi Räikkönen': 'fi', 'Lewis Hamilton': 'gb',
+  'Jenson Button': 'gb', 'Sebastian Vettel': 'de', 'Nico Rosberg': 'de',
+  'Max Verstappen': 'nl', 'Lando Norris': 'gb',
+};
+
+// ── Constructor/team colours ──
+const TEAM_COLORS = {
+  'Alfa Romeo': '#9B0000', 'Ferrari': '#DC0000', 'Maserati': '#00247D',
+  'Maserati/Mercedes': '#00847F', 'Mercedes': '#00D2BE', 'Cooper': '#004225',
+  'BRM': '#006B3F', 'Lotus': '#FFB800', 'Brabham': '#00694C',
+  'Matra': '#002395', 'Tyrrell': '#002395', 'McLaren': '#FF8700',
+  'Williams': '#005AFF', 'Benetton': '#00A651', 'Renault': '#FFF500',
+  'Brawn': '#B5F500', 'Red Bull': '#3671C6',
+};
+
+const flagImg = (iso, size = 16) => iso
+  ? `<img src="https://flagcdn.com/w20/${iso}.png" alt="" width="20" height="15" class="quiz-flag" loading="lazy">`
+  : '';
+const teamDot = (team) => {
+  const c = TEAM_COLORS[team];
+  return c ? `<span class="quiz-team-dot" style="background:${c}" title="${team}"></span>` : '';
+};
+
 // ── F1 World Champions 1950–2025 ──
 const champions = [
   { year: 1950, driver: "Nino Farina", team: "Alfa Romeo" },
@@ -122,6 +156,18 @@ for (let d = 1950; d <= 2020; d += 10) {
   if (items.length) decades.push({ label: `${d}s`, start: d, items });
 }
 
+const renderCell = (c, i) => {
+  const show = found.has(i) || finished;
+  const cls = `f1q-cell ${found.has(i) ? 'f1q-cell--found' : ''} ${finished && !found.has(i) ? 'f1q-cell--missed' : ''}`;
+  const flag = DRIVER_FLAGS[c.driver];
+  return `<div class="${cls}">
+    ${show ? teamDot(c.team) : ''}
+    <span class="f1q-cell-year">${c.year}</span>
+    ${show ? flagImg(flag, 14) : ''}
+    <span class="f1q-cell-name">${show ? c.driver.split(' ').pop().toUpperCase() : ''}</span>
+  </div>`;
+};
+
 const render = () => {
   const app = document.getElementById('quiz-app');
   if (!app) return;
@@ -165,12 +211,7 @@ const render = () => {
             `}
 
             <div class="f1q-grid">
-              ${champions.map((c, i) => `
-                <div class="f1q-cell ${found.has(i) ? 'f1q-cell--found' : ''} ${finished && !found.has(i) ? 'f1q-cell--missed' : ''}">
-                  <span class="f1q-cell-year">${c.year}</span>
-                  <span class="f1q-cell-name">${found.has(i) || finished ? c.driver.split(' ').pop().toUpperCase() : ''}</span>
-                </div>
-              `).join('')}
+              ${champions.map((c, i) => renderCell(c, i)).join('')}
             </div>
 
             <div class="f1q-progress">
@@ -237,7 +278,15 @@ const onInput = (e) => {
         const cell = cells[i];
         if (cell) {
           cell.classList.add('f1q-cell--found');
-          cell.querySelector('.f1q-cell-name').textContent = champions[i].driver.split(' ').pop().toUpperCase();
+          // Re-render cell content with flag and team dot
+          const c = champions[i];
+          const flag = DRIVER_FLAGS[c.driver];
+          cell.innerHTML = `
+            ${teamDot(c.team)}
+            <span class="f1q-cell-year">${c.year}</span>
+            ${flagImg(flag, 14)}
+            <span class="f1q-cell-name">${c.driver.split(' ').pop().toUpperCase()}</span>
+          `;
         }
       });
       if (found.size === TOTAL) { clearInterval(timerInterval); finished = true; render(); }

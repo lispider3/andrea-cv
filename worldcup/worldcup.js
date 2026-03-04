@@ -14,6 +14,20 @@ const tournaments = [
 const TOTAL = tournaments.length * 4; // 24 answers
 const TIMER_SECONDS = 300; // 5 minutes
 
+// Country flag codes (ISO 2-letter)
+const FLAG_CODES = {
+  'Brazil': 'br', 'Germany': 'de', 'Turkey': 'tr', 'South Korea': 'kr',
+  'Italy': 'it', 'France': 'fr', 'Portugal': 'pt', 'Spain': 'es',
+  'Netherlands': 'nl', 'Uruguay': 'uy', 'Argentina': 'ar',
+  'Croatia': 'hr', 'Belgium': 'be', 'England': 'gb-eng', 'Morocco': 'ma',
+};
+
+const flagImg = (team, size = 20) => {
+  const iso = FLAG_CODES[team];
+  if (!iso) return '';
+  return `<img src="https://flagcdn.com/w20/${iso}.png" alt="${team}" width="20" height="15" class="quiz-flag" loading="lazy">`;
+};
+
 let found = {}; // { "year-pos": true }
 let foundCount = 0;
 let timerInterval = null;
@@ -131,7 +145,7 @@ const render = () => {
                     const isFound = found[key];
                     const show = isFound || finished;
                     return `<div class="wc-table-cell ${show ? posClasses[pos] : ''} ${finished && !isFound ? 'wc-cell--missed' : ''}">
-                      ${show ? `<span class="wc-table-flag">${flags[team] || ''}</span><span class="wc-table-name">${team}</span>` : '<span class="wc-table-blank">?</span>'}
+                      ${show ? `${flagImg(team, 18)}<span class="wc-table-name">${team}</span>` : '<span class="wc-table-blank">?</span>'}
                     </div>`;
                   }).join('')}
                 </div>

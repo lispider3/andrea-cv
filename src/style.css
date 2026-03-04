@@ -1349,3 +1349,14 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 /* ── World Cup: fixed cell sizes ── */
 .wc-table-cell { min-height: 64px; min-width: 0; }
 .wc-table-flag { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 800; letter-spacing: 1px; color: var(--accent); opacity: 0.6; }
+
+/* ── QUIZ FLAGS & TEAM DOTS ── */
+.quiz-flag { display: inline-block; vertical-align: middle; border-radius: 2px; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(255,255,255,0.1); }
+.quiz-team-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 4px rgba(0,0,0,0.3); }
+.f1q-cell .quiz-flag { margin-right: 2px; }
+.f1q-cell .quiz-team-dot { margin-right: 4px; }
+.jq-cell .quiz-flag { margin-right: 4px; }
+.wc-table-cell .quiz-flag { margin-bottom: 2px; }
+.wc-table-cell { gap: 6px; }
+.cq-row .quiz-flag { margin-right: 6px; }
+.cq-feedback .quiz-flag { margin-right: 4px; vertical-align: -1px; }

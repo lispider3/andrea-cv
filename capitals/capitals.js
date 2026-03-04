@@ -127,6 +127,50 @@ altEntries.forEach(([alt, canonical]) => {
 });
 
 
+
+// -- Country flags (ISO 2-letter codes for flagcdn.com) --
+const ID3_TO_ISO2 = {
+  '004':'af','008':'al','012':'dz','020':'ad','024':'ao','028':'ag','032':'ar','051':'am',
+  '036':'au','040':'at','031':'az','044':'bs','048':'bh','050':'bd','052':'bb','112':'by',
+  '056':'be','084':'bz','204':'bj','064':'bt','068':'bo','070':'ba','072':'bw','076':'br',
+  '096':'bn','100':'bg','854':'bf','108':'bi','132':'cv','116':'kh','120':'cm','124':'ca',
+  '140':'cf','148':'td','152':'cl','156':'cn','170':'co','174':'km','180':'cd','178':'cg',
+  '188':'cr','191':'hr','192':'cu','196':'cy','203':'cz','208':'dk','262':'dj','212':'dm',
+  '214':'do','626':'tl','218':'ec','818':'eg','222':'sv','226':'gq','232':'er','233':'ee',
+  '748':'sz','231':'et','242':'fj','246':'fi','250':'fr','266':'ga','270':'gm','268':'ge',
+  '276':'de','288':'gh','300':'gr','308':'gd','320':'gt','324':'gn','624':'gw','328':'gy',
+  '332':'ht','340':'hn','348':'hu','352':'is','356':'in','360':'id','364':'ir','368':'iq',
+  '372':'ie','376':'il','380':'it','384':'ci','388':'jm','392':'jp','400':'jo','398':'kz',
+  '404':'ke','296':'ki','-99':'xk','414':'kw','417':'kg','418':'la','428':'lv','422':'lb',
+  '426':'ls','430':'lr','434':'ly','438':'li','440':'lt','442':'lu','450':'mg','454':'mw',
+  '458':'my','462':'mv','466':'ml','470':'mt','584':'mh','478':'mr','480':'mu','484':'mx',
+  '583':'fm','498':'md','492':'mc','496':'mn','499':'me','504':'ma','508':'mz','104':'mm',
+  '516':'na','520':'nr','524':'np','528':'nl','554':'nz','558':'ni','562':'ne','566':'ng',
+  '408':'kp','807':'mk','578':'no','512':'om','586':'pk','585':'pw','275':'ps','591':'pa',
+  '598':'pg','600':'py','604':'pe','608':'ph','616':'pl','620':'pt','634':'qa','642':'ro',
+  '643':'ru','646':'rw','659':'kn','662':'lc','670':'vc','882':'ws','674':'sm','678':'st',
+  '682':'sa','686':'sn','688':'rs','690':'sc','694':'sl','702':'sg','703':'sk','705':'si',
+  '090':'sb','706':'so','710':'za','410':'kr','728':'ss','724':'es','144':'lk','729':'sd',
+  '740':'sr','752':'se','756':'ch','760':'sy','158':'tw','762':'tj','834':'tz','764':'th',
+  '768':'tg','776':'to','780':'tt','788':'tn','792':'tr','795':'tm','798':'tv','800':'ug',
+  '804':'ua','784':'ae','826':'gb','840':'us','858':'uy','860':'uz','548':'vu','336':'va',
+  '862':'ve','704':'vn','887':'ye','894':'zm','716':'zw'
+};
+const getCountryFlag = (d) => ID3_TO_ISO2[d.id] || '';
+const cflagImg = (country, size = 14) => {
+  const d = DATA.find(x => x.c === country);
+  if (!d) return '';
+  const iso = getCountryFlag(d);
+  if (!iso) return '';
+  return `<img src="https://flagcdn.com/w20/${iso}.png" alt="" width="20" height="15" class="quiz-flag" loading="lazy">`;
+};
+const cflagImgByIdx = (i, size = 14) => {
+  const iso = getCountryFlag(DATA[i]);
+  if (!iso) return '';
+  return `<img src="https://flagcdn.com/w20/${iso}.png" alt="" width="20" height="15" class="quiz-flag" loading="lazy">`;
+};
+
+
 // ── Load world map data ──
 const loadMap = async () => {
   if (worldData) return;
@@ -172,7 +216,7 @@ const checkAnswer = (val) => {
       document.getElementById('cq-input').focus();
       document.getElementById('cq-score').textContent = `${score} / ${TOTAL}`;
       const fb = document.getElementById('cq-feedback');
-      if (fb) { fb.textContent = lastAnswered; fb.classList.add('cq-fb-show'); setTimeout(() => fb.classList.remove('cq-fb-show'), 1500); }
+      if (fb) { fb.innerHTML = cflagImgByIdx(i) + " " + lastAnswered; fb.classList.add('cq-fb-show'); setTimeout(() => fb.classList.remove('cq-fb-show'), 1500); }
 
       // Color the country on the map
       const path = document.getElementById(`country-${DATA[i].id}`);
@@ -421,7 +465,7 @@ const render = () => {
               <div class="cq-grid cq-grid--result">
                 ${items.map(a => `
                   <div class="cq-row ${a.got ? 'cq-row--correct' : 'cq-row--missed'}">
-                    <span class="cq-country">${a.c}</span>
+                    ${cflagImg(a.c)} <span class="cq-country">${a.c}</span>
                     <span class="cq-capital ${a.got ? '' : 'cq-capital--missed'}">${a.k}</span>
                   </div>
                 `).join('')}
