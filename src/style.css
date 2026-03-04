@@ -2866,6 +2866,11 @@ html.light .nav-links a:hover {
   opacity: 0.85;
 }
 
+.f1-team-logo--color {
+  filter: none;
+  opacity: 1;
+}
+
 /* ── World Capitals Quiz ── */
 .cq-section {
   padding: 100px 20px 60px;
