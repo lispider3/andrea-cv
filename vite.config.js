@@ -8,6 +8,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         'f1-quiz': resolve(__dirname, 'f1-quiz/index.html'),
         'football': resolve(__dirname, 'football/index.html'),
+        'juve-quiz': resolve(__dirname, 'juve-quiz/index.html'),
         'capitals': resolve(__dirname, 'capitals/index.html'),
         'cpo-sim': resolve(__dirname, 'cpo-sim/index.html'),
         'analytics': resolve(__dirname, 'analytics/index.html'),
