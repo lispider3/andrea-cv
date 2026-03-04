@@ -146,10 +146,10 @@ const render = () => {
 
         ${!started ? `
           <div class="f1q-intro">
-            <div class="f1q-badge" style="border-color:rgba(220,0,0,0.3)"><span style="color:#DC0000">FERRARI QUIZ</span></div>
-            <h1 class="f1q-title">NAME EVERY<br><span style="color:#DC0000">FERRARI F1 DRIVER</span></h1>
+            <div class="f1q-badge"><span>FERRARI QUIZ</span></div>
+            <h1 class="f1q-title">NAME EVERY<br><span>FERRARI F1 DRIVER</span></h1>
             <p class="f1q-subtitle">Can you name every driver who raced for Scuderia Ferrari since 2000?<br>${uniqueDrivers.length} drivers · ${TOTAL} entries · 2000–2024 · 5 minutes.</p>
-            <button id="f1q-start" class="f1q-btn f1q-btn--primary" style="background:#DC0000;border-color:#DC0000">Start Quiz</button>
+            <button id="f1q-start" class="f1q-btn f1q-btn--primary">Start Quiz</button>
           </div>
         ` : ''}
 
@@ -183,7 +183,7 @@ const render = () => {
             </div>
 
             <div class="f1q-progress">
-              <div class="f1q-progress-fill" style="background:linear-gradient(90deg,#DC0000,#FF2800);width:${(found.size/TOTAL)*100}%"></div>
+              <div class="f1q-progress-fill" style="background:linear-gradient(90deg,#DC0000,#FF2800);width:${(found.size / TOTAL) * 100}%"></div>
             </div>
           </div>
         ` : ''}
@@ -239,7 +239,7 @@ const onInput = (e) => {
       e.target.value = '';
       document.getElementById('f1q-score').textContent = `${found.size} / ${TOTAL}`;
       const fill = document.querySelector('.f1q-progress-fill');
-      if (fill) fill.style.width = `${(found.size/TOTAL)*100}%`;
+      if (fill) fill.style.width = `${(found.size / TOTAL) * 100}%`;
       matches.forEach(i => {
         const cells = document.querySelectorAll('.f1q-cell');
         const cell = cells[i];

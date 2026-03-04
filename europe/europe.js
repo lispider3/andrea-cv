@@ -4,52 +4,52 @@ import { trackEvent } from '../src/tracker.js';
 // ── 45 Countries of Europe (Sporcle standard) ──
 // [name, iso2 code, aliases]
 const COUNTRIES = [
-  ['Albania', 'al', ['shqipëri','shqiperi']],
+  ['Albania', 'al', ['shqipëri', 'shqiperi']],
   ['Andorra', 'ad', []],
-  ['Austria', 'at', ['österreich','osterreich']],
+  ['Austria', 'at', ['österreich', 'osterreich']],
   ['Belarus', 'by', ['byelorussia']],
-  ['Belgium', 'be', ['belgique','belgie','belgië']],
-  ['Bosnia and Herzegovina', 'ba', ['bosnia','bih','bosna']],
+  ['Belgium', 'be', ['belgique', 'belgie', 'belgië']],
+  ['Bosnia and Herzegovina', 'ba', ['bosnia', 'bih', 'bosna']],
   ['Bulgaria', 'bg', []],
   ['Croatia', 'hr', ['hrvatska']],
-  ['Cyprus', 'cy', ['kypros','kibris']],
-  ['Czech Republic', 'cz', ['czechia','česko','cesko']],
+  ['Cyprus', 'cy', ['kypros', 'kibris']],
+  ['Czech Republic', 'cz', ['czechia', 'česko', 'cesko']],
   ['Denmark', 'dk', ['danmark']],
   ['Estonia', 'ee', ['eesti']],
   ['Finland', 'fi', ['suomi']],
   ['France', 'fr', []],
-  ['Germany', 'de', ['deutschland','alemania']],
-  ['Greece', 'gr', ['hellas','ellada','ελλάδα']],
-  ['Hungary', 'hu', ['magyarország','magyarorszag']],
-  ['Iceland', 'is', ['ísland','island']],
-  ['Ireland', 'ie', ['eire','éire']],
+  ['Germany', 'de', ['deutschland', 'alemania']],
+  ['Greece', 'gr', ['hellas', 'ellada', 'ελλάδα']],
+  ['Hungary', 'hu', ['magyarország', 'magyarorszag']],
+  ['Iceland', 'is', ['ísland', 'island']],
+  ['Ireland', 'ie', ['eire', 'éire']],
   ['Italy', 'it', ['italia']],
-  ['Kosovo', 'xk', ['kosovë','kosova']],
+  ['Kosovo', 'xk', ['kosovë', 'kosova']],
   ['Latvia', 'lv', ['latvija']],
   ['Liechtenstein', 'li', []],
   ['Lithuania', 'lt', ['lietuva']],
-  ['Luxembourg', 'lu', ['lëtzebuerg','letzebuerg']],
+  ['Luxembourg', 'lu', ['lëtzebuerg', 'letzebuerg']],
   ['Malta', 'mt', []],
   ['Moldova', 'md', []],
   ['Monaco', 'mc', []],
   ['Montenegro', 'me', ['crna gora']],
-  ['Netherlands', 'nl', ['holland','nederland']],
-  ['North Macedonia', 'mk', ['macedonia','makedonija']],
-  ['Norway', 'no', ['norge','noreg']],
+  ['Netherlands', 'nl', ['holland', 'nederland']],
+  ['North Macedonia', 'mk', ['macedonia', 'makedonija']],
+  ['Norway', 'no', ['norge', 'noreg']],
   ['Poland', 'pl', ['polska']],
   ['Portugal', 'pt', []],
-  ['Romania', 'ro', ['românia','romania']],
-  ['Russia', 'ru', ['rossiya','россия']],
+  ['Romania', 'ro', ['românia', 'romania']],
+  ['Russia', 'ru', ['rossiya', 'россия']],
   ['San Marino', 'sm', []],
   ['Serbia', 'rs', ['srbija']],
   ['Slovakia', 'sk', ['slovensko']],
   ['Slovenia', 'si', ['slovenija']],
-  ['Spain', 'es', ['españa','espana','espanha']],
+  ['Spain', 'es', ['españa', 'espana', 'espanha']],
   ['Sweden', 'se', ['sverige']],
-  ['Switzerland', 'ch', ['schweiz','suisse','svizzera']],
-  ['Ukraine', 'ua', ['україна','ukraina']],
-  ['United Kingdom', 'gb', ['uk','great britain','britain','england']],
-  ['Vatican City', 'va', ['vatican','holy see']],
+  ['Switzerland', 'ch', ['schweiz', 'suisse', 'svizzera']],
+  ['Ukraine', 'ua', ['україна', 'ukraina']],
+  ['United Kingdom', 'gb', ['uk', 'great britain', 'britain', 'england']],
+  ['Vatican City', 'va', ['vatican', 'holy see']],
 ];
 
 const TOTAL = COUNTRIES.length;
@@ -106,10 +106,10 @@ const render = () => {
 
         ${!started ? `
           <div class="f1q-intro">
-            <div class="f1q-badge" style="border-color:rgba(59,130,246,0.3)"><span style="color:#3b82f6">GEOGRAPHY QUIZ</span></div>
-            <h1 class="f1q-title">COUNTRIES OF<br><span style="color:#3b82f6">EUROPE</span></h1>
+            <div class="f1q-badge"><span>GEOGRAPHY QUIZ</span></div>
+            <h1 class="f1q-title">COUNTRIES OF<br><span>EUROPE</span></h1>
             <p class="f1q-subtitle">Can you name all ${TOTAL} countries of Europe?<br>5 minutes on the clock.</p>
-            <button id="f1q-start" class="f1q-btn f1q-btn--primary" style="background:#3b82f6;border-color:#3b82f6">Start Quiz</button>
+            <button id="f1q-start" class="f1q-btn f1q-btn--primary">Start Quiz</button>
           </div>
         ` : ''}
 
@@ -143,7 +143,7 @@ const render = () => {
             </div>
 
             <div class="f1q-progress">
-              <div class="f1q-progress-fill" style="background:linear-gradient(90deg,#3b82f6,#60a5fa);width:${(found.size/TOTAL)*100}%"></div>
+              <div class="f1q-progress-fill" style="background:linear-gradient(90deg,#3b82f6,#60a5fa);width:${(found.size / TOTAL) * 100}%"></div>
             </div>
           </div>
         ` : ''}
@@ -197,7 +197,7 @@ const onInput = (e) => {
     e.target.value = '';
     document.getElementById('f1q-score').textContent = `${found.size} / ${TOTAL}`;
     const fill = document.querySelector('.f1q-progress-fill');
-    if (fill) fill.style.width = `${(found.size/TOTAL)*100}%`;
+    if (fill) fill.style.width = `${(found.size / TOTAL) * 100}%`;
     // Update the specific cell
     const cells = document.querySelectorAll('.f1q-cell');
     const sortedPos = sortedIndices.indexOf(idx);
