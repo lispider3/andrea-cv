@@ -322,11 +322,6 @@ const render = () => {
   app.innerHTML = `
     <section class="fb-section">
       <div class="fb-container">
-        <div class="fb-header">
-          <div class="fb-badge"><span>SERIE A INFO</span></div>
-          <h1 class="fb-title">JUVENTUS<br><span>DASHBOARD</span></h1>
-        </div>
-
         ${renderQuiz()}
 
         ${nextMatch ? renderNextMatch(nextMatch) : '<p class="fb-empty">No upcoming Juventus matches found.</p>'}
