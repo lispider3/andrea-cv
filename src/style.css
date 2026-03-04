@@ -300,31 +300,31 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 /* ── Intro ── */
 .f1q-intro { text-align: center; padding: 60px 24px; }
 .f1q-badge { margin-bottom: 20px; }
-.f1q-badge span { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 3px; color: #fff; background: #E10600; padding: 6px 16px; border-radius: 4px; }
+.f1q-badge span { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 3px; color: var(--bg); background: var(--accent); padding: 6px 16px; border-radius: 4px; }
 .f1q-title { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -1px; line-height: 1.05; color: var(--white); }
-.f1q-title span { color: #E10600; }
+.f1q-title span { color: var(--accent); }
 .f1q-subtitle { font-size: 0.82rem; font-weight: 300; color: var(--text-secondary); line-height: 1.6; max-width: 420px; margin: 16px auto 28px; }
 
 /* ── Buttons ── */
 .f1q-btn { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 12px 28px; border: none; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; }
-.f1q-btn--primary { background: #E10600; color: #fff; }
-.f1q-btn--primary:hover { background: #ff3030; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(225,6,0,0.3); }
+.f1q-btn--primary { background: var(--accent); color: var(--bg); }
+.f1q-btn--primary:hover { background: #d4b87a; transform: translateY(-2px); box-shadow: 0 4px 20px rgba(201,169,110,0.3); }
 .f1q-btn--ghost { font-size: 0.55rem; padding: 6px 14px; background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
-.f1q-btn--ghost:hover { color: #E10600; border-color: rgba(225,6,0,0.3); }
+.f1q-btn--ghost:hover { color: var(--accent); border-color: rgba(201,169,110,0.3); }
 
 /* ── Card ── */
 .f1q-card { background: var(--surface); border: 1px solid var(--glass-border); border-radius: var(--radius); padding: 20px; }
-.f1q-card-label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 2px; color: #E10600; display: flex; align-items: center; gap: 8px; margin-bottom: 16px; text-transform: uppercase; }
-.f1q-card-label svg { stroke: #E10600; }
+.f1q-card-label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 2px; color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 16px; text-transform: uppercase; }
+.f1q-card-label svg { stroke: var(--accent); }
 
 /* ── Toolbar ── */
 .f1q-toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
 .f1q-toolbar-left { flex: 1; min-width: 180px; }
 .f1q-toolbar-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.f1q-input { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(225,6,0,0.3); border-radius: var(--radius-sm); color: var(--white); font-family: var(--font-mono); font-size: 0.85rem; outline: none; transition: border-color 0.3s; }
-.f1q-input:focus { border-color: #E10600; box-shadow: 0 0 0 3px rgba(225,6,0,0.1); }
+.f1q-input { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(201,169,110,0.3); border-radius: var(--radius-sm); color: var(--white); font-family: var(--font-mono); font-size: 0.85rem; outline: none; transition: border-color 0.3s; }
+.f1q-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201,169,110,0.1); }
 .f1q-stat-label { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 600; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; }
-.f1q-stat-value { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: #E10600; margin-right: 8px; }
+.f1q-stat-value { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-right: 8px; }
 .f1q-timer--danger { animation: f1q-blink 1s infinite; }
 @keyframes f1q-blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
 
@@ -333,18 +333,18 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .f1q-cell { flex: 1 1 calc(25% - 3px); min-width: 0; display: flex; align-items: center; gap: 6px; padding: 6px 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); border-radius: 3px; min-height: 32px; transition: all 0.3s; }
 .f1q-cell-year { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: var(--text-muted); min-width: 30px; }
 .f1q-cell-name { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 0.5px; color: transparent; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.f1q-cell--found { background: rgba(225,6,0,0.08); border-color: rgba(225,6,0,0.2); }
+.f1q-cell--found { background: rgba(201,169,110,0.08); border-color: rgba(201,169,110,0.2); }
 .f1q-cell--found .f1q-cell-name { color: #fff; }
-.f1q-cell--found .f1q-cell-year { color: #E10600; }
+.f1q-cell--found .f1q-cell-year { color: var(--accent); }
 .f1q-cell--missed .f1q-cell-name { color: var(--text-muted); opacity: 0.6; }
 
 /* ── Progress ── */
 .f1q-progress { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 16px; overflow: hidden; }
-.f1q-progress-fill { height: 100%; background: #E10600; border-radius: 2px; transition: width 0.3s; }
+.f1q-progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 0.3s; }
 
 /* ── Result ── */
 .f1q-result { text-align: center; padding: 32px 16px; margin-bottom: 16px; }
-.f1q-result-score { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 900; color: #E10600; }
+.f1q-result-score { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 900; color: var(--accent); }
 .f1q-result-label { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-top: 8px; }
 
 @media (max-width: 768px) {
@@ -354,7 +354,7 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 }
 
 /* ── Interest flag badge ── */
-.interest-flag { font-family: var(--font-mono); font-size: 0.45rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; background: #E10600; padding: 2px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
+.interest-flag { font-family: var(--font-mono); font-size: 0.45rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 2px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle; }
 
 /* ── Experience card logo ── */
 /* exp-card flex removed — handled via exp-header */
