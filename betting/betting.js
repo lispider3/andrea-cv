@@ -19,6 +19,7 @@ const lessons = [
   { id: 'cashout', title: 'Cash Out', sub: 'Take the Money and Run', tag: 'LESSON 4', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>' },
   { id: 'betbuilder', title: 'Bet Builder', sub: 'Why the Odds Are Never What They Seem', tag: 'LESSON 5', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>' },
   { id: 'combitax', title: 'The Combi Tax', sub: 'Why Your 10-Legger is a Gift to the Bookie', tag: 'LESSON 6', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>' },
+  { id: 'earlypayout', title: 'Early Payout', sub: 'Because 2-0 Is the Most Dangerous Lead', tag: 'LESSON 7', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' },
 ];
 
 function renderPicker() {
@@ -1187,6 +1188,124 @@ function renderCombiTax() {
 }
 
 
+// ═══════════════ LESSON 7: EARLY PAYOUT ═══════════════
+let epGoals = 0; // 0, 1, or 2
+let epTriggered = false;
+
+function renderEarlyPayout() {
+  const timeline = [
+    { min: "0'", label: 'Kick Off', icon: '\u26bd', active: true },
+    { min: "34'", label: epGoals >= 1 ? 'Liverpool 1-0!' : 'Score a goal', icon: epGoals >= 1 ? '\u26bd' : '\u2022', active: epGoals >= 1, goal: true, goalNum: 1 },
+    { min: "60'", label: epGoals >= 2 ? 'Liverpool 2-0!' : 'Score again', icon: epGoals >= 2 ? '\ud83c\udfc6' : '\u2022', active: epGoals >= 2, goal: true, goalNum: 2 },
+    { min: "78'", label: 'Opponent pulls one back (2-1)', icon: '\u2022', active: epGoals >= 2 },
+    { min: "90'", label: 'Final Score: 2-2', icon: '\u2022', active: epGoals >= 2 },
+  ];
+
+  return `
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">HOW IT WORKS</span>
+        <h2 class="sb-section-title">The Two-Goal Safety Net</h2>
+        <p class="sb-section-sub">If the team you back goes 2 goals ahead <em>at any point</em>, your bet is settled as a winner. The final score doesn\u2019t matter.</p>
+
+        <div class="sb-hc-examples" style="margin-top:24px">
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">The Trigger</div>
+            <p>Your team goes 2-0 up (or 3-1, or 4-2). The moment the 2-goal lead is hit, <strong>you\u2019re paid out in full</strong>.</p>
+          </div>
+          <div class="sb-hc-ex-card">
+            <div class="sb-hc-ex-line">Comeback-Proof</div>
+            <p>Even if the opponent scores a miraculous comeback and the game ends 2-2 or 2-3, <em>you keep your winnings</em>.</p>
+          </div>
+          <div class="sb-hc-ex-card sb-hier-card--highlight">
+            <div class="sb-hc-ex-line">Not Cash Out</div>
+            <p>Unlike Cash Out, you get the <strong>full original payout</strong> \u2014 not a reduced amount based on live odds.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <span class="sb-section-tag">INSTANT WIN SIMULATOR</span>
+        <h2 class="sb-section-title">Watch It Happen</h2>
+        <p class="sb-section-sub">Click \u201cScore a Goal\u201d to advance the timeline. At 2-0, the early payout triggers.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> LIVERPOOL vs OPPONENT \u2014 YOU BET \u20ac20 ON LIVERPOOL TO WIN</div>
+
+          <div class="sb-ep-timeline">
+            ${timeline.map((t, i) => `
+              <div class="sb-ep-step ${t.active ? 'sb-ep-step--active' : ''} ${t.goalNum === 2 && epGoals >= 2 ? 'sb-ep-step--trigger' : ''}">
+                <div class="sb-ep-step-dot">${t.active ? (t.goalNum === 2 && epGoals >= 2 ? '\ud83c\udfc6' : (t.goalNum === 1 && epGoals >= 1 ? '\u26bd' : '\u2713')) : (i+1)}</div>
+                <div class="sb-ep-step-info">
+                  <span class="sb-ep-step-min">${t.min}</span>
+                  <span class="sb-ep-step-label">${t.label}</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          ${epGoals >= 2 ? `
+            <div class="sb-ep-payout-banner">
+              <div class="sb-ep-payout-icon">\ud83c\udf89</div>
+              <div>
+                <h4>FULL PAYOUT TRIGGERED!</h4>
+                <p>\u20ac50 paid out at the 60th minute. The game ended 2-2 but you were already celebrating.</p>
+              </div>
+            </div>
+          ` : ''}
+
+          <div class="sb-ep-actions">
+            ${epGoals < 2 ? `<button class="sb-co-btn sb-co-btn--cashout sb-ep-score-btn">\u26bd Score a Goal (${epGoals + 1}/2)</button>` : ''}
+            <button class="sb-co-btn sb-co-btn--ride sb-ep-reset-btn">${epGoals >= 2 ? 'Try Again' : 'Reset'}</button>
+          </div>
+
+          <div class="sb-co-bet-info" style="margin-top:16px">
+            <div class="sb-sim-summary-row"><span>Your Stake</span><span>\u20ac20</span></div>
+            <div class="sb-sim-summary-row"><span>Original Odds</span><span>@ 2.50</span></div>
+            <div class="sb-sim-summary-row sb-sim-summary-total"><span>Payout</span><span style="color:${epGoals >= 2 ? '#34d399' : 'var(--text-muted)'}">${epGoals >= 2 ? '\u20ac50 \u2713' : 'Pending\u2026'}</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">THE COMPARISON</span>
+        <h2 class="sb-section-title">Early Payout vs Cash Out</h2>
+        <p class="sb-section-sub">They sound similar. They\u2019re not.</p>
+
+        <div class="sb-hc-compare" style="margin-top:24px">
+          <table class="sb-hc-table">
+            <thead><tr><th></th><th>Cash Out</th><th>Early Payout</th></tr></thead>
+            <tbody>
+              <tr><td>When?</td><td>Anytime (you choose)</td><td>Automatic at 2-goal lead</td></tr>
+              <tr><td>Payout</td><td>Reduced (live odds)</td><td><strong>Full original payout</strong></td></tr>
+              <tr><td>Risk</td><td>You give up potential upside</td><td>None \u2014 it\u2019s a bonus feature</td></tr>
+              <tr><td>Comeback?</td><td>N/A (bet is closed)</td><td>Doesn\u2019t matter \u2014 already paid</td></tr>
+              <tr><td>Cost</td><td>Built into reduced offer</td><td>Free (bookie promotion)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <div class="sb-banker-card">
+          <div class="sb-banker-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>
+            <h3 class="sb-banker-title">Why Do Bookies Offer This?</h3>
+            <p>Early Payout sounds like free money \u2014 and sometimes it is. But statistically, comebacks from 2-0 down are rare (\u224810% in top leagues). The bookie absorbs occasional extra payouts in exchange for customer loyalty and higher betting volume.</p>
+            <p style="margin-top:8px;color:var(--text-muted);font-size:0.78rem">Why wait for the final whistle? Check which leagues qualify for Early Payout.</p>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
+
 // ═══════════════ MAIN RENDER ═══════════════
 function renderPage() {
   const app = document.getElementById('betting-app');
@@ -1210,6 +1329,8 @@ function renderPage() {
     app.innerHTML = backBtn + lessonHero + renderBetBuilder();
   } else if (currentLesson === 'combitax') {
     app.innerHTML = backBtn + lessonHero + renderCombiTax();
+  } else if (currentLesson === 'earlypayout') {
+    app.innerHTML = backBtn + lessonHero + renderEarlyPayout();
   }
 
   bindEvents();
@@ -1293,6 +1414,10 @@ function bindEvents() {
     renderPage();
     document.getElementById('partial-slider')?.focus();
   });
+
+  // Early payout
+  document.querySelector('.sb-ep-score-btn')?.addEventListener('click', () => { epGoals = Math.min(2, epGoals + 1); renderPage(); });
+  document.querySelector('.sb-ep-reset-btn')?.addEventListener('click', () => { epGoals = 0; renderPage(); });
 
   // Cross-lesson links
   document.querySelectorAll('.sb-link-lesson').forEach(a => {
