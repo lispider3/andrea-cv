@@ -3,6 +3,13 @@ import { trackEvent } from '../src/tracker.js';
 import { natFlagImg as flagImg, initNavScroll } from '../src/shared.js';
 
 const API = 'https://api.jolpi.ca/ergast/f1/current';
+const LOGO_BASE = 'https://inchident.vercel.app/logos/';
+const LOGO_MAP = { sauber: 'audi' }; // IDs that differ from Ergast
+const teamLogo = (id) => {
+  if (!id) return '';
+  const file = LOGO_MAP[id] || id;
+  return `<img src="${LOGO_BASE}${file}.png" alt="" class="f1-team-logo" width="18" height="18" loading="lazy">`;
+};
 let loading = true;
 let error = null;
 let driverStandings = [];
@@ -146,7 +153,7 @@ const renderLastRace = () => {
     return `<tr>
                 <td>${r.position}</td>
                 <td>${flagImg(r.Driver?.nationality)} ${r.Driver?.givenName} ${r.Driver?.familyName}</td>
-                <td>${r.Constructor?.name}</td>
+                <td class="fb-table-team">${teamLogo(r.Constructor?.constructorId)} ${r.Constructor?.name}</td>
                 <td class="fb-table-pts">${r.points}</td>
               </tr>`;
   }).join('')}
@@ -178,10 +185,12 @@ const renderDriverStandings = () => {
   const snippet = driverStandings.slice(0, 6);
 
   const renderRow = (d) => {
+    const cId = d.Constructors?.[0]?.constructorId;
+    const cName = d.Constructors?.[0]?.name || '—';
     return `<tr>
       <td>${d.position}</td>
       <td>${flagImg(d.Driver?.nationality)} ${d.Driver?.givenName} ${d.Driver?.familyName}</td>
-      <td>${d.Constructors?.[0]?.name}</td>
+      <td class="fb-table-team">${teamLogo(cId)} ${cName}</td>
       <td>${d.wins}</td>
       <td class="fb-table-pts">${d.points}</td>
     </tr>`;
@@ -216,7 +225,7 @@ const renderConstructorStandings = () => {
             ${constructorStandings.map(c => {
     return `<tr>
                 <td>${c.position}</td>
-                <td>${c.Constructor?.name}</td>
+                <td class="fb-table-team">${teamLogo(c.Constructor?.constructorId)} ${c.Constructor?.name}</td>
                 <td>${c.wins}</td>
                 <td class="fb-table-pts">${c.points}</td>
               </tr>`;
