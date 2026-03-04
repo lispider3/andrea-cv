@@ -29,6 +29,33 @@ const loadData = async () => {
     const cTable = cRes?.MRData?.StandingsTable?.StandingsLists?.[0];
     constructorStandings = cTable?.ConstructorStandings || [];
 
+    // Pre-season fallback: if standings are empty, fetch entry lists
+    if (!driverStandings.length) {
+      try {
+        const driversRes = await fetch(`${API}/drivers.json`).then(r => r.json());
+        const drivers = driversRes?.MRData?.DriverTable?.Drivers || [];
+        driverStandings = drivers.map((d, i) => ({
+          position: String(i + 1),
+          points: '0',
+          wins: '0',
+          Driver: d,
+          Constructors: [{ name: '—' }],
+        }));
+      } catch { }  // silently fail — tables just won't show
+    }
+    if (!constructorStandings.length) {
+      try {
+        const teamsRes = await fetch(`${API}/constructors.json`).then(r => r.json());
+        const teams = teamsRes?.MRData?.ConstructorTable?.Constructors || [];
+        constructorStandings = teams.map((c, i) => ({
+          position: String(i + 1),
+          points: '0',
+          wins: '0',
+          Constructor: c,
+        }));
+      } catch { }
+    }
+
     const nRaces = nRes?.MRData?.RaceTable?.Races;
     nextRace = nRaces?.length ? nRaces[0] : null;
 
