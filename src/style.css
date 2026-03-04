@@ -2556,6 +2556,7 @@ html.light .nav-links a:hover {
   border-collapse: collapse;
   font-family: var(--font-mono);
   font-size: 0.7rem;
+  transform: translateZ(0);
 }
 
 .fb-table th {
@@ -2595,7 +2596,7 @@ html.light .nav-links a:hover {
 }
 
 .fb-table-juve {
-  background: rgba(201, 169, 110, 0.06);
+  background: rgba(201, 169, 110, 0.12);
 }
 
 .fb-table-juve .fb-table-team {
@@ -2603,7 +2604,7 @@ html.light .nav-links a:hover {
 }
 
 .fb-table-ferrari {
-  background: rgba(201, 169, 110, 0.06);
+  background: rgba(201, 169, 110, 0.12);
 }
 
 .fb-table-ferrari .fb-table-team {
