@@ -18,6 +18,7 @@ const lessons = [
   { id: 'payback', title: 'Paybacks', sub: 'The Juice to Make Money', tag: 'LESSON 3', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>' },
   { id: 'cashout', title: 'Cash Out', sub: 'Take the Money and Run', tag: 'LESSON 4', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>' },
   { id: 'betbuilder', title: 'Bet Builder', sub: 'Why the Odds Are Never What They Seem', tag: 'LESSON 5', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>' },
+  { id: 'combitax', title: 'The Combi Tax', sub: 'Why Your 10-Legger is a Gift to the Bookie', tag: 'LESSON 6', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>' },
 ];
 
 function renderPicker() {
@@ -874,6 +875,123 @@ function renderBetBuilder() {
 }
 
 
+
+// ═══════════════ LESSON 6: THE COMBI TAX ═══════════════
+let ctLegs = 5;
+let ctPaybackBase = 95;
+
+function renderCombiTax() {
+  const pb = ctPaybackBase / 100;
+  const steps = [1, 2, 3, 5, 7, 10, 12];
+  const currentVal = Math.pow(pb, ctLegs) * 100;
+  const bookieEdge = 100 - currentVal;
+
+  return `
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">THE MULTIPLICATION RULE</span>
+        <h2 class="sb-section-title">Margin Compounds. Fast.</h2>
+        <p class="sb-section-sub">A single bet at 95% payback keeps 5% for the bookie. Sounds fair. But in a combi, that 5% compounds with every leg you add.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-pb-formula">
+            <span class="sb-pb-formula-label">Combi Payback</span>
+            <span class="sb-pb-formula-eq">= (Single Payback)&#x207F; = ${ctPaybackBase}%&#x207F;</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <span class="sb-section-tag">THE VALUE LEAK</span>
+        <h2 class="sb-section-title">Watch Your Value Disappear</h2>
+        <p class="sb-section-sub">Each leg you add silently drains more value from your bet.</p>
+
+        <div class="sb-ct-steps">
+          ${steps.map(n => {
+            const val = (Math.pow(pb, n) * 100).toFixed(1);
+            const lost = (100 - parseFloat(val)).toFixed(1);
+            return `<div class="sb-ct-step ${n === ctLegs ? 'sb-ct-step--active' : ''} ${parseFloat(val) < 70 ? 'sb-ct-step--danger' : parseFloat(val) < 85 ? 'sb-ct-step--warn' : ''}">
+              <div class="sb-ct-step-n">${n} leg${n > 1 ? 's' : ''}</div>
+              <div class="sb-ct-step-bar-wrap">
+                <div class="sb-ct-step-bar">
+                  <div class="sb-ct-step-fill" style="width:${val}%"></div>
+                </div>
+              </div>
+              <div class="sb-ct-step-vals">
+                <span class="sb-ct-step-val">${val}%</span>
+                <span class="sb-ct-step-lost">\u2212${lost}%</span>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section sb-section--alt">
+      <div class="sb-container">
+        <span class="sb-section-tag">VALUE SLICER</span>
+        <h2 class="sb-section-title">Try It Yourself</h2>
+        <p class="sb-section-sub">Slide to see how many legs it takes to give the bookie half your value.</p>
+
+        <div class="sb-sim-card" style="margin-top:24px">
+          <div class="sb-sim-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> COMBI PAYBACK SIMULATOR</div>
+
+          <div class="sb-ct-base-row">
+            <span class="sb-ct-base-label">Base Payback</span>
+            <div class="sb-ct-base-btns">
+              ${[90, 92, 95, 97].map(v => `<button class="sb-ct-base-btn ${v === ctPaybackBase ? 'active' : ''}" data-base="${v}">${v}%</button>`).join('')}
+            </div>
+          </div>
+
+          <div class="sb-ct-slider-wrap">
+            <label class="sb-ct-slider-label">Number of Legs: <strong>${ctLegs}</strong></label>
+            <input type="range" min="1" max="12" value="${ctLegs}" class="sb-ct-slider" id="ct-slider" />
+            <div class="sb-ct-slider-ticks"><span>1</span><span>3</span><span>6</span><span>9</span><span>12</span></div>
+          </div>
+
+          <div class="sb-ct-result">
+            <div class="sb-ct-donut">
+              <svg viewBox="0 0 120 120" class="sb-ct-donut-svg">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="rgba(239,68,68,0.15)" stroke-width="12"/>
+                <circle cx="60" cy="60" r="52" fill="none" stroke="${currentVal >= 80 ? '#34d399' : currentVal >= 60 ? '#fbbf24' : '#ef4444'}" stroke-width="12" 
+                  stroke-dasharray="${(currentVal / 100) * 326.7} ${326.7 - (currentVal / 100) * 326.7}" 
+                  stroke-dashoffset="81.7" stroke-linecap="round" class="sb-ct-donut-fill"/>
+              </svg>
+              <div class="sb-ct-donut-text">
+                <span class="sb-ct-donut-val" style="color:${currentVal >= 80 ? '#34d399' : currentVal >= 60 ? '#fbbf24' : '#ef4444'}">${currentVal.toFixed(1)}%</span>
+                <span class="sb-ct-donut-label">Value Left</span>
+              </div>
+            </div>
+
+            <div class="sb-ct-result-details">
+              <div class="sb-sim-summary-row"><span>Your Value</span><span style="color:${currentVal >= 80 ? '#34d399' : currentVal >= 60 ? '#fbbf24' : '#ef4444'}">${currentVal.toFixed(1)}%</span></div>
+              <div class="sb-sim-summary-row"><span>Bookie\u2019s Edge</span><span style="color:#ef4444">${bookieEdge.toFixed(1)}%</span></div>
+              <div class="sb-sim-summary-row sb-sim-summary-total"><span>On a \u20ac100 bet</span><span>You lose <span style="color:#ef4444">\u20ac${bookieEdge.toFixed(0)}</span> to margin</span></div>
+            </div>
+          </div>
+
+          ${ctLegs >= 8 ? '<p class="sb-sim-note" style="color:#ef4444">At '+ctLegs+' legs, the bookie is keeping \u20ac'+bookieEdge.toFixed(0)+' of every \u20ac100 before the match even starts. This is why they offer Acca Insurance \u2014 they want you adding more legs.</p>' : ''}
+        </div>
+      </div>
+    </section>
+
+    <section class="sb-section">
+      <div class="sb-container">
+        <div class="sb-banker-card">
+          <div class="sb-banker-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div>
+            <h3 class="sb-banker-title">Why Bookies Love Accas</h3>
+            <p>Acca Insurance, bonus boosts, \u201cfree bet if one leg loses\u201d \u2014 these aren\u2019t acts of generosity. They\u2019re calculated incentives to get you adding more legs, because the math is <em>heavily</em> in their favour.</p>
+            <p style="margin-top:8px;color:var(--text-muted);font-size:0.78rem">Still want to place that 12-fold? At least now you know the cost.</p>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
+
 // ═══════════════ MAIN RENDER ═══════════════
 function renderPage() {
   const app = document.getElementById('betting-app');
@@ -895,6 +1013,8 @@ function renderPage() {
     app.innerHTML = backBtn + lessonHero + renderCashout();
   } else if (currentLesson === 'betbuilder') {
     app.innerHTML = backBtn + lessonHero + renderBetBuilder();
+  } else if (currentLesson === 'combitax') {
+    app.innerHTML = backBtn + lessonHero + renderCombiTax();
   }
 
   bindEvents();
@@ -957,6 +1077,16 @@ function bindEvents() {
       if (bbActive.has(id)) bbActive.delete(id); else bbActive.add(id);
       renderPage();
     });
+  });
+
+  // Combi tax
+  document.getElementById('ct-slider')?.addEventListener('input', (e) => {
+    ctLegs = parseInt(e.target.value);
+    renderPage();
+    document.getElementById('ct-slider')?.focus();
+  });
+  document.querySelectorAll('.sb-ct-base-btn').forEach(btn => {
+    btn.addEventListener('click', () => { ctPaybackBase = parseInt(btn.dataset.base); renderPage(); });
   });
 
   // Cash out reset

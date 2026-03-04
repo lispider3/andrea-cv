@@ -1176,3 +1176,47 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 /* ── Bet Builder: Conflict leg ── */
 .sb-bb-leg--conflict { border-color: rgba(239,68,68,0.4) !important; background: rgba(239,68,68,0.06) !important; }
 .sb-bb-leg--conflict .sb-bb-leg-check { border-color: #ef4444; background: rgba(239,68,68,0.15); color: #ef4444; }
+
+/* ── Combi Tax: Value Steps ── */
+.sb-ct-steps { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; }
+.sb-ct-step { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); transition: all 0.2s; }
+.sb-ct-step--active { border-color: var(--accent); background: rgba(201,169,110,0.06); }
+.sb-ct-step--warn { border-color: rgba(251,191,36,0.2); }
+.sb-ct-step--danger { border-color: rgba(239,68,68,0.2); }
+.sb-ct-step-n { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700; color: var(--text-muted); min-width: 56px; white-space: nowrap; }
+.sb-ct-step-bar-wrap { flex: 1; }
+.sb-ct-step-bar { height: 8px; background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; }
+.sb-ct-step-fill { height: 100%; border-radius: 4px; transition: width 0.3s; background: linear-gradient(90deg, #34d399, var(--accent)); }
+.sb-ct-step--warn .sb-ct-step-fill { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+.sb-ct-step--danger .sb-ct-step-fill { background: linear-gradient(90deg, #ef4444, #dc2626); }
+.sb-ct-step-vals { display: flex; gap: 8px; min-width: 100px; justify-content: flex-end; }
+.sb-ct-step-val { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; color: var(--white); }
+.sb-ct-step-lost { font-family: var(--font-mono); font-size: 0.6rem; color: #ef4444; }
+
+/* ── Combi Tax: Slider ── */
+.sb-ct-slider-wrap { margin: 24px 0; }
+.sb-ct-slider-label { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 8px; }
+.sb-ct-slider-label strong { color: var(--accent); font-size: 1rem; }
+.sb-ct-slider { width: 100%; -webkit-appearance: none; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; outline: none; cursor: pointer; }
+.sb-ct-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); cursor: pointer; box-shadow: 0 0 8px rgba(201,169,110,0.3); }
+.sb-ct-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); cursor: pointer; }
+.sb-ct-slider-ticks { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.45rem; color: var(--text-muted); margin-top: 4px; padding: 0 4px; }
+
+/* ── Combi Tax: Base Payback Buttons ── */
+.sb-ct-base-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.sb-ct-base-label { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; }
+.sb-ct-base-btns { display: flex; gap: 4px; }
+.sb-ct-base-btn { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; padding: 6px 12px; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); background: rgba(255,255,255,0.02); color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+.sb-ct-base-btn:hover { color: var(--white); border-color: rgba(255,255,255,0.15); }
+.sb-ct-base-btn.active { background: rgba(201,169,110,0.15); color: var(--accent); border-color: var(--accent); }
+
+/* ── Combi Tax: Donut + Result ── */
+.sb-ct-result { display: flex; align-items: center; gap: 32px; margin-top: 24px; }
+.sb-ct-donut { position: relative; width: 140px; height: 140px; flex-shrink: 0; }
+.sb-ct-donut-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.sb-ct-donut-fill { transition: stroke-dasharray 0.4s, stroke 0.4s; }
+.sb-ct-donut-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.sb-ct-donut-val { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 800; transition: color 0.3s; }
+.sb-ct-donut-label { font-family: var(--font-mono); font-size: 0.45rem; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; }
+.sb-ct-result-details { flex: 1; }
+@media (max-width: 600px) { .sb-ct-result { flex-direction: column; align-items: center; } .sb-ct-donut { width: 120px; height: 120px; } }
