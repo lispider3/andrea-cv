@@ -23,7 +23,7 @@ function render() {
       <div class="sb-container">
         <span class="sb-tag">INTERACTIVE</span>
         <h1 class="sb-hero-title">Quiz<br><span>Hub</span></h1>
-        <p class="sb-hero-sub">Test your knowledge across three topics. No sign-ups, no timers, just fun.</p>
+        <p class="sb-hero-sub">Test your knowledge across three topics. No sign-ups, just fun.</p>
       </div>
     </section>
 
