@@ -15,6 +15,7 @@ export default defineConfig({
         'quiz': resolve(__dirname, 'quiz/index.html'),
         'worldcup': resolve(__dirname, 'worldcup/index.html'),
         'ferrari': resolve(__dirname, 'ferrari/index.html'),
+        'europe': resolve(__dirname, 'europe/index.html'),
       },
     },
   },
