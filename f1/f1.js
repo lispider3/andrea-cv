@@ -169,7 +169,7 @@ const renderLastRace = () => {
           <thead><tr><th>P</th><th>Driver</th><th>Team</th><th>Pts</th></tr></thead>
           <tbody>
             ${top10.map(r => {
-    return `<tr>
+    return `<tr class="${r.Constructor?.constructorId === 'ferrari' ? 'fb-table-ferrari' : ''}">
                 <td>${r.position}</td>
                 <td>${flagImg(r.Driver?.nationality)} ${r.Driver?.givenName} ${r.Driver?.familyName}</td>
                 <td class="fb-table-team">${teamLogo(r.Constructor?.constructorId)} ${r.Constructor?.name}</td>
@@ -206,7 +206,7 @@ const renderDriverStandings = () => {
   const renderRow = (d) => {
     const cId = d.Constructors?.[0]?.constructorId;
     const cName = d.Constructors?.[0]?.name || '—';
-    return `<tr>
+    return `<tr class="${cId === 'ferrari' ? 'fb-table-ferrari' : ''}">
       <td>${d.position}</td>
       <td>${flagImg(d.Driver?.nationality)} ${d.Driver?.givenName} ${d.Driver?.familyName}</td>
       <td class="fb-table-team">${teamLogo(cId)} ${cName}</td>
@@ -242,7 +242,7 @@ const renderConstructorStandings = () => {
           <thead><tr><th>#</th><th>Constructor</th><th>Wins</th><th>Pts</th></tr></thead>
           <tbody>
             ${constructorStandings.map(c => {
-    return `<tr>
+    return `<tr class="${c.Constructor?.constructorId === 'ferrari' ? 'fb-table-ferrari' : ''}">
                 <td>${c.position}</td>
                 <td class="fb-table-team">${teamLogo(c.Constructor?.constructorId)} ${c.Constructor?.name}</td>
                 <td>${c.wins}</td>

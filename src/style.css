@@ -2602,6 +2602,14 @@ html.light .nav-links a:hover {
   color: var(--accent) !important;
 }
 
+.fb-table-ferrari {
+  background: rgba(201, 169, 110, 0.06);
+}
+
+.fb-table-ferrari .fb-table-team {
+  color: var(--accent) !important;
+}
+
 /* Loading & Error */
 .fb-loading {
   text-align: center;
