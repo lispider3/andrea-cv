@@ -8,6 +8,8 @@ let driverStandings = [];
 let constructorStandings = [];
 let nextRace = null;
 let lastRace = null;
+let previewText = '';
+let previewPhase = '';
 
 const flagImg = (nat) => {
   const map = {
@@ -49,6 +51,33 @@ const loadData = async () => {
     lastRace = lRaces?.length ? lRaces[0] : null;
 
     loading = false;
+
+    // Fetch AI preview (non-blocking — render first, update after)
+    try {
+      const pRes = await fetch('/api/f1-preview');
+      const ct = pRes.headers.get('content-type') || '';
+      if (pRes.ok && ct.includes('json')) {
+        const pData = await pRes.json();
+        previewText = pData.preview || '';
+        previewPhase = pData.phase || '';
+      }
+    } catch (e) {
+      // Generate a simple client-side fallback
+      if (nextRace) {
+        const circuit = nextRace.Circuit?.circuitName || '';
+        const country = nextRace.Circuit?.Location?.country || '';
+        previewText = `The ${nextRace.raceName} at ${circuit} in ${country} is next on the calendar.`;
+        if (driverStandings.length >= 2) {
+          const p1 = driverStandings[0], p2 = driverStandings[1];
+          const gap = parseInt(p1.points) - parseInt(p2.points);
+          if (parseInt(p1.points) === 0) {
+            previewText += ` The ${new Date().getFullYear()} season is yet to begin — all eyes on the season opener.`;
+          } else {
+            previewText += ` ${p1.Driver.familyName} leads the championship by ${gap} points over ${p2.Driver.familyName}.`;
+          }
+        }
+      }
+    }
   } catch (e) {
     error = e.message;
     loading = false;
@@ -187,6 +216,27 @@ const renderConstructorStandings = () => {
   `;
 };
 
+const renderPreview = () => {
+  if (!previewText) return '';
+  const phaseBadges = {
+    'pre-race': 'PRE-RACE',
+    'build-up': 'RACE WEEK',
+    'race-week': 'RACE WEEK',
+    'post-qualifying': 'POST-QUALIFYING',
+    'race-day': 'RACE DAY',
+    'off-season': 'OFF-SEASON',
+  };
+  const badge = phaseBadges[previewPhase] || 'PREVIEW';
+  return `
+    <div class="fb-card">
+      <div class="fb-card-label"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg> AI RACE PREVIEW <span style="margin-left:8px;padding:2px 8px;background:rgba(255,255,255,0.08);border-radius:10px;font-size:10px;letter-spacing:1px;opacity:0.6">${badge}</span></div>
+      <div class="fb-preview">
+        <p class="fb-preview-text">${previewText}</p>
+      </div>
+    </div>
+  `;
+};
+
 const render = () => {
   const app = document.getElementById('f1-app');
   if (!app) return;
@@ -217,6 +267,7 @@ const render = () => {
         </div>
 
         ${renderNextRace()}
+        ${renderPreview()}
         ${renderDriverStandings()}
         ${renderConstructorStandings()}
         ${renderLastRace()}
