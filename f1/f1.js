@@ -7,7 +7,7 @@ const LOGO_BASE = 'https://inchident.vercel.app/logos/';
 const LOGO_MAP = { sauber: 'audi' }; // IDs that differ from Ergast
 const teamLogo = (id) => {
   if (!id) return '';
-  if (id === 'ferrari') return `<img src="/logos/ferrari-shield.png" alt="Ferrari" class="f1-team-logo f1-team-logo--color" width="18" height="18" loading="lazy">`;
+  if (id === 'ferrari') return `<img src="/logos/ferrari-shield-v2.png" alt="Ferrari" class="f1-team-logo f1-team-logo--color" width="18" height="18" loading="lazy">`;
   const file = LOGO_MAP[id] || id;
   return `<img src="${LOGO_BASE}${file}.png" alt="" class="f1-team-logo" width="18" height="18" loading="lazy">`;
 };
