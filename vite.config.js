@@ -13,6 +13,7 @@ export default defineConfig({
         'analytics': resolve(__dirname, 'analytics/index.html'),
         'betting': resolve(__dirname, 'betting/index.html'),
         'quiz': resolve(__dirname, 'quiz/index.html'),
+        'worldcup': resolve(__dirname, 'worldcup/index.html'),
       },
     },
   },

@@ -1310,3 +1310,29 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .sb-quiz-topic--football { background: rgba(52,211,153,0.12); color: #34d399; border: 1px solid rgba(52,211,153,0.2); }
 .sb-quiz-topic--travel { background: rgba(96,165,250,0.12); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
 .sb-lesson-card { position: relative; }
+
+/* ── World Cup Quiz Table ── */
+.wc-table { margin-top: 16px; }
+.wc-table-header { display: grid; grid-template-columns: 100px repeat(4, 1fr); gap: 4px; margin-bottom: 4px; }
+.wc-table-year-col { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 700; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; padding: 8px; }
+.wc-table-pos-col { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 700; letter-spacing: 0.5px; color: var(--text-muted); padding: 8px; text-align: center; }
+.wc-table-row { display: grid; grid-template-columns: 100px repeat(4, 1fr); gap: 4px; margin-bottom: 4px; }
+.wc-table-row .wc-table-year-col { display: flex; flex-direction: column; justify-content: center; padding: 12px 8px; background: rgba(255,255,255,0.02); border-radius: var(--radius-sm); }
+.wc-table-year { font-family: var(--font-head); font-size: 1rem; font-weight: 800; color: var(--white); }
+.wc-table-host { font-family: var(--font-mono); font-size: 0.45rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; margin-top: 2px; }
+.wc-table-cell { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 12px 6px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: var(--radius-sm); min-height: 56px; text-align: center; transition: all 0.3s; }
+.wc-table-flag { font-size: 1.2rem; }
+.wc-table-name { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; color: var(--white); letter-spacing: 0.5px; }
+.wc-table-blank { font-family: var(--font-mono); font-size: 1rem; color: var(--text-muted); opacity: 0.3; }
+.wc-pos--gold { background: rgba(201,169,110,0.08); border-color: rgba(201,169,110,0.2); }
+.wc-pos--gold .wc-table-name { color: var(--accent); }
+.wc-pos--silver { background: rgba(192,192,192,0.06); border-color: rgba(192,192,192,0.15); }
+.wc-pos--bronze { background: rgba(205,127,50,0.06); border-color: rgba(205,127,50,0.15); }
+.wc-pos--fourth { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
+.wc-cell--missed .wc-table-name { color: var(--text-muted); opacity: 0.6; }
+@media (max-width: 640px) {
+  .wc-table-header, .wc-table-row { grid-template-columns: 60px repeat(4, 1fr); }
+  .wc-table-name { font-size: 0.45rem; }
+  .wc-table-year { font-size: 0.8rem; }
+  .wc-table-host { display: none; }
+}
