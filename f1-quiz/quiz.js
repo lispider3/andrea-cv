@@ -159,7 +159,7 @@ const render = () => {
             ` : `
               <div class="f1q-result">
                 <div class="f1q-result-score">${found.size} / ${TOTAL}</div>
-                <div class="f1q-result-label">${found.size === TOTAL ? 'PERFECT SCORE! 🏆' : found.size > 60 ? 'INCREDIBLE!' : found.size > 40 ? 'GREAT JOB!' : found.size > 20 ? 'NOT BAD!' : 'KEEP PRACTICING!'}</div>
+                <div class="f1q-result-label">${found.size === TOTAL ? 'PERFECT SCORE!' : found.size > 60 ? 'INCREDIBLE!' : found.size > 40 ? 'GREAT JOB!' : found.size > 20 ? 'NOT BAD!' : 'KEEP PRACTICING!'}</div>
                 <button id="f1q-restart" class="f1q-btn f1q-btn--primary" style="margin-top:16px">Play Again</button>
               </div>
             `}

@@ -37,13 +37,13 @@ const aliasMap = {
 };
 
 const flags = {
-  'Brazil': '🇧🇷', 'Germany': '🇩🇪', 'Turkey': '🇹🇷', 'South Korea': '🇰🇷',
-  'Italy': '🇮🇹', 'France': '🇫🇷', 'Portugal': '🇵🇹', 'Spain': '🇪🇸',
-  'Netherlands': '🇳🇱', 'Uruguay': '��🇾', 'Argentina': '🇦🇷',
-  'Croatia': '🇭🇷', 'Belgium': '🇧🇪', 'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'Morocco': '🇲🇦',
+  'Brazil': 'BRA', 'Germany': 'GER', 'Turkey': 'TUR', 'South Korea': 'KOR',
+  'Italy': 'ITA', 'France': 'FRA', 'Portugal': 'POR', 'Spain': 'ESP',
+  'Netherlands': 'NED', 'Uruguay': 'URU', 'Argentina': 'ARG',
+  'Croatia': 'CRO', 'Belgium': 'BEL', 'England': 'ENG', 'Morocco': 'MAR',
 };
 
-const posLabels = ['🥇 Winner', '🥈 Runner-up', '🥉 Third', '4th Place'];
+const posLabels = ['1st', '2nd', '3rd', '4th'];
 const posClasses = ['wc-pos--gold', 'wc-pos--silver', 'wc-pos--bronze', 'wc-pos--fourth'];
 
 // Build lookup: normalized name → [{year, pos}]
@@ -110,7 +110,7 @@ const render = () => {
             ` : `
               <div class="f1q-result">
                 <div class="f1q-result-score">${foundCount} / ${TOTAL}</div>
-                <div class="f1q-result-label">${foundCount === TOTAL ? 'PERFECT SCORE! 🏆' : foundCount > 18 ? 'INCREDIBLE!' : foundCount > 12 ? 'GREAT JOB!' : foundCount > 6 ? 'NOT BAD!' : 'KEEP PRACTICING!'}</div>
+                <div class="f1q-result-label">${foundCount === TOTAL ? 'PERFECT SCORE!' : foundCount > 18 ? 'INCREDIBLE!' : foundCount > 12 ? 'GREAT JOB!' : foundCount > 6 ? 'NOT BAD!' : 'KEEP PRACTICING!'}</div>
                 <button id="f1q-restart" class="f1q-btn f1q-btn--primary" style="margin-top:16px">Play Again</button>
               </div>
             `}

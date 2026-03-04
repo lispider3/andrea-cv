@@ -1270,7 +1270,7 @@ function renderEarlyPayout() {
           <div class="sb-ep-timeline">
             ${timeline.map((t, i) => `
               <div class="sb-ep-step ${t.active ? 'sb-ep-step--active' : ''} ${t.goalNum === 2 && epGoals >= 2 ? 'sb-ep-step--trigger' : ''}">
-                <div class="sb-ep-step-dot">${t.active ? (t.goalNum === 2 && epGoals >= 2 ? '\ud83c\udfc6' : (t.goalNum === 1 && epGoals >= 1 ? '\u26bd' : '\u2713')) : (i+1)}</div>
+                <div class="sb-ep-step-dot">${t.active ? (t.goalNum === 2 && epGoals >= 2 ? 'W' : (t.goalNum === 1 && epGoals >= 1 ? 'G' : '\u2713')) : (i+1)}</div>
                 <div class="sb-ep-step-info">
                   <span class="sb-ep-step-min">${t.min}</span>
                   <span class="sb-ep-step-label">${t.label}</span>
@@ -1281,7 +1281,7 @@ function renderEarlyPayout() {
 
           ${epGoals >= 2 ? `
             <div class="sb-ep-payout-banner">
-              <div class="sb-ep-payout-icon">\ud83c\udf89</div>
+              <div class="sb-ep-payout-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
               <div>
                 <h4>FULL PAYOUT TRIGGERED!</h4>
                 <p>\u20ac50 paid out at the 60th minute. The game ended 2-2 but you were already celebrating.</p>

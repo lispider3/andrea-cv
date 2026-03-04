@@ -253,7 +253,7 @@ const initInteractions = () => {
       navigator.clipboard.writeText('andrealispider@gmail.com').then(() => {
         const toast = document.createElement('div');
         toast.className = 'toast-notification';
-        toast.textContent = '✉ Email copied to clipboard';
+        toast.textContent = 'Email copied to clipboard';
         document.body.appendChild(toast);
         requestAnimationFrame(() => toast.classList.add('show'));
         setTimeout(() => {
@@ -683,7 +683,7 @@ const renderTestimonials = () => `
       <div class="testimonials-grid">
         ${testimonials.map((t, i) => `
           <div class="reveal test-card ${i >= 4 ? 'test-card-hidden' : ''}">
-            <div class="test-quote-icon">❝</div>
+            <div class="test-quote-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="var(--accent)" opacity="0.3"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg></div>
             <div class="test-text clamped">"${t.text}"</div>
             <button class="read-more-btn">READ MORE ▸</button>
             <div class="test-footer">

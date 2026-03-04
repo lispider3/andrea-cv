@@ -198,7 +198,7 @@ function renderDashboard(data) {
                 ${ev.dur ? `<span class="an-event-dur">${fmtDur(ev.dur)}</span>` : ''}
                 ${ev.ip ? `<span class="an-event-ip">${ev.ip}</span>` : ''}
                 ${isMine
-                  ? `<button class="an-unflag-btn" data-fp="${ev.fp}" title="Unflag this session">YOU ✕</button>`
+                  ? `<button class="an-unflag-btn" data-fp="${ev.fp}" title="Unflag this session">YOU x</button>`
                   : ev.fp ? `<button class="an-flag-btn" data-fp="${ev.fp}" title="Flag as my session">Flag</button>` : ''}
                 <span class="an-event-time">${relTime(ev.t)}</span>
               </div>`;

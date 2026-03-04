@@ -115,31 +115,31 @@ const getArchetype = (revenue, morale, stability) => {
 
   // 1. Unicorn: All high
   if (total >= 250 && min >= 60) return {
-    title: 'The Unicorn CPO', emoji: '🦄',
+    title: 'The Unicorn CPO', emoji: '*',
     desc: 'You balanced growth, people, and stability like a seasoned executive. Boards fight over leaders like you. This is a rare outcome — most CPOs sacrifice at least one dimension. Your ability to navigate trade-offs without extremes is what separates good operators from great ones.',
     color: '#C9A96E',
   };
   // 2. Growth Hunter: Revenue dominant
   if (revenue === max && revenue >= morale + 15 && revenue >= stability + 15) return {
-    title: 'The Growth Hunter', emoji: '🎯',
+    title: 'The Growth Hunter', emoji: '◎',
     desc: 'Revenue is king in your world. You lean into opportunity and aren\'t afraid to break things in pursuit of growth. Your investors love you. Your engineering team... has opinions. This style works in hypergrowth but watch for the cracks forming beneath the surface.',
     color: '#22c55e',
   };
   // 3. People Champion: Morale dominant
   if (morale === max && morale >= revenue + 15 && morale >= stability + 15) return {
-    title: 'The People Champion', emoji: '💛',
+    title: 'The People Champion', emoji: '+',
     desc: 'Your team would follow you anywhere. Retention is 100% and Glassdoor reviews are glowing. You know that great products come from great people. But the CFO keeps asking awkward questions about ROI, and the board wants to see more aggressive numbers next quarter.',
     color: '#f59e0b',
   };
   // 4. Technical Stabilizer: Stability dominant
   if (stability === max && stability >= revenue + 15 && stability >= morale + 15) return {
-    title: 'The Technical Stabilizer', emoji: '🛡️',
+    title: 'The Technical Stabilizer', emoji: '▣',
     desc: 'You know that a stable platform is the foundation of everything. Zero downtime, comprehensive test coverage, and on-call engineers who actually sleep at night. Your architecture is a work of art. But the commercial team is wondering why nothing new ever ships.',
     color: '#3b82f6',
   };
   // 5. Balanced Operator: No dominant dimension
   return {
-    title: 'The Balanced Operator', emoji: '⚖️',
+    title: 'The Balanced Operator', emoji: '≋',
     desc: 'You didn\'t let any one dimension dominate your decisions. Every choice was weighed against its impact on growth, people, and systems. This measured approach shows real leadership maturity — the kind that builds sustainable companies, not just fast ones.',
     color: '#a78bfa',
   };

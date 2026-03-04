@@ -1336,3 +1336,16 @@ html.light .nav-links a:hover { color: #1a1a1a; }
   .wc-table-year { font-size: 0.8rem; }
   .wc-table-host { display: none; }
 }
+
+/* ── Quiz Hub Filters ── */
+.sb-quiz-filters { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
+.sb-quiz-filter-btn { font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 18px; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+.sb-quiz-filter-btn:hover { border-color: rgba(255,255,255,0.15); color: var(--white); }
+.sb-quiz-filter-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.sb-quiz-filter-btn--f1.active { background: #ff6347; border-color: #ff6347; }
+.sb-quiz-filter-btn--football.active { background: #34d399; border-color: #34d399; }
+.sb-quiz-filter-btn--travel.active { background: #60a5fa; border-color: #60a5fa; }
+
+/* ── World Cup: fixed cell sizes ── */
+.wc-table-cell { min-height: 64px; min-width: 0; }
+.wc-table-flag { font-family: var(--font-mono); font-size: 0.5rem; font-weight: 800; letter-spacing: 1px; color: var(--accent); opacity: 0.6; }

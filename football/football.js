@@ -310,7 +310,7 @@ const render = () => {
 
   if (error) {
     app.innerHTML = `<section class="fb-section"><div class="fb-container">
-      <div class="fb-error"><p>⚠ ${error}</p><button onclick="location.reload()" class="fb-btn">Retry</button></div>
+      <div class="fb-error"><p>${error}</p><button onclick="location.reload()" class="fb-btn">Retry</button></div>
     </div></section>`;
     return;
   }
