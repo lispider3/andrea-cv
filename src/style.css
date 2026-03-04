@@ -2869,6 +2869,7 @@ html.light .nav-links a:hover {
 .f1-team-logo--color {
   filter: none;
   opacity: 1;
+  mix-blend-mode: lighten;
 }
 
 /* ── World Capitals Quiz ── */
