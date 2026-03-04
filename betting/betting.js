@@ -1221,16 +1221,17 @@ function renderCombiTax() {
 
 
 // ═══════════════ LESSON 7: EARLY PAYOUT ═══════════════
-let epGoals = 0; // 0, 1, or 2
-let epTriggered = false;
+let epGoals = 0; // 0-4 (steps in timeline)
+let epPlaying = false;
+let epTimer = null;
 
 function renderEarlyPayout() {
   const timeline = [
-    { min: "0'", label: 'Kick Off', icon: '\u26bd', active: true },
-    { min: "34'", label: epGoals >= 1 ? 'Liverpool 1-0!' : 'Score a goal', icon: epGoals >= 1 ? '\u26bd' : '\u2022', active: epGoals >= 1, goal: true, goalNum: 1 },
-    { min: "60'", label: epGoals >= 2 ? 'Liverpool 2-0!' : 'Score again', icon: epGoals >= 2 ? '\ud83c\udfc6' : '\u2022', active: epGoals >= 2, goal: true, goalNum: 2 },
-    { min: "78'", label: 'Opponent pulls one back (2-1)', icon: '\u2022', active: epGoals >= 2 },
-    { min: "90'", label: 'Final Score: 2-2', icon: '\u2022', active: epGoals >= 2 },
+    { min: "0'", label: 'Kick Off', active: epGoals >= 0 },
+    { min: "34'", label: epGoals >= 1 ? 'Liverpool 1-0!' : 'Waiting\u2026', active: epGoals >= 1, goalNum: 1 },
+    { min: "60'", label: epGoals >= 2 ? 'Liverpool 2-0! \ud83c\udfc6' : 'Waiting\u2026', active: epGoals >= 2, goalNum: 2 },
+    { min: "78'", label: epGoals >= 3 ? 'Opponent scores (2-1)' : 'Waiting\u2026', active: epGoals >= 3 },
+    { min: "90'", label: epGoals >= 4 ? 'Final Score: 2-2' : 'Waiting\u2026', active: epGoals >= 4 },
   ];
 
   return `
@@ -1447,9 +1448,21 @@ function bindEvents() {
     document.getElementById('partial-slider')?.focus();
   });
 
-  // Early payout
-  document.querySelector('.sb-ep-score-btn')?.addEventListener('click', () => { epGoals = Math.min(2, epGoals + 1); renderPage(); });
-  document.querySelector('.sb-ep-reset-btn')?.addEventListener('click', () => { epGoals = 0; renderPage(); });
+  // Early payout auto-play
+  document.querySelector('.sb-ep-play-btn')?.addEventListener('click', () => {
+    epPlaying = true; epGoals = 0; renderPage();
+    epTimer = setInterval(() => {
+      epGoals++;
+      if (epGoals >= 4) { epPlaying = false; clearInterval(epTimer); epTimer = null; }
+      renderPage();
+    }, 3000);
+  });
+  document.querySelector('.sb-ep-stop-btn')?.addEventListener('click', () => {
+    epPlaying = false; clearInterval(epTimer); epTimer = null; renderPage();
+  });
+  document.querySelector('.sb-ep-reset-btn')?.addEventListener('click', () => {
+    epPlaying = false; clearInterval(epTimer); epTimer = null; epGoals = 0; renderPage();
+  });
 
   // Cross-lesson links
   document.querySelectorAll('.sb-link-lesson').forEach(a => {
