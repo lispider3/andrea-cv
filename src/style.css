@@ -1303,3 +1303,10 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 .sb-bb-cell--conflict .sb-bb-cell-label { color: #ef4444; }
 .sb-bb-cell-odds { font-family: var(--font-mono); font-size: 0.65rem; font-weight: 800; color: var(--accent); }
 @media (max-width: 500px) { .sb-bb-row { flex-wrap: wrap; } .sb-bb-cell { min-width: calc(50% - 4px); } }
+
+/* ── Quiz Topic Flags ── */
+.sb-quiz-topic { position: absolute; top: 12px; right: 12px; font-family: var(--font-mono); font-size: 0.5rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; }
+.sb-quiz-topic--f1 { background: rgba(255,99,71,0.12); color: #ff6347; border: 1px solid rgba(255,99,71,0.2); }
+.sb-quiz-topic--football { background: rgba(52,211,153,0.12); color: #34d399; border: 1px solid rgba(52,211,153,0.2); }
+.sb-quiz-topic--travel { background: rgba(96,165,250,0.12); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
+.sb-lesson-card { position: relative; }
