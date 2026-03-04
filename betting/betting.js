@@ -891,7 +891,7 @@ const bbMarkets = [
   { id: 'un25',    label: 'Under 2.5 Goals',          odds: 2.42, cat: 'goals',  group: 'Total Goals', row: 2 },
   { id: 'bttsy',   label: 'BTTS Yes',                 odds: 1.52, cat: 'btts',   group: 'Both Teams to Score', row: 3 },
   { id: 'bttsn',   label: 'BTTS No',                  odds: 2.42, cat: 'btts',   group: 'Both Teams to Score', row: 3 },
-  { id: 'haaland', label: 'Haaland to Score',         odds: 1.80, cat: 'scorer', group: 'Player to Score Anytime', row: 4 },
+  { id: 'haaland', label: 'Joao Pedro to Score',         odds: 1.80, cat: 'scorer', group: 'Player to Score Anytime', row: 4 },
   { id: 'barcola', label: 'Barcola to Score',         odds: 3.00, cat: 'scorer', group: 'Player to Score Anytime', row: 4 },
   { id: 'ov10c',   label: 'Over 10.5 Corners',        odds: 2.10, cat: 'corners', group: 'Corners', row: 5 },
   { id: 'un10c',   label: 'Under 10.5 Corners',       odds: 1.60, cat: 'corners', group: 'Corners', row: 5 },
@@ -932,8 +932,8 @@ const correlations = {
   
   // Result + Scorers
   'psgwin+barcola':  { factor: 0.25, reason: 'Barcola plays for PSG \u2014 if PSG wins, he\u2019s more likely to have scored.' },
-  'psgwin+haaland':  { factor: 0.15, reason: 'Haaland plays for Chelsea \u2014 PSG winning reduces his chances (but doesn\u2019t eliminate them).' },
-  'chewin+haaland':  { factor: 0.25, reason: 'Haaland plays for Chelsea \u2014 a Chelsea win increases his scoring chances.' },
+  'psgwin+haaland':  { factor: 0.15, reason: 'Joao Pedro plays for Chelsea \u2014 PSG winning reduces his chances (but doesn\u2019t eliminate them).' },
+  'chewin+haaland':  { factor: 0.25, reason: 'Joao Pedro plays for Chelsea \u2014 a Chelsea win increases his scoring chances.' },
   'chewin+barcola':  { factor: 0.15, reason: 'Barcola plays for PSG \u2014 a Chelsea win reduces (but doesn\u2019t eliminate) his chances.' },
   
   // Goals + Scorers
@@ -1010,7 +1010,7 @@ function renderBetBuilder() {
           </div>
           <div class="sb-hc-ex-card sb-hier-card--highlight">
             <div class="sb-hc-ex-line">The Correlation</div>
-            <p>If City win, Haaland probably scored. If there are lots of goals, there are probably lots of corners. <em>These events overlap.</em></p>
+            <p>If City win, Joao Pedro probably scored. If there are lots of goals, there are probably lots of corners. <em>These events overlap.</em></p>
           </div>
         </div>
       </div>
