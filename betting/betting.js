@@ -1033,7 +1033,7 @@ function renderCombiTax() {
           <div class="sb-ct-slider-wrap">
             <label class="sb-ct-slider-label">Number of Legs: <strong>${ctLegs}</strong></label>
             <input type="range" min="1" max="12" value="${ctLegs}" class="sb-ct-slider" id="ct-slider" />
-            <div class="sb-ct-slider-ticks"><span>1</span><span>3</span><span>6</span><span>9</span><span>12</span></div>
+            <div class="sb-ct-slider-ticks">${Array.from({length:12},(_,i)=>'<span class="'+(i+1===ctLegs?'sb-ct-tick--active':'')+'">'+(i+1)+'</span>').join('')}</div>
           </div>
 
           <div class="sb-ct-result">

@@ -1237,3 +1237,5 @@ html.light .nav-links a:hover { color: #1a1a1a; }
 /* ── Cross-Lesson Links ── */
 .sb-link-lesson { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; transition: opacity 0.2s; }
 .sb-link-lesson:hover { opacity: 0.8; }
+
+.sb-ct-tick--active { color: var(--accent); font-weight: 800; }
