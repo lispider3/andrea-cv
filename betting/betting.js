@@ -1155,10 +1155,10 @@ function renderPage() {
 function bindEvents() {
   // Lesson picker
   document.querySelectorAll('.sb-lesson-card').forEach(c => {
-    c.addEventListener('click', () => { currentLesson = c.dataset.lesson; renderPage(); window.scrollTo(0, 0); });
+    c.addEventListener('click', () => { currentLesson = c.dataset.lesson; history.pushState({ lesson: currentLesson }, '', '#' + currentLesson); renderPage(); window.scrollTo(0, 0); });
   });
   // Back
-  document.getElementById('sb-back')?.addEventListener('click', () => { currentLesson = null; renderPage(); window.scrollTo(0, 0); });
+  document.getElementById('sb-back')?.addEventListener('click', () => { history.back(); });
 
   // System bet simulators
   document.querySelectorAll('.sb-pick-btn').forEach(btn => {
@@ -1220,7 +1220,7 @@ function bindEvents() {
 
   // Cross-lesson links
   document.querySelectorAll('.sb-link-lesson').forEach(a => {
-    a.addEventListener('click', (e) => { e.preventDefault(); currentLesson = a.dataset.lesson; renderPage(); window.scrollTo(0, 0); });
+    a.addEventListener('click', (e) => { e.preventDefault(); currentLesson = a.dataset.lesson; history.pushState({ lesson: currentLesson }, '', '#' + currentLesson); renderPage(); window.scrollTo(0, 0); });
   });
 
   // Combi tax
@@ -1254,11 +1254,22 @@ window.addEventListener('scroll', () => {
   if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-// Check URL hash for direct lesson link
-if (location.hash) {
+// Hash-based routing for lesson navigation
+function readHash() {
   const id = location.hash.slice(1);
-  if (lessons.find(l => l.id === id)) currentLesson = id;
+  currentLesson = lessons.find(l => l.id === id) ? id : null;
 }
 
+window.addEventListener('popstate', () => {
+  readHash();
+  renderPage();
+  window.scrollTo(0, 0);
+});
+
+// Set initial state from URL
+readHash();
+if (currentLesson) {
+  history.replaceState({ lesson: currentLesson }, '', '#' + currentLesson);
+}
 renderPage();
 trackEvent('pageview');
