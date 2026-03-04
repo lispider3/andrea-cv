@@ -327,11 +327,11 @@ const render = () => {
           <h1 class="fb-title">JUVENTUS<br><span>DASHBOARD</span></h1>
         </div>
 
+        ${renderQuiz()}
+
         ${nextMatch ? renderNextMatch(nextMatch) : '<p class="fb-empty">No upcoming Juventus matches found.</p>'}
 
         ${standingsData.length ? renderStandings(standingsData) : ''}
-
-        ${renderQuiz()}
       </div>
     </section>
 
