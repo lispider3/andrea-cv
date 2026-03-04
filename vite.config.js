@@ -12,6 +12,7 @@ export default defineConfig({
         'cpo-sim': resolve(__dirname, 'cpo-sim/index.html'),
         'analytics': resolve(__dirname, 'analytics/index.html'),
         'betting': resolve(__dirname, 'betting/index.html'),
+        'quiz': resolve(__dirname, 'quiz/index.html'),
       },
     },
   },
