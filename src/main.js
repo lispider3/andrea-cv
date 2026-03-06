@@ -25,7 +25,7 @@ const experiences = [
     period: "Apr 2024 – Apr 2025",
     location: "Remote",
     details: [
-      "Led end-to-end product and technology strategy for a blockchain-based peer-to-peer betting exchange.",
+      "Led end-to-end product and technology strategy for a blockchain-based iGaming operator.",
       "Hired and led a team of 15+ developers and designers from zero.",
       "Defined the product roadmap for a decentralized sports betting platform.",
     ],
