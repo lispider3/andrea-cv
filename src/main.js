@@ -13,6 +13,7 @@ const experiences = [
     details: [
       "Leading a team of Product Managers, Scrum teams, and designers across multiple product lines in the esports betting space.",
       "Integrated AI tools into daily workflows — using Perplexity and Gemini as research assistants, Cursor, Lovable, and Antigravity for rapid prototyping, and Google AI Studio for experimentation.",
+      "Leading an AI transformation across the product organization, targeting 80+% of code delivery through AI agents — redefining how product teams scope, spec, and ship software.",
       "Developing and executing the product vision and strategy across all B2B product lines — Odds Feed, Sportsbook iFrame, and Engagement Tools.",
       "Building a culture of ownership, experimentation, and genuine human connection within the product organization.",
       "Driving cross-functional alignment between engineering, commercial, and operations teams.",
@@ -156,22 +157,14 @@ const achievementStories = {
   "Years in iGaming \& Sportsbook": "From sportsbook risk management to the C-suite — I started as a trader at Betsson in 2011, learning odds inside out. That domain expertise became the foundation for everything that followed: product ownership, people leadership, and ultimately running entire product organizations across iGaming and esports.",
   "PM / PO / Designers Recruited": "Across Betsson, BOSS Gaming, Betswap, and Oddin.gg, I've personally recruited and interviewed over 50 product managers, product owners, and designers. Hiring for character and culture fit first — skills can be taught, but attitude and values are non-negotiable.",
   "Largest Department Managed": "At Betsson Group, I led a department of 50+ people spanning product managers, designers, QA engineers, and developers across multiple sportsbook squads. Keeping everyone aligned, motivated, and shipping required a mix of clear strategy and genuine human connection.",
-  "Providers Integrated": "From odds feeds and trading platforms to payment providers and front-end frameworks — I've managed the integration of 25+ third-party providers. Each one taught me something about vendor management, technical due diligence, and knowing when to build vs. buy.",
-  "Different Sportsbooks Managed": "Betsson, Betsafe, NordicBet, CasinoEuro, Yourbet, BOSS Gaming, Betswap, and more — each with different markets, different customers, and different challenges. This breadth gives me a rare perspective on what works across segments.",
-  "Departments Built From Zero": "At Betswap, I was employee #1 in product and built a 15-person team in 6 months. At BOSS Gaming, I established the sportsbook department. At Hardball/Yourbet, I set up both Product and Operations from scratch. Building from zero is where I thrive.",
-  "Product Managers Mentored": "My proudest achievement isn't any product launch — it's watching the people I've mentored grow into leaders themselves. Several of my former reports are now Heads of Product and Senior POs at major companies.",
-  "Sports Manually Traded": "Before product management, I spent 4 years as a sportsbook risk manager, manually trading 20+ sports from football to table tennis. This hands-on trading experience gives me an edge that no product course can teach."
+  "Departments Built From Zero": "At Betswap, I was employee #1 in product and built a 15-person team in 6 months. At BOSS Gaming, I established the sportsbook department. At Hardball/Yourbet, I set up both Product and Operations from scratch. Building from zero is where I thrive."
 };
 
 const achievements = [
   { value: 15, suffix: "+", label: "Years in iGaming & Sportsbook" },
   { value: 50, suffix: "+", label: "Largest Department Managed" },
-  { value: 25, suffix: "+", label: "Providers Integrated" },
   { value: 50, suffix: "+", label: "PM / PO / Designers Recruited" },
-  { value: 10, suffix: "+", label: "Different Sportsbooks Managed" },
   { value: 4, suffix: "+", label: "Departments Built From Zero" },
-  { value: 5, suffix: "+", label: "Product Managers Mentored" },
-  { value: 20, suffix: "+", label: "Sports Manually Traded" },
 ];
 
 // ============ INIT ============

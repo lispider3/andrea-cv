@@ -7552,3 +7552,23 @@ html.light .nav-links a:hover {
   margin-right: 4px;
   vertical-align: -1px;
 }
+
+/* ══════════════════════════════════════════════
+   PRINT STYLES — Clean PDF output
+   ══════════════════════════════════════════════ */
+@page {
+  margin: 0;
+}
+
+@media print {
+  /* Remove browser-injected headers/footers (timestamp, URL, filename) */
+  html {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+}
