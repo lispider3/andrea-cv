@@ -5,7 +5,7 @@ import './style.css';
 const experiences = [
   {
     title: "Chief Product Officer",
-    company: "NDA OBO Oddin.gg",
+    company: "Corwyn (by Oddin.gg)",
     logo: "/logos/oddin.png",
     period: "Apr 2025 – Present",
     location: "Remote",
