@@ -21,8 +21,11 @@
       padding: 24px 32px;
     }
 
-    @page { size: A4; margin: 12mm 14mm; }
-    @media print { body { padding: 0; } }
+    @page { size: A4; margin: 12mm 14mm; margin-top: 8mm; margin-bottom: 8mm; }
+    @media print {
+      body { padding: 0; }
+      @page { margin-top: 8mm; margin-bottom: 8mm; }
+    }
 
     /* ── Header ── */
     .header {
@@ -101,7 +104,7 @@
     /* ── Key Achievements ── */
     .achievements {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 6px;
       margin-bottom: 14px;
     }
@@ -260,31 +263,11 @@
     </div>
     <div class="achiev-item">
       <div class="achiev-num">50+</div>
-      <div class="achiev-lbl">PM / PO / Designers Recruited</div>
-    </div>
-    <div class="achiev-item">
-      <div class="achiev-num">50+</div>
       <div class="achiev-lbl">Largest Department Managed</div>
     </div>
     <div class="achiev-item">
-      <div class="achiev-num">25+</div>
-      <div class="achiev-lbl">Providers Integrated</div>
-    </div>
-    <div class="achiev-item">
-      <div class="achiev-num">10+</div>
-      <div class="achiev-lbl">Different Sportsbooks Managed</div>
-    </div>
-    <div class="achiev-item">
-      <div class="achiev-num">4+</div>
-      <div class="achiev-lbl">Departments Built From Zero</div>
-    </div>
-    <div class="achiev-item">
-      <div class="achiev-num">5+</div>
-      <div class="achiev-lbl">Product Managers Mentored</div>
-    </div>
-    <div class="achiev-item">
-      <div class="achiev-num">20+</div>
-      <div class="achiev-lbl">Sports Manually Traded</div>
+      <div class="achiev-num">50+</div>
+      <div class="achiev-lbl">PM / PO / Designers Hired</div>
     </div>
   </div>
 
