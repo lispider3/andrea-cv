@@ -355,7 +355,7 @@ const renderHero = () => `
       <h1 class="hero-headline">Andrea <span class="text-red">Spiteri</span></h1>
 
       <p class="hero-subtitle">
-        Building products, growing people, and having a good time doing it. Over a decade in the gaming & esports industry.
+        Building products, growing people, and having a good time doing it. Over a decade in the igaming & sportsbook industry.
       </p>
 
       <div class="hero-stats">
