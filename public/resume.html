@@ -14,7 +14,7 @@
       font-family: 'Inter', -apple-system, sans-serif;
       font-size: 9pt;
       line-height: 1.5;
-      color: #1a1a1a;
+      color: #2a2a2a;
       background: #ffffff;
       max-width: 210mm;
       margin: 0 auto;
@@ -32,28 +32,25 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      border-bottom: 2px solid #C9A96E;
+      border-bottom: 1px solid #d0d0d0;
       padding-bottom: 14px;
       margin-bottom: 16px;
     }
 
     .header-left h1 {
       font-size: 24pt;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: -0.5px;
       line-height: 1.1;
       color: #1a1a1a;
     }
 
-    .header-left h1 span { color: #9a7b3c; }
-
     .header-left .title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 8pt;
-      font-weight: 500;
-      letter-spacing: 2px;
+      font-size: 8.5pt;
+      font-weight: 400;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: #9a7b3c;
+      color: #777;
       margin-top: 4px;
     }
 
@@ -64,13 +61,12 @@
       line-height: 1.7;
     }
 
-    .header-right a { color: #9a7b3c; text-decoration: none; }
+    .header-right a { color: #2a2a2a; text-decoration: none; }
     .header-right .label {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 6.5pt;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: #888;
+      color: #999;
       margin-right: 4px;
     }
 
@@ -81,58 +77,21 @@
       color: #555;
       line-height: 1.65;
       margin-bottom: 16px;
-      padding: 12px 16px;
-      background: #f8f8f6;
-      border-left: 2px solid #C9A96E;
-      border-radius: 4px;
+      padding: 10px 0;
+      border-top: none;
     }
 
     /* ── Section headings ── */
     .section-heading {
-      font-family: 'JetBrains Mono', monospace;
       font-size: 7.5pt;
-      font-weight: 500;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 3px;
-      color: #9a7b3c;
+      color: #1a1a1a;
       border-bottom: 1px solid #e0e0e0;
       padding-bottom: 4px;
       margin-bottom: 10px;
       margin-top: 14px;
-    }
-
-    /* ── Key Achievements ── */
-    .achievements {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin-bottom: 14px;
-    }
-
-    .achiev-item {
-      text-align: center;
-      padding: 8px 4px;
-      background: #f8f8f6;
-      border-top: 2px solid #C9A96E;
-      border-radius: 0 0 4px 4px;
-    }
-
-    .achiev-num {
-      font-size: 16pt;
-      font-weight: 800;
-      color: #9a7b3c;
-      line-height: 1.1;
-    }
-
-    .achiev-lbl {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 5.5pt;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #888;
-      line-height: 1.3;
-      margin-top: 2px;
     }
 
     /* ── Experience ── */
@@ -149,23 +108,22 @@
 
     .exp-role {
       font-size: 10pt;
-      font-weight: 700;
+      font-weight: 600;
       color: #1a1a1a;
     }
 
     .exp-period {
       font-family: 'JetBrains Mono', monospace;
       font-size: 7pt;
-      font-weight: 500;
-      color: #888;
+      font-weight: 400;
+      color: #999;
       flex-shrink: 0;
     }
 
     .exp-company {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 8pt;
+      font-size: 8.5pt;
       font-weight: 500;
-      color: #9a7b3c;
+      color: #555;
       margin-bottom: 3px;
     }
 
@@ -174,22 +132,19 @@
     .exp-bullets li {
       font-size: 8.5pt;
       font-weight: 300;
-      color: #555;
+      color: #444;
       line-height: 1.55;
-      padding-left: 14px;
+      padding-left: 12px;
       position: relative;
       margin-bottom: 1px;
     }
 
     .exp-bullets li::before {
-      content: '';
+      content: '–';
       position: absolute;
-      left: 3px;
-      top: 7px;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: rgba(201,169,110,0.3);
+      left: 0;
+      top: 0;
+      color: #bbb;
     }
 
     /* ── Two column layout ── */
@@ -208,20 +163,19 @@
     }
 
     .expertise-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 6.5pt;
-      font-weight: 500;
-      padding: 3px 8px;
-      background: rgba(176,141,79,0.08);
-      border: 1px solid rgba(176,141,79,0.15);
-      border-radius: 3px;
-      color: #9a7b3c;
+      font-size: 7pt;
+      font-weight: 400;
+      padding: 2px 8px;
+      background: #f5f5f5;
+      border: 1px solid #e5e5e5;
+      border-radius: 2px;
+      color: #555;
     }
 
     /* ── Education ── */
     .edu-item { margin-bottom: 6px; }
-    .edu-degree { font-size: 9pt; font-weight: 700; color: #1a1a1a; }
-    .edu-meta { font-size: 8pt; color: #888; }
+    .edu-degree { font-size: 9pt; font-weight: 600; color: #1a1a1a; }
+    .edu-meta { font-size: 8pt; color: #999; }
 
     /* ── Languages ── */
     .lang-list { font-size: 8.5pt; color: #555; }
@@ -234,7 +188,7 @@
   <!-- Header -->
   <div class="header">
     <div class="header-left">
-      <h1>Andrea <span>Spiteri</span></h1>
+      <h1>Andrea Spiteri</h1>
       <div class="title">Chief Product Officer</div>
     </div>
     <div class="header-right">
@@ -242,7 +196,7 @@
       <div><span class="label">Phone</span> +356 77011175</div>
       <div><span class="label">Email</span> <a href="mailto:andrealispider@gmail.com">andrealispider@gmail.com</a></div>
       <div><span class="label">LinkedIn</span> <a href="https://www.linkedin.com/in/andrea-spiteri/">linkedin.com/in/andrea-spiteri</a></div>
-      <div><span class="label">Web</span> <a href="https://andreaspiteri.com">andreaspiteri.com</a></div>
+      <div><span class="label">Web</span> <a href="https://www.andreaspiteri.com/">https://www.andreaspiteri.com/</a></div>
     </div>
   </div>
 
@@ -252,23 +206,6 @@
     iGaming and esports industry. I build and lead high-performing product teams, own end-to-end product roadmaps,
     champion product improvements and launches into new markets, and improve methodologies and processes while mentoring
     teams to deliver exceptional results and drive growth.
-  </div>
-
-  <!-- Key Achievements -->
-  <div class="section-heading">Key Achievements</div>
-  <div class="achievements">
-    <div class="achiev-item">
-      <div class="achiev-num">15+</div>
-      <div class="achiev-lbl">Years in iGaming &amp; Sportsbook</div>
-    </div>
-    <div class="achiev-item">
-      <div class="achiev-num">50+</div>
-      <div class="achiev-lbl">Largest Department Managed</div>
-    </div>
-    <div class="achiev-item">
-      <div class="achiev-num">50+</div>
-      <div class="achiev-lbl">PM / PO / Designers Hired</div>
-    </div>
   </div>
 
   <!-- Experience -->
@@ -281,10 +218,10 @@
     </div>
     <div class="exp-company">Corwyn (by Oddin.gg)</div>
     <ul class="exp-bullets">
-      <li>Leading a team of Product Managers, Scrum teams, and designers across multiple product lines in the esports betting space.</li>
-      <li>Integrated AI tools into daily workflows — using Perplexity and Gemini as research assistants, Cursor, Lovable, and Antigravity for rapid prototyping, and Google AI Studio for experimentation.</li>
-      <li>Leading an AI transformation across the product organization, targeting 80+% of code delivery through AI agents — redefining how product teams scope, spec, and ship software.</li>
-      <li>Developing and executing the product vision and strategy across all B2B product lines — Odds Feed, Sportsbook iFrame, and Engagement Tools.</li>
+      <li>Leading a team of Product Managers, Scrum teams, and designers across multiple products in the sports betting space.</li>
+      <li>Integrated AI tools into daily workflows — using Perplexity and Gemini as research assistants, Claude, Cursor, and Antigravity for rapid prototyping, and Google AI Studio for experimentation.</li>
+      <li>Leading an AI transformation across the product organization, targeting 80+% of code delivery through AI agents by end of Q2 2026, redefining how product teams scope, spec, and ship software</li>
+      <li>Developing and executing the product vision and strategy across our B2B product, Odds Feed, Sportsbook iFrame, and Engagement Tools</li>
       <li>Building a culture of ownership, experimentation, and genuine human connection within the product organization.</li>
       <li>Driving cross-functional alignment between engineering, commercial, and operations teams.</li>
     </ul>
