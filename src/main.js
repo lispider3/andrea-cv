@@ -153,48 +153,20 @@ const testimonials = [
   { name: "Lara Tedesco", role: "Strategic Planning | Project & Product Management", company: "", relation: "Worked on the same team", text: `After working with Andrea for well over a year, it is clear that not only does he bring with him a wealth of knowledge in his area but also has a refreshing work ethic. His positivity, leadership and eagerness to bring teams together and solve problems make him an MVP in any team he is in!` }
 ];
 
-const achievementStories = {
-  "Years in iGaming \& Sportsbook": "From sportsbook risk management to the C-suite — I started as a trader at Betsson in 2011, learning odds inside out. That domain expertise became the foundation for everything that followed: product ownership, people leadership, and ultimately running entire product organizations across iGaming and esports.",
-  "PM / PO / Designers Recruited": "Across Betsson, BOSS Gaming, Betswap, and Oddin.gg, I've personally recruited and interviewed over 50 product managers, product owners, and designers. Hiring for character and culture fit first — skills can be taught, but attitude and values are non-negotiable.",
-  "Largest Department Managed": "At Betsson Group, I led a department of 50+ people spanning product managers, designers, QA engineers, and developers across multiple sportsbook squads. Keeping everyone aligned, motivated, and shipping required a mix of clear strategy and genuine human connection.",
-  "Departments Built From Zero": "At Betswap, I was employee #1 in product and built a 15-person team in 6 months. At BOSS Gaming, I established the sportsbook department. At Hardball/Yourbet, I set up both Product and Operations from scratch. Building from zero is where I thrive."
-};
-
-const achievements = [
-  { value: 15, suffix: "+", label: "Years in iGaming & Sportsbook" },
-  { value: 50, suffix: "+", label: "Largest Department Managed" },
-  { value: 50, suffix: "+", label: "PM / PO / Designers Recruited" },
-  { value: 4, suffix: "+", label: "Departments Built From Zero" },
-];
-
 // ============ INIT ============
-const initParticles = () => {
-  const container = document.getElementById('hero-particles');
-  if (!container) return;
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.style.left = Math.random() * 100 + '%';
-    p.style.bottom = '-4px';
-    p.style.animationDuration = (6 + Math.random() * 8) + 's';
-    p.style.animationDelay = (Math.random() * 6) + 's';
-    container.appendChild(p);
-  }
-};
-
 const initThemeToggle = () => {
   const toggle = document.getElementById('theme-toggle');
-  const savedTheme = localStorage.getItem('theme') || 'dark';
-  if (savedTheme === 'light') {
-    document.documentElement.classList.add('light');
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  if (savedTheme === 'dark') {
+    document.documentElement.classList.add('dark');
     toggle.checked = true;
   }
 
   document.querySelector('.neo-toggle').classList.add('ready');
   toggle.addEventListener('change', () => {
-    const isLight = toggle.checked;
-    document.documentElement.classList.toggle('light', isLight);
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    const isDark = toggle.checked;
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
 };
 
@@ -203,7 +175,7 @@ const initNavbar = () => {
   const burger = document.getElementById('burger-btn');
   const links = document.getElementById('nav-links');
 
-window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
@@ -281,37 +253,6 @@ const initInteractions = () => {
   setTimeout(checkReadMore, 100);
 };
 
-const initCountUp = () => {
-  const counters = document.querySelectorAll('.achiev-value');
-  if (!counters.length) return;
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.dataset.target, 10);
-        const prefix = el.dataset.prefix || '';
-        const suffix = el.dataset.suffix || '';
-        const duration = 1800;
-        const start = performance.now();
-
-        const step = (now) => {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          // Ease out cubic
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = Math.round(eased * target);
-          el.textContent = prefix + current + suffix;
-          if (progress < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-        obs.unobserve(el);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  counters.forEach(c => observer.observe(c));
-};
 
 const initHeroTestimonials = () => {
   const slides = document.querySelectorAll('.hero-testimonial-slide');
@@ -344,10 +285,7 @@ const checkReadMore = () => {
 // ============ RENDER ============
 const renderHero = () => `
   <section class="hero" aria-label="Hero">
-    <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content">
-      <div class="hero-tag"><span>Chief Product Officer</span></div>
-
       <div class="hero-photo">
         <img src="/profile.jpg" alt="Andrea Spiteri — Chief Product Officer" loading="eager" width="180" height="180" onerror="this.src='https://ui-avatars.com/api/?name=Andrea+Spiteri&size=512&background=E10600&color=fff'" />
       </div>
@@ -357,25 +295,6 @@ const renderHero = () => `
       <p class="hero-subtitle">
         Building products, growing people, and having a good time doing it. Over a decade in the igaming & sportsbook industry.
       </p>
-
-      <div class="hero-stats">
-        <a href="/betting/" class="stat-box stat-box--link" style="text-decoration:none">
-          <span class="stat-box-value"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
-          <span class="stat-box-label">Sportsbook Expert <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:2px;opacity:0.4;vertical-align:middle"><polygon points="5 3 19 12 5 21 5 3"/></svg></span>
-        </a>
-        <div class="stat-box">
-          <span class="stat-box-value"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg></span>
-          <span class="stat-box-label">AI‑Fluent</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-box-value"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span>
-          <span class="stat-box-label">Product Strategy</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-box-value"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-          <span class="stat-box-label">People Leadership</span>
-        </div>
-      </div>
 
       <div class="hero-cta-row">
         <a href="/andrea-spiteri-cv.pdf" download class="btn-f1">
@@ -414,197 +333,58 @@ const renderHero = () => `
   </section>
 `;
 
-const renderAbout = () => `
-  <section class="section section-dark" id="about" aria-label="About Me">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-tag"><span>Who I Am</span></div>
-        <h2 class="section-title">About <span class="text-red">Me</span></h2>
-      </div>
-
-      <div class="reveal about-text">
-        I lead product teams with a simple conviction: great products are built by empowered people. With over a decade in iGaming and Sportsbook, my approach trades corporate bureaucracy for radical candor and high-trust leadership. I specialise in building resilient cultures where teams have the clarity to execute, the safety to innovate, and the support to lead through turbulence.
-      </div>
-
-      <div class="reveal ai-tools-callout">
-        <div class="ai-tools-label"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg> AI Tools I Use Daily</div>
-        <div class="ai-tools-badges">
-          <a href="/cpo-sim/" class="ai-badge ai-badge--link">Antigravity <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;vertical-align:-1px;opacity:0.6"><polygon points="5 3 19 12 5 21 5 3"/></svg></a>
-          <span class="ai-badge">Cursor</span>
-          <span class="ai-badge">Lovable</span>
-          <span class="ai-badge">Gemini</span>
-          <span class="ai-badge">Perplexity</span>
-        </div>
-      </div>
-
-      <div class="about-grid">
-        <div class="reveal about-card">
-          <div class="about-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
-          <div class="about-card-title">People First</div>
-          <div class="about-card-desc">I hire for character, chemistry & culture above all else.</div>
-        </div>
-        <div class="reveal about-card">
-          <div class="about-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg></div>
-          <div class="about-card-title">Grow Together</div>
-          <div class="about-card-desc">Helping my team find their path, feel successful, and enjoy the ride.</div>
-        </div>
-        <div class="reveal about-card">
-          <div class="about-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <div class="about-card-title">Thrive Under Pressure</div>
-          <div class="about-card-desc">The tighter the deadline, the sharper I get.</div>
-        </div>
-        <div class="reveal about-card">
-          <div class="about-card-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
-          <div class="about-card-title">Connections Matter</div>
-          <div class="about-card-desc">Relationships are the most important factor in everything I do.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-`;
-
-const renderAchievements = () => `
-  <section class="section section-dark" id="achievements" aria-label="Key Achievements">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-tag"><span>Track Record</span></div>
-        <h2 class="section-title">Key <span class="text-red">Achievements</span></h2>
-        <p class="section-subtitle">The numbers behind over a decade of building products, teams, and businesses.</p>
-      </div>
-
-      <div class="achiev-grid">
-        ${achievements.slice(0, 3).map(a => `
-          <div class="reveal achiev-card achiev-card--primary" data-label="${a.label}" onclick="openAchievModal(this)">
-            <div class="achiev-value" data-target="${a.value}" data-prefix="${a.prefix || ''}" data-suffix="${a.suffix || ''}">${a.prefix || ''}0${a.suffix || ''}</div>
-            <div class="achiev-label">${a.label}</div>
-            <div class="achiev-card-hint">Click for story</div><div class="achiev-bar"></div>
-          </div>
-        `).join('')}
-      </div>
-      <div class="achiev-inline reveal">
-        ${achievements.slice(3).map(a => `<span class="achiev-chip" data-label="${a.label}" onclick="openAchievModal(this)"><span class="achiev-chip-num" data-target="${a.value}" data-prefix="${a.prefix || ''}" data-suffix="${a.suffix || ''}">${a.prefix || ''}${a.value}${a.suffix || ''}</span> ${a.label}</span>`).join('<span class="achiev-sep">·</span>')}
-      </div>
-    </div>
-  </section>
-`;
 
 const renderOffTrack = () => `
   <section class="section section-dark" id="offtrack" aria-label="Beyond Work">
     <div class="container">
       <div class="reveal">
-        <div class="section-tag"><span>Off The Track</span></div>
+
         <h2 class="section-title">Beyond <span class="text-red">Work</span></h2>
-        <p class="section-subtitle">Languages, education, and the things that keep me going when the laptop is closed.</p>
       </div>
 
       <div class="offtrack-grid">
-        <!-- Languages -->
+        <!-- Education & Languages -->
         <div class="reveal offtrack-panel">
           <div class="offtrack-panel-header">
-            <span class="offtrack-panel-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
-            <span class="offtrack-panel-title">Languages</span>
-          </div>
-          <div class="offtrack-panel-body">
-            <div class="lang-row">
-              <div class="lang-info">
-                <span class="lang-name">Maltese</span>
-                <span class="lang-level">Native</span>
-              </div>
-              <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
-              <div class="lang-book-spacer"></div>
-            </div>
-            <div class="lang-row">
-              <div class="lang-info">
-                <span class="lang-name">English</span>
-                <span class="lang-level">Native</span>
-              </div>
-              <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
-              <button class="lang-book-btn" data-book="en" title="Currently reading">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              </button>
-            </div>
-            <div class="lang-row">
-              <div class="lang-info">
-                <span class="lang-name">Italian</span>
-                <span class="lang-level">Native</span>
-              </div>
-              <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
-              <button class="lang-book-btn" data-book="it" title="Currently reading">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              </button>
-            </div>
-            <div class="lang-row">
-              <div class="lang-info">
-                <span class="lang-name">Spanish</span>
-                <span class="lang-level">Beginner</span>
-              </div>
-              <div class="lang-bar"><div class="lang-fill" style="width:25%"></div></div>
-              <div class="lang-book-spacer"></div>
-            </div>
-            <div class="lang-row">
-              <div class="lang-info">
-                <span class="lang-name">French</span>
-                <span class="lang-level">Beginner</span>
-              </div>
-              <div class="lang-bar"><div class="lang-fill" style="width:25%"></div></div>
-              <div class="lang-book-spacer"></div>
-            </div>
-            <div class="lang-row">
-              <div class="lang-info">
-                <span class="lang-name">Greek</span>
-                <span class="lang-level">Beginner</span>
-              </div>
-              <div class="lang-bar"><div class="lang-fill" style="width:25%"></div></div>
-              <div class="lang-book-spacer"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Education -->
-        <div class="reveal offtrack-panel">
-          <div class="offtrack-panel-header">
-            <span class="offtrack-panel-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 10 3 12 0v-5"/></svg></span>
-            <span class="offtrack-panel-title">Education</span>
+            <span class="offtrack-panel-title">Education & Languages</span>
           </div>
           <div class="offtrack-panel-body">
             <div class="edu-item">
               <div class="edu-degree">BSc Physical Education (Sports)</div>
-              <div class="edu-meta">University of Malta</div>
-              <div class="edu-meta">2008 – 2012</div>
+              <div class="edu-meta">University of Malta · 2008 – 2012</div>
             </div>
             <div class="edu-item">
               <div class="edu-degree">Matriculation Certificate</div>
               <div class="edu-meta">Physics & Mathematics</div>
             </div>
+            <div class="edu-item" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
+              <div class="edu-meta"><strong style="color: var(--white);">Native:</strong> Maltese, English, Italian</div>
+              <div class="edu-meta"><strong style="color: var(--white);">Beginner:</strong> Spanish, French, Greek</div>
+            </div>
           </div>
         </div>
 
         <!-- Interests -->
-        <div class="reveal offtrack-panel offtrack-panel--wide">
+        <div class="reveal offtrack-panel">
           <div class="offtrack-panel-header">
-            <span class="offtrack-panel-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span>
             <span class="offtrack-panel-title">Interests</span>
           </div>
           <div class="offtrack-interests">
             <div class="interest-chip">
-              <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg></span>
-              <span class="interest-label">CrossFit</span>
+              <span class="interest-label">Training</span>
             </div>
-            <a href="/f1/" class="interest-chip interest-chip--link" style="text-decoration:none;">
-              <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
-              <span class="interest-label">Formula 1</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;opacity:0.4"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <a href="/f1/" class="interest-chip interest-chip--link">
+              <span class="interest-label">Formula 1 ↗</span>
             </a>
-            <a href="/football/" class="interest-chip interest-chip--link" style="text-decoration:none;">
-              <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="1"/></svg></span>
-              <span class="interest-label">Football</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;opacity:0.4"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <a href="/football/" class="interest-chip interest-chip--link">
+              <span class="interest-label">Football ↗</span>
             </a>
-            <a href="/capitals/" class="interest-chip interest-chip--link" style="text-decoration:none;">
-              <span class="interest-icon"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg></span>
-              <span class="interest-label">Traveling</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:4px;opacity:0.4"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <a href="/capitals/" class="interest-chip interest-chip--link">
+              <span class="interest-label">Traveling ↗</span>
             </a>
+            <button class="interest-chip interest-chip--reading" data-book="it">
+              <span class="interest-label">Reading ↗</span>
+            </button>
           </div>
         </div>
       </div>
@@ -616,15 +396,17 @@ const renderExperience = () => `
   <section class="section section-dark" id="experience" aria-label="Career Experience">
     <div class="container">
       <div class="reveal">
-        <div class="section-tag"><span>Career</span></div>
-        <h2 class="section-title">What I <span class="text-red">Do</span></h2>
-        <p class="section-subtitle">From sportsbook trading floors to the C-suite — the full journey.</p>
+
+        <h2 class="section-title">Experience</h2>
+      </div>
+
+      <div class="reveal about-text">
+        I lead product teams with a simple conviction: great products are built by empowered people. With over a decade in iGaming and Sportsbook, my approach trades corporate bureaucracy for radical candor and high-trust leadership. I specialise in building resilient cultures where teams have the clarity to execute, the safety to innovate, and the support to lead through turbulence. I hire for character, chemistry and culture. I help my team find their path, feel successful, and enjoy the ride. Relationships are the most important factor in everything I do.
       </div>
 
       <div class="experience-list">
         ${experiences.map((exp, i) => `
           <div class="reveal exp-card ${exp.current ? 'exp-card--current' : ''} ${i >= 3 ? 'exp-hidden' : ''}">
-            ${exp.current ? '<div class="exp-badge">Current</div>' : ''}
             <div class="exp-info">
               <div class="exp-header">
                 ${exp.logo ? `<img class="exp-logo" src="${exp.logo}" alt="${exp.company}" loading="lazy" />` : ''}
@@ -666,9 +448,8 @@ const renderTestimonials = () => `
   <section class="section section-dark" id="testimonials" aria-label="Testimonials">
     <div class="container">
       <div class="reveal">
-        <div class="section-tag"><span>Social Proof</span></div>
-        <h2 class="section-title">What People <span class="text-red">Say</span></h2>
-        <p class="section-subtitle">Recommendations from colleagues and leaders I've had the honour to work with. <span class="endorsement-badge"><span class="endorsement-badge-num">${testimonials.length}</span> LinkedIn Recommendations</span></p>
+
+        <h2 class="section-title">Recommendations</h2>
       </div>
 
 
@@ -728,64 +509,20 @@ const renderFooter = () => `
 
 // ============ MOUNT ============
 
-const renderModal = () => `
-  <div class="modal-overlay" id="achiev-modal">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeAchievModal()">&times;</button>
-      <div class="modal-value" id="modal-value"></div>
-      <div class="modal-label" id="modal-label"></div>
-      <div class="modal-story" id="modal-story"></div>
-    </div>
-  </div>
-`;
-
 const renderApp = () => {
   const app = document.querySelector('#app');
   app.innerHTML = `
     ${renderHero()}
-    ${renderAbout()}
-    ${renderAchievements()}
     ${renderExperience()}
     ${renderTestimonials()}
     ${renderOffTrack()}
     ${renderFooter()}
-    ${renderModal()}
   `;
 
-  initParticles();
   window.observeReveals();
   initInteractions();
-  initCountUp();
   initHeroTestimonials();
 };
-
-
-// Modal functions
-window.openAchievModal = (card) => {
-  const label = card.dataset.label;
-  const valueEl = card.querySelector('.achiev-value');
-  const value = valueEl ? valueEl.textContent : '';
-  const story = achievementStories[label] || 'Story coming soon...';
-  
-  document.getElementById('modal-value').textContent = value;
-  document.getElementById('modal-label').textContent = label;
-  document.getElementById('modal-story').textContent = story;
-  document.getElementById('achiev-modal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-};
-
-window.closeAchievModal = () => {
-  document.getElementById('achiev-modal').classList.remove('active');
-  document.body.style.overflow = '';
-};
-
-// Close modal on overlay click or Escape
-document.addEventListener('click', (e) => {
-  if (e.target.id === 'achiev-modal') closeAchievModal();
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeAchievModal();
-});
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
@@ -806,9 +543,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Book modal (must be after renderApp so DOM exists)
   const books = {
     it: { title: 'Il Maestro e Margherita', author: 'Mikhail Bulgakov', lang: 'Reading in Italian', cover: '/book-bulgakov.jpg' },
-    en: { title: 'Narrative of the Life of Frederick Douglass', author: 'Frederick Douglass', lang: 'Reading in English', cover: '/book-douglass.jpg' },
   };
-  document.querySelectorAll('.lang-book-btn').forEach(btn => {
+  document.querySelectorAll('[data-book]').forEach(btn => {
     btn.addEventListener('click', () => {
       const b = books[btn.dataset.book];
       if (!b) return;

@@ -17,10 +17,6 @@
       "destination": "/f1-quiz/index.html"
     },
     {
-      "source": "/cpo-sim/(.*)",
-      "destination": "/cpo-sim/index.html"
-    },
-    {
       "source": "/analytics/(.*)",
       "destination": "/analytics/index.html"
     },

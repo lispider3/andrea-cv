@@ -11,7 +11,6 @@ export default defineConfig({
         'football': resolve(__dirname, 'football/index.html'),
         'juve-quiz': resolve(__dirname, 'juve-quiz/index.html'),
         'capitals': resolve(__dirname, 'capitals/index.html'),
-        'cpo-sim': resolve(__dirname, 'cpo-sim/index.html'),
         'analytics': resolve(__dirname, 'analytics/index.html'),
         'betting': resolve(__dirname, 'betting/index.html'),
         'quiz': resolve(__dirname, 'quiz/index.html'),
