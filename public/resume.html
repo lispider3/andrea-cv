@@ -98,7 +98,7 @@
 
     /* ── Experience ── */
     .exp-item {
-      margin-bottom: 10px;
+      margin-bottom: 16px;
       page-break-inside: avoid;
     }
 
@@ -156,24 +156,6 @@
       gap: 24px;
     }
 
-    /* ── Expertise ── */
-    .expertise-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-bottom: 6px;
-    }
-
-    .expertise-tag {
-      font-size: 7pt;
-      font-weight: 400;
-      padding: 2px 8px;
-      background: #f5f5f5;
-      border: 1px solid #e5e5e5;
-      border-radius: 2px;
-      color: #555;
-    }
-
     /* ── Education ── */
     .edu-item { margin-bottom: 6px; }
     .edu-degree { font-size: 9pt; font-weight: 600; color: #1a1a1a; }
@@ -182,6 +164,49 @@
     /* ── Languages ── */
     .lang-list { font-size: 8.5pt; color: #555; }
     .lang-list span { font-weight: 600; color: #1a1a1a; }
+
+    /* ── Key Achievements ── */
+    .exp-achievements {
+      margin-top: 4px;
+      padding: 5px 10px;
+      background: #faf7f0;
+      border-left: 2px solid #C9A96E;
+    }
+
+    .exp-achievements-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6pt;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #9a7b3c;
+      margin-bottom: 2px;
+    }
+
+    .exp-achievements ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .exp-achievements li {
+      font-size: 8pt;
+      font-weight: 500;
+      color: #2a2a2a;
+      line-height: 1.5;
+      padding-left: 12px;
+      position: relative;
+      margin-bottom: 0;
+    }
+
+    .exp-achievements li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #9a7b3c;
+      font-size: 7pt;
+      font-weight: 700;
+    }
   </style>
 </head>
 
@@ -218,7 +243,7 @@
       <div class="exp-role">Chief Product Officer</div>
       <div class="exp-period">Apr 2025 – Present</div>
     </div>
-    <div class="exp-company">Corwyn (by Oddin.gg)</div>
+    <div class="exp-company">NDA (by Oddin.gg)</div>
     <ul class="exp-bullets">
       <li>Leading a team of Product Managers, Scrum teams, and designers across multiple products in the sports betting space.</li>
       <li>Integrated AI tools into daily workflows — using Perplexity and Gemini as research assistants, Claude, Cursor, and Antigravity for rapid prototyping, and Google AI Studio for experimentation.</li>
@@ -227,6 +252,14 @@
       <li>Building a culture of ownership, experimentation, and genuine human connection within the product organization.</li>
       <li>Driving cross-functional alignment between engineering, commercial, and operations teams.</li>
     </ul>
+    <div class="exp-achievements">
+      <div class="exp-achievements-label">Key Achievements</div>
+      <ul>
+        <li>Implemented Product processes and drafted blueprint for a new sportsbook</li>
+        <li>Fast hiring and strong team retention</li>
+        <li>Closed 2 commercial deals from the demo of a product still pre-launch</li>
+      </ul>
+    </div>
   </div>
 
   <div class="exp-item">
@@ -239,6 +272,13 @@
       <li>Led end-to-end product and technology strategy for a blockchain-based iGaming operator.</li>
       <li>Hired and led a team of 15+ developers and designers from zero.</li>
     </ul>
+    <div class="exp-achievements">
+      <div class="exp-achievements-label">Key Achievements</div>
+      <ul>
+        <li>Introduced agile practices and delivered a new 3rd party sportsbook integration (GR8) in one month</li>
+        <li>Integrated FastTrack (CRM) and Alea (Casino Aggregator)</li>
+      </ul>
+    </div>
   </div>
 
   <div class="exp-item">
@@ -252,6 +292,13 @@
       <li>Led a team of Product Owners across six scrum teams to execute a dynamic roadmap.</li>
       <li>Oversaw recruiting ~50 Product Owners, Managers, and UX/UI Designers.</li>
     </ul>
+    <div class="exp-achievements">
+      <div class="exp-achievements-label">Key Achievements</div>
+      <ul>
+        <li>Joined with 2 teams, scaled up to 7 teams</li>
+        <li>Grew Sportsbook offering from 300K events/year to over 1.2M events</li>
+      </ul>
+    </div>
   </div>
 
   <div class="exp-item">
@@ -264,6 +311,12 @@
       <li>Oversaw in-house Sportsbook platform across B2B/B2C operations with over 150 land-based outlets.</li>
       <li>Delivered a LATAM-focused front end and trader/partner back offices.</li>
     </ul>
+    <div class="exp-achievements">
+      <div class="exp-achievements-label">Key Achievements</div>
+      <ul>
+        <li>Launched a new sportsbook on an in-house platform as Head of Operations</li>
+      </ul>
+    </div>
   </div>
 
   <div class="exp-item">
@@ -277,6 +330,13 @@
         P&amp;L.</li>
       <li>Spearheaded an agile transition and led platform migration, achieving exponential growth post-relaunch.</li>
     </ul>
+    <div class="exp-achievements">
+      <div class="exp-achievements-label">Key Achievements</div>
+      <ul>
+        <li>Switched sportsbook provider to BetConstruct</li>
+        <li>Doubled monthly turnover for the first 3 months after launch</li>
+      </ul>
+    </div>
   </div>
 
   <div class="exp-item">
@@ -289,6 +349,12 @@
       <li>Managed the product vertical and launched V2 of the social betting app.</li>
       <li>Introduced structured product management processes to improve development efficiency.</li>
     </ul>
+    <div class="exp-achievements">
+      <div class="exp-achievements-label">Key Achievements</div>
+      <ul>
+        <li>Launched a V2 of the community app and reached 30,000 users in 3 months</li>
+      </ul>
+    </div>
   </div>
 
   <div class="exp-item">
@@ -301,6 +367,13 @@
       <li>Developed internal trading tools and integrated third-party feeds (BetGenius, Betradar, Perform).</li>
       <li>Bridged the gap between trading and technical teams to ensure seamless product delivery.</li>
     </ul>
+    <div class="exp-achievements">
+      <div class="exp-achievements-label">Key Achievements</div>
+      <ul>
+        <li>Started 2 new teams in a new office location (Budapest) to build new trading tools and backoffice</li>
+        <li>Integrated all content from BetGenius, Sportradar and Sporting Solutions</li>
+      </ul>
+    </div>
   </div>
 
   <div class="exp-item">
@@ -313,31 +386,26 @@
       <li>Managed P&amp;L and trading for high-profile events, including Champions League and World Cup Finals.</li>
       <li>Supervised up to 50 traders to ensure optimal risk management across operations.</li>
     </ul>
+    <div class="exp-achievements">
+      <div class="exp-achievements-label">Key Achievements</div>
+      <ul>
+        <li>Traded Champions League and World Cup finals handling over 5M€ in turnover for one event</li>
+        <li>Kept a 13%+ trading margin when trading events manually</li>
+      </ul>
+    </div>
   </div>
 
   <!-- Bottom two columns -->
   <div class="two-col">
-    <div>
-      <div class="section-heading">Expertise</div>
-      <div class="expertise-list">
-        <span class="expertise-tag">Product Development & Strategy</span>
-        <span class="expertise-tag">Team Leadership & Recruitment</span>
-        <span class="expertise-tag">Sportsbook Operations</span>
-        <span class="expertise-tag">Agile Methodologies</span>
-        <span class="expertise-tag">UX/UI Design Optimization</span>
-        <span class="expertise-tag">B2B & B2C Portfolio Management</span>
-        <span class="expertise-tag">AI-Augmented Workflows</span>
-        <span class="expertise-tag">Stakeholder Management</span>
-      </div>
-    </div>
     <div>
       <div class="section-heading">Education</div>
       <div class="edu-item">
         <div class="edu-degree">Bachelor of Education Sports</div>
         <div class="edu-meta">University of Malta · 2008 – 2012</div>
       </div>
-
-      <div class="section-heading" style="margin-top:12px">Languages</div>
+    </div>
+    <div>
+      <div class="section-heading">Languages</div>
       <div class="lang-list">
         <span>Native:</span> Maltese, English &amp; Italian<br>
         <span>Beginner:</span> French, Spanish &amp; Greek

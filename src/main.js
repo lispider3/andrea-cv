@@ -5,7 +5,7 @@ import './style.css';
 const experiences = [
   {
     title: "Chief Product Officer",
-    company: "Corwyn (by Oddin.gg)",
+    company: "NDA (by Oddin.gg)",
     logo: "/logos/oddin.png",
     period: "Apr 2025 – Present",
     location: "Remote",
@@ -17,6 +17,11 @@ const experiences = [
       "Developing and executing the product vision and strategy across all B2B product lines — Odds Feed, Sportsbook iFrame, and Engagement Tools.",
       "Building a culture of ownership, experimentation, and genuine human connection within the product organization.",
       "Driving cross-functional alignment between engineering, commercial, and operations teams.",
+    ],
+    keyMetrics: [
+      "Implemented Product processes and drafted blueprint for a new sportsbook",
+      "Fast hiring and strong team retention",
+      "Closed 2 commercial deals from the demo of a product still pre-launch",
     ],
   },
   {
@@ -30,6 +35,10 @@ const experiences = [
       "Hired and led a team of 15+ developers and designers from zero.",
       "Defined the product roadmap for a decentralized sports betting platform.",
     ],
+    keyMetrics: [
+      "Introduced agile practices and delivered a new 3rd party sportsbook integration (GR8) in one month",
+      "Integrated FastTrack (CRM) and Alea (Casino Aggregator)",
+    ],
   },
   {
     title: "Principal Product Manager & People Lead",
@@ -41,7 +50,10 @@ const experiences = [
       "Led the sportsbook product strategy across Betsson's portfolio of 20+ brands.",
       "Managed and mentored a team of Product Owners, fostering growth and career development.",
       "Drove the adoption of modern product management practices across the organization.",
-      "Spearheaded the migration to a new sportsbook platform, managing complex stakeholder relationships.",
+    ],
+    keyMetrics: [
+      "Joined with 2 teams, scaled up to 7 teams",
+      "Grew Sportsbook offering from 300K events/year to over 1.2M events",
     ],
   },
   {
@@ -55,6 +67,9 @@ const experiences = [
       "Managed relationships with key platform providers and negotiated commercial agreements.",
       "Built and led a cross-functional team of developers, QA engineers, and designers.",
     ],
+    keyMetrics: [
+      "Launched a new sportsbook on an in-house platform as Head of Operations",
+    ],
   },
   {
     title: "Head of Product",
@@ -67,6 +82,10 @@ const experiences = [
       "Led end-to-end product development from concept through to market launch.",
       "Managed a team of developers and designers, shipping weekly releases.",
     ],
+    keyMetrics: [
+      "Switched sportsbook provider to BetConstruct",
+      "Doubled monthly turnover for the first 3 months after launch",
+    ],
   },
   {
     title: "Product Manager",
@@ -77,6 +96,9 @@ const experiences = [
     details: [
       "Managed a Fantasy sports product for a rapidly growing startup.",
       "Drove user engagement through gamification features and community building.",
+    ],
+    keyMetrics: [
+      "Launched a V2 of the community app and reached 30,000 users in 3 months",
     ],
   },
   {
@@ -100,6 +122,10 @@ const experiences = [
       "Managed sportsbook risk and trading operations across multiple brands.",
       "Built pricing models and managed live in-play betting risk.",
       "Transitioned from operations into product management — the rest is history.",
+    ],
+    keyMetrics: [
+      "Traded Champions League and World Cup finals handling over 5M\u20AC in turnover for one event",
+      "Kept a 13%+ trading margin when trading events manually",
     ],
   }
 ];
@@ -428,6 +454,19 @@ const renderExperience = () => `
                   </div>
                 `).join('')}
               </div>
+              ${exp.keyMetrics ? `
+              <div class="exp-metrics">
+                <div class="exp-metrics-label">Key Achievements</div>
+                <div class="exp-metrics-list">
+                  ${exp.keyMetrics.map(m => `
+                    <div class="exp-metric">
+                      <svg class="exp-metric-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      <span>${m}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+              ` : ''}
             </div>
           </div>
         `).join('')}
