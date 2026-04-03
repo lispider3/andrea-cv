@@ -182,11 +182,9 @@ const testimonials = [
 // ============ INIT ============
 const initThemeToggle = () => {
   const toggle = document.getElementById('theme-toggle');
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  if (savedTheme === 'dark') {
-    document.documentElement.classList.add('dark');
-    toggle.checked = true;
-  }
+  localStorage.removeItem('theme');
+  document.documentElement.classList.remove('dark');
+  const savedTheme = 'light';
 
   document.querySelector('.neo-toggle').classList.add('ready');
   toggle.addEventListener('change', () => {

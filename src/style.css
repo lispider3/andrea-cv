@@ -1244,6 +1244,47 @@ html.dark .btn-f1:not(.btn-f1-outline):hover {
   line-height: 1.7;
 }
 
+.exp-metrics {
+  margin-top: 12px;
+  padding-left: 12px;
+  border-left: 2px solid var(--border);
+}
+
+.exp-metrics-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.exp-metrics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exp-metric {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.exp-metric-icon {
+  color: var(--text-muted);
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.exp-metric span {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
 .experience-list {
   display: flex;
   flex-direction: column;
