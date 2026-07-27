@@ -609,12 +609,11 @@ a {
   color: var(--text);
 }
 
-.test-footer {
+.test-header {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding-top: 8px;
-  border-top: none;
+  margin-bottom: 10px;
 }
 
 .test-name {
@@ -630,15 +629,6 @@ a {
   color: var(--text-muted);
 }
 
-.test-relation {
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  color: var(--accent);
-  opacity: 0.6;
-}
-
 .test-hidden {
   display: none;
 }
@@ -651,7 +641,8 @@ a {
 .offtrack-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0 48px;
+  align-items: start;
+  gap: 40px 48px;
 }
 
 .offtrack-panel {
@@ -717,74 +708,101 @@ a {
   color: var(--text-muted);
 }
 
-.offtrack-interests {
+.interest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.interest-tile {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-  padding: 0;
-}
-
-.interest-chip {
-  display: inline-flex;
   align-items: center;
-  gap: 0;
-  padding: 0;
+  gap: 10px;
+  padding: 14px 16px;
   background: transparent;
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 0;
-  transition: color var(--transition);
-  font-size: 0.85rem;
-  color: var(--text);
+  font-family: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: default;
+  transition: border-color var(--transition), background var(--transition);
 }
 
-.interest-chip::after {
-  content: '·';
-  margin: 0 10px;
-  color: var(--text-muted);
+.interest-tile--link {
+  cursor: pointer;
 }
 
-.interest-chip:last-child::after {
-  display: none;
+.interest-tile--link:hover,
+.interest-tile--link:focus-visible {
+  border-color: var(--color-pop);
+  background: var(--surface-hover);
 }
 
-.interest-chip:hover {
+.interest-tile--link:hover .interest-label,
+.interest-tile--link:focus-visible .interest-label {
   color: var(--color-pop);
 }
 
-.interest-chip--link {
-  text-decoration: none;
-}
-
-.interest-chip--reading {
-  background: none;
-  border: none;
-  font-family: inherit;
-  cursor: pointer;
-  padding: 0;
-  font-size: inherit;
-  color: inherit;
+.interest-tile--link:hover .interest-arrow,
+.interest-tile--link:focus-visible .interest-arrow {
+  transform: translate(2px, -2px);
+  color: var(--color-pop);
 }
 
 .interest-icon {
-  display: none;
-}
-
-.interest-icon svg {
-  display: none;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
 }
 
 .interest-label {
-  font-size: 0.78rem;
-  font-weight: 400;
+  font-size: 0.8rem;
+  font-weight: 500;
   color: var(--text);
+  transition: color var(--transition);
+  flex: 1;
 }
 
-.interest-sub {
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  font-weight: 500;
-  letter-spacing: 1px;
+.interest-arrow {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
   color: var(--text-muted);
+  transition: transform var(--transition), color var(--transition);
+}
+
+/* ── EXTRAS (low-key links to side projects) ── */
+.extras-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 0;
+  background: var(--bg);
+}
+
+.extras-row a {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.6;
+  transition: opacity var(--transition), color var(--transition);
+}
+
+.extras-row a:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.extras-sep {
+  color: var(--text-muted);
+  opacity: 0.4;
+  font-size: 0.62rem;
 }
 
 /* ── FOOTER ── */
@@ -1632,32 +1650,6 @@ html.dark .btn-f1:not(.btn-f1-outline):hover {
   width: 36px;
   height: 36px;
   display: block;
-}
-
-/* ── Toast notification ── */
-.toast-notification {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  padding: 14px 28px;
-  background: var(--accent);
-  color: #121212;
-  border-radius: 8px;
-  box-shadow: 0 8px 30px rgba(201, 169, 110, 0.3);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 9999;
-  pointer-events: none;
-}
-
-.toast-notification.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
 }
 
 /* ── FOOTBALL DASHBOARD ── */

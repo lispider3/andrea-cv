@@ -172,7 +172,7 @@ const renderLastRace = () => {
     return `<tr class="${r.Constructor?.constructorId === 'ferrari' ? 'fb-table-ferrari' : ''}">
                 <td>${r.position}</td>
                 <td>${flagImg(r.Driver?.nationality)} ${r.Driver?.givenName} ${r.Driver?.familyName}</td>
-                <td class="fb-table-team">${teamLogo(r.Constructor?.constructorId)} ${r.Constructor?.name}</td>
+                <td class="fb-table-team">${teamLogo(r.Constructor?.constructorId)}</td>
                 <td class="fb-table-pts">${r.points}</td>
               </tr>`;
   }).join('')}
@@ -205,11 +205,10 @@ const renderDriverStandings = () => {
 
   const renderRow = (d) => {
     const cId = d.Constructors?.[0]?.constructorId;
-    const cName = d.Constructors?.[0]?.name || '—';
     return `<tr class="${cId === 'ferrari' ? 'fb-table-ferrari' : ''}">
       <td>${d.position}</td>
       <td>${flagImg(d.Driver?.nationality)} ${d.Driver?.givenName} ${d.Driver?.familyName}</td>
-      <td class="fb-table-team">${teamLogo(cId)} ${cName}</td>
+      <td class="fb-table-team">${teamLogo(cId)}</td>
       <td>${d.wins}</td>
       <td class="fb-table-pts">${d.points}</td>
     </tr>`;

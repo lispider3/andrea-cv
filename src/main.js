@@ -176,7 +176,12 @@ const testimonials = [
   { name: "David Bibor", role: "Delivering high-performing IT products for millions", company: "", relation: "Worked on the same team", text: `While Andrea is always easy-going, he works with amazing diligence and perseverance, and behind the funny sentences he shares there are years of hard work. His decisions are always backed by facts, his opinions always backed by careful consideration. Andrea is the kind of professional we rarely have the chance to work with, and without whom we would certainly find our days harder.` },
   { name: "Raisa Pierre", role: "UX Design | Product Design", company: "", relation: "Reported to Andrea directly", text: `I enjoyed working with Andrea is an excellent manager. His communication helped lift our spirits as a team with a combination of humor and empathy. He shares knowledge and answers every doubt and query calmly, and he even follows up to make sure my issues get resolved or not.` },
   { name: "Dino Ramic", role: "Digital Marketing Specialist", company: "", relation: "Worked on the same team", text: `Andrea is one of the most organized people I met. Work dedication, knowledge, setting teams and people around him on the right mindset is just one of the biggest assets he possesses. Analytical skills and approaching people on very kind but yet professional way is something what drives success in any workspace and business.\n\nFrom the professional side I can say he is a full package, very technical oriented, deep understanding and expertise of his business area and for sure he stands as one of the main "wheels" in any company structures.` },
-  { name: "Lara Tedesco", role: "Strategic Planning | Project & Product Management", company: "", relation: "Worked on the same team", text: `After working with Andrea for well over a year, it is clear that not only does he bring with him a wealth of knowledge in his area but also has a refreshing work ethic. His positivity, leadership and eagerness to bring teams together and solve problems make him an MVP in any team he is in!` }
+  { name: "Lara Tedesco", role: "Strategic Planning | Project & Product Management", company: "", relation: "Worked on the same team", text: `After working with Andrea for well over a year, it is clear that not only does he bring with him a wealth of knowledge in his area but also has a refreshing work ethic. His positivity, leadership and eagerness to bring teams together and solve problems make him an MVP in any team he is in!` },
+  { name: "Vladyslav Shestachenko", role: "Trading Manager", company: "Oddin.gg", text: `I was lucky to work with Andrea, and I can honestly say he is one of the strongest professionals I've met in the betting industry. His knowledge of sportsbook operations, trading, and product development is truly outstanding. He has a deep understanding of the market, sees the bigger picture, and consistently makes decisions that work not only in theory but also in practice.\n\nIt was a real pleasure working with him. Despite his extensive experience and expertise, Andrea is always open to discussion, listens to different perspectives, and genuinely values his team's opinions. People like him are the ones who build great products and strong teams.\n\nWhat stands out even more, though, are his personal qualities. Andrea is kind, honest, and someone you genuinely enjoy working with. I also have to mention his sense of humor, it's one of the best I've come across. Even in the most stressful situations, he knows how to lighten the mood without ever compromising his professionalism.\n\nI highly recommend Andrea. If you're looking for someone who is not only an exceptional expert in betting, trading, and product management, but also a great leader and an even better person, you won't find many people like him.` },
+  { name: "Vladan Blagojevic", role: "Senior Business Development Manager", company: "Oddin.gg", text: `Anyone who's worked in a commercial role knows the classic tension between sales and product. You're pushing for what the market wants, they're guarding the roadmap. It rarely feels like you're fully on the same team.\n\nWith Andrea at Oddin.gg, that tension simply didn't exist.\n\nAs a sales guy, I always felt like a genuine partner in the product conversation - not an afterthought. He had a rare ability to connect product strategy to real market value, and the clarity to communicate it in a way that actually helped us sell. Sharp vision, no ego, and the kind of collaborative approach that makes the whole company move better.\n\nAny team that gets Andrea is lucky.` },
+  { name: "Alexandre Cartier", role: "Product Manager", company: "Oddin.gg", text: `I wish to anyone to find 10x managers in their careers. Andrea is one of them.\n\nFrom my first interview to the last call we had together, we always had a mix of deep product conversations, industry knowledge sharing sessions, philosophical questions answered and a lot of banter.\n\nAndrea is the type of manager that gives me hope that climbing the ladder doesn't always remove your soul.\n\nAndrea is also the type of manager that helps you grow, always has availability & thoughts to make you not only a better professional but also a better human being. I'm much better know at Product than I was 6 months ago and I want to publicly thank you for that too.\n\nOf course, the fact that Italy stole 2006 World Cup from France is something we will probably never agree on, but our collaboration was frankly too short and I'm looking forward to working with you again.\n\nIn the meantime, may the lucky ones that will find you as their next manager have a great time 😎` },
+  { name: "Nikolay Krassikov", role: "UX/UI Designer", company: "Oddin.gg", text: `Andrea is the best manager I've had in my career.\n\nWhat I appreciate the most is that he is not afraid to take responsibility, make decisions, and support his team when things get difficult. When everything is going well, he is the one who keeps the positive atmosphere going and somehow makes it even better. A big part of that comes from the fact that, besides being a great manager, he has an amazing sense of humor.\n\nI learned a huge amount from him. Most of what I know about the industry comes from working with Andrea. He always gave me space to grow, trusted me with bigger responsibilities, and supported people who wanted to learn and take ownership.\n\nOne thing I really appreciated is that my work never went unnoticed. Good work gets noticed, recognized, and appreciated. Sounds simple, but not every manager does that.\n\nAndrea knows how to connect business goals with reality. He can translate business requirements into something the team can actually understand and deliver, while also representing the team's perspective back to management.\n\nAs a Gen Z guy, I often found myself learning about new trends, tools, and industry developments from him first.\n\nAnd finally, I have to mention that Andrea saved me from several stupid purchases and questionable financial decisions during our time working together. If one day you get tired of product management, I think you could have a solid future as a financial advisor or mindset coach.\n\nThanks for everything, mate. Working with you helped me grow both professionally and personally. I was lucky to have you as a manager, and I hope we'll have a chance to work together again in the future.` },
+  { name: "Ivan Kostyuchenko", role: "", company: "", text: `I've witnessed first-hand Andrea's amazing dedication to his team, the product, and the industry. He made it easy to connect different parts of the org together, remaining, at the same, an expert and a mentor on the product side for everyone else. I wish any product team I'll ever have to work with would have a professional like him leading.` }
 ];
 
 // ============ INIT ============
@@ -196,27 +201,10 @@ const initThemeToggle = () => {
 
 const initNavbar = () => {
   const navbar = document.getElementById('navbar');
-  const burger = document.getElementById('burger-btn');
-  const links = document.getElementById('nav-links');
 
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
-
-  burger.addEventListener('click', () => {
-    const isOpen = burger.classList.toggle('open');
-    links.classList.toggle('open');
-    burger.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  // Close mobile nav on link click
-  links.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      burger.classList.remove('open');
-      links.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    });
-  });
 };
 
 const initReveal = () => {
@@ -235,24 +223,6 @@ const initReveal = () => {
 };
 
 const initInteractions = () => {
-  // Copy email to clipboard
-  const copyBtn = document.getElementById('copy-email-btn');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText('andrealispider@gmail.com').then(() => {
-        const toast = document.createElement('div');
-        toast.className = 'toast-notification';
-        toast.textContent = 'Email copied to clipboard';
-        document.body.appendChild(toast);
-        requestAnimationFrame(() => toast.classList.add('show'));
-        setTimeout(() => {
-          toast.classList.remove('show');
-          setTimeout(() => toast.remove(), 300);
-        }, 2500);
-      });
-    });
-  }
-
   // Show more experience
   const expBtn = document.getElementById('show-more-exp');
   if (expBtn) {
@@ -324,9 +294,9 @@ const renderHero = () => `
         <a href="/andrea-spiteri-cv.pdf" download class="btn-f1">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download CV
         </a>
-        <button id="copy-email-btn" class="btn-f1 btn-f1-outline" type="button">
+        <a href="https://www.linkedin.com/in/andrea-spiteri/" target="_blank" rel="noopener noreferrer" class="btn-f1 btn-f1-outline">
           Get in Touch <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
+        </a>
       </div>
 
       <div class="hero-testimonial-banner" aria-label="Testimonial highlights">
@@ -393,21 +363,30 @@ const renderOffTrack = () => `
           <div class="offtrack-panel-header">
             <span class="offtrack-panel-title">Interests</span>
           </div>
-          <div class="offtrack-interests">
-            <div class="interest-chip">
+          <div class="interest-grid">
+            <div class="interest-tile">
+              <svg class="interest-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.4 14.4 9.6 9.6"/><path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z"/><path d="m21.5 21.5-1.4-1.4"/><path d="M3.9 3.9 2.5 2.5"/><path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z"/></svg>
               <span class="interest-label">Training</span>
             </div>
-            <a href="/f1/" class="interest-chip interest-chip--link">
-              <span class="interest-label">Formula 1 ↗</span>
+            <a href="/f1/" class="interest-tile interest-tile--link">
+              <svg class="interest-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+              <span class="interest-label">Formula 1</span>
+              <svg class="interest-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
             </a>
-            <a href="/football/" class="interest-chip interest-chip--link">
-              <span class="interest-label">Football ↗</span>
+            <a href="/football/" class="interest-tile interest-tile--link">
+              <svg class="interest-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5 16.5 11l-1.7 5.5h-5.6L7.5 11z"/></svg>
+              <span class="interest-label">Football</span>
+              <svg class="interest-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
             </a>
-            <a href="/capitals/" class="interest-chip interest-chip--link">
-              <span class="interest-label">Traveling ↗</span>
+            <a href="/capitals/" class="interest-tile interest-tile--link">
+              <svg class="interest-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+              <span class="interest-label">Traveling</span>
+              <svg class="interest-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
             </a>
-            <button class="interest-chip interest-chip--reading" data-book="it">
-              <span class="interest-label">Reading ↗</span>
+            <button class="interest-tile interest-tile--link" data-book="it" type="button">
+              <svg class="interest-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+              <span class="interest-label">Reading</span>
+              <svg class="interest-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
             </button>
           </div>
         </div>
@@ -495,13 +474,12 @@ const renderTestimonials = () => `
         ${testimonials.map((t, i) => `
           <div class="reveal test-card ${i >= 4 ? 'test-card-hidden' : ''}">
             <div class="test-quote-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="var(--accent)" opacity="0.3"><path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"/></svg></div>
-            <div class="test-text clamped">"${t.text}"</div>
-            <button class="read-more-btn">READ MORE ▸</button>
-            <div class="test-footer">
+            <div class="test-header">
               <div class="test-name">${t.name}</div>
               <div class="test-role">${t.role}${t.company ? ` — ${t.company}` : ''}</div>
-              <div class="test-relation">${t.relation}</div>
             </div>
+            <div class="test-text clamped">"${t.text}"</div>
+            <button class="read-more-btn">READ MORE ▸</button>
           </div>
         `).join('')}
       </div>
@@ -515,6 +493,14 @@ const renderTestimonials = () => `
       ` : ''}
     </div>
   </section>
+`;
+
+const renderExtras = () => `
+  <div class="extras-row">
+    <a href="/betting/">Betting</a>
+    <span class="extras-sep">·</span>
+    <a href="/quiz/">Quiz</a>
+  </div>
 `;
 
 const renderFooter = () => `
@@ -534,11 +520,6 @@ const renderFooter = () => `
 
     <footer class="footer" id="contact" role="contentinfo">
     <div class="container">
-      <div class="footer-links">
-          <a href="/andrea-spiteri-cv.pdf" download><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download CV</a>
-          <a href="mailto:andrealispider@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Email</a>
-          <a href="https://www.linkedin.com/in/andrea-spiteri/" target="_blank" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a>
-        </div>
       <p class="footer-copy">© ${new Date().getFullYear()} Andrea Spiteri — All rights reserved</p>
     </div>
   </footer>
@@ -553,6 +534,7 @@ const renderApp = () => {
     ${renderExperience()}
     ${renderTestimonials()}
     ${renderOffTrack()}
+    ${renderExtras()}
     ${renderFooter()}
   `;
 
