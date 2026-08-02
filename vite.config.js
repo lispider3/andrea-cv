@@ -17,6 +17,7 @@ export default defineConfig({
         'worldcup': resolve(__dirname, 'worldcup/index.html'),
         'ferrari': resolve(__dirname, 'ferrari/index.html'),
         'europe': resolve(__dirname, 'europe/index.html'),
+        'travel': resolve(__dirname, 'travel/index.html'),
       },
     },
   },
