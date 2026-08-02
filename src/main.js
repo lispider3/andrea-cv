@@ -4,12 +4,24 @@ import './style.css';
 // ============ DATA ============
 const experiences = [
   {
-    title: "Chief Product Officer",
-    company: "NDA (by Oddin.gg)",
-    logo: "/logos/oddin.png",
-    period: "Apr 2025 – Present",
+    title: "Product Consultant",
+    company: "Fennica Gaming",
+    logo: "/logos/fennica.png",
+    period: "June 2026 – Present",
     location: "Remote",
     current: true,
+    details: [
+      "Consulting for Fennica Gaming on building a new, more engaging homepage experience.",
+      "Leading the integration of a new sportsbook product, including the operational setup behind it.",
+      "Owning the market delivery strategy for the rollout.",
+    ],
+  },
+  {
+    title: "Chief Product Officer",
+    company: "Corwyn (by Oddin.gg)",
+    logo: "/logos/oddin.png",
+    period: "April 2025 – June 2026",
+    location: "Remote",
     details: [
       "Leading a team of Product Managers, Scrum teams, and designers across multiple product lines in the esports betting space.",
       "Integrated AI tools into daily workflows — using Perplexity and Gemini as research assistants, Cursor, Lovable, and Antigravity for rapid prototyping, and Google AI Studio for experimentation.",
