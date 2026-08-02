@@ -1771,6 +1771,10 @@ html.theme-football {
   color: var(--accent);
 }
 
+.fb-team--juve img {
+  filter: brightness(0) invert(1);
+}
+
 .fb-team-tag {
   font-family: var(--font-mono);
   font-size: 0.5rem;
@@ -2131,6 +2135,10 @@ html.theme-football {
 
 .fb-table-juve .fb-table-team {
   color: var(--accent) !important;
+}
+
+.fb-table-juve .fb-table-team img {
+  filter: brightness(0) invert(1);
 }
 
 .fb-table-ferrari {
