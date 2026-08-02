@@ -729,8 +729,14 @@ a {
   transition: border-color var(--transition), background var(--transition);
 }
 
+.interest-tile--wide {
+  grid-column: 1 / -1;
+  justify-content: center;
+}
+
 .interest-tile--link {
   cursor: pointer;
+  border-left-color: var(--color-pop);
 }
 
 .interest-tile--link:hover,
@@ -741,12 +747,6 @@ a {
 
 .interest-tile--link:hover .interest-label,
 .interest-tile--link:focus-visible .interest-label {
-  color: var(--color-pop);
-}
-
-.interest-tile--link:hover .interest-arrow,
-.interest-tile--link:focus-visible .interest-arrow {
-  transform: translate(2px, -2px);
   color: var(--color-pop);
 }
 
@@ -763,14 +763,6 @@ a {
   color: var(--text);
   transition: color var(--transition);
   flex: 1;
-}
-
-.interest-arrow {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
-  color: var(--text-muted);
-  transition: transform var(--transition), color var(--transition);
 }
 
 /* ── EXTRAS (low-key links to side projects) ── */
