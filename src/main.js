@@ -6,7 +6,7 @@ const experiences = [
   {
     title: "Product Consultant",
     company: "Fennica Gaming",
-    logo: "/logos/fennica.png",
+    logo: "/logos/fennica.jpg",
     period: "June 2026 – Present",
     location: "Remote",
     current: true,
