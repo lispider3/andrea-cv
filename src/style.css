@@ -1645,6 +1645,13 @@ html.dark .btn-f1:not(.btn-f1-outline):hover {
 }
 
 /* ── FOOTBALL DASHBOARD ── */
+html.theme-football {
+  --accent: #6D83F2;
+  --accent-dim: rgba(109, 131, 242, 0.2);
+  --accent-glow: rgba(109, 131, 242, 0.1);
+  --color-pop: #6D83F2;
+}
+
 .fb-section {
   min-height: 100vh;
   padding: 100px 24px 60px;
@@ -2301,6 +2308,13 @@ html.dark .btn-f1:not(.btn-f1-outline):hover {
 }
 
 /* ── F1 Dashboard ── */
+html.theme-f1 {
+  --accent: #6D83F2;
+  --accent-dim: rgba(109, 131, 242, 0.2);
+  --accent-glow: rgba(109, 131, 242, 0.1);
+  --color-pop: #6D83F2;
+}
+
 .f1-hero {
   text-align: center;
   padding: 32px 24px 24px;

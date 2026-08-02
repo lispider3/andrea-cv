@@ -86,15 +86,20 @@ const loadData = async () => {
     const juveEvents = eventsData.filter(isJuve).filter(e => new Date(e.commence_time) > new Date()).sort((a,b) => new Date(a.commence_time)-new Date(b.commence_time));
     const nextEv = juveEvents[0] || oddsData.filter(isJuve)[0];
     if (nextEv) {
+      const oddsMatch = oddsData.find(o => o.home_team === nextEv.home_team && o.away_team === nextEv.away_team) || (nextEv.bookmakers ? nextEv : null);
+      const avgOdds = oddsMatch ? getAvgOdds(oddsMatch) : null;
+      const oddsParams = avgOdds
+        ? `&homeOdds=${avgOdds[nextEv.home_team] || ''}&awayOdds=${avgOdds[nextEv.away_team] || ''}&drawOdds=${avgOdds['Draw'] || ''}`
+        : '';
       try {
-        const pRes = await fetch(`/api/preview?home=${encodeURIComponent(nextEv.home_team)}&away=${encodeURIComponent(nextEv.away_team)}`);
+        const pRes = await fetch(`/api/preview?home=${encodeURIComponent(nextEv.home_team)}&away=${encodeURIComponent(nextEv.away_team)}${oddsParams}`);
         const ct = pRes.headers.get('content-type') || '';
         if (pRes.ok && ct.includes('json')) {
           const pData = await pRes.json();
           previewText = pData.preview || '';
         } else { throw new Error('Not JSON'); }
       } catch(e) {
-        previewText = generateClientPreview(nextEv.home_team, nextEv.away_team, standingsData);
+        previewText = generateClientPreview(nextEv.home_team, nextEv.away_team, standingsData, avgOdds);
       }
     }
     loading = false;
@@ -131,10 +136,23 @@ const getAvgOdds = (event) => {
   return avg;
 };
 
-const generateClientPreview = (home, away, standings) => {
+const EARLY_SEASON_GAMES = 2;
+
+const generateClientPreview = (home, away, standings, avgOdds) => {
   const find = (name) => standings.find(t => t.name === name || name.includes(t.name));
   const hs = find(home); const as = find(away);
-  if (!hs || !as) return `${home} host ${away} in a key Serie A showdown.`;
+
+  if (!hs || !as || hs.p <= EARLY_SEASON_GAMES || as.p <= EARLY_SEASON_GAMES) {
+    const lines = [`${home} host ${away} early in the new Serie A campaign, with both sides still finding their form.`];
+    if (avgOdds && avgOdds[home] && avgOdds[away]) {
+      const hOdds = parseFloat(avgOdds[home]); const aOdds = parseFloat(avgOdds[away]);
+      if (hOdds < aOdds) lines.push(`Bookmakers make ${home} the favourites at ${hOdds.toFixed(2)}, with ${away} priced at ${aOdds.toFixed(2)}.`);
+      else if (aOdds < hOdds) lines.push(`Bookmakers make ${away} the favourites at ${aOdds.toFixed(2)}, with ${home} priced at ${hOdds.toFixed(2)}.`);
+      else lines.push(`Odds are tightly matched between the two sides, pointing to an open contest.`);
+    }
+    return lines.join(' ');
+  }
+
   const homeGD = hs.gf - hs.ga;
   const lines = [];
   if (Math.abs(hs.pts - as.pts) <= 8) lines.push(`A pivotal clash as ${home} (${hs.pts}pts) host ${away} (${as.pts}pts) with just ${Math.abs(hs.pts-as.pts)} points between them.`);

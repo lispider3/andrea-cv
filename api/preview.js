@@ -1,11 +1,13 @@
 // Vercel Serverless — AI Match Preview Generator
 // Generates a brief match preview combining ESPN head-to-head data with context
 
+const EARLY_SEASON_GAMES = 2; // below this many games played, standings/points aren't meaningful yet
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=7200');
 
-  const { home, away } = req.query;
+  const { home, away, homeOdds, awayOdds, drawOdds } = req.query;
   if (!home || !away) {
     return res.status(400).json({ error: 'home and away params required' });
   }
@@ -42,13 +44,69 @@ export default async function handler(req, res) {
     const homeStats = getTeamStats(home);
     const awayStats = getTeamStats(away);
 
-    // Generate preview text
-    const preview = generatePreview(home, away, homeStats, awayStats);
+    const odds = (homeOdds || awayOdds || drawOdds)
+      ? { home: parseFloat(homeOdds), away: parseFloat(awayOdds), draw: parseFloat(drawOdds) }
+      : null;
+
+    const isEarlySeason = !homeStats || !awayStats
+      || homeStats.played <= EARLY_SEASON_GAMES
+      || awayStats.played <= EARLY_SEASON_GAMES;
+
+    let preview;
+    if (isEarlySeason) {
+      const host = req.headers.host;
+      const proto = host?.includes('localhost') ? 'http' : 'https';
+      const [homeForm, awayForm] = await Promise.all([
+        fetchRecentForm(proto, host, home),
+        fetchRecentForm(proto, host, away),
+      ]);
+      preview = generateEarlySeasonPreview(home, away, odds, homeForm, awayForm);
+    } else {
+      preview = generatePreview(home, away, homeStats, awayStats);
+    }
 
     res.status(200).json({ preview, home: homeStats, away: awayStats });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+}
+
+async function fetchRecentForm(proto, host, team) {
+  try {
+    const r = await fetch(`${proto}://${host}/api/results?team=${encodeURIComponent(team)}`);
+    if (!r.ok) return null;
+    const data = await r.json();
+    return data.record || null;
+  } catch {
+    return null;
+  }
+}
+
+function generateEarlySeasonPreview(home, away, odds, homeForm, awayForm) {
+  const lines = [];
+
+  lines.push(`${home} host ${away} early in the new Serie A campaign, with both sides still finding their form.`);
+
+  if (odds && !Number.isNaN(odds.home) && !Number.isNaN(odds.away)) {
+    const favorite = odds.home < odds.away ? home : (odds.away < odds.home ? away : null);
+    if (favorite) {
+      const favOdds = Math.min(odds.home, odds.away).toFixed(2);
+      const otherOdds = Math.max(odds.home, odds.away).toFixed(2);
+      const underdog = favorite === home ? away : home;
+      lines.push(`Bookmakers make ${favorite} the favourites at ${favOdds}, with ${underdog} priced at ${otherOdds}.`);
+    } else {
+      lines.push(`Odds are tightly matched between the two sides, pointing to an open contest.`);
+    }
+  }
+
+  if (homeForm && homeForm.sequence) {
+    lines.push(`${home} arrive on the back of a ${homeForm.sequence} run over their last ${homeForm.sequence.length} matches.`);
+  }
+  if (awayForm && awayForm.sequence) {
+    lines.push(`${away} head into this one having gone ${awayForm.sequence} in their recent outings.`);
+  }
+
+  return lines.join(' ');
 }
 
 function generatePreview(home, away, hs, as) {
