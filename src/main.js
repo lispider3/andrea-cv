@@ -5,13 +5,13 @@ import './style.css';
 const experiences = [
   {
     title: "Product Consultant",
-    company: "Fennica Gaming",
-    logo: "/logos/fennica.jpg",
+    company: "Partis",
+    logo: "/logos/partis.png",
     period: "June 2026 – Present",
     location: "Remote",
     current: true,
     details: [
-      "Consulting for Fennica Gaming on building a new, more engaging homepage experience.",
+      "Consulting for Partis on building a new, more engaging homepage experience.",
       "Leading the integration of a new sportsbook product, including the operational setup behind it.",
       "Owning the market delivery strategy for the rollout.",
     ],
